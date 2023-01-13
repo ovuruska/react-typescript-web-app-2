@@ -22,7 +22,6 @@ const AvailableHours = ({state}) => {
                     const branchName = branches.filter(branch => branch.id.toString() === key.toString())[0].name
                     free_hours.forEach(freeHour => {
                         var date = new Date(freeHour)
-                        console.log(date)
                         tmpAvailableHours.push({
                             branch: key,
                             hour: freeHour,

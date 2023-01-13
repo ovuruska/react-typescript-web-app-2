@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 const {API_URL} = require("./constants");
 
 
@@ -42,11 +44,11 @@ class Repository {
             .catch(error => console.log('error', error))
     }
 
-    async fetchAvailableHoursBulk(branches,date){
+    async fetchAvailableHoursBulk(branches, date) {
         var branchData = {}
         await Promise.all(
-            branches.map(async (branch) =>  {
-                const availableHours = await this.fetchAvailableHours(branch.id,date)
+            branches.map(async (branch) => {
+                const availableHours = await this.fetchAvailableHours(branch.id, date)
                 branchData[branch.id] = availableHours
             })
         )
@@ -54,16 +56,20 @@ class Repository {
 
     }
 
-    async createAppointment(branchId){
+    async createAppointment(branchId, date) {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-
+        //"2023-01-13T17:15:17.433Z"
+        var dateObj = dayjs(date)
+        const dateString = dateObj.format("YYYY-MM-DD HH:mm:ss")
+        console.log(dateString)
         var raw = JSON.stringify({
             "customer": "6cea57c2fb6cbc2a40411135005760f241fffc3e5e67ab99882726431037f908",
             "dog": "1",
-            "branch": branchId
-        });
+            "branch": branchId,
+            "start": dateString
 
+        });
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,

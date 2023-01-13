@@ -105,7 +105,7 @@ class SelectableCardList extends React.Component {
         });
         return (<div style={{
             boxSizing: "border-box",
-            marginTop: "4rem",
+            marginTop: "2rem",
             "width": "90vw"
         }}>
             <Grid container spacing={6} className="cardlist">

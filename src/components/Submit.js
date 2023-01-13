@@ -9,12 +9,11 @@ const SubmitButton = ({state}) => {
 
     const [processing, setProcessing] = useState(false)
     const [done,setDone] = useState(false)
-
     const onClick = () => {
         setProcessing(true)
         const {selected} = state
         var repository = new Repository()
-        repository.createAppointment(selected.branch).then(() => {
+        repository.createAppointment(selected.branch,selected.hour).then(() => {
             setProcessing(false)
             setDone(true)
 
