@@ -1,0 +1,29 @@
+.nav-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 10px;
+
+  border-top: 0.5px solid #3894d7;
+  background-color: #bae2ff;
+}
+
+.nav-bottom a {
+  font-weight: 400;
+  font-size: 8px;
+  color: #787878;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-bottom h3 {
+  margin: 6px 0;
+}
+
+.nav-bottom img {
+  height: 25px;
+}
