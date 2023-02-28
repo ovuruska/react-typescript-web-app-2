@@ -1,41 +1,17 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import mockPhotoSrc from "../../assets/pet-card/dogmock.png";
+import useFetchPets from "../../hooks/useFetchPets";
 import "./petCard.css";
 
 export default function PetCard() {
-  const [pets, setPets] = useState([]);
   const [selectedpet, setselectedpet] = useState(0);
 
-  function getMockDogs() {
-    return [
-      {
-        name: "Mock",
-        breed: "mock",
-        age: 5,
-        weight: 20,
-        description: "mock",
-        owner: "mock",
-        rabies_vaccination: "mock",
-        employee_notes: "mock",
-      },
-      {
-        name: "Mock",
-        breed: "mock",
-        age: 5,
-        weight: 20,
-        description: "mock",
-        owner: "mock",
-        rabies_vaccination: "mock",
-        employee_notes: "mock",
-      },
-    ];
-  }
-  useEffect(() => {
-    setTimeout(() => {
-      setPets(getMockDogs());
-    }, 1000);
-  }, []);
+  const pets = useSelector((state) => {
+    return state.pets.pets;
+  });
+
   return (
     <div className="pet-card-wrapper">
       {pets.length === 0 ? (

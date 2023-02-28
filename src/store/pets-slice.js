@@ -1,12 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-class Pet {
-  constructor(height, width) {
-    this.height = height;
-    this.width = width;
-  }
-}
-
 const petsSlice = createSlice({
   name: "pets",
   initialState: {
@@ -14,7 +7,10 @@ const petsSlice = createSlice({
   },
   reducers: {
     addPet(state, action) {
-      state.pets.push(Pet());
+      state.pets.push(action.payload);
+    },
+    emptyPets(state) {
+      state.pets = [];
     },
   },
 });
