@@ -21,11 +21,12 @@ export default function Appointments() {
           >
             <h3>
               <span className="bold-date">Mon-01/23/2023 9:00</span> | Kris
-              <span style={{ paddingRight: "8px" }}>|</span>
+              <span style={{ paddingRight: "8px" }}> |</span>
               Royal Oaks
             </h3>
             <BsFillGearFill
               style={{ marginLeft: "8px", marginBottom: "2px" }}
+              className={i === selectedApt && "rotate"}
             />
           </div>
         );

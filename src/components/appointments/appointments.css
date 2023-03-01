@@ -29,3 +29,11 @@
   font-weight: 700;
   padding-right: 8px;
 }
+
+.appointment svg {
+  transition: all 0.4s linear;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
