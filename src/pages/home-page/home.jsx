@@ -1,4 +1,5 @@
 import { Fragment, useEffect } from "react";
+import Appointments from "../../components/appointments/appointments";
 import BookService from "../../components/book-service-card/bookServiceCard";
 import PetCard from "../../components/pet-card/petCard";
 import SubHeading from "../../components/sub-heading/subHeading";
@@ -21,6 +22,7 @@ export default function HomePage() {
       <SubHeading title="Book a Service" />
       <BookService />
       <SubHeading title="Upcoming Appointments" />
+      <Appointments />
     </Fragment>
   );
 }

@@ -7,7 +7,7 @@ export default function SubHeading(props) {
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-        margin: "10px 0",
+        margin: "20px 0",
         marginTop: "20px",
       }}
     >
