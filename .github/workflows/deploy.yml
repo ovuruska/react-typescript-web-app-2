@@ -9,13 +9,16 @@ on:
 
 
 jobs:
+  
   build:
-
+    concurrency: 
+      group: ${{ github.workflow }}
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v2
-
+      
       - run : npm i
         shell: bash
       
@@ -33,3 +36,9 @@ jobs:
         shell: bash
       - run : git push origin HEAD:gh-pages --force
         shell: bash
+      
+      - name: Deploy to GH Pages 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: public
