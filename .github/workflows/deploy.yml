@@ -1,44 +1,50 @@
-name: React app deployment
+name: Deploy
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-
+    branches:
+      - master
+  
 
 jobs:
-  
   build:
-    concurrency: 
-      group: ${{ github.workflow }}
-      cancel-in-progress: false
+    name: Build
     runs-on: ubuntu-latest
-    
+
     steps:
-      - uses: actions/checkout@v2
-      
-      - run : npm i
-        shell: bash
-      
-      - run : CI=false npm run build
-        shell: bash
-      - run : git config user.name github-actions
-        shell: bash
-      - run : git config user.email github-actions@github.com
-        shell: bash
-      - run : git --work-tree dist add --all
-        shell: bash
-      - run : git add CNAME
-        shell: bash
-      - run : git commit -m "Automatic Deploy action run by github-actions"
-        shell: bash
-      - run : git push origin HEAD:gh-pages --force
-        shell: bash
-      
-      - name: Deploy to GH Pages 🚀
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Build project
+        run: npm run build
+
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v3
+        with:
+          name: production-files
+          path: ./dist
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: production-files
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+          publish_dir: ./dist
