@@ -41,7 +41,7 @@ export default function PetCard() {
               >
                 <Avatar
                   round={true}
-                  name="Alfie"
+                  name={pet.name}
                   size="35px"
                   color="grey"
                   style={{

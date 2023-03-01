@@ -1,8 +1,10 @@
 import ContentLoader from 'react-content-loader'
-import useScreenSize from 'use-screen-size'
+import useWindowDimensions from "../../hooks/useWindowDimensions.jsx";
 
 const HomeContentLoader = () => {
-    const {width,height} = useScreenSize()
+    const { height, width } = useWindowDimensions();
+
+
     return <div style={{
         width: '100%',
         height: '100%',
