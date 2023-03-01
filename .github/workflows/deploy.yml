@@ -14,7 +14,7 @@ jobs:
   
   deploy:
     
-    name: Build
+    name: Deploy
 
     runs-on: ubuntu-latest
     permissions:
@@ -27,7 +27,7 @@ jobs:
       
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v
 
       - name: Setup Node
         uses: actions/setup-node@v3
