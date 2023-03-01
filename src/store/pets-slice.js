@@ -4,6 +4,7 @@ const petsSlice = createSlice({
   name: "pets",
   initialState: {
     pets: [],
+    id: 102,
   },
   reducers: {
     addPet(state, action) {
@@ -11,6 +12,9 @@ const petsSlice = createSlice({
     },
     emptyPets(state) {
       state.pets = [];
+    },
+    setId(state, action) {
+      state.id = action.payload;
     },
   },
 });

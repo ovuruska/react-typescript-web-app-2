@@ -3,7 +3,7 @@ import { BsFillGearFill } from "react-icons/bs";
 import "./appointments.css";
 
 export default function Appointments() {
-  const [selectedApt, setSelectedApt] = useState(-1);
+  const [selectedApt, setSelectedApt] = useState(0);
   const appointments = [0, 0, 0, 0, 0];
   return (
     <div className="appointments-wrapper">
