@@ -65,7 +65,6 @@ export default function useFetchPets() {
   }
 
   useEffect(() => {
-    ///#TODO API CALL INSTEAD OF SETTIMEOUT WITH MOCKDATA
     dispatch(PetsActions.emptyPets());
     authAndFetch();
   }, []);

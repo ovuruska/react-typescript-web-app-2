@@ -1,4 +1,5 @@
 import { Fragment, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Appointments from "../../components/appointments/appointments";
 import BookService from "../../components/book-service-card/bookServiceCard";
 import PetCard from "../../components/pet-card/petCard";
@@ -19,10 +20,11 @@ export default function HomePage() {
   return (
     <Fragment>
       <PetCard />
-      <SubHeading title="Book a Service" />
-      <BookService />
       <SubHeading title="Upcoming Appointments" />
       <Appointments />
+      <Link to="/book" className="book-btn">
+        Book
+      </Link>
     </Fragment>
   );
 }

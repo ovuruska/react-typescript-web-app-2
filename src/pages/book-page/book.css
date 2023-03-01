@@ -1,0 +1,48 @@
+.dot {
+  height: 27px;
+  width: 27px;
+  background-color: transparent;
+  border: 0.5px solid #989898;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 50%;
+  display: inline-block;
+  color: #2d7cb6;
+  font-weight: 400;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-bar-wrapper {
+  padding: 50px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 95%;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress h3 {
+  font-size: 15px;
+  margin-left: 5px;
+  text-align: center;
+  color: #2d7cb6;
+  font-weight: 400;
+}
+
+.h-line {
+  margin: 0 5px;
+  width: 30px;
+  border: 1px solid #d3d9e4;
+  border-radius: 3px;
+}
+
+.bold {
+  font-weight: 700 !important;
+}
