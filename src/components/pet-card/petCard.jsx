@@ -1,9 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AiOutlinePlus } from "react-icons/ai";
+import Avatar from "react-avatar";
 
-import mockPhotoSrc from "../../assets/pet-card/dogmock.png";
-import useFetchPets from "../../hooks/useFetchPets";
 import "./petCard.css";
 
 export default function PetCard() {
@@ -40,7 +39,15 @@ export default function PetCard() {
                       : "100%",
                 }}
               >
-                <img src={mockPhotoSrc}></img>
+                <Avatar
+                  round={true}
+                  name="Alfie"
+                  size="35px"
+                  color="grey"
+                  style={{
+                    margin: "0 15px",
+                  }}
+                />
                 <div className="name-wrapper">
                   <h1>{pet.name}</h1>
                 </div>
