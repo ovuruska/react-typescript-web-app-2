@@ -1,11 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AiOutlinePlus } from "react-icons/ai";
+
 import Avatar from "react-avatar";
 
 import "./petCard.css";
 
-export default function PetCard() {
+import MockPetCard from "./mockPetCard";
+
+export default function PetCard(props) {
   const [selectedpet, setselectedpet] = useState(0);
 
   const pets = useSelector((state) => {
@@ -19,8 +22,8 @@ export default function PetCard() {
         <AiOutlinePlus />
       </div>
       <div className="pet-card-wrapper">
-        {pets.length === 0 ? (
-          <div className="pet-card-mock"></div>
+        {props.loading ? (
+          <MockPetCard />
         ) : (
           pets.map((pet, ind) => {
             return (

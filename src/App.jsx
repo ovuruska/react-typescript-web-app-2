@@ -5,7 +5,6 @@ import "./App.css";
 import BottomNavBar from "./components/bottom-nav/bottomNav";
 import PetCard from "./components/pet-card/petCard";
 import HomePage from "./pages/home-page/home";
-import HomeContentLoader from "./pages/home-page/home-content-loader";
 
 const Book = lazy(() => import("./pages/book-page/book"));
 
@@ -17,7 +16,7 @@ function App() {
           <Route element={<HomePage />} path="/" />
           <Route
             element={
-              <Suspense fallback={<HomeContentLoader />}>
+              <Suspense fallback={<div>#TODO CONTENT LOADER</div>}>
                 <Book />
               </Suspense>
             }
