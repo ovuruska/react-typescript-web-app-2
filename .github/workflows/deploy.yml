@@ -5,31 +5,26 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
+permissions:
+  contents: write
 
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v2
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
 
-      - run : npm i
-        shell: bash
-      
-      - run : CI=false npm run build
-        shell: bash
-      - run : git config user.name github-actions
-        shell: bash
-      - run : git config user.email github-actions@github.com
-        shell: bash
-      - run : git --work-tree dist add --all
-        shell: bash
-      - run : git add CNAME
-        shell: bash
-      - run : git commit -m "Automatic Deploy action run by github-actions"
-        shell: bash
-      - run : git push origin HEAD:gh-pages --force
-        shell: bash
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
