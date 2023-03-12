@@ -46,7 +46,7 @@ export default function useFetchPets() {
     var myHeaders2 = new Headers();
     myHeaders2.append(
       "Authorization",
-      "Token a3c4fbcde633ba8d9d9f344177f7e6935535dde2d8afbf8d815d59fbea8c3e5e"
+      `Token ${window.localStorage.getItem("token")}`
     );
 
     var requestOptions2 = {
