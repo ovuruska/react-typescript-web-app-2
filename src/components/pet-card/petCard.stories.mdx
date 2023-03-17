@@ -1,0 +1,16 @@
+<!-- Button.stories.mdx -->
+
+import { useState } from 'react';
+
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import MockPetCard from './mockPetCard';
+
+<Meta title="MockPetCard" component={MockPetCard} />
+
+<Canvas>
+    <Story name="Primary">
+        {() => {
+            return <MockPetCard />;
+        }}
+    </Story>
+</Canvas>
