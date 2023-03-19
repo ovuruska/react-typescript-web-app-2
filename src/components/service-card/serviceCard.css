@@ -1,0 +1,30 @@
+.card {
+    width: 167px;
+    height: 134px;
+    background: #B4FFE4;
+    border-radius: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-svg {
+    margin-bottom: 8px;
+}
+
+.card-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.card-subtitle {
+    color: #777;
+    font-size: 14px;
+}
