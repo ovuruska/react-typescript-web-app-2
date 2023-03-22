@@ -2,6 +2,7 @@
 
 * {
   margin: 0;
+  box-sizing: border-box;
 }
 
 h1,
@@ -12,6 +13,8 @@ h4 {
 }
 
 body {
+  box-sizing: border-box;
+
   font-family: "Manrope";
   font-size: 14px;
   margin: 0;
