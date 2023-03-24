@@ -15,7 +15,7 @@ function App() {
   });
 
   useEffect(() => {
-    console.log(pets);
+    (pets);
   }, [loading]); */
 
   return (

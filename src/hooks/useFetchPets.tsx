@@ -68,7 +68,6 @@ const useFetchPets = () => {
 
     let respBody: ApiMeResponse | { detail: String } = await resp2.json();
     if (!instanceOfApiMeResponse(respBody)) {
-      console.log("zaaa");
       window.localStorage.removeItem("token");
       await authAndFetch();
       return;

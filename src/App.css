@@ -34,3 +34,14 @@ body {
   align-items: flex-start;
   height: 100%;
 }
+
+@media only screen and (min-device-width: 650px) {
+  body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dedede;
+  }
+}

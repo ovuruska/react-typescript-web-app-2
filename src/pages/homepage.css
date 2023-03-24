@@ -38,3 +38,23 @@
 .promotions-row .item {
   margin-right: 1.3em;
 }
+
+a:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.2s ease-in-out;
+}
+
+img {
+  pointer-events: none;
+}
+
+@media only screen and (min-device-width: 650px) {
+  .home-page {
+    max-width: 390px;
+    max-height: 85vh;
+    overflow-y: scroll;
+    border-radius: 30px;
+    background-color: #ffffff;
+  }
+}

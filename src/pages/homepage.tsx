@@ -11,9 +11,7 @@ import imageSrc from "../assets/mockPhoto.png";
 import RewardsCard from "../components/rewards-card/rewards-card";
 
 const HomePage: React.FC = () => {
-  useEffect(() => {
-    console.log(imageSrc);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="home-page">
