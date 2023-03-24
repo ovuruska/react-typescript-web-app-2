@@ -8,19 +8,16 @@
   flex-direction: column;
   text-align: center;
 }
-.service-card img {
-  margin-bottom: 5px;
-}
 
 .service-card h1 {
   color: #27946d;
-  font-size: 1.3em;
-  padding-bottom: 3px;
+  font-size: 1.2em;
+  padding-bottom: 2px;
 }
 
 .service-card h2 {
   font-weight: 600;
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #47ca9b;
 }
 

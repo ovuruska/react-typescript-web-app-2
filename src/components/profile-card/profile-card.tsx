@@ -4,6 +4,8 @@ import React from "react";
 import PetCard from "../pet-card/pet-card";
 import bgSrc from "../../assets/bgtop.png";
 import CarouselSlider from "../carousel-slider/carousel-slider";
+import ProfileBtn from "../buttons/profile-btn";
+import AddBtn from "../buttons/add-btn";
 
 interface Props {}
 
@@ -12,6 +14,10 @@ const ProfileCard: React.FC<Props> = ({}) => {
     <div className="profile">
       <div className="row row1">
         <h1>Hello Emma</h1>
+        <div className="icons">
+          <ProfileBtn />
+          <AddBtn />
+        </div>
       </div>
       <div className="row pets-slider">
         <CarouselSlider

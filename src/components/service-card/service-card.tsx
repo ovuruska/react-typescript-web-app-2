@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import GroomingIcon from "../icons/grooming-icon";
+import WeWashIcon from "../icons/wewash-icon";
 import "./service-card.css";
 
 interface Props {
@@ -28,7 +30,7 @@ const ServiceCard: React.FC<Props> = ({ svgSrc, title, subtitle }) => {
       }}
     >
       <div className="left-column">
-        <img src={svgSrc} alt="SVG" />
+        {colorScheme === 0 ? <GroomingIcon /> : <WeWashIcon fill="#4947CA" />}
       </div>
       <div className="right-column">
         <h1>{title}</h1>

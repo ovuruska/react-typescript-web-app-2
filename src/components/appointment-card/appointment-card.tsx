@@ -1,6 +1,7 @@
 import React from "react";
 import "./appointment-card.css";
 import svgSrc from "../../assets/grooming.svg";
+import WeWashIcon from "../icons/wewash-icon";
 
 interface AppointmentCardProps {
   date: string;
@@ -46,7 +47,7 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({
           justifyContent: "center",
         }}
       >
-        <img src={svgSrc}></img>
+        <WeWashIcon fill="#B5B5B5" />
       </div>
     </div>
   );

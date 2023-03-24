@@ -1,6 +1,6 @@
 .pet-card {
-  width: 167px;
-  height: 70px;
+  width: 150px;
+  height: 68px;
   background: #ffffff;
   border-radius: 18px;
   display: flex;
@@ -10,12 +10,12 @@
 
 .pet-card h1 {
   color: #da8100;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 800;
 }
 
 .pet-card h2 {
   color: #aeaeae;
   font-weight: 800;
-  font-size: 1em;
+  font-size: 0.8em;
 }

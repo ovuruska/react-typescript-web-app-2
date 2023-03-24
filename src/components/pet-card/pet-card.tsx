@@ -11,13 +11,10 @@ interface Props {
 
 const PetCard: React.FC<Props> = (props: Props) => {
   const { svgSrc, name, age } = props;
-  console.log(props);
   return (
     <div className="pet-card">
       <div className="center-wrapper" style={{ width: "45%" }}>
         <Avatar name={name} round={true} size={"50px"} color="#DA8100" />
-        {/*         <img src={svgSrc} alt="SVG" />
-         */}{" "}
       </div>
       <div className="left-wrapper" style={{ width: "55%" }}>
         <h1>{name}</h1>

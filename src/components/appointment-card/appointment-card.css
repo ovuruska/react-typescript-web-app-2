@@ -19,6 +19,14 @@
   font-weight: 600;
 }
 
-.appointment-card img {
-  width: 20px;
+.appointment-card svg {
+  width: 24px;
+  height: 24px;
+  fill: #b5b5b5 !important;
+  color: #b5b5b5;
+  stroke: #b5b5b5;
+}
+
+.appointment-card svg circle {
+  stroke: #b5b5b5;
 }
