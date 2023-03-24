@@ -8,6 +8,7 @@ import "./homepage.css";
 import AppointmentCard from "../components/appointment-card/appointment-card";
 import CarouselSlider from "../components/carousel-slider/carousel-slider";
 import imageSrc from "../assets/mockPhoto.png";
+import RewardsCard from "../components/rewards-card/rewards-card";
 
 const HomePage: React.FC = () => {
   useEffect(() => {
@@ -17,6 +18,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="home-page">
       <ProfileCard />
+      <RewardsCard rewardCount={100} />
       <div className="service-row">
         <ServiceCard
           title="Grooming"
