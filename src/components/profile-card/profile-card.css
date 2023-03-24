@@ -1,0 +1,44 @@
+.profile {
+  background-color: #faca86;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-bottom: 3em;
+}
+
+.row1 {
+  padding: 2em 1em;
+  padding-bottom: 0.3em;
+}
+
+.row1 h1 {
+  font-weight: 800;
+  font-size: 1.5em;
+  color: #a9593d;
+}
+
+.pets-slider {
+  padding: 1em 1em;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.pets-slider .pet-card {
+  margin-right: 0.6em;
+}
+
+.row {
+  width: 100%;
+}
+
+.bg-row {
+  display: flex;
+  justify-content: center;
+}
+
+.bg-row img {
+  width: 100%;
+}

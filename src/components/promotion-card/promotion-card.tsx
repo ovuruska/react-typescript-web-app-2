@@ -8,6 +8,7 @@ type PromotionCardProps = {
 };
 
 const PromotionCard: React.FC<PromotionCardProps> = ({ imageSrc, title }) => {
+  console.log(imageSrc);
   return (
     <div className="promotion-card">
       <div className="img-wrapper" style={{ background: "#FFE1D9" }}>

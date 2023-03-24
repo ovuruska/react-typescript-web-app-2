@@ -9,7 +9,9 @@ interface Props {
   age: string;
 }
 
-const PetCard: React.FC<Props> = ({ svgSrc, name, age }) => {
+const PetCard: React.FC<Props> = (props: Props) => {
+  const { svgSrc, name, age } = props;
+  console.log(props);
   return (
     <div className="pet-card">
       <div className="center-wrapper" style={{ width: "45%" }}>
