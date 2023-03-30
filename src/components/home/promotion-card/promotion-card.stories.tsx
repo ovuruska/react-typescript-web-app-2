@@ -1,5 +1,5 @@
 import React from "react";
-import imageSrc from "../../assets/mockPhoto.png";
+import imageSrc from "../../../assets/mockPhoto.png";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import PromotionCard from "./promotion-card";

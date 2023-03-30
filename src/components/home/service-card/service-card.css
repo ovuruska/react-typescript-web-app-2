@@ -1,5 +1,5 @@
 .service-card {
-  width: 45%;
+  width: 100%;
   height: 134px;
   border-radius: 18px;
   display: flex;
@@ -7,6 +7,17 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  transition: all linear 0.4s;
+}
+
+.navigation-link-service {
+  width: 45%;
+  text-decoration: none;
+}
+
+.service-card:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .service-card h1 {

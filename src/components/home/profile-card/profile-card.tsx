@@ -1,11 +1,11 @@
 import "./profile-card.css";
-import "../../App.css";
+import "../../../App.css";
 import React from "react";
-import PetCard from "../pet-card/pet-card";
-import bgSrc from "../../assets/bgtop.png";
-import CarouselSlider from "../carousel-slider/carousel-slider";
-import ProfileBtn from "../buttons/profile-btn";
-import AddBtn from "../buttons/add-btn";
+import PetCard from "../../home/pet-card/pet-card";
+import bgSrc from "../../../assets/bgtop.png";
+import CarouselSlider from "../../carousel-slider/carousel-slider";
+import ProfileBtn from "../../buttons/profile-btn";
+import AddBtn from "../../buttons/add-btn";
 
 interface Props {}
 

@@ -1,5 +1,5 @@
 import React from "react";
-import PawIcon from "../icons/paw-icon";
+import PawIcon from "../../icons/paw-icon";
 import "./rewards-card.css";
 
 interface Props {

@@ -48,13 +48,3 @@ a:hover {
 img {
   pointer-events: none;
 }
-
-@media only screen and (min-device-width: 650px) {
-  .home-page {
-    max-width: 390px;
-    max-height: 85vh;
-    overflow-y: scroll;
-    border-radius: 30px;
-    background-color: #ffffff;
-  }
-}

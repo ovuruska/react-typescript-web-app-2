@@ -4,7 +4,9 @@ import useFetchPets from "./hooks/useFetchPets";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
 import "./App.css";
-import HomePage from "./pages/homepage";
+import HomePage from "./pages/homepage/homepage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import BookPage from "./pages/bookpage/bookpage";
 
 function App() {
   /* const [count, setCount] = useState(0);
@@ -20,7 +22,12 @@ function App() {
 
   return (
     <div className="App">
-      <HomePage />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/book" element={<BookPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

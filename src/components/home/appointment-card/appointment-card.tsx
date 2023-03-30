@@ -1,7 +1,6 @@
 import React from "react";
 import "./appointment-card.css";
-import svgSrc from "../../assets/grooming.svg";
-import WeWashIcon from "../icons/wewash-icon";
+import WeWashIcon from "../../icons/wewash-icon";
 
 interface AppointmentCardProps {
   date: string;

@@ -1,0 +1,49 @@
+.dates-wrapper {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 1.5em;
+}
+
+.date-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border-radius: 1em;
+  height: 2.5em;
+  width: 2.5em;
+  text-align: center;
+  transition: all linear 0.3s;
+  background-color: transparent;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.date-box-active {
+  background-color: #735bf2;
+  color: #fff;
+}
+
+.date-box-deactive {
+  color: #8f9bb3;
+}
+
+.date-box-day {
+  color: #8f9bb3 !important;
+}
+
+.date-box span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.calender-control {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}

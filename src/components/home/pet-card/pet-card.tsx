@@ -1,5 +1,5 @@
 import React from "react";
-import "../../App.css";
+import "../../../App.css";
 import "./pet-card.css";
 import Avatar from "react-avatar";
 
