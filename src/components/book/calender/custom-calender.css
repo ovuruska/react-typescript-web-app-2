@@ -19,6 +19,13 @@
   background-color: transparent;
   font-weight: 600;
   font-style: normal;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 .date-box:hover {
@@ -36,6 +43,8 @@
 
 .date-box-day {
   color: #8f9bb3 !important;
+  align-self: flex-end;
+  height: 1.2em !important;
 }
 
 .date-box span {
@@ -51,4 +60,14 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
+}
+
+.calender-control svg {
+  font-weight: 300;
+  border-radius: 10px;
+  border: 1px solid #ced3de;
+}
+
+.calender-control svg:hover {
+  cursor: pointer;
 }

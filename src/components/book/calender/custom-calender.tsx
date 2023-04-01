@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./custom-calender.css";
 import "../../../App.css";
 import moment from "moment";
-import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
+import {
+  MdOutlineKeyboardArrowRight,
+  MdOutlineKeyboardArrowLeft,
+} from "react-icons/md";
 
 interface CustomCalendarProps {}
 
@@ -26,8 +29,9 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
   const [dateRange, setDateRange] = useState<Array<Date>>([]);
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [activeDay, setActiveDay] = useState<number>(new Date().getDate());
 
-  useEffect(() => {
+  function setDates() {
     let startDate;
     if (
       new Date(
@@ -71,15 +75,6 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
         }-01`
       ).endOf("month");
     } else {
-      console.log(
-        moment(
-          `${currentYear}-${
-            currentMonth < 10
-              ? "0" + String(currentMonth)
-              : String(currentMonth)
-          }-01`
-        ).endOf("month")
-      );
       endDate = moment(
         `${currentYear}-${
           currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
@@ -98,13 +93,17 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
       currentDate = currentDate.clone().add(1, "day");
     }
     setDateRange(dateRange);
+  }
+
+  useEffect(() => {
+    setDates();
   }, [currentMonth, currentYear]);
 
   return (
     <div className="calender">
       <div className="calender-control">
-        <IoIosArrowDropleft
-          size={"40px"}
+        <MdOutlineKeyboardArrowLeft
+          size={"30px"}
           onClick={() => {
             setCurrentMonth((old) => old - 1);
           }}
@@ -113,8 +112,8 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
           <h1>{monthNames[currentMonth - 1]}</h1>
           <h3>{currentYear}</h3>
         </div>
-        <IoIosArrowDropright
-          size={"40px"}
+        <MdOutlineKeyboardArrowRight
+          size={"30px"}
           onClick={() => {
             setCurrentMonth((old) => old + 1);
           }}
@@ -122,15 +121,23 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
       </div>
       <div className="dates-wrapper">
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => {
-          return (
-            <div className="date-box date-box-day">
-              <span>{day}</span>
-            </div>
-          );
+          return <span className="date-box date-box-day">{day}</span>;
         })}
         {dateRange.map((date) => {
           return date.getMonth() + 1 === currentMonth ? (
-            <div className="date-box">
+            <div
+              className="date-box"
+              onClick={() => {
+                setActiveDay(date.getDate());
+              }}
+              style={{
+                background:
+                  date.getDate() === activeDay
+                    ? "rgba(0,0,0,1)"
+                    : "rgba(0,0,0,0)",
+                color: date.getDate() === activeDay ? "white" : "black",
+              }}
+            >
               <span>{date.getDate()}</span>
             </div>
           ) : (
