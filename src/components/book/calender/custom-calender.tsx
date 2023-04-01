@@ -1,89 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./custom-calender.css";
 import "../../../App.css";
-import moment from "moment";
-import {
-  MdOutlineKeyboardArrowRight,
-  MdOutlineKeyboardArrowLeft,
-} from "react-icons/md";
+import * as moment from "moment";
+import {MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight} from "react-icons/md";
 
-interface CustomCalendarProps {}
+interface CustomCalendarProps {
+  date?: Date;
+}
 
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",];
 
-const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
-  const [value, onChange] = useState<Date>(new Date());
+const CustomCalendar: React.FC<CustomCalendarProps> = ({date = new Date()}) => {
   const [dateRange, setDateRange] = useState<Array<Date>>([]);
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [activeDay, setActiveDay] = useState<number>(new Date().getDate());
+  const [currentMonth, setCurrentMonth] = useState(date.getMonth() + 1);
+  const [currentYear, setCurrentYear] = useState(date.getFullYear());
+  const [activeDay, setActiveDay] = useState<number>(date.getDate());
+
+  function getStartDate() {
+    const firstDayOfMonth = new Date(`${currentYear}-${currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)}-01`);
+    const isSunday = firstDayOfMonth.getDay() === 0;
+    return isSunday ? moment(firstDayOfMonth).subtract(1, "day").startOf("week").add(1, "day") : moment(firstDayOfMonth).startOf("month").startOf("week").add(1, "day");
+  }
+
+  function getEndDate() {
+    const endOfMonth = moment(`${currentYear}-${currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)}-01`).endOf("month");
+    const isSunday = endOfMonth.day() === 0;
+    return isSunday ? endOfMonth : endOfMonth.endOf("week").add(1, "day");
+  }
 
   function setDates() {
-    let startDate;
-    if (
-      new Date(
-        `${currentYear}-${
-          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
-        }-01`
-      ).getDay() === 0
-    ) {
-      startDate = moment(
-        `${currentYear}-${
-          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
-        }-01`
-      )
-        .subtract(1, "day")
-        .startOf("week")
-        .add(1, "day");
-    } else {
-      console.log();
-      startDate = moment(
-        `${currentYear}-${
-          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
-        }-01`
-      )
-        .startOf("month")
-        .startOf("week")
-        .add(1, "day");
-    }
-    let endDate;
-    if (
-      moment(
-        `${currentYear}-${
-          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
-        }-01`
-      )
-        .endOf("month")
-        .day() === 0
-    ) {
-      endDate = moment(
-        `${currentYear}-${
-          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
-        }-01`
-      ).endOf("month");
-    } else {
-      endDate = moment(
-        `${currentYear}-${
-          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
-        }-01`
-      )
-        .endOf("month")
-        .endOf("week")
-        .add(1, "day");
-    }
+    const startDate = getStartDate();
+    const endDate = getEndDate();
 
     const dateRange = [];
     let currentDate = startDate;
@@ -99,56 +46,95 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
     setDates();
   }, [currentMonth, currentYear]);
 
-  return (
-    <div className="calender">
+  const incrementMonth = () => {
+    let newMonth, newYear;
+    if (currentMonth === 12) {
+      newYear = currentYear + 1;
+      newMonth = 1;
+    } else {
+      newYear = currentYear;
+      newMonth = currentMonth + 1;
+    }
+
+    const newMonthDays = new Date(newYear, newMonth, 0).getDate();
+    if (activeDay > newMonthDays) {
+      setActiveDay(newMonthDays);
+    }
+
+    setCurrentYear(newYear);
+    setCurrentMonth(newMonth);
+  };
+
+  const decrementMonth = () => {
+    let newMonth, newYear;
+    if (currentMonth === 1) {
+      newYear = currentYear - 1;
+      newMonth = 12;
+    } else {
+      newYear = currentYear;
+      newMonth = currentMonth - 1;
+    }
+
+    const newMonthDays = new Date(newYear, newMonth, 0).getDate();
+    if (activeDay > newMonthDays) {
+      setActiveDay(newMonthDays);
+    }
+
+    setCurrentYear(newYear);
+    setCurrentMonth(newMonth);
+  };
+
+  const renderDaysOfWeek = () => {
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    return days.map((day) => (<span key={day} className="date-box date-box-day">
+{day}
+</span>));
+  };
+
+  const renderDates = () => {
+    return dateRange.map((date) => {
+      const isActiveDate = date.getMonth() + 1 === currentMonth;
+      const isSelectedDate = date.getDate() === activeDay;
+      const dateBoxClass = isActiveDate ? "date-box" : "date-box date-box-deactive";
+      const dateStyle = isSelectedDate ? {background: "rgba(0,0,0,1)", color: "white"} : {
+        background: "rgba(0,0,0,0)",
+        color: "black"
+      };
+
+      return (<div
+          key={date.toISOString()}
+          className={dateBoxClass}
+          onClick={() => isActiveDate && setActiveDay(date.getDate())}
+          data-testid={isSelectedDate ? "active-date" : "date"}
+          style={dateStyle}
+        >
+          <span>{date.getDate()}</span>
+        </div>);
+    });
+  };
+
+  return (<div className="calender" data-testid="calendar-instance">
       <div className="calender-control">
         <MdOutlineKeyboardArrowLeft
+          data-testid="arrow-left"
           size={"30px"}
-          onClick={() => {
-            setCurrentMonth((old) => old - 1);
-          }}
+          onClick={decrementMonth}
         />
         <div className="date">
-          <h1>{monthNames[currentMonth - 1]}</h1>
-          <h3>{currentYear}</h3>
+          <h1 data-testid="current-month">{monthNames[currentMonth - 1]}</h1>
+          <h3 data-testid={"current-year"}>{currentYear}</h3>
         </div>
         <MdOutlineKeyboardArrowRight
+          data-testid="arrow-right"
           size={"30px"}
-          onClick={() => {
-            setCurrentMonth((old) => old + 1);
-          }}
+          onClick={incrementMonth}
         />
       </div>
       <div className="dates-wrapper">
-        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => {
-          return <span className="date-box date-box-day">{day}</span>;
-        })}
-        {dateRange.map((date) => {
-          return date.getMonth() + 1 === currentMonth ? (
-            <div
-              className="date-box"
-              onClick={() => {
-                setActiveDay(date.getDate());
-              }}
-              style={{
-                background:
-                  date.getDate() === activeDay
-                    ? "rgba(0,0,0,1)"
-                    : "rgba(0,0,0,0)",
-                color: date.getDate() === activeDay ? "white" : "black",
-              }}
-            >
-              <span>{date.getDate()}</span>
-            </div>
-          ) : (
-            <div className="date-box date-box-deactive">
-              <span>{date.getDate()}</span>
-            </div>
-          );
-        })}
+        {renderDaysOfWeek()}
+        {renderDates()}
       </div>
-    </div>
-  );
+    </div>);
 };
 
 export default CustomCalendar;

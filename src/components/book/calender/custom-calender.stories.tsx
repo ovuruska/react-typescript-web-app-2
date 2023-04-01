@@ -9,8 +9,8 @@ export default {
 } as ComponentMeta<typeof CustomCalendar>;
 
 //👇 We create a “template” of how args map to rendering
-const Template: ComponentStory<typeof CustomCalendar> = (args) => (
-  <CustomCalendar currentMonth={3} currentYear={2023} />
+const Template: ComponentStory<typeof CustomCalendar> = () => (
+  <CustomCalendar  />
 );
 
 export const FirstStory = Template.bind({});
