@@ -1,8 +1,8 @@
-import React from "react";
+/* import React from "react";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import ServiceCard from "./service-card";
-import svgSrc from "../../assets/grooming.svg";
+import svgSrc from "../../../assets/grooming.svg";
 
 export default {
   title: "Service Card",
@@ -21,5 +21,6 @@ const Template: ComponentStory<typeof ServiceCard> = (args) => (
 export const FirstStory = Template.bind({});
 
 FirstStory.args = {
-  /*👇 The args you need here will depend on your component */
+  👇 The args you need here will depend on your component 
 };
+ */

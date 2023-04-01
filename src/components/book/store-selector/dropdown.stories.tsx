@@ -7,7 +7,7 @@ import Dropdown from "./dropdown";
 StoreSelector;
 
 export default {
-  title: "Store selector",
+  title: "Dropdown",
   component: Dropdown,
 } as ComponentMeta<typeof Dropdown>;
 

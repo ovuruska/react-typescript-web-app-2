@@ -28,22 +28,67 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
-    const startDate = moment(
-      `${currentYear}-${
-        currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
-      }-01`
-    )
-      .startOf("month")
-      .startOf("week")
-      .add(1, "day");
-    const endDate = moment(
-      `${currentYear}-${
-        currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
-      }-01`
-    )
-      .endOf("month")
-      .endOf("week")
-      .add(1, "day");
+    let startDate;
+    if (
+      new Date(
+        `${currentYear}-${
+          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
+        }-01`
+      ).getDay() === 0
+    ) {
+      startDate = moment(
+        `${currentYear}-${
+          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
+        }-01`
+      )
+        .subtract(1, "day")
+        .startOf("week")
+        .add(1, "day");
+    } else {
+      console.log();
+      startDate = moment(
+        `${currentYear}-${
+          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
+        }-01`
+      )
+        .startOf("month")
+        .startOf("week")
+        .add(1, "day");
+    }
+    let endDate;
+    if (
+      moment(
+        `${currentYear}-${
+          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
+        }-01`
+      )
+        .endOf("month")
+        .day() === 0
+    ) {
+      endDate = moment(
+        `${currentYear}-${
+          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
+        }-01`
+      ).endOf("month");
+    } else {
+      console.log(
+        moment(
+          `${currentYear}-${
+            currentMonth < 10
+              ? "0" + String(currentMonth)
+              : String(currentMonth)
+          }-01`
+        ).endOf("month")
+      );
+      endDate = moment(
+        `${currentYear}-${
+          currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)
+        }-01`
+      )
+        .endOf("month")
+        .endOf("week")
+        .add(1, "day");
+    }
 
     const dateRange = [];
     let currentDate = startDate;
@@ -68,7 +113,12 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
           <h1>{monthNames[currentMonth - 1]}</h1>
           <h3>{currentYear}</h3>
         </div>
-        <IoIosArrowDropright size={"40px"} />
+        <IoIosArrowDropright
+          size={"40px"}
+          onClick={() => {
+            setCurrentMonth((old) => old + 1);
+          }}
+        />
       </div>
       <div className="dates-wrapper">
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => {
