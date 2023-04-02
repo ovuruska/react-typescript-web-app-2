@@ -3,11 +3,16 @@ import HomePage from "./pages/homepage/homepage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BookPage from "./pages/bookpage/bookpage";
 import {useInjection} from "inversify-react";
-import {ApiUrl, ApiUrlSymbol} from "@domain/types/symbols/api-url";
+import {useEffect} from "react";
+import {HttpClient, HttpClientSymbol} from "@quicker/common/http-client";
 
 function App() {
-  const apiUrl = useInjection<ApiUrl>(ApiUrlSymbol);
-  console.log(apiUrl);
+  const client = useInjection<HttpClient>(HttpClientSymbol);
+
+  useEffect(()=>{
+    client.login("b","b");
+  },[])
+
 
   return (
     <div className="App">

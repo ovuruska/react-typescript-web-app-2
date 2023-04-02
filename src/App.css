@@ -46,6 +46,7 @@ body {
   }
 
   .page {
+    min-width: 450px;
     max-width: 450px;
     max-height: 85vh;
     height: 85vh;
