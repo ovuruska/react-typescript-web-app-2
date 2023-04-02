@@ -1,10 +1,8 @@
 module.exports = {
     preset: 'ts-jest',
     testMatch: ['**/__tests__/**/*.+(ts|tsx|js)', '**/?(*.)+(spec|test).+(ts|tsx|js)'],
-    collectCoverage: true,
+    collectCoverage: false,
     collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
-    coveragePathIgnorePatterns: ['node_modules', 'src/index.tsx', 'src/setupTests.ts'],
-    coverageDirectory: 'coverage',
     moduleNameMapper: {
         '\\.(scss|sass|css|less)$': 'identity-obj-proxy',
         "^@quicker/(.*)$": "<rootDir>/src/$1",
