@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import "./dropdown.css";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { BiTimeFive } from "react-icons/bi";
 import "../../../App.css";
+import "./slot-card.css";
 
 interface Props {
   time: string;
@@ -11,7 +11,8 @@ const SlotCard: React.FC<Props> = ({ time }) => {
   return (
     <div className="slot-card">
       <span>{time}</span>
-      <span></span>
+
+      <BiTimeFive size={"20px"} />
     </div>
   );
 };

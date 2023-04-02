@@ -38,7 +38,7 @@
 }
 
 .date-box-deactive {
-  color: #8f9bb3;
+  color: #8f9bb3 !important;
 }
 
 .date-box-day {
