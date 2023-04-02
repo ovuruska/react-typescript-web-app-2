@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./custom-calender.css";
 import "../../../App.css";
-import * as moment from "moment";
+import moment from 'moment'
 import {MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight} from "react-icons/md";
 
 interface CustomCalendarProps {
