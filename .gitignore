@@ -32,5 +32,9 @@ storybook-static
 vite.config.ts.timestamp-*.mjs
 
 
+
+coverage
+
+
 # environment variables
 .env

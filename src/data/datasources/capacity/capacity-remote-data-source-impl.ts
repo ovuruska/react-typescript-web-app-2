@@ -1,19 +1,20 @@
 import {MonthlyCapacityResponse} from "@domain/types/responses/monthly-capacity-response";
 import {MonthlyCapacityRequest} from "@domain/types/requests/monthly-capacity-request";
-import {AvailableRemoteDataSource} from "@data/datasources/available/available-remote-data-source";
+import {CapacityRemoteDataSource} from "@data/datasources/capacity/capacity-remote-data-source";
 import {inject, injectable} from "inversify";
-import {ApiUrlSymbol} from "@domain/types/symbols/api-url";
+import {ApiUrl, ApiUrlSymbol} from "@domain/types/symbols/api-url";
 
 @injectable()
-export class AvailableRemoteDataSourceImpl extends AvailableRemoteDataSource {
+export class CapacityRemoteDataSourceImpl extends CapacityRemoteDataSource {
 
-  constructor(@inject(ApiUrlSymbol) private apiUrl: string) {
+  constructor(@inject<ApiUrl>(ApiUrlSymbol) private apiUrl: ApiUrl) {
     super();
   }
 
 
   async getMonthlyCapacity(monthlyCapacityRequest: MonthlyCapacityRequest): Promise<MonthlyCapacityResponse> {
-    const response = await fetch(`${this.apiUrl}/api/schedule/capacity/monthly`, {
+    const {value} = this.apiUrl;
+    const response = await fetch(`${value}api/schedule/capacity/monthly`, {
       method: 'POST', headers: {
         'Content-Type': 'application/json',
       }, body: JSON.stringify(monthlyCapacityRequest),

@@ -10,7 +10,13 @@
     "preview": "vite preview",
     "storybook": "npm run cache:clear && start-storybook -p 6006",
     "build-storybook": "npm run cache:clear  && build-storybook",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test:coverage && node check-coverage.cjs"
+    }
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -54,9 +60,11 @@
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
     "babel-loader": "^8.3.0",
+    "husky": "^8.0.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
+    "jest-fetch-mock": "^3.0.3",
     "ts-jest": "^29.0.5",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^4.9.3",

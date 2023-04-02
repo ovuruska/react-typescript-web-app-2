@@ -1,10 +1,10 @@
-import {AvailableRemoteDataSource} from "@data/datasources/available/available-remote-data-source";
+import {CapacityRemoteDataSource} from "@data/datasources/capacity/capacity-remote-data-source";
 import {MonthlyCapacityRequest} from "@domain/types/requests/monthly-capacity-request";
 import {MonthlyCapacityResponse} from "@domain/types/responses/monthly-capacity-response";
 import {injectable} from "inversify";
 
 @injectable()
-export class AvailableRemoteDataSourceMock extends AvailableRemoteDataSource {
+export class CapacityRemoteDataSourceMock extends CapacityRemoteDataSource {
   getMonthlyCapacity(monthlyCapacityRequest: MonthlyCapacityRequest): Promise<MonthlyCapacityResponse> {
 
     const {date} = monthlyCapacityRequest;

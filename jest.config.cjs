@@ -15,7 +15,6 @@ module.exports = {
         "^@data/(.*)$": "<rootDir>/data/$1",
 
     },
-    module: "esnext",
     setupFiles: ['./jest.setup.cjs'],
     rootDir: 'src',
     testEnvironment: 'jsdom',

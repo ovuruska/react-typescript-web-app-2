@@ -85,5 +85,71 @@ describe("CustomCalendar", () => {
 
   });
 
+  it('When clicked on a date, the date should be highlighted', () => {
+    const {container, getByTestId} = render(<CustomCalendar date={
+      new Date("2023-01-01")
+    }/>);
+    const dateDiv = container.querySelectorAll(
+      "div[data-testid='date']"
+    );
+    const dateDiv15 = Array.from(dateDiv).filter((div) => div.textContent === '15')[0];
+    fireEvent.click(dateDiv15);
+    const activeDate = container.querySelector(
+      "div[data-testid='active-date']"
+    ) as HTMLElement;
+    expect(activeDate).toBeTruthy();
+    expect(activeDate.textContent).toBe("15");
+  });
+
+  it('When date is changed, event handler should have called.', () => {
+    const mockOnChange = jest.fn();
+    const {container, getByTestId} = render(<CustomCalendar date={
+      new Date("2023-01-01")
+    } onChange={mockOnChange}/>);
+    // Click on date dive that includes 15 and data-testid="date"
+    const dateDiv = container.querySelectorAll(
+      "div[data-testid='date']"
+    );
+    const dateDiv15 = Array.from(dateDiv).filter((div) => div.textContent === '15')[0];
+    fireEvent.click(dateDiv15);
+    expect(mockOnChange).toHaveBeenCalled();
+
+  });
+
+  it('When active date is clicked, event handler should not have called.', () => {
+    const mockOnChange = jest.fn();
+    const {container, getByTestId} = render(<CustomCalendar date={
+      new Date("2023-01-01")
+    } onChange={mockOnChange}/>);
+    const dateDiv = container.querySelector(
+      "div[data-testid='active-date']"
+    ) as HTMLElement;
+    fireEvent.click(dateDiv);
+    expect(mockOnChange).not.toHaveBeenCalled();
+  });
+
+  it('When month is decremented, event handler should have called.', () => {
+    const mockOnChange = jest.fn();
+    const {container, getByTestId} = render(<CustomCalendar date={
+      new Date("2023-01-01")
+    } onChange={mockOnChange}/>);
+    const arrowLeftIcon = container.querySelector(
+      "svg[data-testid='arrow-left']"
+    ) as HTMLElement;
+    fireEvent.click(arrowLeftIcon);
+    expect(mockOnChange).toHaveBeenCalled();
+  });
+
+  it('When month is incremented, event handler should have called.', () => {
+    const mockOnChange = jest.fn();
+    const {container, getByTestId} = render(<CustomCalendar date={
+      new Date("2023-01-01")
+    } onChange={mockOnChange}/>);
+    const arrowRightIcon = container.querySelector(
+      "svg[data-testid='arrow-right']"
+    ) as HTMLElement;
+    fireEvent.click(arrowRightIcon);
+    expect(mockOnChange).toHaveBeenCalled();
+  });
 
 });

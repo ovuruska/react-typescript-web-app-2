@@ -6,11 +6,14 @@ import {MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight} from "react-ico
 
 interface CustomCalendarProps {
   date?: Date;
+  onChange?: (date: Date) => void;
 }
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",];
 
-const CustomCalendar: React.FC<CustomCalendarProps> = ({date = new Date()}) => {
+const CustomCalendar: React.FC<CustomCalendarProps> = ({
+                                                         onChange, date = new Date()
+                                                       }) => {
   const [dateRange, setDateRange] = useState<Array<Date>>([]);
   const [currentMonth, setCurrentMonth] = useState(date.getMonth() + 1);
   const [currentYear, setCurrentYear] = useState(date.getFullYear());
@@ -63,6 +66,9 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({date = new Date()}) => {
 
     setCurrentYear(newYear);
     setCurrentMonth(newMonth);
+    if (onChange !== undefined) {
+      onChange(new Date(newYear, newMonth, activeDay));
+    }
   };
 
   const decrementMonth = () => {
@@ -82,6 +88,9 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({date = new Date()}) => {
 
     setCurrentYear(newYear);
     setCurrentMonth(newMonth);
+    if (onChange !== undefined) {
+      onChange(new Date(newYear, newMonth, activeDay));
+    }
   };
 
   const renderDaysOfWeek = () => {
@@ -91,50 +100,58 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({date = new Date()}) => {
 </span>));
   };
 
+
   const renderDates = () => {
     return dateRange.map((date) => {
-      const isActiveDate = date.getMonth() + 1 === currentMonth;
-      const isSelectedDate = date.getDate() === activeDay;
-      const dateBoxClass = isActiveDate ? "date-box" : "date-box date-box-deactive";
-      const dateStyle = isSelectedDate ? {background: "rgba(0,0,0,1)", color: "white"} : {
-        background: "rgba(0,0,0,0)",
-        color: "black"
+      const isActiveMonth = date.getMonth() + 1 === currentMonth;
+      const isActiveDate = date.getDate() === activeDay;
+      const dateBoxClass = isActiveMonth ? "date-box" : "date-box date-box-deactive";
+      const dateStyle = isActiveDate ? {background: "rgba(0,0,0,1)", color: "white"} : {
+        background: "rgba(0,0,0,0)", color: "black"
+      };
+      const onDateClick = () => {
+        if (!isActiveDate) {
+          setActiveDay(date.getDate());
+          if (onChange !== undefined) {
+            onChange(new Date(currentYear, currentMonth, date.getDate()));
+          }
+        }
       };
 
       return (<div
-          key={date.toISOString()}
-          className={dateBoxClass}
-          onClick={() => isActiveDate && setActiveDay(date.getDate())}
-          data-testid={isSelectedDate ? "active-date" : "date"}
-          style={dateStyle}
-        >
-          <span>{date.getDate()}</span>
-        </div>);
+        key={date.toISOString()}
+        className={dateBoxClass}
+        onClick={onDateClick}
+        data-testid={isActiveDate ? "active-date" : "date"}
+        style={dateStyle}
+      >
+        <span>{date.getDate()}</span>
+      </div>);
     });
   };
 
   return (<div className="calender" data-testid="calendar-instance">
-      <div className="calender-control">
-        <MdOutlineKeyboardArrowLeft
-          data-testid="arrow-left"
-          size={"30px"}
-          onClick={decrementMonth}
-        />
-        <div className="date">
-          <h1 data-testid="current-month">{monthNames[currentMonth - 1]}</h1>
-          <h3 data-testid={"current-year"}>{currentYear}</h3>
-        </div>
-        <MdOutlineKeyboardArrowRight
-          data-testid="arrow-right"
-          size={"30px"}
-          onClick={incrementMonth}
-        />
+    <div className="calender-control">
+      <MdOutlineKeyboardArrowLeft
+        data-testid="arrow-left"
+        size={"30px"}
+        onClick={decrementMonth}
+      />
+      <div className="date">
+        <h1 data-testid="current-month">{monthNames[currentMonth - 1]}</h1>
+        <h3 data-testid={"current-year"}>{currentYear}</h3>
       </div>
-      <div className="dates-wrapper">
-        {renderDaysOfWeek()}
-        {renderDates()}
-      </div>
-    </div>);
+      <MdOutlineKeyboardArrowRight
+        data-testid="arrow-right"
+        size={"30px"}
+        onClick={incrementMonth}
+      />
+    </div>
+    <div className="dates-wrapper">
+      {renderDaysOfWeek()}
+      {renderDates()}
+    </div>
+  </div>);
 };
 
 export default CustomCalendar;
