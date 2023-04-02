@@ -6,7 +6,40 @@ export interface PetState {
 }
 
 const initialState: PetState = {
-  pets: [],
+  pets: [
+    {
+      id: 5,
+      created_at: "String",
+      updated_at: "String",
+      name: "Archie",
+      breed: "String",
+      age: 5,
+      weight: 10,
+      description: "String",
+      rabies_vaccination: "String",
+      employee_notes: "String",
+      customer_notes: "String",
+      special_handling: false,
+      coat_type: "String",
+      owner: 5,
+    },
+    {
+      id: 5,
+      created_at: "String",
+      updated_at: "String",
+      name: "Leslie",
+      breed: "String",
+      age: 5,
+      weight: 10,
+      description: "String",
+      rabies_vaccination: "String",
+      employee_notes: "String",
+      customer_notes: "String",
+      special_handling: false,
+      coat_type: "String",
+      owner: 5,
+    },
+  ],
 };
 
 const petsSlice = createSlice({

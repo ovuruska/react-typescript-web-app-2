@@ -35,6 +35,10 @@ body {
   height: 100%;
 }
 
+a {
+  text-decoration: none;
+}
+
 @media only screen and (min-device-width: 650px) {
   body {
     width: 100vw;
@@ -46,7 +50,6 @@ body {
   }
 
   .page {
-    min-width: 450px;
     max-width: 450px;
     max-height: 85vh;
     height: 85vh;
