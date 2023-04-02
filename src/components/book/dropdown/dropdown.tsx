@@ -4,9 +4,9 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import "../../../App.css";
 
 interface Props {
-  dropdownList: Array<String>;
+  dropdownList: Array<string>;
   width: string;
-  dropdownTitle: String;
+  dropdownTitle: string;
 }
 
 const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle }) => {

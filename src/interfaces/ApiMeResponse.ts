@@ -6,13 +6,13 @@ export default interface ApiMeResponse {
   lifetime_product_sales: number;
   lifetime_service_sales: number;
   dogs: Array<Pet>;
-  created_at: String;
-  updated_at: String;
-  name: String;
-  uid: String;
-  email: String;
-  phone: String;
-  address: String;
+  created_at: string;
+  updated_at: string;
+  name: string;
+  uid: string;
+  email: string;
+  phone: string;
+  address: string;
   role: number;
   user: number;
 }

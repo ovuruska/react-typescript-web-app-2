@@ -1,16 +1,16 @@
 export default interface Pet {
   id: number;
-  created_at: String;
-  updated_at: String;
-  name: String;
-  breed: String;
+  created_at: string;
+  updated_at: string;
+  name: string;
+  breed: string;
   age: number;
   weight: number;
-  description: String;
-  rabies_vaccination: String;
-  employee_notes: String;
-  customer_notes: String;
+  description: string;
+  rabies_vaccination: string;
+  employee_notes: string;
+  customer_notes: string;
   special_handling: Boolean;
-  coat_type: String;
+  coat_type: string;
   owner: number;
 }

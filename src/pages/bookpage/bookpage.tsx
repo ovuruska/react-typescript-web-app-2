@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import CustomCalendar from "@quicker/components/book/calender/custom-calender";
 
 const BookPage: React.FC = () => {
-  const [petNames, setPetNames] = useState<Array<String>>([]);
+  const [petNames, setPetNames] = useState<Array<string>>([]);
 
   const type = useSelector((state: RootState) => {
     return state.order.orderType;
@@ -39,9 +39,10 @@ const BookPage: React.FC = () => {
         </div>
         <div className="dropdown-wrapper">
           <Dropdown
-            dropdownList={petNames}
             width="100%"
-            dropdownTitle={petNames[0]}
+            dropdownTitle={petNames[0] ?? "Select Pet"}
+
+            dropdownList={petNames as string[]}
           />
         </div>
       </div>

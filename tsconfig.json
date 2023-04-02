@@ -17,7 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@quicker/*": ["*"],
       "@domain/*": ["domain/*"],
       "@components/*": ["components/*"],
       "@hooks/*": ["hooks/*"],
@@ -25,6 +24,7 @@
       "@data/*": ["data/*"],
       "@features/*": ["features/*"],
       "@utils/*": ["utils/*"],
+      "@quicker/*": ["./*"],
     },
     "baseUrl": "src"
   },

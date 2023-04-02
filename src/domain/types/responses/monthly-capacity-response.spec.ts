@@ -1,15 +1,3 @@
-/*
-import {CapacityDetails} from "@domain/types/common/capacity-details";
-
-
-export type MonthlyCapacityResponse = CapacityDetails[];
-export interface CapacityDetails {
-  date: string;
-  morning_capacity: number;
-  afternoon_capacity: number;
-}
-
- */
 import {MonthlyCapacityResponse} from "@domain/types/responses/monthly-capacity-response";
 
 describe('MonthlyCapacityResponse', () => {
