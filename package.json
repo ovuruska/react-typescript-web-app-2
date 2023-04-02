@@ -16,7 +16,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test --collectCoverage=false"
+      "pre-commit": "npm test"
     }
   },
   "dependencies": {
