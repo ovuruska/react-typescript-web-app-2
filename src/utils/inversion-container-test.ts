@@ -6,7 +6,6 @@ import {CapacityRemoteDataSourceImpl} from "@data/datasources/capacity/capacity-
 import {CapacityRepository} from "@domain/repositories/capacity-repository";
 import {CapacityRepositoryImpl} from "@data/repositories/capacity-repository-impl";
 import {GetMonthlyCapacityUseCase} from "@domain/usecases/get-monthly-capacity";
-import {CapacityRemoteDataSourceMock} from "@data/datasources/capacity/capacity-remote-data-source-mock";
 
 let container: Container;
 
@@ -15,7 +14,7 @@ export const createTestInversion = () => {
 
 
   container.bind<ApiUrl>(ApiUrlSymbol).toConstantValue({value: process.env.API_URL as string});
-  container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceMock);
+  container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
   container.bind<CapacityRepository>(CapacityRepository).to(CapacityRepositoryImpl);
   container.bind<GetMonthlyCapacityUseCase>(GetMonthlyCapacityUseCase).toSelf();
 }

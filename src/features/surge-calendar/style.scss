@@ -1,0 +1,20 @@
+
+.surge-calendar {
+  &--empty {
+    color: #7CDEA8;
+  }
+
+  &--full {
+    color: #FF424B;
+    text-decoration: line-through;
+  }
+
+  &--busy {
+    color: #FF424B;
+  }
+
+  &--partial {
+    color: #FACA86;
+  }
+
+}

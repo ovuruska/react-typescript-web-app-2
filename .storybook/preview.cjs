@@ -1,3 +1,8 @@
+import {worker} from '@data/mocks/browser';
+
+worker.start();
+
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -7,3 +12,6 @@ export const parameters = {
     },
   },
 }
+import 'reflect-metadata';
+
+

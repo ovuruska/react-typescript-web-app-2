@@ -7,12 +7,13 @@ import {MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight} from "react-ico
 interface CustomCalendarProps {
   date?: Date;
   onChange?: (date: Date) => void;
+  mapDateToClassName?: (date: Date) => string;
 }
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",];
 
 const CustomCalendar: React.FC<CustomCalendarProps> = ({
-                                                         onChange, date = new Date()
+                                                         onChange, date = new Date(), mapDateToClassName = () => "",
                                                        }) => {
   const [dateRange, setDateRange] = useState<Array<Date>>([]);
   const [currentMonth, setCurrentMonth] = useState(date.getMonth() + 1);
@@ -103,13 +104,19 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
 
   const renderDates = () => {
     return dateRange.map((date) => {
+      const spanClassName = " " + mapDateToClassName(date);
       const isActiveMonth = date.getMonth() + 1 === currentMonth;
-      const isActiveDate = date.getDate() === activeDay;
+      const isActiveDate = date.getDate() === activeDay && isActiveMonth;
       const dateBoxClass = isActiveMonth ? "date-box" : "date-box date-box-deactive";
       const dateStyle = isActiveDate ? {background: "rgba(0,0,0,1)", color: "white"} : {
         background: "rgba(0,0,0,0)", color: "black"
       };
       const onDateClick = () => {
+        if(!isActiveMonth) {
+          setCurrentYear(date.getFullYear());
+          setActiveDay(date.getDate());
+          setCurrentMonth(date.getMonth() + 1);
+        }
         if (!isActiveDate) {
           setActiveDay(date.getDate());
           if (onChange !== undefined) {
@@ -125,7 +132,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
         data-testid={isActiveDate ? "active-date" : "date"}
         style={dateStyle}
       >
-        <span>{date.getDate()}</span>
+        <span className={spanClassName}>{date.getDate()}</span>
       </div>);
     });
   };

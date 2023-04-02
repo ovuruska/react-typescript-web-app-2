@@ -14,12 +14,14 @@ export class CapacityRemoteDataSourceImpl extends CapacityRemoteDataSource {
 
   async getMonthlyCapacity(monthlyCapacityRequest: MonthlyCapacityRequest): Promise<MonthlyCapacityResponse> {
     const {value} = this.apiUrl;
-    const response = await fetch(`${value}api/schedule/capacity/monthly`, {
+    const response = await fetch(`${value}/api/schedule/capacity/monthly`, {
       method: 'POST', headers: {
         'Content-Type': 'application/json',
       }, body: JSON.stringify(monthlyCapacityRequest),
     });
-    const data = await response.json();
-    return data as MonthlyCapacityResponse;
+    if(!response.ok){
+      throw new Error(response.statusText);
+    }
+    return await response.json();
   }
 }

@@ -1,37 +1,12 @@
-/*
-import {inject, injectable} from "inversify";
-import {CapacityRepository} from "@domain/repositories/capacity-repository";
-import {MonthlyCapacityRequest} from "@domain/types/requests/monthly-capacity-request";
-import {MonthlyCapacityResponse} from "@domain/types/responses/monthly-capacity-response";
-
-
-export interface GetMonthlyCapacityParams extends MonthlyCapacityRequest {
-}
-
-@injectable()
-export class GetMonthlyCapacityUseCase {
-  constructor(
-    @inject(CapacityRepository) private readonly capacityRepository: CapacityRepository,
-  ) {
-  }
-
-  async call(params: GetMonthlyCapacityParams): Promise<MonthlyCapacityResponse> {
-    return await this.capacityRepository.getMonthlyCapacity(params);
-  }
-}
-export interface MonthlyCapacityRequest {
-  employees?: number[];
-  branches?: number[];
-  service: string;
-  date: string;
-}
-
-
- */
-
 import {GetMonthlyCapacityParams, GetMonthlyCapacityUseCase} from "@domain/usecases/get-monthly-capacity";
 import {Container} from "inversify";
 import {getTestContainer} from "@utils/inversion-container-test";
+import {
+  getMonthlyCapacityResponse,
+  setAfternoonCapacity,
+  setMorningCapacity
+} from "@data/mocks/handlers/get-monthly-capacity";
+import fetchMock from "jest-fetch-mock";
 
 describe('GetMonthlyCapacityUseCase', () => {
 
@@ -50,6 +25,15 @@ describe('GetMonthlyCapacityUseCase', () => {
       date: "01/2023",
 
     };
+    setMorningCapacity(0);
+    setAfternoonCapacity(0);
+    const date = new Date(2023,0,1)
+    const response = getMonthlyCapacityResponse(date);
+
+    fetchMock.mockResponse(
+      JSON.stringify(response
+    ));
+
     const result = await useCase.call(params);
     expect(result).toBeTruthy();
     expect(result).toBeInstanceOf(Array);

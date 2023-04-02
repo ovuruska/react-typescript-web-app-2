@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import Pet from "../interfaces/Pet";
 
 export interface OrderState {
   orderType: string;
 }
 
 const initialState: OrderState = {
-  orderType: "Grooming",
+  orderType: "Full Grooming",
 };
 
 const orderSlice = createSlice({
