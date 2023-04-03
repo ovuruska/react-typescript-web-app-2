@@ -12,6 +12,11 @@ import {AvailableRemoteDataSourceImpl} from "@data/datasources/available/remote-
 import {GetAvailableSlotsUseCase} from "@domain/usecases/get-available-slots";
 import {HttpClient, HttpClientSymbol} from "@quicker/common/http-client";
 import {HttpClientImpl} from "@quicker/common/http-client-impl";
+import {CustomerRemoteDataSource} from "@data/datasources/customer/remote-data-source";
+import {CustomerRemoteDataSourceImpl} from "@data/datasources/customer/remote-data-source-impl";
+import {CustomerRepository} from "@domain/repositories/customer-repository";
+import {CustomerRepositoryImpl} from "@data/repositories/customer-repository-impl";
+import {GetMeUseCase} from "@domain/usecases/get-me";
 
 let container: Container;
 
@@ -26,6 +31,10 @@ export const createInversion = () => {
   container.bind<AvailableRepository>(AvailableRepository).to(AvailableRepositoryImpl);
   container.bind<AvailableRemoteDataSource>(AvailableRemoteDataSource).to(AvailableRemoteDataSourceImpl);
   container.bind<GetAvailableSlotsUseCase>(GetAvailableSlotsUseCase).toSelf();
+  container.bind<CustomerRemoteDataSource>(CustomerRemoteDataSource).to(CustomerRemoteDataSourceImpl);
+  container.bind<CustomerRepository>(CustomerRepository).to(CustomerRepositoryImpl);
+  container.bind<GetMeUseCase>(GetMeUseCase).toSelf();
+
 }
 
 export const getContainer = () => {
