@@ -22,6 +22,7 @@ let container: Container;
 
 export const createInversion = () => {
   container = new Container();
+
   container
     .bind<ApiUrl>(ApiUrlSymbol)
     .toConstantValue({ value: import.meta.env.VITE_API_URL as string });
