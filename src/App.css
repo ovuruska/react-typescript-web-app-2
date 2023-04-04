@@ -39,6 +39,10 @@ a {
   text-decoration: none;
 }
 
+.page {
+  width: 100%;
+}
+
 @media only screen and (min-device-width: 650px) {
   body {
     width: 100vw;
@@ -51,6 +55,7 @@ a {
 
   .page {
     max-width: 450px;
+    width: 450px;
     max-height: 85vh;
     height: 85vh;
     overflow-y: scroll;

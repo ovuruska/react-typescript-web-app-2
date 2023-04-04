@@ -16,7 +16,6 @@ export class CapacityRepositoryImpl extends CapacityRepository {
 
   async getMonthlyCapacity(monthlyCapacityRequest: MonthlyCapacityRequest): Promise<MonthlyCapacityResponse> {
     return await this.dataSource.getMonthlyCapacity(monthlyCapacityRequest);
-
   }
 
 }

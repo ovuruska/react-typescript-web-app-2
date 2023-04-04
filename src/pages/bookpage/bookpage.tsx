@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Pet from "../../interfaces/Pet";
 import { Link } from "react-router-dom";
 import CustomCalendar from "@quicker/components/book/calender/custom-calender";
+import SurgeCalendar from "@features/surge-calendar/surge-calendar";
 
 const BookPage: React.FC = () => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
@@ -41,7 +42,6 @@ const BookPage: React.FC = () => {
           <Dropdown
             width="100%"
             dropdownTitle={petNames[0] ?? "Select Pet"}
-
             dropdownList={petNames as string[]}
           />
         </div>
@@ -50,7 +50,7 @@ const BookPage: React.FC = () => {
         <div className="calender-header-row">
           <h2>Choose Date</h2>
         </div>
-        <CustomCalendar />
+        <SurgeCalendar />
       </div>
     </div>
   );
