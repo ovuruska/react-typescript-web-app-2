@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useInjection} from "inversify-react";
 import {DailyAvailableSlot} from "@domain/types/responses/daily-available-slots-response";
-import {GetAvailableSlotsParams, GetAvailableSlotsUseCase} from "@domain/usecases/get-available-slots";
+import {GetAvailableSlotsParams, GetAvailableSlotsUseCase} from "@domain/usecases/available/get-available-slots";
 
 type AvailableSlotsProps = {
   date: Date; employees?: number[]; branches?: number[]; onClick?: () => void; service: string; duration?: number;

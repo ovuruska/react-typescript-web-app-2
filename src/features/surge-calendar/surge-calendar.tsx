@@ -3,7 +3,7 @@ import {useCallback, useEffect, useMemo, useState} from "react";
 import {useInjection} from "inversify-react";
 import {
   GetMonthlyCapacityParams, GetMonthlyCapacityUseCase,
-} from "@domain/usecases/get-monthly-capacity";
+} from "@domain/usecases/capacity/get-monthly-capacity";
 import {MonthlyCapacityResponse} from "@domain/types/responses/monthly-capacity-response";
 import {CapacityDetails} from "@domain/types/common/capacity-details";
 import "./style.scss";
@@ -25,7 +25,6 @@ const SurgeCalendar: React.FC<SurgeCalendarProps> = ({
 
   const getMonthlyCapacity = useInjection(GetMonthlyCapacityUseCase);
   const [capacityMap, setCapacityMap] = useState<Map<string, CapacityDetails>>(new Map());
-  console.log("capacityMap", capacityMap);
 
   const memoizedEmployees = useMemo(() => employees, [employees]);
   const memoizedBranches = useMemo(() => branches, [branches]);

@@ -7,4 +7,4 @@ require('dotenv').config({
 require('reflect-metadata');
 
 require('jest-fetch-mock').enableMocks();
-
+require('@quicker/__mocks__/sessionStorage');
