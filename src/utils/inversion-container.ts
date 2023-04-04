@@ -33,7 +33,7 @@ export const createInversion = () => {
     .bind<CapacityRepository>(CapacityRepository)
     .to(CapacityRepositoryImpl);
   container.bind<GetMonthlyCapacityUseCase>(GetMonthlyCapacityUseCase).toSelf();
-  container.bind<HttpClient>(HttpClientSymbol).to(HttpClientImpl);
+  container.bind<HttpClient>(HttpClientSymbol).to(HttpClientImpl).inSingletonScope();
   container
     .bind<AvailableRepository>(AvailableRepository)
     .to(AvailableRepositoryImpl);

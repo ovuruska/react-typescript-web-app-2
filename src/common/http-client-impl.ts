@@ -25,7 +25,6 @@ export class HttpClientImpl {
     this.instance.interceptors.response.use(
       (response: any) => {
         if (response.status === 401) {
-          this.purgeAuthToken();
         } else {
           return response;
         }
@@ -42,8 +41,7 @@ export class HttpClientImpl {
         username,
         password,
       });
-      console.log(response);
-      if (response.data.token) {
+      if (response.status === 200) {
         this.setAuthToken(response.data.token);
       }
     } catch (error) {
