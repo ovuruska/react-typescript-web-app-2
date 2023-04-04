@@ -36,6 +36,7 @@ const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle }) => {
       </div>
       {dropdownList.map((store, index) => (
         <div
+          key={index}
           className="dropdown-row"
           onClick={() => {
             setAciveIndex(index);

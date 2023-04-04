@@ -10,7 +10,7 @@ export default {
 
 //👇 We create a “template” of how args map to rendering
 const Template: ComponentStory<typeof SlotCard> = (args) => (
-  <SlotCard time={"09:00"} />
+  <SlotCard time={"09:00"} availabilty={false} width="25%" selected={true} />
 );
 
 export const FirstStory = Template.bind({});
