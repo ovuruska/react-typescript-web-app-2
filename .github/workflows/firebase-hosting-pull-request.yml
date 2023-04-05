@@ -21,7 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm i && npm run build
       - name: Create .env variables
         uses: SpicyPizza/create-envfile@v1.3
         with:
@@ -34,6 +33,9 @@ jobs:
           envkey_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
           envkey_REACT_APP_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
           envkey_VITE_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+      - name: Test
+        run: npm run test
+      - run: npm i && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
