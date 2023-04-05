@@ -1,14 +1,14 @@
 import React from 'react'
 import useAllBranches from "@hooks/useAllBranches";
 import {BranchEntity} from "@domain/types/common/branch";
-import DropdownBtnBottomDrawer from "@features/select-branch/dropdown-btn-bottom-drawer";
+import DropdownBottomDrawer,{DropdownBottomDrawerItem} from "@components/buttons/dropdown-bottom-drawer/dropdown-bottom-drawer";
 
 interface SelectBranchProps {
   onSelect?: (branch: BranchEntity[]) => void;
 }
 
 
-const SelectBranch: React.FC<SelectBranchProps> = ({
+const SelectBranches: React.FC<SelectBranchProps> = ({
                                                       onSelect
                                                    }) => {
 
@@ -27,8 +27,17 @@ const SelectBranch: React.FC<SelectBranchProps> = ({
     label = `${selectedBranches.length} Stores Selected`;
   }
 
-  return <DropdownBtnBottomDrawer onSelect={ handleSelect} label={label} options={allBranches} />
+  const options = allBranches.map((branch) => {
+    return {
+      id: branch.id,
+      title: branch.name,
+      description: branch.address,
+      value:branch
+    } as DropdownBottomDrawerItem<BranchEntity>
+  });
+
+  return <DropdownBottomDrawer onSelect={handleSelect} label={label} options={options}/>
 
 }
 
-export default SelectBranch
+export default SelectBranches

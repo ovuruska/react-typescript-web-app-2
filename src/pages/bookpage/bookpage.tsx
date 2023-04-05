@@ -7,8 +7,9 @@ import { useEffect, useState } from "react";
 import Pet from "../../interfaces/Pet";
 import { Link } from "react-router-dom";
 import SurgeCalendar from "@features/surge-calendar/surge-calendar";
-import SelectBranch from "@features/select-branch/select-branch";
+import SelectBranches from "@features/select-branches/select-branches";
 import AvailableSlots from "@features/available-slots/available-slots";
+import SelectGroomers from "@features/select-groomers/select-groomers";
 
 const BookPage: React.FC = () => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
@@ -49,7 +50,7 @@ const BookPage: React.FC = () => {
       </div>
       <div className="calender-row">
         <div className={"book-page__select-branch"}>
-          <SelectBranch />
+          <SelectBranches />
         </div>
         <div className="calender-header-row">
           <h2>Choose Date</h2>
@@ -64,6 +65,9 @@ const BookPage: React.FC = () => {
           </div>
         </div>
         <SurgeCalendar />
+      </div>
+      <div className={"calendar-header-row"}>
+        <SelectGroomers/>
       </div>
       <div className="slots-row">
         <div className="calender-header-row">
