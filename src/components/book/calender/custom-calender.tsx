@@ -144,7 +144,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
         size={"30px"}
         onClick={decrementMonth}
       />
-      <div className="date">
+      <div className="custom-calendar-date">
         <h1 data-testid="current-month">{monthNames[currentMonth - 1]}</h1>
         <h3 data-testid={"current-year"}>{currentYear}</h3>
       </div>

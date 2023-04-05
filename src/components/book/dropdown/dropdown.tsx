@@ -11,13 +11,13 @@ interface Props {
 
 const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle }) => {
   const [expand, setExpand] = useState<Boolean>(false);
-  const [activeIndex, setAciveIndex] = useState<number>(-1);
+  const [activeIndex, setActiveIndex] = useState<number>(-1);
 
   return (
     <div
       className="dropdown"
       style={{
-        maxHeight: expand ? `${(dropdownList.length + 1) * 50}px` : "50px",
+        height: expand ? `${(dropdownList.length + 1) * 50}px` : "50px",
         width: width,
       }}
     >
@@ -39,7 +39,7 @@ const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle }) => {
           key={index}
           className="dropdown-row"
           onClick={() => {
-            setAciveIndex(index);
+            setActiveIndex(index);
             setExpand(false);
           }}
         >

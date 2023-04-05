@@ -1,4 +1,4 @@
-import {GetMeUseCase} from "@domain/usecases/get-me";
+import {GetMeUseCase} from "@domain/usecases/customer/get-me";
 import {getTestContainer} from "@utils/inversion-container-test";
 import {Container} from "inversify";
 import mockAxios from "jest-mock-axios";

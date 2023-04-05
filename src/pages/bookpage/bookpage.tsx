@@ -6,8 +6,8 @@ import Dropdown from "../../components/book/dropdown/dropdown";
 import { useEffect, useState } from "react";
 import Pet from "../../interfaces/Pet";
 import { Link } from "react-router-dom";
-import CustomCalendar from "@quicker/components/book/calender/custom-calender";
 import SurgeCalendar from "@features/surge-calendar/surge-calendar";
+import SelectBranch from "@features/select-branch/select-branch";
 
 const BookPage: React.FC = () => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
@@ -47,8 +47,21 @@ const BookPage: React.FC = () => {
         </div>
       </div>
       <div className="calender-row">
+        <div className={"book-page__select-branch"}>
+          <SelectBranch width={"%100"}/>
+        </div>
         <div className="calender-header-row">
           <h2>Choose Date</h2>
+          <div className="legend-row">
+            {
+              // Create a rounded circle with the color of the legend #FF424B
+            }
+            <div className="legend legend--full"></div>
+            <h3>Full</h3>
+            <div className="legend legend--empty"></div>
+            <h3>Available</h3>
+
+          </div>
         </div>
         <SurgeCalendar />
       </div>

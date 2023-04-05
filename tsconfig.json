@@ -24,7 +24,8 @@
       "@data/*": ["data/*"],
       "@features/*": ["features/*"],
       "@utils/*": ["utils/*"],
-      "@quicker/*": ["./*"],
+      "@quicker/*": ["*"],
+      "@assets/*": ["assets/*"],
     },
     "baseUrl": "src"
   },

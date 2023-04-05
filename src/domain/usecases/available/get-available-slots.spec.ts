@@ -1,4 +1,4 @@
-import {GetAvailableSlotsUseCase} from "@domain/usecases/get-available-slots";
+import {GetAvailableSlotsUseCase} from "@domain/usecases/available/get-available-slots";
 import {Container} from "inversify";
 import {getTestContainer} from "@utils/inversion-container-test";
 import mockAxios from "jest-mock-axios";

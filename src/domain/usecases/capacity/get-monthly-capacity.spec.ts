@@ -1,11 +1,10 @@
-import {GetMonthlyCapacityParams, GetMonthlyCapacityUseCase} from "@domain/usecases/get-monthly-capacity";
+import {GetMonthlyCapacityParams, GetMonthlyCapacityUseCase} from "@domain/usecases/capacity/get-monthly-capacity";
 import {Container} from "inversify";
 import {getTestContainer} from "@utils/inversion-container-test";
 import {
   getMonthlyCapacityResponse, setAfternoonCapacity, setMorningCapacity
 } from "@data/mocks/handlers/get-monthly-capacity";
 import mockAxios from 'jest-mock-axios';
-import MockUnresolvedPromiseBody from "jest-mock-axios";
 
 
 describe('GetMonthlyCapacityUseCase', () => {
