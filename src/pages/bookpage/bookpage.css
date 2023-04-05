@@ -68,11 +68,18 @@
 .calender-header-row {
   padding: 1em 2.6em;
   display: flex;
+
   color: #212529;
   justify-content: space-between;
 }
 .book-page__select-branch {
   margin: 2rem;
+}
+.book-page__select-row{
+  margin:2rem;
+  display: flex;
+  gap:2rem;
+  justify-content: space-between;
 }
 
 .legend-row {

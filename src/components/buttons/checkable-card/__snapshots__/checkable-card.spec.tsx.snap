@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropdownBottomDrawer should render 1`] = `
+<div>
+  <div
+    class="checkableCard"
+    data-testid="checkable-card"
+  >
+    <div
+      class="checkableCard__left"
+    />
+    <div
+      class="checkableCard__right"
+    >
+      <div
+        class="checkbox"
+        data-testid="checkbox"
+      >
+        <label />
+        <input
+          type="checkbox"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DropdownBottomDrawer should render with checked 1`] = `
+<div>
+  <div
+    class="checkableCard__checked"
+    data-testid="checkable-card"
+  >
+    <div
+      class="checkableCard__left"
+    />
+    <div
+      class="checkableCard__right"
+    >
+      <div
+        class="checkbox__checked"
+        data-testid="checkbox"
+      >
+        <label />
+        <input
+          checked=""
+          type="checkbox"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="DoneIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DropdownBottomDrawer should render with content 1`] = `
+<div>
+  <div
+    class="checkableCard"
+    data-testid="checkable-card"
+  >
+    <div
+      class="checkableCard__left"
+    >
+      <div
+        class="checkableCard__content"
+      >
+        Content Includes Random Characters
+      </div>
+    </div>
+    <div
+      class="checkableCard__right"
+    >
+      <div
+        class="checkbox"
+        data-testid="checkbox"
+      >
+        <label />
+        <input
+          type="checkbox"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DropdownBottomDrawer should render with onClicked 1`] = `
+<div>
+  <div
+    class="checkableCard"
+    data-testid="checkable-card"
+  >
+    <div
+      class="checkableCard__left"
+    />
+    <div
+      class="checkableCard__right"
+    >
+      <div
+        class="checkbox"
+        data-testid="checkbox"
+      >
+        <label />
+        <input
+          type="checkbox"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DropdownBottomDrawer should render with title 1`] = `
+<div>
+  <div
+    class="checkableCard"
+    data-testid="checkable-card"
+  >
+    <div
+      class="checkableCard__left"
+    >
+      <div
+        class="checkableCard__title"
+      >
+        Title Includes Random Characters
+      </div>
+    </div>
+    <div
+      class="checkableCard__right"
+    >
+      <div
+        class="checkbox"
+        data-testid="checkbox"
+      >
+        <label />
+        <input
+          type="checkbox"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DropdownBottomDrawer should render with title and content 1`] = `
+<div>
+  <div
+    class="checkableCard"
+    data-testid="checkable-card"
+  >
+    <div
+      class="checkableCard__left"
+    >
+      <div
+        class="checkableCard__title"
+      >
+        Title Includes Random Characters
+      </div>
+      <div
+        class="checkableCard__content"
+      >
+        Content Includes Random Characters
+      </div>
+    </div>
+    <div
+      class="checkableCard__right"
+    >
+      <div
+        class="checkbox"
+        data-testid="checkbox"
+      >
+        <label />
+        <input
+          type="checkbox"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DropdownBottomDrawer should render with title, content, checked and onClicked 1`] = `
+<div>
+  <div
+    class="checkableCard__checked"
+    data-testid="checkable-card"
+  >
+    <div
+      class="checkableCard__left"
+    >
+      <div
+        class="checkableCard__title__checked"
+      >
+        Title Includes Random Characters
+      </div>
+      <div
+        class="checkableCard__content"
+      >
+        Content Includes Random Characters
+      </div>
+    </div>
+    <div
+      class="checkableCard__right"
+    >
+      <div
+        class="checkbox__checked"
+        data-testid="checkbox"
+      >
+        <label />
+        <input
+          checked=""
+          type="checkbox"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="DoneIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;
