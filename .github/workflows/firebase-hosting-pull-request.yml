@@ -7,20 +7,20 @@ name: Deploy to Firebase Hosting on PR
 permissions:
   contents: read
   pages: write
-  id-token: write      
+  id-token: write
 
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-
-
+  
+  
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
-       - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: Create .env variables
         uses: SpicyPizza/create-envfile@v1.3
         with:
