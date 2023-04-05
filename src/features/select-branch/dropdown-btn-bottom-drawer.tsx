@@ -42,6 +42,12 @@ const DropdownBtnBottomDrawer = ({
     setIsOpen(false)
   }
 
+  const handleClearAll = () => {
+    setSelected([]);
+    onSelect && onSelect([]);
+    setIsOpen(false)
+  }
+
   const toggle = () => setIsOpen(!isOpen);
 
   const cards = options.map((option) => {
@@ -68,6 +74,9 @@ const DropdownBtnBottomDrawer = ({
         <>
           {...cards}
         </>
+        <WeakBtn onClick={handleClearAll} content={"Clear all selections"}/>
+        <div style={{height: "8px"}}/>
+
         <WeakBtn onClick={handleSelectAll} content={"Select All"}/>
         <div style={{height: "8px"}}/>
         <CtaPrimary onClick={handleContinue} content={"Continue"}/>

@@ -5,17 +5,30 @@ import DropdownBtnBottomDrawer from "@features/select-branch/dropdown-btn-bottom
 
 interface SelectBranchProps {
   // onClick
-  onSelect?: (branch: BranchEntity) => void;
-  width?: string;
+  onSelect?: (branch: BranchEntity[]) => void;
 }
 
 
 const SelectBranch: React.FC<SelectBranchProps> = ({
-                                                     width, onSelect
+                                                      onSelect
                                                    }) => {
 
+  const [selectedBranches, setSelectedBranches] = React.useState<BranchEntity[]>([]);
   const allBranches: BranchEntity[] = useAllBranches();
-  return <DropdownBtnBottomDrawer onSelect={console.log} label={"Select Store"} options={allBranches} />
+
+  const handleSelect = (branches: BranchEntity[]) => {
+    setSelectedBranches(branches);
+    onSelect && onSelect(branches);
+  }
+
+  let label = "Select Store";
+  if(selectedBranches.length  == 1) {
+    label = selectedBranches[0].name;
+  }else if(selectedBranches.length > 1){
+    label = `${selectedBranches.length} Stores Selected`;
+  }
+
+  return <DropdownBtnBottomDrawer onSelect={ handleSelect} label={label} options={allBranches} />
 
 }
 
