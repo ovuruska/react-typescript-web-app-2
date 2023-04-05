@@ -5,12 +5,12 @@ import DropdownBottomDrawer, {
   DropdownBottomDrawerItem
 } from "@components/buttons/dropdown-bottom-drawer/dropdown-bottom-drawer";
 
-interface SelectBranchProps {
+interface SelectGroomersProps {
   onSelect?: (branch: EmployeeEntity[]) => void;
 }
 
 
-const SelectBranch: React.FC<SelectBranchProps> = ({
+const SelectGroomers: React.FC<SelectGroomersProps> = ({
                                                      onSelect
                                                    }) => {
 
@@ -41,4 +41,4 @@ const SelectBranch: React.FC<SelectBranchProps> = ({
 
 }
 
-export default SelectBranch
+export default SelectGroomers

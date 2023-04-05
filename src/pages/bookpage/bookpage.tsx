@@ -10,6 +10,7 @@ import SurgeCalendar from "@features/surge-calendar/surge-calendar";
 import SelectBranches from "@features/select-branches/select-branches";
 import AvailableSlots from "@features/available-slots/available-slots";
 import SelectGroomers from "@features/select-groomers/select-groomers";
+import SelectTime from "@features/select-time/select-time";
 
 const BookPage: React.FC = () => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
@@ -55,9 +56,7 @@ const BookPage: React.FC = () => {
         <div className="calender-header-row">
           <h2>Choose Date</h2>
           <div className="legend-row">
-            {
-              // Create a rounded circle with the color of the legend #FF424B
-            }
+
             <div className="legend legend--full"></div>
             <h3>Full</h3>
             <div className="legend legend--empty"></div>
@@ -66,8 +65,9 @@ const BookPage: React.FC = () => {
         </div>
         <SurgeCalendar />
       </div>
-      <div className={"calendar-header-row"}>
+      <div className={"book-page__select-row"}>
         <SelectGroomers/>
+        <SelectTime/>
       </div>
       <div className="slots-row">
         <div className="calender-header-row">

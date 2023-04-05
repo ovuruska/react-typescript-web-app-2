@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CtaPrimary content should be visible 1`] = `
+<div>
+  <button
+    class="ctaPrimary"
+    data-testid="cta-primary"
+  >
+    <label
+      class="ctaPrimary__label"
+    >
+      Button
+    </label>
+  </button>
+</div>
+`;
+
+exports[`CtaPrimary should render 1`] = `
+<div>
+  <button
+    class="ctaPrimary"
+    data-testid="cta-primary"
+  >
+    <label
+      class="ctaPrimary__label"
+    >
+      Button
+    </label>
+  </button>
+</div>
+`;
+
+exports[`CtaPrimary should render with content 1`] = `
+<div>
+  <button
+    class="ctaPrimary"
+    data-testid="cta-primary"
+  >
+    <label
+      class="ctaPrimary__label"
+    >
+      Button
+    </label>
+  </button>
+</div>
+`;
+
+exports[`CtaPrimary should render with onClick 1`] = `
+<div>
+  <button
+    class="ctaPrimary"
+    data-testid="cta-primary"
+  >
+    <label
+      class="ctaPrimary__label"
+    >
+      Button
+    </label>
+  </button>
+</div>
+`;

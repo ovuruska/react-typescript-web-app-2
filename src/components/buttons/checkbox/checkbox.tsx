@@ -11,11 +11,11 @@ const Checkbox : React.FC<CheckboxProps> = ({
   onChecked,
   label
 }) => {
-  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheck = () => {
     onChecked && onChecked(!checked);
   };
 
-  return <div className={checked ? styles.checkbox__checked : styles.checkbox}>
+  return <div data-testid={"checkbox"} onClick={handleCheck} className={checked ? styles.checkbox__checked : styles.checkbox}>
     <label>{label}</label>
     <input type="checkbox"  onChange={handleCheck} checked={checked}/>
     {checked && <DoneIcon />  }

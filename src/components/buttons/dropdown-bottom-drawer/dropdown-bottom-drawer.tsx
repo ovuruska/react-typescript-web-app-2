@@ -37,18 +37,14 @@ const DropdownBottomDrawer = <T extends {}>({
     });
   };
 
-  const getValues = () => {
-    return selected.map((item ) => item.value)
-  }
-
   const handleContinue = () => {
-    onSelect && onSelect(getValues());
+    onSelect && onSelect(selected.map((item ) => item.value));
     setIsOpen(false)
   }
 
   const handleSelectAll = () => {
     setSelected(options);
-    onSelect && onSelect(getValues());
+    onSelect && onSelect(options.map((item) => item.value));
     setIsOpen(false)
   }
 
@@ -67,17 +63,17 @@ const DropdownBottomDrawer = <T extends {}>({
       title={option.title}
       content={option.description}
       checked={checked}
-      onChecked={() => handleCheck(option)}
+      onClicked={() => handleCheck(option)}
     />
       <div style={{height: "8px"}}/>
     </div>
   });
 
-  return (<div className={styles.dropdownBtnTemplate} onClick={toggle}>
+  return (<div data-testid={"dropdown-bottom-drawer"} className={styles.dropdownBtnTemplate} onClick={toggle}>
     <label className={styles.dropdownBtnTemplate__label}>{label}</label>
     <BottomDrawer  open={isOpen}>
       <div className={styles.dropdownBtnTemplate__header}>
-        <h1>Select Store</h1>
+        <h1>{label}</h1>
         <Close onClick={toggle}/>
       </div>
       <div style={{height: "16px"}}/>
