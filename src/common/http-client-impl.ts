@@ -49,7 +49,6 @@ export class HttpClientImpl extends HttpClient {
   }
 
   async login(username: string, password: string): Promise<void> {
-    if (this.authToken) return;
     try {
       const response = await this.instance.post("/api/auth/customer/login", {
         username,
