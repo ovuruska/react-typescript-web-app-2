@@ -23,7 +23,11 @@ import {GetMeUseCase} from "@domain/usecases/customer/get-me";
 import {BranchRepositoryImpl} from "@data/repositories/branch/repository-impl";
 import {BranchRepository} from "@domain/repositories/branch/repository";
 import {GetAllBranchesUseCase} from "@domain/usecases/branch/get-all-branches";
-
+import {EmployeeRemoteDataSource} from "@data/datasources/employee/remote-data-source";
+import {EmployeeRemoteDataSourceImpl} from "@data/datasources/employee/remote-data-source-impl";
+import {EmployeeRepository} from "@domain/repositories/employee/repository";
+import {EmployeeRepositoryImpl} from "@data/repositories/employee/repository-impl";
+import {GetAllGroomers} from "@domain/usecases/employee/get-all-groomers";
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -41,5 +45,10 @@ export const containerBind = (container:Container) => {
   container.bind<BranchRemoteDataSource>(BranchRemoteDataSource).to(BranchRemoteDataSourceImpl).inSingletonScope();
   container.bind<BranchLocalDataSource>(BranchLocalDataSource).to(BranchLocalDataSourceImpl).inSingletonScope();
   container.bind<GetAllBranchesUseCase>(GetAllBranchesUseCase).toSelf().inSingletonScope();
+
+  container.bind<EmployeeRemoteDataSource>(EmployeeRemoteDataSource).to(EmployeeRemoteDataSourceImpl);
+  container.bind<EmployeeRepository>(EmployeeRepository).to(EmployeeRepositoryImpl);
+  container.bind<GetAllGroomers>(GetAllGroomers).toSelf();
+
 
 }
