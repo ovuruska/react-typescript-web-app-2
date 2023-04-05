@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
           svgSrc={svgSrc}
         />
         <ServiceCard
-          title="WeWash"
+          title="We Wash"
           subtitle="Tincidunt ornare massa"
           svgSrc={svgSrc}
         />

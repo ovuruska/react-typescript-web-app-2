@@ -58,12 +58,11 @@ const DropdownBottomDrawer = <T extends {}>({
 
   const cards = options.map((option) => {
     const checked = selected.findIndex((item) => item.id === option.id) > -1;
-    return <div data-testid={"dropdown-bottom-drawer-option-item"}><CheckableCard
+    return <div onClick={() => handleCheck(option)} data-testid={"dropdown-bottom-drawer-option-item"}><CheckableCard
       key={option.id}
       title={option.title}
       content={option.description}
       checked={checked}
-      onClicked={() => handleCheck(option)}
     />
       <div style={{height: "8px"}}/>
     </div>

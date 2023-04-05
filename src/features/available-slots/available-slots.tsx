@@ -7,6 +7,7 @@ import {
 } from "@domain/usecases/available/get-available-slots";
 import SlotCard from "@components/book/slot-card/slot-card";
 import "./available-slots.css";
+import useAvailableSlots from "@hooks/useAvailableSlots";
 
 type AvailableSlotsProps = {
   date: Date;
@@ -15,6 +16,7 @@ type AvailableSlotsProps = {
   onClick?: () => void;
   service: string;
   duration?: number;
+  times?:string[];
 };
 
 const AvailableSlots: React.FC<AvailableSlotsProps> = ({
@@ -23,44 +25,38 @@ const AvailableSlots: React.FC<AvailableSlotsProps> = ({
   branches,
   service,
   duration,
+  times,
 }) => {
-  const getAvailableSlots = useInjection<GetAvailableSlotsUseCase>(
-    GetAvailableSlotsUseCase
-  );
 
-  const [slots, setSlots] = React.useState<DailyAvailableSlot[]>([]);
   const [selectedSlot, setSelectedSlot] = React.useState<number>(-1);
 
-  useEffect(() => {
-    const dateStr = date.toISOString().split("T")[0];
+  const slots : DailyAvailableSlot[] = useAvailableSlots({date, employees, branches, service, duration, times});
 
-    const params = {
-      date: dateStr,
-      employees,
-      branches,
-      service,
-      duration,
-    } as GetAvailableSlotsParams;
+  const formatSlot = (slot: DailyAvailableSlot) => {
+    const start = new Date(slot.start);
+    if(start.getMinutes() === 0) {
+      return `${start.getHours()}:00`;
+    }
+    return `${start.getHours()}:${start.getMinutes()}`;
+  }
 
-    /* getAvailableSlots.call(params).then((response) => {
-      ///setSlots(response as DailyAvailableSlot[]); TODO GET ACTUAL DATA
+  const sortAndGetUniqueSlots = (slots: DailyAvailableSlot[]) => {
+    const sortedSlots = slots.sort((a, b) => {
+      const aDate = new Date(a.start);
+      const bDate = new Date(b.start);
+      return aDate.getTime() - bDate.getTime();
+    });
+    const set = new Set(sortedSlots.map((slot) => formatSlot(slot))).values();
+    return Array.from(set);
+  }
 
-
-    }); */
-    setSlots([
-      { start: "09:00", end: "10:00", employee: 5, branch: 1 },
-      { start: "11:00", end: "10:00", employee: 5, branch: 1 },
-      { start: "12:00", end: "10:00", employee: 5, branch: 1 },
-      { start: "13:00", end: "10:00", employee: 5, branch: 1 },
-      { start: "15:00", end: "10:00", employee: 5, branch: 1 },
-    ] as DailyAvailableSlot[]);
-  }, [date, employees, branches, service, duration]);
   return (
     <div className="slots-wrapper">
-      {slots.map((slot, index) => (
-        <div onClick={() => setSelectedSlot(index)} className="slot-wrapper">
+      {sortAndGetUniqueSlots(slots).map((slot,index) => (
+        <div key={slot} onClick={() => setSelectedSlot(index)} className="slot-wrapper">
           <SlotCard
-            time={slot.start}
+
+            time={slot}
             availabilty={true}
             selected={selectedSlot === index ? true : false}
             width="100%"

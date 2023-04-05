@@ -5,7 +5,7 @@ export interface OrderState {
 }
 
 const initialState: OrderState = {
-  orderType: "Full Grooming",
+  orderType: "Grooming",
 };
 
 const orderSlice = createSlice({

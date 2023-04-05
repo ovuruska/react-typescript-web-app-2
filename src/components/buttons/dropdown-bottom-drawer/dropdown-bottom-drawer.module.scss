@@ -7,8 +7,6 @@
   display: flex;
   align-items: center;
   position: relative;
-
-
 }
 .dropdownBtnTemplate:hover{
   cursor: pointer;
@@ -43,7 +41,6 @@
    font-size: 15px;
    line-height: 18px;
   position: relative;
-   color: #A9593D;
    margin: 16px 12px ;
   user-select: none;
   pointer-events: none;
@@ -63,6 +60,9 @@
 }
 
 .dropdownBtnTemplate__value{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: 'Manrope', sans-serif;
   font-style: normal;
   font-weight: 700;
