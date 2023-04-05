@@ -13,6 +13,7 @@ const useAllGroomers = () : EmployeeEntity[] => {
       setGroomers(response);
     });
   },[])
+  groomers.sort((a, b) => a.name.localeCompare(b.name));
 
   return groomers;
 }

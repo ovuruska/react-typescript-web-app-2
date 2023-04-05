@@ -13,6 +13,7 @@ const useAllBranches = () : BranchEntity[] => {
       setBranches(response);
     });
   },[])
+  branches.sort((a, b) => a.name.localeCompare(b.name));
 
   return branches;
 }

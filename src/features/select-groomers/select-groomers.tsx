@@ -1,7 +1,9 @@
 import React from 'react'
 import useAllGroomers from "@hooks/useAllGroomers";
 import {EmployeeEntity} from "@domain/types/common/employee";
-import DropdownBtnBottomDrawer from "@features/select-groomers/dropdown-btn-bottom-drawer";
+import DropdownBottomDrawer, {
+  DropdownBottomDrawerItem
+} from "@components/buttons/dropdown-bottom-drawer/dropdown-bottom-drawer";
 
 interface SelectBranchProps {
   onSelect?: (branch: EmployeeEntity[]) => void;
@@ -27,7 +29,15 @@ const SelectBranch: React.FC<SelectBranchProps> = ({
     label = `${groomers.length} Groomers Selected`;
   }
 
-  return <DropdownBtnBottomDrawer onSelect={ handleSelect} label={label} options={allGroomers} />
+  const options = allGroomers.map((groomer) => {
+    return {
+      id: groomer.id,
+      title: groomer.name,
+      value:groomer
+    } as DropdownBottomDrawerItem<EmployeeEntity>
+  });
+
+  return <DropdownBottomDrawer onSelect={handleSelect} label={label} options={options}/>
 
 }
 
