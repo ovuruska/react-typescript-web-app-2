@@ -4,7 +4,6 @@
     // Additional or overridden options specific to storybook
   },
   "include": [
-    // Include necessary paths, for example:
     "./**/*.stories.ts",
     "./**/*.stories.tsx"
   ]

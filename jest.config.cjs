@@ -12,6 +12,7 @@ module.exports = {
         "^@utils/(.*)$": "<rootDir>/src/utils/$1",
         "^@data/(.*)$": "<rootDir>/src/data/$1",
         "^@features/(.*)$": "<rootDir>/src/features/$1",
+        "^@assets/(.*)$": "<rootDir>/src/assets/$1",
 
     },
     setupFiles: ['./jest.setup.cjs'],

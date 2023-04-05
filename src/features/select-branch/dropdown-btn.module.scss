@@ -1,0 +1,49 @@
+.dropdownBtnTemplate{
+  width: 100%;
+  background-color:#F8F9FA;
+  border-radius: 12px;
+  height:64px;
+  display: flex;
+  align-items: center;
+
+
+}
+.dropdownBtnTemplate:hover{
+  cursor: pointer;
+  background-color:#E5E5E5;
+}
+
+.dropdownBtnTemplate__header{
+  display: flex;
+    padding:16px;
+    align-items: center;
+    width:100%;
+    justify-content: space-between;
+    & svg{
+    height:32px;
+      width:32px;
+      color:#CED4DA;
+      &:hover{
+        cursor: pointer;
+        color:#495057;
+      }
+    }
+}
+
+.dropdownBtnTemplate__icon:hover{
+  cursor: pointer;
+}
+
+.dropdownBtnTemplate__label{
+   font-family: 'Manrope', sans-serif;
+   font-style: normal;
+   font-weight: 700;
+   font-size: 15px;
+   line-height: 18px;
+   color: #495057;
+   margin: 16px 12px ;
+  user-select: none;
+  pointer-events: none;
+
+
+}

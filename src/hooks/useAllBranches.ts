@@ -12,7 +12,7 @@ const useAllBranches = () : BranchEntity[] => {
     getAllBranches.call().then((response) => {
       setBranches(response);
     });
-  })
+  },[])
 
   return branches;
 }

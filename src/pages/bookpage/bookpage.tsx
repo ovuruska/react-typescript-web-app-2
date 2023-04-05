@@ -6,7 +6,6 @@ import Dropdown from "../../components/book/dropdown/dropdown";
 import { useEffect, useState } from "react";
 import Pet from "../../interfaces/Pet";
 import { Link } from "react-router-dom";
-import CustomCalendar from "@quicker/components/book/calender/custom-calender";
 import SurgeCalendar from "@features/surge-calendar/surge-calendar";
 import SelectBranch from "@features/select-branch/select-branch";
 
