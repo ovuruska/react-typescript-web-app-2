@@ -66,7 +66,7 @@ const BookPage: React.FC = () => {
         <SurgeCalendar />
       </div>
       <div className={"book-page__select-row"}>
-        <SelectGroomers/>
+        {type == "Grooming" ? <SelectGroomers/> : null}
         <SelectTime/>
       </div>
       <div className="slots-row">

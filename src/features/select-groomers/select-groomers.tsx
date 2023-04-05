@@ -22,12 +22,7 @@ const SelectGroomers: React.FC<SelectGroomersProps> = ({
     onSelect && onSelect(branches);
   }
 
-  let label = "Select Groomers";
-  if(groomers.length  == 1) {
-    label = groomers[0].name;
-  }else if(groomers.length > 1){
-    label = `${groomers.length} Groomers Selected`;
-  }
+  const label = "Select Groomers";
 
   const options = allGroomers.map((groomer) => {
     return {

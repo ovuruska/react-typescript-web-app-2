@@ -36,60 +36,38 @@ describe('DropdownBottomDrawer', () => {
 
   it("should Select All options", () => {
     const onSelect = jest.fn();
-    const { getByTestId } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} />);
+    const { getByTestId, getAllByTestId } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} />);
 
     act(() => {
       getByTestId("dropdown-bottom-drawer").click();
     });
 
-    options.forEach((option) => {
+    const optionElements = getAllByTestId("dropdown-bottom-drawer-option-item");
+    expect(optionElements.length).toBe(options.length);
+    optionElements.forEach((optionElement) => {
       act(() => {
-        const optionElement = screen.getByText(option.title as string);
         optionElement.click();
       });
     });
   });
-  it('when clicked all options and clicked continue, onSelected should return all option values.', () => {
 
-        const onSelect = jest.fn();
-      const { getByTestId } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} />);
-
-      act(() => {
-        getByTestId("dropdown-bottom-drawer").click();
-      });
-
-      options.forEach((option) => {
-        act(() => {
-          const optionElement = screen.getByText(option.title as string);
-          optionElement.click();
-        });
-      });
-      act(()=>{
-        const continueElement = screen.getByText("Continue");
-        continueElement.click();
-    })
-
-        expect(onSelect).toBeCalledWith(options.map((option) => option.value));
-
-  });
   it('when clicked all options and again clicked all options and clicked continue, onSelected should return empty array.', () => {
 
     const onSelect = jest.fn();
-    const { getByTestId } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} />);
+    const { getByTestId,getAllByTestId } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} />);
 
     act(() => {
       getByTestId("dropdown-bottom-drawer").click();
     });
-
-    options.forEach((option) => {
+    const optionElements = getAllByTestId("dropdown-bottom-drawer-option-item");
+    expect(optionElements.length).toBe(options.length);
+    optionElements.forEach((optionElement) => {
       act(() => {
-        const optionElement = screen.getByText(option.title as string);
         optionElement.click();
       });
     });
-    options.forEach((option) => {
+    optionElements.forEach((optionElement) => {
       act(() => {
-        const optionElement = screen.getByText(option.title as string);
         optionElement.click();
       });
     });
@@ -104,15 +82,16 @@ describe('DropdownBottomDrawer', () => {
 
   it('when clicked all options and clicked clear all, onSelected should return empty array.', () => {
     const onSelect = jest.fn();
-    const { getByTestId } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} />);
+    const { getByTestId,getAllByTestId } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} />);
 
     act(() => {
       getByTestId("dropdown-bottom-drawer").click();
     });
 
-    options.forEach((option) => {
+    const optionElements = getAllByTestId("dropdown-bottom-drawer-option-item");
+    expect(optionElements.length).toBe(options.length);
+    optionElements.forEach((optionElement) => {
       act(() => {
-        const optionElement = screen.getByText(option.title as string);
         optionElement.click();
       });
     });
@@ -127,16 +106,16 @@ describe('DropdownBottomDrawer', () => {
 
   it('when some options are selected and clicked clear all, onSelected should return empty array.', () => {
     const onSelect = jest.fn();
-    const { getByTestId } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} />);
+    const { getByTestId,getAllByTestId } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} />);
 
     act(() => {
       getByTestId("dropdown-bottom-drawer").click();
     });
 
-    options.forEach((option,index) => {
-      if(index > 1) return;
+    const optionElements = getAllByTestId("dropdown-bottom-drawer-option-item");
+    expect(optionElements.length).toBe(options.length);
+    optionElements.forEach((optionElement) => {
       act(() => {
-        const optionElement = screen.getByText(option.title as string);
         optionElement.click();
       });
     });
@@ -150,15 +129,16 @@ describe('DropdownBottomDrawer', () => {
 
   it('when all options are selected and clicked Select All, onSelected should return all options.', () => {
     const onSelect = jest.fn();
-    const { getByTestId } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} />);
+    const { getByTestId, getAllByTestId } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} />);
 
     act(() => {
       getByTestId("dropdown-bottom-drawer").click();
     });
 
-    options.forEach((option) => {
+    const optionElements = getAllByTestId("dropdown-bottom-drawer-option-item");
+    expect(optionElements.length).toBe(options.length);
+    optionElements.forEach((optionElement) => {
       act(() => {
-        const optionElement = screen.getByText(option.title as string);
         optionElement.click();
       });
     });

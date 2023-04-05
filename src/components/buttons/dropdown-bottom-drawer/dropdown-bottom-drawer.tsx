@@ -58,7 +58,7 @@ const DropdownBottomDrawer = <T extends {}>({
 
   const cards = options.map((option) => {
     const checked = selected.findIndex((item) => item.id === option.id) > -1;
-    return <div><CheckableCard
+    return <div data-testid={"dropdown-bottom-drawer-option-item"}><CheckableCard
       key={option.id}
       title={option.title}
       content={option.description}
@@ -69,8 +69,20 @@ const DropdownBottomDrawer = <T extends {}>({
     </div>
   });
 
+  let valueText = null;
+  if(selected.length == 1){
+    valueText = selected[0].title ?? "1 Selected";
+  }else if(selected.length > 1){
+    valueText = `${selected.length} Selected`;
+  }
+
+
+
+
   return (<div data-testid={"dropdown-bottom-drawer"} className={styles.dropdownBtnTemplate} onClick={toggle}>
-    <label className={styles.dropdownBtnTemplate__label}>{label}</label>
+    <label className={!valueText ? styles.dropdownBtnTemplate__label : styles.dropdownBtnTemplate__label__floating}>{label}</label>
+    {!!valueText ? <div className={styles.dropdownBtnTemplate__value}>{valueText}</div> : null }
+
     <BottomDrawer  open={isOpen}>
       <div className={styles.dropdownBtnTemplate__header}>
         <h1>{label}</h1>
@@ -80,12 +92,12 @@ const DropdownBottomDrawer = <T extends {}>({
       <>
         {...cards}
       </>
-      <WeakBtn onClick={handleClearAll} content={"Clear all selections"}/>
+      <WeakBtn onClick={handleClearAll} data-testid={"dropdown-bottom-drawer-clear-all"} content={"Clear all selections"}/>
       <div style={{height: "8px"}}/>
 
-      <WeakBtn onClick={handleSelectAll} content={"Select All"}/>
+      <WeakBtn onClick={handleSelectAll} data-testid={"dropdown-bottom-drawer-select-all"} content={"Select All"}/>
       <div style={{height: "8px"}}/>
-      <CtaPrimary onClick={handleContinue} content={"Continue"}/>
+      <CtaPrimary onClick={handleContinue} data-testid={"dropdown-bottom-drawer-continue"} content={"Continue"}/>
     </BottomDrawer>
 
   </div>);

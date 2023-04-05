@@ -20,12 +20,7 @@ const SelectBranches: React.FC<SelectBranchProps> = ({
     onSelect && onSelect(branches);
   }
 
-  let label = "Select Store";
-  if(selectedBranches.length  == 1) {
-    label = selectedBranches[0].name;
-  }else if(selectedBranches.length > 1){
-    label = `${selectedBranches.length} Stores Selected`;
-  }
+  const label = "Select Store";
 
   const options = allBranches.map((branch) => {
     return {
