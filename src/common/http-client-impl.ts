@@ -16,11 +16,22 @@ export class HttpClientImpl {
     this.instance = axios.create({ baseURL: apiUrl.value });
     this.authToken = localStorage.getItem("authToken");
 
-    /* if (this.authToken) {
-      this.instance.defaults.headers.common[
-        "Authorization"
-      ] = `Token ${this.authToken}`;
-    } */
+    if (this.authToken) {
+      this.instance
+        .get("/api/auth/customer/verify", {
+          headers: {
+            Authorization: `Token ${this.authToken}`,
+          },
+        })
+        .then(() => {
+          this.instance.defaults.headers.common[
+            "Authorization"
+          ] = `Token ${this.authToken}`;
+        })
+        .catch((err) => {
+          this.authToken = null;
+        });
+    }
 
     this.instance.interceptors.response.use(
       (response: any) => {
@@ -36,6 +47,7 @@ export class HttpClientImpl {
   }
 
   async login(username: string, password: string): Promise<void> {
+    if (this.authToken) return;
     try {
       const response = await this.instance.post("/api/auth/customer/login", {
         username,
