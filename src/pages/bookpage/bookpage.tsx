@@ -11,9 +11,16 @@ import SelectBranches from "@features/select-branches/select-branches";
 import AvailableSlots from "@features/available-slots/available-slots";
 import SelectGroomers from "@features/select-groomers/select-groomers";
 import SelectTime from "@features/select-time/select-time";
+import {BranchEntity} from "@domain/types/common/branch";
+import {EmployeeEntity} from "@domain/types/common/employee";
 
 const BookPage: React.FC = () => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
+  const [date,setDate] = useState<Date>(new Date());
+  const [branches,setBranches] = useState<Array<number>>([]);
+  const [groomers,setGroomers] = useState<Array<number>>([]);
+  const [times,setTimes] = useState<Array<string>>(["morning","afternoon","evening"]);
+
 
   const type = useSelector((state: RootState) => {
     return state.order.orderType;
@@ -31,14 +38,23 @@ const BookPage: React.FC = () => {
       });
     });
   }, [pets]);
+
+  const handleSelectBranches = (branches:BranchEntity[]) => {
+    setBranches(branches.map((branch) => branch.id));
+  }
+
+  const handleSelectEmployees = (employees:EmployeeEntity[]) => {
+    setGroomers(employees.map((employee) => employee.id));
+  }
+
   return (
     <div className="book-page page">
-      <div className={`service-pet-row ${type.toLowerCase()}-row`}>
+      <div className={`service-pet-row ${type.toLowerCase().replace(" ","")}-row`}>
         <Link to={"/"}>
           <BiLeftArrowAlt size={"35px"} />
         </Link>
         <div className="service-title">
-          <h3 className={`${type.toLowerCase()}-heading`}>{type}</h3>
+          <h3 className={`${type.toLowerCase().replace(" ","")}-heading`}>{type}</h3>
           <h1>Book for</h1>
         </div>
         <div className="dropdown-wrapper">
@@ -51,7 +67,7 @@ const BookPage: React.FC = () => {
       </div>
       <div className="calender-row">
         <div className={"book-page__select-branch"}>
-          <SelectBranches />
+          <SelectBranches onSelect={handleSelectBranches} />
         </div>
         <div className="calender-header-row">
           <h2>Choose Date</h2>
@@ -63,18 +79,18 @@ const BookPage: React.FC = () => {
             <h3>Available</h3>
           </div>
         </div>
-        <SurgeCalendar />
+        <SurgeCalendar initialDate={date} onChange={setDate} />
       </div>
       <div className={"book-page__select-row"}>
-        <SelectGroomers/>
-        <SelectTime/>
+        {type == "Grooming" ? <SelectGroomers onSelect={handleSelectEmployees}/> : null}
+        <SelectTime onSelect={setTimes}/>
       </div>
       <div className="slots-row">
         <div className="calender-header-row">
           <h2>Select Time</h2>
         </div>
 
-        <AvailableSlots date={new Date()} service="WeWash" />
+        <AvailableSlots date={date} service={type} times={times} branches={branches} employees={groomers}  />
       </div>
     </div>
   );

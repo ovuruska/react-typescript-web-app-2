@@ -5,6 +5,7 @@ import DropdownBottomDrawer, {
 
 interface SelectTimeProps {
   onSelect?: (branch: string[]) => void;
+  initialState?: string[];
 }
 
 const options = [{
@@ -17,7 +18,7 @@ const options = [{
 
 
 const SelectTime: React.FC<SelectTimeProps> = ({
-                                                 onSelect
+                                                 onSelect, initialState
                                                }) => {
 
   const [selectedTimes, setSelectedTimes] = React.useState<string[]>(options.map((option) => option.value));
@@ -28,12 +29,7 @@ const SelectTime: React.FC<SelectTimeProps> = ({
     onSelect && onSelect(times);
 
   }
-  let label = "Select Time";
-  if (selectedTimes.length == 1) {
-    label = selectedTimes[0];
-  } else if (selectedTimes.length > 1) {
-    label = `${selectedTimes.length} Times Selected`;
-  }
+  const label = "Select Time";
 
 
   return <DropdownBottomDrawer initialState={options} onSelect={handleSelect} label={label} options={options}/>

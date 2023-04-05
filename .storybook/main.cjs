@@ -22,6 +22,7 @@ module.exports = {
             '@assets':  path.resolve(__dirname, '../src/assets'),
             '@domain':  path.resolve(__dirname, '../src/domain'),
             '@data':  path.resolve(__dirname, '../src/data'),
+            '@quicker':  path.resolve(__dirname, '../src'),
 
         }
         return config
