@@ -1,14 +1,14 @@
 import React from 'react'
 import useAllBranches from "@hooks/useAllBranches";
 import {BranchEntity} from "@domain/types/common/branch";
-import DropdownBtnBottomDrawer from "@features/select-branch/dropdown-btn-bottom-drawer";
+import DropdownBtnBottomDrawer from "@features/select-branches/dropdown-btn-bottom-drawer";
 
 interface SelectBranchProps {
   onSelect?: (branch: BranchEntity[]) => void;
 }
 
 
-const SelectBranch: React.FC<SelectBranchProps> = ({
+const SelectBranches: React.FC<SelectBranchProps> = ({
                                                       onSelect
                                                    }) => {
 
@@ -31,4 +31,4 @@ const SelectBranch: React.FC<SelectBranchProps> = ({
 
 }
 
-export default SelectBranch
+export default SelectBranches

@@ -44,17 +44,17 @@ describe('GetAllBranchesUseCase', () => {
 
 // Path: src/domain/usecases/employee/get-all-groomers.spec.ts
 import {getTestContainer} from "@utils/inversion-container-test";
-import {GetAllGroomers} from "@domain/usecases/employee/get-all-groomers";
+import {GetAllGroomersUseCase} from "@domain/usecases/employee/get-all-groomers-use-case";
 import {Container} from "inversify";
 import mockAxios from "jest-mock-axios";
 
 describe('GetAllGroomers', () => {
-  let getAllGroomers: GetAllGroomers;
+  let getAllGroomers: GetAllGroomersUseCase;
   let container: Container;
 
   beforeAll(() => {
     container = getTestContainer();
-    getAllGroomers = container.get(GetAllGroomers);
+    getAllGroomers = container.get(GetAllGroomersUseCase);
   });
 
   it('should be defined', () => {

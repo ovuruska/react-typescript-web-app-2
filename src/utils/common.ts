@@ -27,7 +27,7 @@ import {EmployeeRemoteDataSource} from "@data/datasources/employee/remote-data-s
 import {EmployeeRemoteDataSourceImpl} from "@data/datasources/employee/remote-data-source-impl";
 import {EmployeeRepository} from "@domain/repositories/employee/repository";
 import {EmployeeRepositoryImpl} from "@data/repositories/employee/repository-impl";
-import {GetAllGroomers} from "@domain/usecases/employee/get-all-groomers";
+import {GetAllGroomersUseCase} from "@domain/usecases/employee/get-all-groomers-use-case";
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -48,7 +48,7 @@ export const containerBind = (container:Container) => {
 
   container.bind<EmployeeRemoteDataSource>(EmployeeRemoteDataSource).to(EmployeeRemoteDataSourceImpl);
   container.bind<EmployeeRepository>(EmployeeRepository).to(EmployeeRepositoryImpl);
-  container.bind<GetAllGroomers>(GetAllGroomers).toSelf();
+  container.bind<GetAllGroomersUseCase>(GetAllGroomersUseCase).toSelf();
 
 
 }

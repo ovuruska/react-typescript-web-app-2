@@ -45,7 +45,7 @@ const AvailableSlots: React.FC<AvailableSlotsProps> = ({
     /* getAvailableSlots.call(params).then((response) => {
       ///setSlots(response as DailyAvailableSlot[]); TODO GET ACTUAL DATA
 
-     
+
     }); */
     setSlots([
       { start: "09:00", end: "10:00", employee: 5, branch: 1 },
@@ -54,7 +54,6 @@ const AvailableSlots: React.FC<AvailableSlotsProps> = ({
       { start: "13:00", end: "10:00", employee: 5, branch: 1 },
       { start: "15:00", end: "10:00", employee: 5, branch: 1 },
     ] as DailyAvailableSlot[]);
-    console.log(slots);
   }, [date, employees, branches, service, duration]);
   return (
     <div className="slots-wrapper">

@@ -4,7 +4,7 @@ export interface EmployeeEntity {
   name: string;
   email: string;
   phone: string;
-  role: number;
+  role: string;
 
 }
 
