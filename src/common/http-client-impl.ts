@@ -6,13 +6,15 @@ import axios, {
 } from "axios";
 import { inject, injectable } from "inversify";
 import { ApiUrl, ApiUrlSymbol } from "@domain/types/symbols/api-url";
+import { HttpClient } from "./http-client";
 
 @injectable()
-export class HttpClientImpl {
-  private instance: AxiosInstance;
+export class HttpClientImpl extends HttpClient {
+  public instance: AxiosInstance;
   private authToken: string | null;
 
-  constructor(@inject<ApiUrl>(ApiUrlSymbol) readonly apiUrl: ApiUrl) {
+  constructor(@inject<ApiUrl>(ApiUrlSymbol) protected apiUrl: ApiUrl) {
+    super(apiUrl);
     this.instance = axios.create({ baseURL: apiUrl.value });
     this.authToken = localStorage.getItem("authToken");
 
