@@ -49,7 +49,7 @@ const BookPage: React.FC = () => {
       </div>
       <div className="calender-row">
         <div className={"book-page__select-branch"}>
-          <SelectBranch width={"%100"} />
+          <SelectBranch />
         </div>
         <div className="calender-header-row">
           <h2>Choose Date</h2>

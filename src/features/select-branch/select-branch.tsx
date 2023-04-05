@@ -4,7 +4,6 @@ import {BranchEntity} from "@domain/types/common/branch";
 import DropdownBtnBottomDrawer from "@features/select-branch/dropdown-btn-bottom-drawer";
 
 interface SelectBranchProps {
-  // onClick
   onSelect?: (branch: BranchEntity[]) => void;
 }
 
