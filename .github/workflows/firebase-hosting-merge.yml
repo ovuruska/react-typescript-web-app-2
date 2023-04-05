@@ -23,18 +23,17 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm i && npm run build
       - name: Create .env variables
-        uses: ozaytsev86/create-env-file@v1
-        # Insert .env variables should have prefix ENV_
+        uses: SpicyPizza/create-envfile@v1.3
         with:
-          ENV_API_URL: ${{ secrets.BACKEND_URL }}
-          ENV_REACT_APP_API_URL: ${{ secrets.BACKEND_URL }}
-          ENV_VITE_API_URL: ${{ secrets.BACKEND_URL }}
-          ENV_API_USERNAME: ${{ secrets.TEST_USERNAME }}
-          ENV_REACT_APP_API_USERNAME: ${{ secrets.TEST_USERNAME }}
-          ENV_VITE_API_USERNAME: ${{ secrets.TEST_USERNAME }}
-          ENV_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
-          ENV_REACT_APP_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
-          ENV_VITE_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          envkey_API_URL: ${{ secrets.BACKEND_URL }}
+          envkey_REACT_APP_API_URL: ${{ secrets.BACKEND_URL }}
+          envkey_VITE_API_URL: ${{ secrets.BACKEND_URL }}
+          envkey_API_USERNAME: ${{ secrets.TEST_USERNAME }}
+          envkey_REACT_APP_API_USERNAME: ${{ secrets.TEST_USERNAME }}
+          envkey_VITE_API_USERNAME: ${{ secrets.TEST_USERNAME }}
+          envkey_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          envkey_REACT_APP_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          envkey_VITE_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
