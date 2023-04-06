@@ -13,7 +13,6 @@ const ProfileCard: React.FC<Props> = ({}) => {
   return (
     <div className="profile">
       <div className="row row1">
-        <h1>Hello Emma</h1>
         <div className="icons">
           <ProfileBtn />
           <AddBtn />

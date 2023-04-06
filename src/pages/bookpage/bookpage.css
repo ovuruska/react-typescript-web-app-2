@@ -5,10 +5,15 @@
 .service-pet-row {
   width: 100%;
   display: flex;
-  padding: 2em 3em;
+  padding: 1.6em 2em;
   align-items: center;
   overflow: visible;
   position: relative;
+}
+
+.service-pet-row a {
+  display: flex;
+  align-items: center;
 }
 
 .service-pet-row svg {
@@ -21,7 +26,7 @@
 }
 
 .service-title {
-  padding-left: 1.5em;
+  padding-left: 0.6em;
 }
 
 .service-pet-row h1 {
@@ -76,10 +81,10 @@
 .book-page__select-branch {
   margin: 2rem;
 }
-.book-page__select-row{
-  margin:2rem;
+.book-page__select-row {
+  margin: 2rem;
   display: flex;
-  gap:2rem;
+  gap: 2rem;
   justify-content: space-between;
 }
 

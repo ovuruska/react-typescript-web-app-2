@@ -8,6 +8,7 @@ import svgSrc from "../../assets/grooming.svg";
 import "./homepage.css";
 import AppointmentCard from "../../components/home/appointment-card/appointment-card";
 import imageSrc from "../../assets/mockPhoto.png";
+import logoSrc from "../../assets/logo.png";
 import RewardsCard from "../../components/home/rewards-card/rewards-card";
 
 const HomePage: React.FC = () => {
@@ -15,6 +16,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="home-page page">
+      <img alt="scrubbers logo" className={"logo"} src={logoSrc}></img>
       <ProfileCard />
       {/* <RewardsCard rewardCount={100} /> */}
       <div className="service-row">

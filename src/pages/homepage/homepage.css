@@ -64,3 +64,11 @@ a:hover {
 img {
   pointer-events: none;
 }
+
+.logo {
+  position: absolute;
+  width: 120px;
+  top: 1em;
+  left: 2em;
+  z-index: 100;
+}
