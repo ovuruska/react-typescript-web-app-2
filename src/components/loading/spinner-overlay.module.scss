@@ -2,12 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
   z-index: 9999;
 }
 
@@ -16,8 +13,25 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border-left-color: #007bff;
+  border-left-color: #a9593d;
   animation: spinner 1s linear infinite;
+}
+
+.page {
+  width: 100%;
+  position: relative;
+}
+
+@media only screen and (min-device-width: 650px) {
+  .spinnerOverlay {
+    max-width: 450px;
+    width: 450px;
+    max-height: 85vh;
+    height: 85vh;
+    overflow-y: scroll;
+    border-radius: 30px;
+    background-color: #ffffff;
+  }
 }
 
 @keyframes spinner {

@@ -1,21 +1,15 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import { lazy, Suspense } from "react";
-const HomePage = lazy(() => import("./pages/homepage/homepage"));
-const BookPage = lazy(() => import("./pages/bookpage/bookpage"));
 
-import { useInjection } from "inversify-react";
-import { useEffect } from "react";
-import { HttpClient, HttpClientSymbol } from "@quicker/common/http-client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AutoLogin from "@components/auth/auto-login";
+import BookAppointment from "@pages/book-appointment/book-appointment";
+import SpinnerOverlay from "@components/loading/spinner-overlay";
+
+const BookPage = lazy(() => import("./pages/bookpage/bookpage"));
+const HomePage = lazy(() => import("./pages/homepage/homepage"));
 
 function App() {
-  const client = useInjection<HttpClient>(HttpClientSymbol);
-
-  useEffect(() => {
-    client.login("b", "b");
-  }, []);
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -23,17 +17,29 @@ function App() {
           <Route
             path="/"
             element={
-              <Suspense fallback={<div>{/* TODO FALLBACK SPİNNER */}</div>}>
-                <HomePage />
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <HomePage />
+                </AutoLogin>
               </Suspense>
             }
           />
           <Route
             path="/book"
             element={
-              <Suspense fallback={<div>{/* TODO FALLBACK SPİNNER */}</div>}>
-                <BookPage />
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <BookPage />
+                </AutoLogin>
               </Suspense>
+            }
+          />
+          <Route
+            path="/book-now"
+            element={
+              <AutoLogin>
+                <BookAppointment />
+              </AutoLogin>
             }
           />
         </Routes>

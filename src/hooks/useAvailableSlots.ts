@@ -23,7 +23,7 @@ const useAvailableSlots = ({
   employees,
   times = ["morning", "afternoon", "evening"],
 }: AvailableSlotsParams) => {
-  const [slots, setSlots] = React.useState<DailyAvailableSlot[]>([]);
+  const [slots, setSlots] = React.useState<string[]>([]);
   const getAvailableSlots = useInjection(GetAvailableSlotsUseCase);
   const dateStr = date.toISOString().split("T")[0];
 
@@ -39,23 +39,49 @@ const useAvailableSlots = ({
       duration,
     } as GetAvailableSlotsParams;
     getAvailableSlots.call(params).then((response) => {
-      setSlots(response as DailyAvailableSlot[]);
+      setSlots(
+        sortAndGetUniqueSlots(
+          response.filter((slot) => {
+            const date = new Date(slot.start);
+            const dateHour: number = date.getHours();
+            if (times?.includes("morning")) {
+              return dateHour >= 8 && dateHour <= 12;
+            }
+            if (times?.includes("afternoon")) {
+              return dateHour >= 12 && dateHour <= 16;
+            }
+            if (times?.includes("evening")) {
+              return dateHour >= 16 && dateHour <= 20;
+            }
+            return false;
+          })
+        )
+      );
+      console.log(slots);
     });
   }, [dateStr, duration, employees, branches]);
 
-  return slots.filter((slot) => {
-    const date = new Date(slot.start);
-    const dateHour: number = date.getHours();
-    if (times?.includes("morning")) {
-      return dateHour >= 8 && dateHour <= 12;
+  const formatSlot = (slot: DailyAvailableSlot) => {
+    const start = new Date(slot.start);
+    if (start.getMinutes() === 0) {
+      return `${start.getHours()}:00`;
     }
-    if (times?.includes("afternoon")) {
-      return dateHour >= 12 && dateHour <= 16;
-    }
-    if (times?.includes("evening")) {
-      return dateHour >= 16 && dateHour <= 20;
-    }
-    return false;
-  });
+    return `${start.getHours()}:${start.getMinutes()}`;
+  };
+
+  const sortAndGetUniqueSlots = (slots: DailyAvailableSlot[]) => {
+    const sortedSlots = slots.sort((a, b) => {
+      const aDate = new Date(a.start);
+      const bDate = new Date(b.start);
+      return aDate.getTime() - bDate.getTime();
+    });
+    const set = new Set(sortedSlots.map((slot) => formatSlot(slot))).values();
+    return Array.from(set);
+  };
+
+  return {
+    slots,
+    setSlots,
+  };
 };
 export default useAvailableSlots;
