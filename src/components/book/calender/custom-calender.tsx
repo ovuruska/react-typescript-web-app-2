@@ -68,7 +68,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
     setCurrentYear(newYear);
     setCurrentMonth(newMonth);
     if (onChange !== undefined) {
-      onChange(new Date(newYear, newMonth, activeDay));
+      onChange(new Date(newYear, newMonth, activeDay+1));
     }
   };
 

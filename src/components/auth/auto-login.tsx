@@ -16,12 +16,12 @@ const AutoLogin = ({children}: AutoLoginProps) => {
   useEffect(() => {
     setIsLoading(true);
     client.login().then(() => {
+      client.verify().then(() => {
+        setIsLoading(false);
+        setIsLoggedIn(true);
+      });
+    });
 
-    });
-    client.verify().then(() => {
-      setIsLoading(false);
-      setIsLoggedIn(true);
-    });
   }, []);
 
 

@@ -16,18 +16,23 @@ const HomePage: React.FC = () => {
   return (
     <div className="home-page page">
       <ProfileCard />
-      <RewardsCard rewardCount={100} />
+      {/* <RewardsCard rewardCount={100} /> */}
       <div className="service-row">
-        <ServiceCard
-          title="Grooming"
-          subtitle="Tincidunt ornare massa"
-          svgSrc={svgSrc}
-        />
-        <ServiceCard
-          title="We Wash"
-          subtitle="Tincidunt ornare massa"
-          svgSrc={svgSrc}
-        />
+        <div className="header-row">
+          <h2>Add Appointments</h2>
+        </div>
+        <div className="service-row-flex">
+          <ServiceCard
+            title="Grooming"
+            subtitle="Tincidunt ornare massa"
+            svgSrc={svgSrc}
+          />
+          <ServiceCard
+            title="We Wash"
+            subtitle="Tincidunt ornare massa"
+            svgSrc={svgSrc}
+          />
+        </div>
       </div>
       <div className="appointments-row">
         <div className="header-row">

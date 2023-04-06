@@ -9,7 +9,6 @@ export interface AvailableSlotsParams {
   service?: string;
   branches?: number[];
   employees?: number[];
-  times?: string[];
 }
 
 
@@ -18,21 +17,24 @@ const useAvailableSlots = ({
   duration  = 60,
   service = "Full Grooming",
   branches,
- employees,
-  times = ["morning","afternoon","evening"],
+ employees
                            } :AvailableSlotsParams) => {
   const [slots, setSlots] = React.useState<DailyAvailableSlot[]>([]);
   const getAvailableSlots = useInjection(GetAvailableSlotsUseCase);
-  const dateStr = date.toISOString().split("T")[0];
 
+  const dateStr = (date?.getDate() < 10 )? "0" + date?.getDate() : date?.getDate();
+  const monthStr = (date?.getMonth() + 1 < 10) ? "0" + (date?.getMonth() + 1) : date?.getMonth() + 1;
+  const yearStr = date?.getFullYear();
+
+
+  const fullDate = `${yearStr}-${monthStr}-${dateStr}`;
   useEffect(() => {
     if(service === "Grooming")
       service = "Full Grooming";
     else if(service === "WeWash")
       service = "We Wash";
-
     const params = {
-      date: dateStr,
+      date: fullDate,
       employees : employees ?? [],
       branches : branches ?? [],
       service,
@@ -46,20 +48,6 @@ const useAvailableSlots = ({
     });
   }, [dateStr,duration,employees,branches]);
 
-  return slots.filter((slot) => {
-    const date = new Date(slot.start);
-    const dateHour : number = date.getHours();
-    if(times?.includes("morning")){
-      return dateHour >= 8 && dateHour <= 12;
-    }
-    if(times?.includes("afternoon")) {
-      return dateHour >= 12 && dateHour <= 16;
-    }
-    if(times?.includes("evening")) {
-      return dateHour >= 16 && dateHour <= 20;
-    }
-    return false;
-
-  });
+  return slots;
 }
 export default useAvailableSlots;

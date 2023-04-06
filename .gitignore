@@ -30,7 +30,7 @@ yarn-error.log*
 # artifacts
 storybook-static
 vite.config.ts.timestamp-*.mjs
-
+**/__snapshots__
 
 
 coverage
