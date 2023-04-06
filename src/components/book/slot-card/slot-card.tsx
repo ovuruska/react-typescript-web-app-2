@@ -8,9 +8,10 @@ interface Props {
   availabilty: Boolean;
   width: string;
   selected: Boolean;
+  onClick?: () => void;
 }
 
-const SlotCard: React.FC<Props> = ({ time, availabilty, width, selected }) => {
+const SlotCard: React.FC<Props> = ({ time,onClick, availabilty, width, selected }) => {
   const [color, setColor] = useState<string>();
   const [fill, setfill] = useState<string>();
   useEffect(() => {
@@ -27,6 +28,7 @@ const SlotCard: React.FC<Props> = ({ time, availabilty, width, selected }) => {
   }, [selected, availabilty]);
   return (
     <div
+      onClick={onClick}
       className="slot-card"
       style={{
         background: selected && availabilty ? "#5ED376" : "transparent",

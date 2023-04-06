@@ -13,7 +13,7 @@ type AvailableSlotsProps = {
   date: Date;
   employees?: number[];
   branches?: number[];
-  onClick?: () => void;
+  onClick?: (slots:DailyAvailableSlot[]) => void;
   service: string;
   duration?: number;
   times?:string[];
@@ -26,6 +26,7 @@ const AvailableSlots: React.FC<AvailableSlotsProps> = ({
   service,
   duration,
   times,
+  onClick
 }) => {
 
   const [selectedSlot, setSelectedSlot] = React.useState<number>(-1);
@@ -53,7 +54,7 @@ const AvailableSlots: React.FC<AvailableSlotsProps> = ({
   return (
     <div className="slots-wrapper">
       {sortAndGetUniqueSlots(slots).map((slot,index) => (
-        <div key={slot} onClick={() => setSelectedSlot(index)} className="slot-wrapper">
+        <div key={slot} onClick={() => handleClick(slot,index)} className="slot-wrapper">
           <SlotCard
 
             time={slot}
