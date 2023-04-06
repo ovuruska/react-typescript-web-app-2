@@ -28,7 +28,7 @@ const AvailableSlotsDrawer = ({
   const getCards = (slots: DailyAvailableSlot[]) => {
     return slots.map((slot) => {
       const key = `${slot.branch.id}-${slot.employee.id}-${slot.start}`;
-      return <div key={key} className={styles.availableSlot__bookCard}>
+      return <div data-testid={"available-slots-book-card"} key={key} className={styles.availableSlot__bookCard}>
         <BookCard
         key={JSON.stringify(slot)}
         text={slot.employee.name}
@@ -55,7 +55,7 @@ const AvailableSlotsDrawer = ({
       <Close onClick={toggle}/>
     </div>
     <div style={{height: "16px"}}/>
-    <div style={{marginLeft:"16px"}}>
+    <div style={{marginLeft:"16px"}} data-testid={"available-slots-text"}>
       <TextInputControlled label={"Recommended groomers for at"} value={timeOfDay}/>
 
     </div>

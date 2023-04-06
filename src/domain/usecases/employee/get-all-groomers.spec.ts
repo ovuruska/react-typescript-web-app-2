@@ -1,8 +1,8 @@
 /*import {GetAllBranchesUseCase} from "@domain/usecases/branch/get-all-branches";
 import {Container} from "inversify";
 import {getTestContainer} from "@utils/inversion-container-test";
-import mock = jest.mock;
-import mockAxios from "jest-mock-axios";
+import __mock__ = jest.__mock__;
+import mockAxios from "jest-__mock__-axios";
 
 describe('GetAllBranchesUseCase', () => {
   let getAllBranchesUseCase: GetAllBranchesUseCase;

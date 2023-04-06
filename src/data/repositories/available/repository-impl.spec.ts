@@ -7,7 +7,7 @@ import Container = interfaces.Container;
 import {
   CapacityRemoteDataSource,
 } from "@data/datasources/capacity/capacity-remote-data-source";
-import {CapacityRemoteDataSourceMock} from "@data/datasources/capacity/capacity-remote-data-source-mock";
+import {CapacityRemoteDataSourceMock} from "@data/datasources/capacity/capacity-remote-data-source-__mock__";
 import {CapacityRepository} from "@domain/repositories/capacity-repository";
 
 describe('CapacityRepositoryImpl', () => {
