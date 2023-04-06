@@ -90,6 +90,8 @@ import mockAxios from "jest-mock-axios";
 import {DailyAvailableSlotsRequest} from "@domain/types/requests/daily-available-slots-request";
 import {DailyAvailableSlotsResponse} from "@domain/types/responses/daily-available-slots-response";
 import {AvailableRepository} from "@domain/repositories/available-repository";
+import {EmployeeEntity} from "@domain/types/common/employee";
+import {BranchEntity} from "@domain/types/common/branch";
 
 describe('AvailableRepositoryImpl', () => {
 
@@ -110,12 +112,34 @@ describe('AvailableRepositoryImpl', () => {
       date: '2021-02-01', service: 'We Wash'
     } as DailyAvailableSlotsRequest;
 
-    const mockResponse = [{
-      "start": "08:00", "end": "08:30", "employee": 1, "branch": 1
-    }, {
-      "start": "08:30", "end": "09:00", "employee": 1, "branch": 1
+    const employee = {
+      id: 3,
+      name: `Employee 3`,
 
-    }] as DailyAvailableSlotsResponse;
+    } as EmployeeEntity;
+
+    const branch = {
+      id: 3,
+      name: `Branch 3`,
+      address: `Address 3`,
+      phone: `Phone 3`,
+      email: `Email 3`,
+    } as BranchEntity;
+
+    const mockResponse: DailyAvailableSlotsResponse = [
+      {
+        start: '08:00',
+        end: '08:30',
+        employee,
+        branch,
+      },
+      {
+        start: '08:30',
+        end: '09:00',
+        employee,
+        branch,
+      }
+    ];
 
     mockAxios.post.mockResolvedValue(mockResponse);
 

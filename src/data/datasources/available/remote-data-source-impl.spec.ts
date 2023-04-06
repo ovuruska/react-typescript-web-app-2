@@ -5,6 +5,8 @@ import {AvailableRemoteDataSource} from "@data/datasources/available/remote-data
 import {DailyAvailableSlotsRequest} from "@domain/types/requests/daily-available-slots-request";
 import {DailyAvailableSlotsResponse} from "@domain/types/responses/daily-available-slots-response";
 import mockAxios from "jest-mock-axios";
+import {EmployeeEntity} from "@domain/types/common/employee";
+import {BranchEntity} from "@domain/types/common/branch";
 
 describe('AvailableRemoteDataSourceImpl', () => {
   let availableRemoteDataSourceImpl: AvailableRemoteDataSourceImpl;
@@ -26,18 +28,32 @@ describe('AvailableRemoteDataSourceImpl', () => {
       date: '01/2023',
     };
 
+    const employee = {
+      id: 3,
+      name: `Employee 3`,
+
+    } as EmployeeEntity;
+
+    const branch = {
+      id: 3,
+      name: `Branch 3`,
+      address: `Address 3`,
+      phone: `Phone 3`,
+      email: `Email 3`,
+    } as BranchEntity;
+
     const mockResponse: DailyAvailableSlotsResponse = [
       {
         start: '08:00',
         end: '08:30',
-        employee: 3,
-        branch: 3,
+        employee,
+        branch,
           },
       {
         start: '08:30',
         end: '09:00',
-        employee: 3,
-        branch: 3,
+        employee,
+        branch,
       }
     ];
     mockAxios.post.mockResolvedValue({ data: mockResponse });
