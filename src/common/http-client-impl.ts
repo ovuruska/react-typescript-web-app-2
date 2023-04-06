@@ -54,18 +54,26 @@ export class HttpClientImpl implements HttpClient {
     );
   }
 
-  async login(username: "b", password: "b"): Promise<void> {
-    if (this.authToken) return;
+  async login(username: string, password: string): Promise<void> {
     try {
-      const response = await this.instance.post("/api/auth/customer/login", {
-        username,
-        password,
-      });
-      if (response.status === 200) {
-        this.setAuthToken(response.data.token);
+      await this.verify();
+      return;
+    } catch {
+      if (!(username || password)) {
+        username = "b";
+        password = "b";
       }
-    } catch (error) {
-      throw new Error("Authentication failed");
+      try {
+        const response = await this.instance.post("/api/auth/customer/login", {
+          username,
+          password,
+        });
+        if (response.status === 200) {
+          this.setAuthToken(response.data.token);
+        }
+      } catch (error) {
+        throw new Error("Authentication failed");
+      }
     }
   }
 
