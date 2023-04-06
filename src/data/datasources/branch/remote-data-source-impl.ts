@@ -1,7 +1,8 @@
 import { inject, injectable } from "inversify";
 import { BranchRemoteDataSource } from "@data/datasources/branch/remote-data-source";
 import { BranchEntity } from "@domain/types/common/branch";
-import { HttpClient, HttpClientSymbol } from "@quicker/common/http-client";
+import { HttpClient } from "@quicker/common/http-client";
+import { HttpClientSymbol } from "@domain/types/TYPES";
 
 @injectable()
 export class BranchRemoteDataSourceImpl implements BranchRemoteDataSource {

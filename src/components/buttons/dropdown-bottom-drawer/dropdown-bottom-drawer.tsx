@@ -1,6 +1,6 @@
 import {useState} from "react";
 import styles from "./dropdown-bottom-drawer.module.scss";
-import BottomDrawer from "@components/drawers/bottom-drawer";
+import SelectBottomDrawer from "@components/drawers/select-bottom-drawer/select-bottom-drawer";
 import CtaPrimary from "@components/buttons/cta-primary/cta-primary";
 import WeakBtn from "@components/buttons/weak-btn/weak-btn";
 import CheckableCard from "@components/buttons/checkable-card/checkable-card";
@@ -82,7 +82,7 @@ const DropdownBottomDrawer = <T extends {}>({
     <label className={!valueText ? styles.dropdownBtnTemplate__label : styles.dropdownBtnTemplate__label__floating}>{label}</label>
     {!!valueText ? <div className={styles.dropdownBtnTemplate__value}>{valueText}</div> : null }
 
-    <BottomDrawer  open={isOpen}>
+    <SelectBottomDrawer open={isOpen}>
       <div className={styles.dropdownBtnTemplate__header}>
         <h1>{label}</h1>
         <Close onClick={toggle}/>
@@ -97,7 +97,7 @@ const DropdownBottomDrawer = <T extends {}>({
       <WeakBtn onClick={handleSelectAll} data-testid={"dropdown-bottom-drawer-select-all"} content={"Select All"}/>
       <div style={{height: "8px"}}/>
       <CtaPrimary onClick={handleContinue} data-testid={"dropdown-bottom-drawer-continue"} content={"Continue"}/>
-    </BottomDrawer>
+    </SelectBottomDrawer>
 
   </div>);
 }

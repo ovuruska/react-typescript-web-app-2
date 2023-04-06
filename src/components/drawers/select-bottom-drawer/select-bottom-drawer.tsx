@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {Box,  Drawer} from "@mui/material";
 
-interface BottomDrawerProps {
+interface SelectBottomDrawerProps {
   open: boolean;
   children: React.ReactNode;
 }
 
-const BottomDrawer : React.FC<BottomDrawerProps> = ({
+const SelectBottomDrawer : React.FC<SelectBottomDrawerProps> = ({
   open,
 children
                       }) => {
@@ -46,4 +46,4 @@ children
   );
 };
 
-export default BottomDrawer;
+export default SelectBottomDrawer;

@@ -2,7 +2,8 @@ import {AvailableRemoteDataSource} from "@data/datasources/available/remote-data
 import {inject, injectable} from "inversify";
 import {DailyAvailableSlotsRequest} from "@domain/types/requests/daily-available-slots-request";
 import {DailyAvailableSlotsResponse} from "@domain/types/responses/daily-available-slots-response";
-import {HttpClient, HttpClientSymbol} from "@quicker/common/http-client";
+import {HttpClient} from "@quicker/common/http-client";
+import {HttpClientSymbol} from "@domain/types/TYPES";
 
 @injectable()
 export class AvailableRemoteDataSourceImpl implements AvailableRemoteDataSource {

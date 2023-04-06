@@ -1,7 +1,8 @@
 import {inject, injectable} from "inversify";
 import {EmployeeRemoteDataSource} from "@data/datasources/employee/remote-data-source";
 import {EmployeeEntity, EmployeeFilter} from "@domain/types/common/employee";
-import {HttpClient, HttpClientSymbol} from "@quicker/common/http-client";
+import {HttpClient} from "@quicker/common/http-client";
+import {HttpClientSymbol} from "@domain/types/TYPES";
 
 @injectable()
 export class EmployeeRemoteDataSourceImpl implements EmployeeRemoteDataSource {
