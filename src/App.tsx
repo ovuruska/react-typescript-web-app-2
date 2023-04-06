@@ -2,23 +2,16 @@ import "./App.css";
 import HomePage from "./pages/homepage/homepage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BookPage from "./pages/bookpage/bookpage";
-import { useInjection } from "inversify-react";
-import { useEffect } from "react";
-import { HttpClient, HttpClientSymbol } from "@quicker/common/http-client";
+import AutoLogin from "@components/auth/auto-login";
 
 function App() {
-  const client = useInjection<HttpClient>(HttpClientSymbol);
-
-  useEffect(() => {
-    client.login("b", "b");
-  }, []);
 
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/book" element={<BookPage />} />
+          <Route path="/" element={<AutoLogin><HomePage /></AutoLogin>} />
+          <Route path="/book" element={<AutoLogin><BookPage /></AutoLogin>} />
         </Routes>
       </BrowserRouter>
     </div>

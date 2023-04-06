@@ -7,15 +7,17 @@ import axios, {
 import { inject, injectable } from "inversify";
 import { ApiUrl, ApiUrlSymbol } from "@domain/types/symbols/api-url";
 import { HttpClient } from "./http-client";
+import {Credentials} from "@domain/types/common/credentials";
+import {CredentialsSymbol} from "@domain/types/TYPES";
 
 @injectable()
-export class HttpClientImpl extends HttpClient {
+export class HttpClientImpl implements HttpClient {
   public instance: AxiosInstance;
   private authToken: string | null;
 
-  constructor(@inject<ApiUrl>(ApiUrlSymbol) protected apiUrl: ApiUrl) {
-    super(apiUrl);
+  constructor(@inject<ApiUrl>(ApiUrlSymbol) protected apiUrl: ApiUrl,@inject<Credentials>(CredentialsSymbol) private readonly credentials: Credentials) {
     this.instance = axios.create({ baseURL: apiUrl.value });
+    this.credentials = credentials;
     this.authToken = localStorage.getItem("authToken");
 
     if (this.authToken) {
@@ -49,6 +51,7 @@ export class HttpClientImpl extends HttpClient {
   }
 
   async login(username: string, password: string): Promise<void> {
+    if (this.authToken) return;
     try {
       const response = await this.instance.post("/api/auth/customer/login", {
         username,
@@ -59,6 +62,20 @@ export class HttpClientImpl extends HttpClient {
       }
     } catch (error) {
       throw new Error("Authentication failed");
+    }
+  }
+
+  async verify(): Promise<boolean> {
+    if (!this.authToken) return false;
+    try {
+      const response = await this.instance.get("/api/auth/customer/verify", {
+        headers: {
+          Authorization: `Token ${this.authToken}`,
+        },
+      });
+      return response.status === 200;
+    } catch (error) {
+      return false;
     }
   }
 

@@ -1,15 +1,9 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { injectable } from "inversify";
-import { ApiUrl } from "@domain/types/symbols/api-url";
-import axios from "axios";
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
+import {injectable} from "inversify";
+import {ApiUrl} from "@domain/types/symbols/api-url";
 
 @injectable()
 export abstract class HttpClient {
-  public readonly instance: AxiosInstance;
-
-  constructor(protected readonly apiUrl: ApiUrl) {
-    this.instance = axios.create({ baseURL: apiUrl.value });
-  }
 
   abstract get<Response = any>(
     url: string,
@@ -39,7 +33,8 @@ export abstract class HttpClient {
     config?: AxiosRequestConfig
   ): Promise<AxiosResponse<Response>>;
 
-  abstract login(username: string, password: string): Promise<any>;
+  abstract login(username?: string, password?: string): Promise<any>;
+
+  abstract verify(): Promise<boolean>;
 }
 
-export const HttpClientSymbol = Symbol("HttpClient");
