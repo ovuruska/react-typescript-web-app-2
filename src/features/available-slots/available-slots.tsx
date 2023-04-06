@@ -16,7 +16,7 @@ type AvailableSlotsProps = {
   onClick?: () => void;
   service: string;
   duration?: number;
-  times?:string[];
+  times?: string[];
 };
 
 const AvailableSlots: React.FC<AvailableSlotsProps> = ({
@@ -27,18 +27,24 @@ const AvailableSlots: React.FC<AvailableSlotsProps> = ({
   duration,
   times,
 }) => {
-
   const [selectedSlot, setSelectedSlot] = React.useState<number>(-1);
 
-  const slots : DailyAvailableSlot[] = useAvailableSlots({date, employees, branches, service, duration, times});
+  const slots: DailyAvailableSlot[] = useAvailableSlots({
+    date,
+    employees,
+    branches,
+    service,
+    duration,
+    times,
+  });
 
   const formatSlot = (slot: DailyAvailableSlot) => {
     const start = new Date(slot.start);
-    if(start.getMinutes() === 0) {
+    if (start.getMinutes() === 0) {
       return `${start.getHours()}:00`;
     }
     return `${start.getHours()}:${start.getMinutes()}`;
-  }
+  };
 
   const sortAndGetUniqueSlots = (slots: DailyAvailableSlot[]) => {
     const sortedSlots = slots.sort((a, b) => {
@@ -47,15 +53,19 @@ const AvailableSlots: React.FC<AvailableSlotsProps> = ({
       return aDate.getTime() - bDate.getTime();
     });
     const set = new Set(sortedSlots.map((slot) => formatSlot(slot))).values();
+    console.log(Array.from(set));
     return Array.from(set);
-  }
+  };
 
   return (
     <div className="slots-wrapper">
-      {sortAndGetUniqueSlots(slots).map((slot,index) => (
-        <div key={slot} onClick={() => setSelectedSlot(index)} className="slot-wrapper">
+      {sortAndGetUniqueSlots(slots).map((slot, index) => (
+        <div
+          key={slot}
+          onClick={() => setSelectedSlot(index)}
+          className="slot-wrapper"
+        >
           <SlotCard
-
             time={slot}
             availabilty={true}
             selected={selectedSlot === index ? true : false}
