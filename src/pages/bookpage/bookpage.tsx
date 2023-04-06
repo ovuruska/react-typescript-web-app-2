@@ -5,7 +5,7 @@ import { BiLeftArrowAlt } from "react-icons/bi";
 import Dropdown from "../../components/book/dropdown/dropdown";
 import { useEffect, useState } from "react";
 import Pet from "../../interfaces/Pet";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import SurgeCalendar from "@features/surge-calendar/surge-calendar";
 import SelectBranches from "@features/select-branches/select-branches";
 import AvailableSlots from "@features/available-slots/available-slots";
@@ -20,7 +20,7 @@ const BookPage: React.FC = () => {
   const [branches,setBranches] = useState<Array<number>>([]);
   const [groomers,setGroomers] = useState<Array<number>>([]);
   const [times,setTimes] = useState<Array<string>>(["morning","afternoon","evening"]);
-
+  const navigate = useNavigate();
 
   const type = useSelector((state: RootState) => {
     return state.order.orderType;
@@ -90,7 +90,7 @@ const BookPage: React.FC = () => {
           <h2>Select Time</h2>
         </div>
 
-        <AvailableSlots date={date} service={type} times={times} branches={branches} employees={groomers}  />
+        <AvailableSlots onClick={() => navigate("/book-now")} date={date} service={type} times={times} branches={branches} employees={groomers}  />
       </div>
     </div>
   );

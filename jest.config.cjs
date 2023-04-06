@@ -16,6 +16,7 @@ module.exports = {
 
     },
     setupFiles: ['./jest.setup.cjs'],
+    setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
     rootDir: '',
     testEnvironment: 'jsdom',
 }

@@ -2,7 +2,7 @@ import {CapacityRemoteDataSource} from "@data/datasources/capacity/capacity-remo
 import {CapacityRemoteDataSourceImpl} from "@data/datasources/capacity/capacity-remote-data-source-impl";
 import {CapacityRepository} from "@domain/repositories/capacity-repository";
 import {CapacityRepositoryImpl} from "@data/repositories/capacity-repository-impl";
-import {HttpClient, HttpClientSymbol} from "@quicker/common/http-client";
+import {HttpClient} from "@quicker/common/http-client";
 import {HttpClientImpl} from "@quicker/common/http-client-impl";
 import {AvailableRepository} from "@domain/repositories/available-repository";
 import {AvailableRepositoryImpl} from "@data/repositories/available/repository-impl";
@@ -28,6 +28,8 @@ import {EmployeeRemoteDataSourceImpl} from "@data/datasources/employee/remote-da
 import {EmployeeRepository} from "@domain/repositories/employee/repository";
 import {EmployeeRepositoryImpl} from "@data/repositories/employee/repository-impl";
 import {GetAllGroomersUseCase} from "@domain/usecases/employee/get-all-groomers-use-case";
+import {HttpClientSymbol} from "@domain/types/TYPES";
+
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
