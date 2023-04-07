@@ -5,17 +5,16 @@ import {MonthlyCapacityResponse} from "@domain/types/responses/monthly-capacity-
 import {UseCase} from "@quicker/common/use-case";
 
 
-export interface GetMonthlyCapacityParams extends MonthlyCapacityRequest {
-}
 
 @injectable()
-export class GetMonthlyCapacityUseCase implements UseCase<GetMonthlyCapacityParams,Promise<MonthlyCapacityResponse>> {
+export class GetMonthlyCapacityUseCase implements UseCase<MonthlyCapacityRequest,Promise<MonthlyCapacityResponse>> {
   constructor(
     @inject(CapacityRepository) private readonly capacityRepository: CapacityRepository,
   ) {
   }
 
-  async call(params: GetMonthlyCapacityParams): Promise<MonthlyCapacityResponse> {
+  async call(params: MonthlyCapacityRequest): Promise<MonthlyCapacityResponse> {
     return await this.capacityRepository.getMonthlyCapacity(params);
   }
 }
+

@@ -1,19 +1,23 @@
 
-.surge-calendar {
-  &--empty {
+.surgeCalendar {
+  &__empty {
     color: #7CDEA8;
   }
 
-  &--full {
+  &__full {
     color: #FF424B;
     text-decoration: line-through;
+    &:hover{
+      pointer-events: none;
+        cursor: default;
+    }
   }
 
-  &--busy {
+  &__busy {
     color: #FF424B;
   }
 
-  &--partial {
+  &__partial {
     color: #FACA86;
   }
 

@@ -3,7 +3,7 @@ import {injectable} from "inversify";
 
 @injectable()
 export abstract class MockGenerator<T> {
-  abstract generateOne(): T;
+  abstract generateOne(...params : never): T;
 
-  abstract generateMany(count: number): T[];
+  abstract generateMany(...params : never): T[];
 }

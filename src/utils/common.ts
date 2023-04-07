@@ -1,7 +1,7 @@
 import {CapacityRemoteDataSource} from "@data/datasources/capacity/capacity-remote-data-source";
 import {CapacityRemoteDataSourceImpl} from "@data/datasources/capacity/capacity-remote-data-source-impl";
 import {CapacityRepository} from "@domain/repositories/capacity-repository";
-import {CapacityRepositoryImpl} from "@data/repositories/capacity-repository-impl";
+import {CapacityRepositoryImpl} from "@data/repositories/capacity/repository-impl";
 import {HttpClient} from "@quicker/common/http-client";
 import {HttpClientImpl} from "@quicker/common/http-client-impl";
 import {AvailableRepository} from "@domain/repositories/available-repository";
@@ -11,7 +11,7 @@ import {AvailableRemoteDataSourceImpl} from "@data/datasources/available/remote-
 import {CustomerRemoteDataSource} from "@data/datasources/customer/remote-data-source";
 import {CustomerRemoteDataSourceImpl} from "@data/datasources/customer/remote-data-source-impl";
 import {CustomerRepository} from "@domain/repositories/customer-repository";
-import {CustomerRepositoryImpl} from "@data/repositories/customer-repository-impl";
+import {CustomerRepositoryImpl} from "@data/repositories/customer/repository-impl";
 import {Container} from "inversify";
 import {BranchRemoteDataSource} from "@data/datasources/branch/remote-data-source";
 import {BranchLocalDataSource} from "@data/datasources/branch/local-data-source";
@@ -29,6 +29,8 @@ import {EmployeeRepository} from "@domain/repositories/employee/repository";
 import {EmployeeRepositoryImpl} from "@data/repositories/employee/repository-impl";
 import {GetAllGroomersUseCase} from "@domain/usecases/employee/get-all-groomers-use-case";
 import {HttpClientSymbol} from "@domain/types/TYPES";
+import { CapacityLocalDataSource } from '@data/datasources/capacity/local-data-source';
+import { CapacityLocalDataSourceImpl } from '@data/datasources/capacity/local-data-source-impl';
 
 
 export const containerBind = (container:Container) => {
@@ -52,5 +54,6 @@ export const containerBind = (container:Container) => {
   container.bind<EmployeeRepository>(EmployeeRepository).to(EmployeeRepositoryImpl);
   container.bind<GetAllGroomersUseCase>(GetAllGroomersUseCase).toSelf();
 
+  container.bind<CapacityLocalDataSource>(CapacityLocalDataSource).to(CapacityLocalDataSourceImpl);
 
 }

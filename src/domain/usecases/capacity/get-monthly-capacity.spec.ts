@@ -1,10 +1,11 @@
-import {GetMonthlyCapacityParams, GetMonthlyCapacityUseCase} from "@domain/usecases/capacity/get-monthly-capacity";
+import {GetMonthlyCapacityUseCase} from "@domain/usecases/capacity/get-monthly-capacity";
 import {Container} from "inversify";
 import {getTestContainer} from "@utils/inversion-container-test";
 import {
   getMonthlyCapacityResponse, setAfternoonCapacity, setMorningCapacity
 } from "@data/mocks/handlers/get-monthly-capacity";
 import mockAxios from 'jest-mock-axios';
+import { MonthlyCapacityRequest } from '@domain/types/requests/monthly-capacity-request';
 
 
 describe('GetMonthlyCapacityUseCase', () => {
@@ -23,7 +24,7 @@ describe('GetMonthlyCapacityUseCase', () => {
   });
 
   it('should return the monthly capacity', async () => {
-    const params: GetMonthlyCapacityParams = {
+    const params: MonthlyCapacityRequest = {
       employees: [1, 2, 3], branches: [1, 2, 3], service: "service", date: "01/2023",
 
     };
