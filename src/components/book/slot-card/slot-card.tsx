@@ -7,11 +7,11 @@ interface Props {
   time: string;
   availabilty: Boolean;
   width: string;
-  selected: Boolean;
+  selected?: boolean;
   onClick?: () => void;
 }
 
-const SlotCard: React.FC<Props> = ({ time,onClick, availabilty, width, selected }) => {
+const SlotCard: React.FC<Props> = ({ time,onClick, availabilty, width, selected = false }) => {
   const [color, setColor] = useState<string>();
   const [fill, setfill] = useState<string>();
   useEffect(() => {

@@ -5,7 +5,7 @@ import { useInjection } from "inversify-react";
 import SpinnerOverlay from "@components/loading/spinner-overlay";
 
 interface AutoLoginProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const AutoLogin = ({ children }: AutoLoginProps) => {

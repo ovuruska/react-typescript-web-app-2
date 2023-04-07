@@ -1,5 +1,5 @@
 import "./bookpage.css";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "@quicker/store/store";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import Dropdown from "../../components/book/dropdown/dropdown";
@@ -13,6 +13,8 @@ import SelectGroomers from "@features/select-groomers/select-groomers";
 import SelectTime from "@features/select-time/select-time";
 import {BranchEntity} from "@domain/types/common/branch";
 import {EmployeeEntity} from "@domain/types/common/employee";
+import {OrderActions} from "@quicker/store/order-slice";
+import {DailyAvailableSlot} from "@domain/types/responses/daily-available-slots-response";
 
 const BookPage: React.FC = () => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
@@ -21,6 +23,7 @@ const BookPage: React.FC = () => {
   const [groomers,setGroomers] = useState<Array<number>>([]);
   const [times,setTimes] = useState<Array<string>>(["morning","afternoon","evening"]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const type = useSelector((state: RootState) => {
     return state.order.orderType;
@@ -45,6 +48,20 @@ const BookPage: React.FC = () => {
 
   const handleSelectEmployees = (employees:EmployeeEntity[]) => {
     setGroomers(employees.map((employee) => employee.id));
+  }
+
+  const onBook = (slot:DailyAvailableSlot) => {
+    const branch = slot.branch.id;
+    const employee = slot.employee.id;
+    const start = slot.start;
+
+    dispatch(OrderActions.setOrder({
+      branch,
+      groomer: employee,
+      start
+
+    }));
+    navigate("/add-ons");
   }
 
   return (
@@ -90,7 +107,7 @@ const BookPage: React.FC = () => {
           <h2>Select Time</h2>
         </div>
 
-        <AvailableSlots onClick={() => navigate("/book-now")} date={date} service={type} times={times} branches={branches} employees={groomers}  />
+        <AvailableSlots onSelect={onBook} date={date} service={type} times={times} branches={branches} employees={groomers}  />
       </div>
     </div>
   );

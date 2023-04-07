@@ -1,10 +1,11 @@
+
 import "./App.css";
 import { lazy, Suspense } from "react";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AutoLogin from "@components/auth/auto-login";
-import BookAppointment from "@pages/book-appointment/book-appointment";
 import SpinnerOverlay from "@components/loading/spinner-overlay";
+import AddOnsPage from '@pages/addons/add-ons';
 
 const BookPage = lazy(() => import("./pages/bookpage/bookpage"));
 const HomePage = lazy(() => import("./pages/homepage/homepage"));
@@ -35,10 +36,10 @@ function App() {
             }
           />
           <Route
-            path="/book-now"
+            path="/add-ons"
             element={
               <AutoLogin>
-                <BookAppointment />
+                <AddOnsPage />
               </AutoLogin>
             }
           />

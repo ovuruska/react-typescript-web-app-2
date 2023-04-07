@@ -44,6 +44,7 @@ export class HttpClientImpl implements HttpClient {
     this.instance.interceptors.response.use(
       (response: any) => {
         if (response.status === 401) {
+          return;
         } else {
           return response;
         }
@@ -54,26 +55,18 @@ export class HttpClientImpl implements HttpClient {
     );
   }
 
-  async login(username: string, password: string): Promise<void> {
+  async login(): Promise<void> {
     try {
-      await this.verify();
-      return;
-    } catch {
-      if (!(username || password)) {
-        username = "b";
-        password = "b";
+      const { username, password } = this.credentials;
+      const response = await this.instance.post("/api/auth/customer/login", {
+        username,
+        password,
+      });
+      if (response.status === 200) {
+        this.setAuthToken(response.data.token);
       }
-      try {
-        const response = await this.instance.post("/api/auth/customer/login", {
-          username,
-          password,
-        });
-        if (response.status === 200) {
-          this.setAuthToken(response.data.token);
-        }
-      } catch (error) {
-        throw new Error("Authentication failed");
-      }
+    } catch (error) {
+      throw new Error("Authentication failed");
     }
   }
 
@@ -87,9 +80,7 @@ export class HttpClientImpl implements HttpClient {
       });
       return response.status === 200;
     } catch (error) {
-      return new Promise((resolve, reject) => {
-        reject(new Error("Wrong token"));
-      });
+      return false;
     }
   }
 
