@@ -16,18 +16,18 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
                                                          onChange, date = new Date(), mapDateToClassName = () => "",
                                                        }) => {
   const [dateRange, setDateRange] = useState<Array<Date>>([]);
-  const [currentMonth, setCurrentMonth] = useState(date.getMonth() + 1);
-  const [currentYear, setCurrentYear] = useState(date.getFullYear());
-  const [activeDay, setActiveDay] = useState<number>(date.getDate());
+  const [currentMonth, setCurrentMonth] = useState(date.getUTCMonth() + 1);
+  const [currentYear, setCurrentYear] = useState(date.getUTCFullYear());
+  const [activeDay, setActiveDay] = useState<number>(date.getUTCDate());
 
   function getStartDate() {
     const firstDayOfMonth = new Date(`${currentYear}-${currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)}-01`);
     const isSunday = firstDayOfMonth.getDay() === 0;
-    return isSunday ? moment(firstDayOfMonth).subtract(1, "day").startOf("week").add(1, "day") : moment(firstDayOfMonth).startOf("month").startOf("week").add(1, "day");
+    return isSunday ? moment.utc(firstDayOfMonth).subtract(1, "day").startOf("week").add(1, "day") : moment.utc(firstDayOfMonth).startOf("month").startOf("week").add(1, "day");
   }
 
   function getEndDate() {
-    const endOfMonth = moment(`${currentYear}-${currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)}-01`).endOf("month");
+    const endOfMonth = moment.utc(`${currentYear}-${currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)}-01`).endOf("month");
     const isSunday = endOfMonth.day() === 0;
     return isSunday ? endOfMonth : endOfMonth.endOf("week").add(1, "day");
   }
@@ -61,15 +61,19 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
     }
 
     const newMonthDays = new Date(newYear, newMonth, 0).getDate();
-    if (activeDay > newMonthDays) {
-      setActiveDay(newMonthDays);
+    if (onChange !== undefined) {
+      if(activeDay > newMonthDays){
+        onChange(new Date(newYear, newMonth, newMonthDays));
+        setActiveDay(newMonthDays);
+      }else{
+        onChange(new Date(newYear, newMonth, activeDay));
+
+      }
     }
 
     setCurrentYear(newYear);
     setCurrentMonth(newMonth);
-    if (onChange !== undefined) {
-      onChange(new Date(newYear, newMonth, activeDay+1));
-    }
+
   };
 
   const decrementMonth = () => {
@@ -83,15 +87,18 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
     }
 
     const newMonthDays = new Date(newYear, newMonth, 0).getDate();
-    if (activeDay > newMonthDays) {
-      setActiveDay(newMonthDays);
+    if (onChange !== undefined) {
+      if(activeDay > newMonthDays){
+        onChange(new Date(newYear, newMonth, newMonthDays));
+        setActiveDay(newMonthDays);
+      }else{
+        onChange(new Date(newYear, newMonth, activeDay));
+
+      }
     }
 
     setCurrentYear(newYear);
     setCurrentMonth(newMonth);
-    if (onChange !== undefined) {
-      onChange(new Date(newYear, newMonth, activeDay));
-    }
   };
 
   const renderDaysOfWeek = () => {
@@ -105,22 +112,22 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
   const renderDates = () => {
     return dateRange.map((date) => {
       const spanClassName = " " + mapDateToClassName(date);
-      const isActiveMonth = date.getMonth() + 1 === currentMonth;
-      const isActiveDate = date.getDate() === activeDay && isActiveMonth;
+      const isActiveMonth = date.getUTCMonth() + 1 === currentMonth;
+      const isActiveDate = date.getUTCDate() === activeDay && isActiveMonth;
       const dateBoxClass = isActiveMonth ? "date-box" : "date-box date-box-deactive";
       const dateStyle = isActiveDate ? {background: "rgba(0,0,0,1)", color: "white"} : {
         background: "rgba(0,0,0,0)", color: "black"
       };
       const onDateClick = () => {
         if(!isActiveMonth) {
-          setCurrentYear(date.getFullYear());
-          setActiveDay(date.getDate());
-          setCurrentMonth(date.getMonth() + 1);
+          setCurrentYear(date.getUTCFullYear());
+          setActiveDay(date.getUTCDate());
+          setCurrentMonth(date.getUTCMonth() + 1);
         }
         if (!isActiveDate) {
-          setActiveDay(date.getDate());
+          setActiveDay(date.getUTCDate());
           if (onChange !== undefined) {
-            onChange(new Date(currentYear, currentMonth, date.getDate()));
+            onChange(new Date(currentYear, currentMonth, date.getUTCDate()));
           }
         }
       };
@@ -132,7 +139,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
         data-testid={isActiveDate ? "active-date" : "date"}
         style={dateStyle}
       >
-        <span className={spanClassName}>{date.getDate()}</span>
+        <span className={spanClassName}>{date.getUTCDate()}</span>
       </div>);
     });
   };

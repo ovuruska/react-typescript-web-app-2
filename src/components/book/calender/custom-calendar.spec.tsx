@@ -1,6 +1,45 @@
 import React from "react";
 import {fireEvent, getByTestId, render,} from "@testing-library/react";
 import CustomCalendar from "./custom-calender";
+import timezoneMock, { TimeZone } from 'timezone-mock';
+
+const timeZones = [
+  'Australia/Adelaide',
+  'Brazil/East',
+  'Europe/London',
+  'US/Eastern',
+  'US/Pacific',
+  'UTC',
+  'Etc/GMT+12',
+  'Etc/GMT+11',
+  'Etc/GMT+10',
+  'Etc/GMT+9',
+  'Etc/GMT+8',
+  'Etc/GMT+7',
+  'Etc/GMT+6',
+  'Etc/GMT+5',
+  'Etc/GMT+4',
+  'Etc/GMT+3',
+  'Etc/GMT+2',
+  'Etc/GMT+1',
+  'Etc/GMT+0',
+  'Etc/GMT',
+  'Etc/GMT-0',
+  'Etc/GMT-1',
+  'Etc/GMT-2',
+  'Etc/GMT-3',
+  'Etc/GMT-4',
+  'Etc/GMT-5',
+  'Etc/GMT-6',
+  'Etc/GMT-7',
+  'Etc/GMT-8',
+  'Etc/GMT-9',
+  'Etc/GMT-10',
+  'Etc/GMT-11',
+  'Etc/GMT-12',
+  'Etc/GMT-13',
+  'Etc/GMT-14',
+];
 
 describe("CustomCalendar", () => {
   it("should increment the month from December to January and increment the year", () => {
@@ -33,9 +72,9 @@ describe("CustomCalendar", () => {
 
     expect(currentYear.textContent).toBe("2022");
   });
-
   it("should not lose focus when moved from January 31 to February", () => {
-    const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-01-31")}/>);
+    const mockFn = jest.fn();
+    const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-01-31")} onChange={mockFn}/>);
 
     const arrowRightIcon = container.querySelector("svg[data-testid='arrow-right']") as HTMLElement;
     fireEvent.click(arrowRightIcon);
@@ -44,16 +83,35 @@ describe("CustomCalendar", () => {
     const activeDate = container.querySelector("div[data-testid='active-date']") as HTMLElement;
     expect(activeDate).toBeTruthy();
     expect(activeDate.textContent).toBe("28");
+    expect(mockFn).toHaveBeenCalled();
+    expect(mockFn).toHaveBeenCalledWith(new Date(2023,2,28));
   });
 
   it("should not lose focus when moved from March 31 to April", () => {
-    const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-03-31")}/>);
+    const mockFn = jest.fn();
+    const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-03-31")} onChange={mockFn}/>);
     const arrowRightIcon = container.querySelector("svg[data-testid='arrow-right']") as HTMLElement;
     fireEvent.click(arrowRightIcon);
 
     const activeDate = container.querySelector("div[data-testid='active-date']") as HTMLElement;
     expect(activeDate).toBeTruthy();
     expect(activeDate.textContent).toBe("30");
+    expect(mockFn).toHaveBeenCalled();
+    expect(mockFn).toHaveBeenCalledWith(new Date(2023,4,30));
+  });
+
+  it("should not lose focus when moved from March 31 to February", () => {
+    const mockFn = jest.fn();
+
+    const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-03-31")} onChange={mockFn}/>);
+    const arrowLeftIcon = container.querySelector("svg[data-testid='arrow-left']") as HTMLElement;
+    fireEvent.click(arrowLeftIcon);
+
+    const activeDate = container.querySelector("div[data-testid='active-date']") as HTMLElement;
+    expect(activeDate).toBeTruthy();
+    expect(activeDate.textContent).toBe("28");
+    expect(mockFn).toHaveBeenCalled();
+    expect(mockFn).toHaveBeenCalledWith(new Date(2023,2,28));
 
   });
 
@@ -141,6 +199,21 @@ describe("CustomCalendar", () => {
 
     const currentYear = container.querySelector("h3[data-testid='current-year']") as HTMLElement;
     expect(currentYear.textContent).toBe("2023");
+  });
+
+  it('Check if the calendar has correct number of items when timezone has changed.', () => {
+    const mockOnChange = jest.fn();
+
+    // Iterate all timezones
+    timeZones.forEach((timezone) => {
+      timezoneMock.register(timezone as TimeZone);
+      const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-02-01")} onChange={mockOnChange}/>);
+      const dateDivs = container.querySelectorAll("div[data-testid*='date']");
+      expect(dateDivs.length).toBe(35);
+    });
+
+
+
   });
 
 });
