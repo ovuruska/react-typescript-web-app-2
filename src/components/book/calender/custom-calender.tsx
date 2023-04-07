@@ -21,8 +21,6 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
   const [activeDay, setActiveDay] = useState<number>(date.getUTCDate());
 
   function getStartDate() {
-    const currentDate = date;
-    currentDate;
     const firstDayOfMonth = new Date(`${currentYear}-${currentMonth < 10 ? "0" + String(currentMonth) : String(currentMonth)}-01`);
     const isSunday = firstDayOfMonth.getDay() === 0;
     return isSunday ? moment.utc(firstDayOfMonth).subtract(1, "day").startOf("week").add(1, "day") : moment.utc(firstDayOfMonth).startOf("month").startOf("week").add(1, "day");
@@ -62,16 +60,20 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
       newMonth = currentMonth + 1;
     }
 
-    const newMonthDays = new Date(newYear, newMonth, 0).getUTCDate();
-    if (activeDay > newMonthDays) {
-      setActiveDay(newMonthDays);
+    const newMonthDays = new Date(newYear, newMonth, 0).getDate();
+    if (onChange !== undefined) {
+      if(activeDay > newMonthDays){
+        onChange(new Date(newYear, newMonth, newMonthDays));
+        setActiveDay(newMonthDays);
+      }else{
+        onChange(new Date(newYear, newMonth, activeDay));
+
+      }
     }
 
     setCurrentYear(newYear);
     setCurrentMonth(newMonth);
-    if (onChange !== undefined) {
-      onChange(new Date(newYear, newMonth, activeDay+1));
-    }
+
   };
 
   const decrementMonth = () => {
@@ -85,15 +87,18 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
     }
 
     const newMonthDays = new Date(newYear, newMonth, 0).getDate();
-    if (activeDay > newMonthDays) {
-      setActiveDay(newMonthDays);
+    if (onChange !== undefined) {
+      if(activeDay > newMonthDays){
+        onChange(new Date(newYear, newMonth, newMonthDays));
+        setActiveDay(newMonthDays);
+      }else{
+        onChange(new Date(newYear, newMonth, activeDay));
+
+      }
     }
 
     setCurrentYear(newYear);
     setCurrentMonth(newMonth);
-    if (onChange !== undefined) {
-      onChange(new Date(newYear, newMonth, activeDay));
-    }
   };
 
   const renderDaysOfWeek = () => {

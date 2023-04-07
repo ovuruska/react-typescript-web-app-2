@@ -72,9 +72,9 @@ describe("CustomCalendar", () => {
 
     expect(currentYear.textContent).toBe("2022");
   });
-
   it("should not lose focus when moved from January 31 to February", () => {
-    const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-01-31")}/>);
+    const mockFn = jest.fn();
+    const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-01-31")} onChange={mockFn}/>);
 
     const arrowRightIcon = container.querySelector("svg[data-testid='arrow-right']") as HTMLElement;
     fireEvent.click(arrowRightIcon);
@@ -83,16 +83,35 @@ describe("CustomCalendar", () => {
     const activeDate = container.querySelector("div[data-testid='active-date']") as HTMLElement;
     expect(activeDate).toBeTruthy();
     expect(activeDate.textContent).toBe("28");
+    expect(mockFn).toHaveBeenCalled();
+    expect(mockFn).toHaveBeenCalledWith(new Date(2023,2,28));
   });
 
   it("should not lose focus when moved from March 31 to April", () => {
-    const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-03-31")}/>);
+    const mockFn = jest.fn();
+    const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-03-31")} onChange={mockFn}/>);
     const arrowRightIcon = container.querySelector("svg[data-testid='arrow-right']") as HTMLElement;
     fireEvent.click(arrowRightIcon);
 
     const activeDate = container.querySelector("div[data-testid='active-date']") as HTMLElement;
     expect(activeDate).toBeTruthy();
     expect(activeDate.textContent).toBe("30");
+    expect(mockFn).toHaveBeenCalled();
+    expect(mockFn).toHaveBeenCalledWith(new Date(2023,4,30));
+  });
+
+  it("should not lose focus when moved from March 31 to February", () => {
+    const mockFn = jest.fn();
+
+    const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-03-31")} onChange={mockFn}/>);
+    const arrowLeftIcon = container.querySelector("svg[data-testid='arrow-left']") as HTMLElement;
+    fireEvent.click(arrowLeftIcon);
+
+    const activeDate = container.querySelector("div[data-testid='active-date']") as HTMLElement;
+    expect(activeDate).toBeTruthy();
+    expect(activeDate.textContent).toBe("28");
+    expect(mockFn).toHaveBeenCalled();
+    expect(mockFn).toHaveBeenCalledWith(new Date(2023,2,28));
 
   });
 
