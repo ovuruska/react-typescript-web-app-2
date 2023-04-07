@@ -63,7 +63,6 @@ const BookPage: React.FC = () => {
     }));
     navigate("/add-ons");
   }
-
   return (
     <div className="book-page page">
       <div className={`service-pet-row ${type.toLowerCase().replace(" ","")}-row`}>

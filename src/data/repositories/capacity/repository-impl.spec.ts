@@ -1,4 +1,4 @@
-import {CapacityRepositoryImpl} from "@data/repositories/capacity-repository-impl";
+import {CapacityRepositoryImpl} from "@data/repositories/capacity/repository-impl";
 import {getTestContainer} from "@utils/inversion-container-test";
 import {interfaces} from "inversify";
 import Container = interfaces.Container;
@@ -15,6 +15,10 @@ describe('CapacityRepositoryImpl', () => {
     container = getTestContainer();
     container.rebind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceMock);
     availableRepository = container.get<CapacityRepository>(CapacityRepository) as  CapacityRepositoryImpl;
+  });
+  beforeEach(() => {
+    jest.clearAllMocks();
+    sessionStorage.clear();
   });
 
   it('should be defined', () => {
@@ -55,6 +59,18 @@ describe('CapacityRepositoryImpl', () => {
     expect(monthlyCapacityResponse).toBeInstanceOf(Array);
     expect(monthlyCapacityResponse.length).toBe(30);
 
+  });
+
+  it('should get first call from axios, then from sessionStorage.',async () => {
+    const monthlyCapacityRequest = {
+      date:'02/2021',
+      service:'We Wash'
+    };
+
+    await availableRepository.getMonthlyCapacity(monthlyCapacityRequest);
+    expect(sessionStorage.setItem).toHaveBeenCalled();
+    await availableRepository.getMonthlyCapacity(monthlyCapacityRequest);
+    expect(sessionStorage.getItem).toHaveBeenCalled();
   });
 
 

@@ -134,7 +134,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
 
       return (<div
         key={date.toISOString()}
-        className={dateBoxClass}
+        className={dateBoxClass + spanClassName}
         onClick={onDateClick}
         data-testid={isActiveDate ? "active-date" : "date"}
         style={dateStyle}

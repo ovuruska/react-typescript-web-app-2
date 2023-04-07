@@ -1,12 +1,10 @@
 import CustomCalendar from "@components/book/calender/custom-calender";
-import { useCallback, useMemo, useState } from "react";
-import { useInjection } from "inversify-react";
-import {
-  GetMonthlyCapacityUseCase,
-} from "@domain/usecases/capacity/get-monthly-capacity";
+import { useCallback,  useState } from "react";
+
 import { CapacityDetails } from "@domain/types/common/capacity-details";
 import styles from "./surge-calendar.module.scss";
 import useMonthlyCapacity from '@hooks/use-monthly-capacity';
+import { getDateString } from '@utils/date-utils';
 
 export type SurgeCalendarProps = {
   initialDate?: Date;
@@ -18,45 +16,43 @@ export type SurgeCalendarProps = {
 
 const SurgeCalendar: React.FC<SurgeCalendarProps> = ({
   initialDate = new Date(),
-  employees= [],
-  branches = [],
+  employees,
+  branches,
   onChange,
   service = "Full Grooming",
 }) => {
   const [date, setDate] = useState<Date>(initialDate);
 
-  const getMonthlyCapacity = useInjection(GetMonthlyCapacityUseCase);
-
-
-  const memoizedEmployees = useMemo(() => employees, [employees]);
-  const memoizedBranches = useMemo(() => branches, [branches]);
-  const memoizedService = useMemo(() => service, [service]);
   const capacityMap = useMonthlyCapacity({
     date,
-    employees: memoizedEmployees,
-    branches: memoizedBranches,
-    service: memoizedService,
+    employees,
+    branches,
+    service,
 
   });
 
-  const handleChange = (newDate: Date) => {
-    setDate(newDate);
-    onChange && onChange(date);
-  };
+  const handleChange = useCallback(
+    (newDate: Date) => {
+      setDate(newDate);
+      if (onChange) {
+        onChange(newDate);
+      }
+    },
+    [onChange]
+  );
 
   const mapDateToClassName = useCallback(
     (date: Date) => {
-      const result: CapacityDetails | undefined = capacityMap.get(
-        `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
-      );
+      const dateKey = getDateString(date.getDate(), date.getMonth() , date.getFullYear());
+      const result: CapacityDetails | undefined = capacityMap.get(dateKey);
       if (result) {
         const total = result.afternoon_capacity + result.morning_capacity;
         if (total <= 0.5) {
-          return styles.surgeCalendarEmpty;
-        } else if (total <= 1.0) {
+          return styles.surgeCalendar__empty;
+        } else if (total <= 1.0  ) {
           return "";
         } else {
-          return styles.surgeCalendarFull;
+          return styles.surgeCalendar__full;
         }
       } else {
         return "";
@@ -64,7 +60,6 @@ const SurgeCalendar: React.FC<SurgeCalendarProps> = ({
     },
     [capacityMap]
   );
-
   return (
     <div>
       <CustomCalendar
