@@ -105,6 +105,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
   const renderDates = () => {
     return dateRange.map((date) => {
       const spanClassName = " " + mapDateToClassName(date);
+      console.log(spanClassName)
       const isActiveMonth = date.getMonth() + 1 === currentMonth;
       const isActiveDate = date.getDate() === activeDay && isActiveMonth;
       const dateBoxClass = isActiveMonth ? "date-box" : "date-box date-box-deactive";

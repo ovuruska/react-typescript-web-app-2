@@ -34,7 +34,12 @@ const AvailableSlots: React.FC<AvailableSlotsProps> = ({
 
   const formatSlot = (slot: DailyAvailableSlot) => {
     const start = new Date(slot.start);
-    return `start.getMinutes() === 0 ? ${start.getHours()}:00 : ${start.getHours()}:${start.getMinutes()}`;
+    // 17:00 17:30 17:05
+    const hour = start.getHours();
+    const minutes = start.getMinutes();
+    const minutesString = minutes < 10 ? "0" + minutes.toString() : minutes.toString();
+    const hourString = hour < 10 ? "0" + hour.toString() : hour.toString();
+    return `${hourString}:${minutesString}`;
   };
 
   const getAvailableSlots = (slots: DailyAvailableSlot[]) => {
