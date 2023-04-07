@@ -1,5 +1,5 @@
 import React from 'react'
-import useAllGroomers from "@hooks/useAllGroomers";
+import useAllGroomers from "@hooks/use-all-groomers";
 import {EmployeeEntity} from "@domain/types/common/employee";
 import DropdownBottomDrawer, {
   DropdownBottomDrawerItem

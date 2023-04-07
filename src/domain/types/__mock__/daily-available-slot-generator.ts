@@ -5,20 +5,7 @@ import {faker} from "@faker-js/faker";
 import {EmployeeMockGenerator} from "@domain/types/__mock__/employee-mock-generator";
 import {BranchMockGenerator} from "@domain/types/__mock__/branch-generator";
 
-/*
-import {EmployeeEntity} from "@domain/types/common/employee";
-import {BranchEntity} from "@domain/types/common/branch";
 
-export interface DailyAvailableSlot {
-  start: string;
-  end: string;
-  employee: EmployeeEntity;
-  branch: BranchEntity;
-}
-
-export type  DailyAvailableSlotsResponse = DailyAvailableSlot[];
-
- */
 @injectable()
 export class DailyAvailableSlotMockGenerator extends MockGenerator<DailyAvailableSlot>{
   private employeeMockGenerator: EmployeeMockGenerator = new EmployeeMockGenerator();

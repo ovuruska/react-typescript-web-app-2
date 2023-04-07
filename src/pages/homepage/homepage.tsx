@@ -5,10 +5,9 @@ import CarouselSlider from "../../components/carousel-slider/carousel-slider";
 import ProfileCard from "../../components/home/profile-card/profile-card";
 import ServiceCard from "../../components/home/service-card/service-card";
 import svgSrc from "../../assets/grooming.svg";
-import "./homepage.css";
+import "./homepage.scss";
 import AppointmentCard from "../../components/home/appointment-card/appointment-card";
 import imageSrc from "../../assets/mockPhoto.png";
-import RewardsCard from "../../components/home/rewards-card/rewards-card";
 
 const HomePage: React.FC = () => {
   useEffect(() => {}, []);
@@ -19,7 +18,7 @@ const HomePage: React.FC = () => {
       {/* <RewardsCard rewardCount={100} /> */}
       <div className="service-row">
         <div className="header-row">
-          <h2>Add Appointments</h2>
+          <h1>Book Appointment</h1>
         </div>
         <div className="service-row-flex">
           <ServiceCard
@@ -36,7 +35,7 @@ const HomePage: React.FC = () => {
       </div>
       <div className="appointments-row">
         <div className="header-row">
-          <h2>Upcoming Appointments</h2>
+          <h2>Upcoming appointments</h2>
         </div>
         <AppointmentCard
           name="Emma"

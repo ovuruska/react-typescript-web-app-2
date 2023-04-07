@@ -1,5 +1,5 @@
 import React from 'react'
-import useAllBranches from "@hooks/useAllBranches";
+import useAllBranches from "@hooks/use-all-branches";
 import {BranchEntity} from "@domain/types/common/branch";
 import DropdownBottomDrawer,{DropdownBottomDrawerItem} from "@components/buttons/dropdown-bottom-drawer/dropdown-bottom-drawer";
 

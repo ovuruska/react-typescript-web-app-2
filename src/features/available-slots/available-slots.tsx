@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DailyAvailableSlot } from "@domain/types/responses/daily-available-slots-response";
 import SlotCard from "@components/book/slot-card/slot-card";
 import "./available-slots.css";
-import useAvailableSlots from "@hooks/useAvailableSlots";
+import useAvailableSlots from "@hooks/use-available-slots";
 import AvailableSlotsDrawer from "@features/available-slots/available-slots-drawer";
 
 export interface AvailableSlotsProps  {
