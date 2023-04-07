@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build_and_deploy:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -37,6 +37,25 @@ jobs:
         run: npm i
       - name: Run unit tests
         run: npm run test
+      
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create .env variables
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_API_URL: ${{ secrets.BACKEND_URL }}
+          envkey_REACT_APP_API_URL: ${{ secrets.BACKEND_URL }}
+          envkey_VITE_API_URL: ${{ secrets.BACKEND_URL }}
+          envkey_API_USERNAME: ${{ secrets.TEST_USERNAME }}
+          envkey_REACT_APP_API_USERNAME: ${{ secrets.TEST_USERNAME }}
+          envkey_VITE_API_USERNAME: ${{ secrets.TEST_USERNAME }}
+          envkey_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          envkey_REACT_APP_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          envkey_VITE_API_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+      - name: Install dependencies
+        run: npm i
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

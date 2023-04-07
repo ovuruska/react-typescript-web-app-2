@@ -8,12 +8,15 @@ import svgSrc from "../../assets/grooming.svg";
 import "./homepage.scss";
 import AppointmentCard from "../../components/home/appointment-card/appointment-card";
 import imageSrc from "../../assets/mockPhoto.png";
+import logoSrc from "../../assets/logo.png";
+import RewardsCard from "../../components/home/rewards-card/rewards-card";
 
 const HomePage: React.FC = () => {
   useEffect(() => {}, []);
 
   return (
     <div className="home-page page">
+      <img alt="scrubbers logo" className={"logo"} src={logoSrc}></img>
       <ProfileCard />
       {/* <RewardsCard rewardCount={100} /> */}
       <div className="service-row">
@@ -35,7 +38,7 @@ const HomePage: React.FC = () => {
       </div>
       <div className="appointments-row">
         <div className="header-row">
-          <h2>Upcoming appointments</h2>
+          <h2>Upcoming Appointments</h2>
         </div>
         <AppointmentCard
           name="Emma"

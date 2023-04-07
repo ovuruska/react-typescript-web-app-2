@@ -1,17 +1,48 @@
+
 import "./App.css";
-import HomePage from "./pages/homepage/homepage";
+import { lazy, Suspense } from "react";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import BookPage from "./pages/bookpage/bookpage";
 import AutoLogin from "@components/auth/auto-login";
+import SpinnerOverlay from "@components/loading/spinner-overlay";
+import AddOnsPage from '@pages/addons/add-ons';
+
+const BookPage = lazy(() => import("./pages/bookpage/bookpage"));
+const HomePage = lazy(() => import("./pages/homepage/homepage"));
 
 function App() {
-
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AutoLogin><HomePage /></AutoLogin>} />
-          <Route path="/book" element={<AutoLogin><BookPage /></AutoLogin>} />
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <HomePage />
+                </AutoLogin>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/book"
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <BookPage />
+                </AutoLogin>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/add-ons"
+            element={
+              <AutoLogin>
+                <AddOnsPage />
+              </AutoLogin>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

@@ -6,14 +6,13 @@ import bgSrc from "../../../assets/bgtop.png";
 import CarouselSlider from "../../carousel-slider/carousel-slider";
 import ProfileBtn from "../../buttons/profile-btn";
 import AddBtn from "../../buttons/add-btn";
-import scrubbersLogo from "../../../assets/scrubbers-logo.png";
+
 interface Props {}
 
 const ProfileCard: React.FC<Props> = ({}) => {
   return (
     <div className="profile">
       <div className="row row1">
-        <img width={"128px"} src={scrubbersLogo}/>
         <div className="icons">
           <ProfileBtn />
           <AddBtn />

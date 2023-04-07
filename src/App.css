@@ -58,10 +58,11 @@ h3{
 
 .page {
   width: 100%;
+  position: relative;
 }
 
-.custom-calendar__BEM date{
-  color: #A9593D;
+.custom-calendar__BEM date {
+  color: #a9593d;
 }
 
 @media only screen and (min-device-width: 650px) {

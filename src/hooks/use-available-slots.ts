@@ -1,7 +1,10 @@
-import React, {useEffect} from "react";
-import {DailyAvailableSlot} from "@domain/types/responses/daily-available-slots-response";
-import {GetAvailableSlotsParams, GetAvailableSlotsUseCase} from "@domain/usecases/available/get-available-slots";
-import {useInjection} from "inversify-react";
+import React, { useEffect } from "react";
+import { DailyAvailableSlot } from "@domain/types/responses/daily-available-slots-response";
+import {
+  GetAvailableSlotsParams,
+  GetAvailableSlotsUseCase,
+} from "@domain/usecases/available/get-available-slots";
+import { useInjection } from "inversify-react";
 
 export interface AvailableSlotsParams {
   date?: Date;
@@ -9,15 +12,17 @@ export interface AvailableSlotsParams {
   service?: string;
   branches?: number[];
   employees?: number[];
+  times?: string[];
 }
 
 
 const useAvailableSlots = ({
   date = new Date(),
-  duration  = 60,
+  duration = 60,
   service = "Full Grooming",
   branches,
- employees
+ employees,
+  times = ["morning","afternoon","evening"],
                            } :AvailableSlotsParams) => {
   const [slots, setSlots] = React.useState<DailyAvailableSlot[]>([]);
   const getAvailableSlots = useInjection(GetAvailableSlotsUseCase);
