@@ -15,6 +15,7 @@ export default defineConfig({
       "@assets": "/src/assets",
       "@pages": "/src/pages",
       "@quicker": "/src",
+      "@styles": "/src/styles",
     },
   },
 })

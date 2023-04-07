@@ -3,7 +3,7 @@ import React from "react";
 import {DailyAvailableSlot} from "@domain/types/responses/daily-available-slots-response";
 import styles from "@features/available-slots/available-slots-drawer.module.scss";
 import {Close} from "@mui/icons-material";
-import BookCard from "@components/buttons/book-card/book-card";
+import BookCard from "@components/cards/book-card/book-card";
 import TextInputControlled from "@components/inputs/text-input";
 
 
@@ -28,7 +28,7 @@ const AvailableSlotsDrawer = ({
   const getCards = (slots: DailyAvailableSlot[]) => {
     return slots.map((slot) => {
       const key = `${slot.branch.id}-${slot.employee.id}-${slot.start}`;
-      return <div data-testid={"available-slots-book-card"} key={key} className={styles.availableSlot__bookCard}>
+      return <div data-testid={"available-slots-book-cards"} key={key} className={styles.availableSlot__bookCard}>
         <BookCard
         key={JSON.stringify(slot)}
         text={slot.employee.name}

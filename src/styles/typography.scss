@@ -1,0 +1,13 @@
+@mixin caption-2{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 142%;
+}
+
+@mixin caption-1{
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 142%;
+}

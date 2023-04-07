@@ -3,7 +3,7 @@ import styles from "./dropdown-bottom-drawer.module.scss";
 import SelectBottomDrawer from "@components/drawers/select-bottom-drawer/select-bottom-drawer";
 import CtaPrimary from "@components/buttons/cta-primary/cta-primary";
 import WeakBtn from "@components/buttons/weak-btn/weak-btn";
-import CheckableCard from "@components/buttons/checkable-card/checkable-card";
+import CheckableCard from "@components/cards/checkable-card/checkable-card";
 import {Close} from "@mui/icons-material";
 
 

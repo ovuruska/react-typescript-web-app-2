@@ -1,4 +1,4 @@
-import BookCard from "@components/buttons/book-card/book-card";
+import BookCard from "@components/cards/book-card/book-card";
 import {render} from "@testing-library/react";
 
 describe("BookCard", () => {
@@ -27,10 +27,10 @@ describe("BookCard", () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('onClick should not be called when book card is clicked.', () => {
+  it('onClick should not be called when book cards is clicked.', () => {
     const onClick = jest.fn();
     const {getByTestId} = render(<BookCard onClick={onClick}/>);
-    const bookCard = getByTestId("book-card");
+    const bookCard = getByTestId("book-cards");
     bookCard.click();
     expect(onClick).not.toHaveBeenCalled();
   });

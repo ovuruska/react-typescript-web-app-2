@@ -5,7 +5,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import PetCard from "./pet-card";
 
 export default {
-  title: "Pet card",
+  title: "Pet cards",
   component: PetCard,
 } as ComponentMeta<typeof PetCard>;
 

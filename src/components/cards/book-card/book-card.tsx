@@ -10,7 +10,7 @@ const BookCard = ({text, onClick}: BookCardProps) => {
 
 
 
-  return <div data-testid={"book-card"} className={styles.bookCard} >
+  return <div data-testid={"book-cards"} className={styles.bookCard} >
     {text}
     <BookBtn onClick={onClick} text={"Book Now"}/>
   </div>

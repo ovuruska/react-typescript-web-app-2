@@ -23,6 +23,7 @@ module.exports = {
             '@domain':  path.resolve(__dirname, '../src/domain'),
             '@data':  path.resolve(__dirname, '../src/data'),
             '@quicker':  path.resolve(__dirname, '../src'),
+            '@styles':  path.resolve(__dirname, '../src/styles'),
 
         }
         return config

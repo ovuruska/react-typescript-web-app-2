@@ -5,7 +5,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import ProfileCard from "./profile-card";
 
 export default {
-  title: "Profile card",
+  title: "Profile cards",
   component: ProfileCard,
 } as ComponentMeta<typeof ProfileCard>;
 
