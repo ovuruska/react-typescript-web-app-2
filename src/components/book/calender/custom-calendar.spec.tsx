@@ -1,6 +1,45 @@
 import React from "react";
 import {fireEvent, getByTestId, render,} from "@testing-library/react";
 import CustomCalendar from "./custom-calender";
+import timezoneMock, { TimeZone } from 'timezone-mock';
+
+const timeZones = [
+  'Australia/Adelaide',
+  'Brazil/East',
+  'Europe/London',
+  'US/Eastern',
+  'US/Pacific',
+  'UTC',
+  'Etc/GMT+12',
+  'Etc/GMT+11',
+  'Etc/GMT+10',
+  'Etc/GMT+9',
+  'Etc/GMT+8',
+  'Etc/GMT+7',
+  'Etc/GMT+6',
+  'Etc/GMT+5',
+  'Etc/GMT+4',
+  'Etc/GMT+3',
+  'Etc/GMT+2',
+  'Etc/GMT+1',
+  'Etc/GMT+0',
+  'Etc/GMT',
+  'Etc/GMT-0',
+  'Etc/GMT-1',
+  'Etc/GMT-2',
+  'Etc/GMT-3',
+  'Etc/GMT-4',
+  'Etc/GMT-5',
+  'Etc/GMT-6',
+  'Etc/GMT-7',
+  'Etc/GMT-8',
+  'Etc/GMT-9',
+  'Etc/GMT-10',
+  'Etc/GMT-11',
+  'Etc/GMT-12',
+  'Etc/GMT-13',
+  'Etc/GMT-14',
+];
 
 describe("CustomCalendar", () => {
   it("should increment the month from December to January and increment the year", () => {
@@ -141,6 +180,21 @@ describe("CustomCalendar", () => {
 
     const currentYear = container.querySelector("h3[data-testid='current-year']") as HTMLElement;
     expect(currentYear.textContent).toBe("2023");
+  });
+
+  it('Check if the calendar has correct number of items when timezone has changed.', () => {
+    const mockOnChange = jest.fn();
+
+    // Iterate all timezones
+    timeZones.forEach((timezone) => {
+      timezoneMock.register(timezone as TimeZone);
+      const {container, getByTestId} = render(<CustomCalendar date={new Date("2023-02-01")} onChange={mockOnChange}/>);
+      const dateDivs = container.querySelectorAll("div[data-testid*='date']");
+      expect(dateDivs.length).toBe(35);
+    });
+
+
+
   });
 
 });
