@@ -1,20 +1,16 @@
-.grooming-heading {
-  color: #27946d;
-}
+
 .service-pet-row {
-  height:112px;
   width: 100%;
   display: flex;
-  padding: 12px 20px;
-  align-items: start;
+  padding: 2em;
+  align-items: center;
   overflow: visible;
   position: relative;
-
+  padding-bottom:4em;
 }
 
 .service-pet-row a {
   display: flex;
-  padding-top:12px;
   align-items: center;
 }
 
@@ -31,16 +27,12 @@
   padding-left: 0.6em;
 }
 
+.service-pet-row h1 {
+  font-size: 1.8em;
+}
 
-
-.dropdown-wrapper {
-  position: absolute;
-  right: 16px;
-  top: 8px;
-  z-index: 1000;
-  height:56px;
-  width: 120px;
-
+.grooming-heading {
+  color: #27946d;
 }
 
 .grooming-row {
@@ -54,6 +46,15 @@
 .wewash-row h3 {
   color: #4947ca;
 }
+
+.dropdown-wrapper {
+  position: absolute;
+  right: 3em;
+  top: 2em;
+  z-index: 1000;
+  width: 100px;
+}
+
 .service-pet-row .dropdown {
   padding: 0;
 }

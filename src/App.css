@@ -14,10 +14,12 @@ h4 {
   color: #212529;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 body {
   box-sizing: border-box;
-
-  font-family: "Manrope";
   font-size: 14px;
   margin: 0;
 }

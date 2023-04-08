@@ -6,6 +6,7 @@ import PageCard from '@components/cards/page-card/page-card';
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import { ProductEntity } from '@domain/types/common/product';
 import StruckCard from '@components/cards/struck-card/struck-card';
+import ServiceHeader from '@features/service-header/service-header';
 
 export interface AddOnsDumbProps {
   products: any[];
@@ -54,7 +55,7 @@ const AddOnsDumb = ({
   }
 
   return <PageCard className={'add-ons-page'}>
-
+    <ServiceHeader selectable={false}/>
     <div className={style.addOnsPage}>
       <h2>
         Add-ons
