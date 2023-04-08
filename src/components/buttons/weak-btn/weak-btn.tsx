@@ -1,4 +1,4 @@
-import styles from "./weak-btn.module.css";
+import styles from "./weak-btn.module.scss";
 interface CtaPrimaryProps {
   content: string;
   onClick?: () => void;

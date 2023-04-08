@@ -1,6 +1,8 @@
+@import '@styles/variables.scss';
+
 .weakBtn{
   background: white;
-    border: 1px solid #E9ECEF;
+    border: 2px solid $gray-300;
   height:64px;
   transition: all 0.2s ease-in-out;
   outline: none;

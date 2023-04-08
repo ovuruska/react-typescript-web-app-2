@@ -5,12 +5,12 @@ export interface OrderState {
   branch?:number;
   groomer?:number;
   start?:string;
-
+  products?:number[];
 }
 
 const initialState: OrderState = {
   orderType: "Grooming",
-
+  products:[],
 };
 
 const orderSlice = createSlice({
