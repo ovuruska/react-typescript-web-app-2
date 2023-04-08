@@ -22,32 +22,11 @@
   position: relative;
 }
 
-.custom-calendar__BEM date {
-  color: #a9593d;
+@mixin stackedTopBorder($color:#ffffff, $marginTop:-2em, $radius:32px) {
+  position: relative;
+  background-color: $color;
+  margin-top:$marginTop;
+  border-radius: $radius;
+
+  padding: -$marginTop;
 }
-
-/*
-@media only screen and (min-device-width: 650px) {
-  body {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #dedede;
-  }
-
-  .page {
-    max-width: 450px;
-    width: 450px;
-    max-height: 85vh;
-    height: 85vh;
-    overflow-y: scroll;
-    border-radius: 30px;
-    background-color: #ffffff;
-  }
-}
-
- */
-
-
