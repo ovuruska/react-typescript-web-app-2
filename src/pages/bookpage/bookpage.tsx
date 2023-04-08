@@ -2,7 +2,6 @@ import "./bookpage.scss";
 import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "@quicker/store/store";
 import { useEffect, useState } from "react";
-import Pet from "../../interfaces/Pet";
 import {Link, useNavigate} from "react-router-dom";
 import SurgeCalendar from "@features/surge-calendar/surge-calendar";
 import SelectBranches from "@features/select-branches/select-branches";
@@ -14,6 +13,7 @@ import {EmployeeEntity} from "@domain/types/common/employee";
 import {OrderActions} from "@quicker/store/order-slice";
 import {DailyAvailableSlot} from "@domain/types/responses/daily-available-slots-response";
 import ServiceHeader from '@features/service-header/service-header';
+import { PetEntity } from '@domain/types/common/pet';
 
 const BookPage: React.FC = () => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
@@ -28,7 +28,7 @@ const BookPage: React.FC = () => {
     return state.order.orderType;
   });
 
-  const pets: Array<Pet> = useSelector((state: RootState) => {
+  const pets: Array<PetEntity> = useSelector((state: RootState) => {
     return state.pets.pets;
   });
 

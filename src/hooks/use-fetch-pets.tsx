@@ -1,14 +1,10 @@
-import { is } from "immer/dist/internal";
 import { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ApiMeResponse from "../interfaces/ApiMeResponse";
-import Pet from "../interfaces/Pet";
 import { PetsActions } from "../store/pet-slice";
-import { RootState } from "../store/store";
 
 const useFetchPets = () => {
-  const [loading, setloading] = useState<Boolean>(true);
+  const [loading, setloading] = useState<boolean>(true);
 
   const dispatch = useDispatch();
 
@@ -16,16 +12,16 @@ const useFetchPets = () => {
     return true;
   }
 
-  async function auth(username: String, password: String) {
-    var myHeaders: Headers = new Headers();
+  async function auth(username: string, password: string) {
+    const myHeaders: Headers = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
+    const raw = JSON.stringify({
       username,
       password,
     });
 
-    var requestOptions: RequestInit = {
+    const requestOptions: RequestInit = {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -49,13 +45,13 @@ const useFetchPets = () => {
 
   async function fetchPets() {
     ///Get Pets
-    var myHeaders2 = new Headers();
+    const myHeaders2 = new Headers();
     myHeaders2.append(
       "Authorization",
       `Token ${window.localStorage.getItem("token")}`
     );
 
-    var requestOptions2: RequestInit = {
+    const requestOptions2: RequestInit = {
       method: "GET",
       headers: myHeaders2,
       redirect: "follow",
@@ -66,7 +62,7 @@ const useFetchPets = () => {
       requestOptions2
     );
 
-    let respBody: ApiMeResponse | { detail: String } = await resp2.json();
+    const respBody: ApiMeResponse | { detail: string } = await resp2.json();
     if (!instanceOfApiMeResponse(respBody)) {
       window.localStorage.removeItem("token");
       await authAndFetch();
