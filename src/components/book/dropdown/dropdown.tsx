@@ -7,9 +7,10 @@ interface Props {
   dropdownList: Array<string>;
   width: string;
   dropdownTitle: string;
+  onChange?: (index:number) => void;
 }
 
-const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle }) => {
+const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle,onChange }) => {
   const [expand, setExpand] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(-1);
 
@@ -41,6 +42,7 @@ const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle }) => {
           onClick={() => {
             setActiveIndex(index);
             setExpand(false);
+            onChange && onChange(index);
           }}
         >
           <li>{store}</li>
