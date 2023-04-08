@@ -16,32 +16,27 @@ const ServiceHeader : React.FC<ServiceHeaderProps>= ({
                        } : ServiceHeaderProps) => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
 
-  const {type,pets,pet:selectedPet} = useSelector((state: RootState) => {
+  const {type,pets,selectedPet} = useSelector((state: RootState) => {
     return {
       type:state.order.orderType,
       pets:state.pets.pets,
-      pet:state.order.pet,
+      selectedPet:state.order.pet,
     }
   });
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if(pets.length !== 0){
-      dispatch(OrderActions.setPet(pets[0]));
-    }
-
-  });
 
   useEffect(() => {
     setPetNames([]);
-    pets.forEach((pet) => {
-      setPetNames((old) => {
-        return [...old, pet.name];
-      });
+    pets.map((pet:PetEntity) => {
+      setPetNames((petNames) => [...petNames,pet.name]);
     });
-    const pet = pets.filter((pet) => pet.name === petNames[0])[0] as PetEntity;
-    dispatch(OrderActions.setPet(pet));
   }, [pets]);
+
+  const handleChange = (index:number) => {
+    const pet = pets[index];
+    dispatch(OrderActions.setPet(pet));
+  }
 
   let title = "Book for"
   if (!selectable ) {
@@ -64,6 +59,8 @@ const ServiceHeader : React.FC<ServiceHeaderProps>= ({
     <div className='dropdown-wrapper'>
       <Dropdown
         width='100%'
+
+        onChange={handleChange}
         dropdownTitle={petNames[0] ?? 'Select Pet'}
         dropdownList={petNames as string[]}
       />

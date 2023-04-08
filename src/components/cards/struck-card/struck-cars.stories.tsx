@@ -2,9 +2,10 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import StruckCard, { StruckCardProps } from './struck-card';
+import { faker } from '@faker-js/faker';
 
 export default {
-  title: 'StruckCard',
+  title: 'Components/StruckCard',
   component: StruckCard,
   argTypes: {
     onClick: { action: 'clicked' },
@@ -48,10 +49,37 @@ DifferentPrices.args = {
 export const LongContent = Template.bind({});
 LongContent.args = {
   content: 'Struck Card with a Longer Content Description for Testing',
-  checked: false,
   onClick: () => {
 
   },
   struckPrice: 100,
   price: 80,
 };
+export const LongContentAndChecked = Template.bind({});
+LongContentAndChecked.args = {
+  ...Checked.args,
+  ...LongContent.args,
+}
+
+
+export const VeryLongContent = Template.bind({});
+VeryLongContent.args = {
+  content: faker.lorem.paragraphs(2),
+}
+
+export const VeryLongContentAndChecked = Template.bind({});
+VeryLongContentAndChecked.args = {
+  ...Checked.args,
+  ...VeryLongContent.args,
+}
+
+export const VeryVeryLongContent = Template.bind({});
+VeryVeryLongContent.args = {
+  content: faker.lorem.paragraphs(5),
+}
+
+export const VeryVeryLongContentAndChecked = Template.bind({});
+VeryVeryLongContentAndChecked.args = {
+  ...Checked.args,
+  ...VeryVeryLongContent.args,
+}

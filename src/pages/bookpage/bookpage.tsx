@@ -28,19 +28,6 @@ const BookPage: React.FC = () => {
     return state.order.orderType;
   });
 
-  const pets: Array<PetEntity> = useSelector((state: RootState) => {
-    return state.pets.pets;
-  });
-
-  useEffect(() => {
-    setPetNames([]);
-    pets.forEach((pet) => {
-      setPetNames((old) => {
-        return [...old, pet.name];
-      });
-    });
-  }, [pets]);
-
   const handleSelectBranches = (branches:BranchEntity[]) => {
     setBranches(branches.map((branch) => branch.id));
   }

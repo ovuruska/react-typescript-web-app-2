@@ -1,7 +1,7 @@
 import styles from "./checkable-card.module.scss";
 import Checkbox from "@components/buttons/checkbox/checkbox";
 
-interface CheckableCardProps {
+export interface CheckableCardProps {
   title?: string;
   content?: string;
   checked?: boolean;
