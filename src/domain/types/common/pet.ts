@@ -10,7 +10,7 @@ export interface PetEntity {
   rabies_vaccination: string;
   employee_notes: string;
   customer_notes: string;
-  special_handling: Boolean;
+  special_handling: boolean;
   coat_type: string;
   owner: number;
 }

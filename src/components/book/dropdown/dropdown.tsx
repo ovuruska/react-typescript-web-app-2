@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./dropdown.css";
+import "./dropdown.scss";
 import { IoMdArrowDropdown } from "react-icons/io";
 import "../../../App.css";
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle }) => {
-  const [expand, setExpand] = useState<Boolean>(false);
+  const [expand, setExpand] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(-1);
 
   return (
@@ -27,9 +27,9 @@ const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle }) => {
           setExpand((old) => !old);
         }}
       >
-        <h1>
+        <li>
           {activeIndex === -1 ? dropdownTitle : dropdownList[activeIndex]}
-        </h1>
+        </li>
         <div className={`animation-rotation ${expand && "rotate"}`}>
           <IoMdArrowDropdown size={"35px"} />
         </div>
@@ -43,7 +43,7 @@ const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle }) => {
             setExpand(false);
           }}
         >
-          <h1>{store}</h1>
+          <li>{store}</li>
         </div>
       ))}
     </div>

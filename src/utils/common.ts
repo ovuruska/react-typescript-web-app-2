@@ -31,6 +31,13 @@ import {GetAllGroomersUseCase} from "@domain/usecases/employee/get-all-groomers-
 import {HttpClientSymbol} from "@domain/types/TYPES";
 import { CapacityLocalDataSource } from '@data/datasources/capacity/local-data-source';
 import { CapacityLocalDataSourceImpl } from '@data/datasources/capacity/local-data-source-impl';
+import { ProductRemoteDataSource } from '@data/datasources/product/remote-data-source';
+import { ProductRemoteDataSourceImpl } from '@data/datasources/product/remote-data-source-impl';
+import { ProductLocalDataSource } from '@data/datasources/product/local-data-source';
+import { ProductLocalDataSourceImpl } from '@data/datasources/product/local-data-source-impl';
+import { ProductRepository } from '@domain/repositories/product/repository';
+import { ProductRepositoryImpl } from '@data/repositories/product/repository-impl';
+import { GetAllProductsUseCase } from '@domain/usecases/product/get-all-products';
 
 
 export const containerBind = (container:Container) => {
@@ -56,4 +63,8 @@ export const containerBind = (container:Container) => {
 
   container.bind<CapacityLocalDataSource>(CapacityLocalDataSource).to(CapacityLocalDataSourceImpl);
 
+  container.bind<ProductRemoteDataSource>(ProductRemoteDataSource).to(ProductRemoteDataSourceImpl);
+  container.bind<ProductLocalDataSource>(ProductLocalDataSource).to(ProductLocalDataSourceImpl);
+  container.bind<ProductRepository>(ProductRepository).to(ProductRepositoryImpl);
+  container.bind<GetAllProductsUseCase>(GetAllProductsUseCase).toSelf();
 }

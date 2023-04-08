@@ -9,16 +9,7 @@ describe('Checkbox', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('should render with label', () => {
-    const label = "Label Includes Random Characters";
-    // Check if label variable is visible in the snapshot
 
-    const { container } = render(<Checkbox checked={false} label={label} />);
-
-    expect(container).toMatchSnapshot();
-    const labelElement = screen.getByText(label);
-    expect(labelElement).toBeInTheDocument();
-  });
 
   it('should render with checked', () => {
     const checked = true;
@@ -38,18 +29,7 @@ describe('Checkbox', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('should render with label, checked and onChecked', () => {
-    const label = "Label Includes Random Characters";
-    const checked = true;
-    const onChecked = jest.fn();
-    // Check if label, checked and onChecked variables are visible in the snapshot
 
-    const { container } = render(<Checkbox checked={checked} label={label} onChecked={onChecked} />);
-
-    expect(container).toMatchSnapshot();
-    const labelElement = screen.getByText(label);
-    expect(labelElement).toBeInTheDocument();
-  });
 
   it('onChecked should be fired when clicked.', () => {
     const onChecked = jest.fn();

@@ -38,9 +38,12 @@ function App() {
           <Route
             path="/add-ons"
             element={
+              <Suspense fallback={<SpinnerOverlay />}>
+
               <AutoLogin>
                 <AddOnsPage />
               </AutoLogin>
+              </Suspense>
             }
           />
         </Routes>

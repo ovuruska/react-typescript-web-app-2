@@ -72,7 +72,7 @@ const AvailableSlots: React.FC<AvailableSlotsProps> = ({
   return (
     <div className="slots-wrapper">
       {getSlotStrings(filteredSlots).map((hour) => (
-        <div data-testid={"available-slot-card"} key={hour} onClick={() => handleClick(hour)} className="slot-wrapper">
+        <div data-testid={"available-slot-cards"} key={hour} onClick={() => handleClick(hour)} className="slot-wrapper">
           <SlotCard time={hour} availabilty={true} width="100%" />
         </div>
       ))}

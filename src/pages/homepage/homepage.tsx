@@ -9,7 +9,6 @@ import "./homepage.scss";
 import AppointmentCard from "../../components/home/appointment-card/appointment-card";
 import imageSrc from "../../assets/mockPhoto.png";
 import logoSrc from "../../assets/logo.png";
-import RewardsCard from "../../components/home/rewards-card/rewards-card";
 
 const HomePage: React.FC = () => {
   useEffect(() => {}, []);

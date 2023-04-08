@@ -26,8 +26,6 @@ const AutoLogin = ({ children }: AutoLoginProps) => {
         setTimeout(() => {
           setIsLoading(false);
           setIsLoggedIn(true);
-          console.log("Can't login");
-          //Todo update redux for login fail
         }, 4000);
       });
   }, []);

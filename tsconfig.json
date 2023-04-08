@@ -26,6 +26,7 @@
       "@utils/*": ["utils/*"],
       "@quicker/*": ["*"],
       "@assets/*": ["assets/*"],
+      "@styles": ["styles/*"]
     },
     "baseUrl": "src"
   },

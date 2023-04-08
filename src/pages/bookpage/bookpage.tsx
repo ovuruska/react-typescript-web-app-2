@@ -1,8 +1,6 @@
-import "./bookpage.css";
+import "./bookpage.scss";
 import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "@quicker/store/store";
-import { BiLeftArrowAlt } from "react-icons/bi";
-import Dropdown from "../../components/book/dropdown/dropdown";
 import { useEffect, useState } from "react";
 import Pet from "../../interfaces/Pet";
 import {Link, useNavigate} from "react-router-dom";
@@ -15,6 +13,7 @@ import {BranchEntity} from "@domain/types/common/branch";
 import {EmployeeEntity} from "@domain/types/common/employee";
 import {OrderActions} from "@quicker/store/order-slice";
 import {DailyAvailableSlot} from "@domain/types/responses/daily-available-slots-response";
+import ServiceHeader from '@features/service-header/service-header';
 
 const BookPage: React.FC = () => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
@@ -51,37 +50,21 @@ const BookPage: React.FC = () => {
   }
 
   const onBook = (slot:DailyAvailableSlot) => {
-    const branch = slot.branch.id;
-    const employee = slot.employee.id;
+    const branch = slot.branch
+    const employee = slot.employee;
     const start = slot.start;
 
     dispatch(OrderActions.setOrder({
       branch,
       groomer: employee,
       start
-
     }));
     navigate("/add-ons");
   }
   return (
     <div className="book-page page">
-      <div className={`service-pet-row ${type.toLowerCase().replace(" ","")}-row`}>
-        <Link to={"/"}>
-          <BiLeftArrowAlt size={"35px"} />
-        </Link>
-        <div className="service-title">
-          <h3 className={`${type.toLowerCase().replace(" ","")}-heading`}>{type}</h3>
-          <h1>Book for</h1>
-        </div>
-        <div className="dropdown-wrapper">
-          <Dropdown
-            width="100%"
-            dropdownTitle={petNames[0] ?? "Select Pet"}
-            dropdownList={petNames as string[]}
-          />
-        </div>
-      </div>
-      <div className="calender-row">
+      <ServiceHeader/>
+      <div className="calender-row calendar-row-top">
         <div className={"book-page__select-branch"}>
           <SelectBranches onSelect={handleSelectBranches} />
         </div>
