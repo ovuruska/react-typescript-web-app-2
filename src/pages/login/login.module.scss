@@ -1,4 +1,4 @@
-@include '@styles/layout';
+@import '@styles/layout';
 
 .loginPage {
   @include stackedTopBorder;
