@@ -54,9 +54,7 @@ const AddOnsDumb = ({
     onNextBooking && onNextBooking();
   }
 
-  return <PageCard className={'add-ons-page'}>
-    <ServiceHeader selectable={false}/>
-    <div className={style.addOnsPage}>
+  return <div className={style.addOnsPage}>
       <h2>
         Add-ons
       </h2>
@@ -69,7 +67,10 @@ const AddOnsDumb = ({
               {productsWithCategories[category].map((product) => {
                 const { cost, name, id } = product;
                 const checked = !!products.find((p) => p.id === product.id);
-                return <StruckCard checked={checked} onClick={handleProductClick(product)} price={cost} key={id} content={name} />;
+                return <StruckCard
+                  checked={checked}
+                  onClick={handleProductClick(product)}
+                  price={cost} key={id} content={name} />;
               })}
           </div>;
         })}
@@ -84,8 +85,7 @@ const AddOnsDumb = ({
 
         </div>
       </div>
-    </div>
-  </PageCard>;
+    </div>;
 
 };
 

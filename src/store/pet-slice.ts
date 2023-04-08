@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import Pet from "../interfaces/Pet";
+import { PetEntity } from '@domain/types/common/pet';
 
 export interface PetState {
-  pets: Array<Pet>;
+  pets: Array<PetEntity>;
 }
 
 const initialState: PetState = {
@@ -46,7 +46,7 @@ const petsSlice = createSlice({
   name: "pets",
   initialState,
   reducers: {
-    addPet(state, action: PayloadAction<Pet>) {
+    addPet(state, action: PayloadAction<PetEntity>) {
       state.pets.push(action.payload);
     },
     emptyPets(state) {

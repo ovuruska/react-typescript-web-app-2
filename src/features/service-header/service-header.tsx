@@ -1,22 +1,19 @@
-import { Link } from 'react-router-dom';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import Dropdown from '@components/book/dropdown/dropdown';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@quicker/store/store';
-import Pet from '@quicker/interfaces/Pet';
 import './service-header.scss';
 import { OrderActions } from '@quicker/store/order-slice';
 import { PetEntity } from '@domain/types/common/pet';
-import { useNavigate } from 'react-router';
 
 interface ServiceHeaderProps{
   selectable? : boolean;
 }
 
-const ServiceHeader = ({
+const ServiceHeader : React.FC<ServiceHeaderProps>= ({
   selectable = true,
-                       }) => {
+                       } : ServiceHeaderProps) => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
 
   const {type,pets,pet:selectedPet} = useSelector((state: RootState) => {
