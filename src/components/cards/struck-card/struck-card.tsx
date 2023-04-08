@@ -11,7 +11,7 @@ export interface StruckCardProps {
 }
 
 const StruckCard: React.FC<StruckCardProps> = ({
-                                                 content="", checked=false, onClick, struckPrice, price,
+                                                 content="", checked=false, onClick, struckPrice, price = 0,
 
                                                }: StruckCardProps) => {
 

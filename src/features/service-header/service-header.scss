@@ -1,0 +1,69 @@
+.grooming-heading {
+  color: #27946d;
+}
+.service-pet-row {
+  height:112px;
+  width: 100%;
+  display: flex;
+  padding: 12px 20px;
+  align-items: start;
+  overflow: visible;
+  position: relative;
+
+}
+
+.service-pet-row a {
+  display: flex;
+  padding-top:12px;
+  align-items: center;
+}
+
+.service-pet-row svg {
+  fill: black;
+}
+
+.service-pet-row h3 {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.service-title {
+  padding-left: 0.6em;
+}
+
+
+
+.dropdown-wrapper {
+  position: absolute;
+  right: 16px;
+  top: 8px;
+  z-index: 1000;
+  height:56px;
+  width: 120px;
+
+}
+
+.grooming-row {
+  background-color: #b4ffe4;
+}
+
+.wewash-row {
+  background-color: #e1e0ff;
+}
+
+.wewash-row h3 {
+  color: #4947ca;
+}
+.service-pet-row .dropdown {
+  padding: 0;
+}
+
+.service-pet-row .dropdown-main {
+  box-shadow: 0px 0px 54px rgba(0, 0, 0, 0.07);
+  border-radius: 6px;
+}
+
+.service-pet-row .dropdown-row {
+  padding: 0 0.8em;
+  height: 50px;
+}

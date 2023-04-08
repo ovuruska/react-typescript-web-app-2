@@ -19,7 +19,6 @@ Basic.args = {
   content: 'Basic Struck Card',
   checked: false,
   onClick: () => {
-    console.log('clicked');
   },
   price: 80,
 };

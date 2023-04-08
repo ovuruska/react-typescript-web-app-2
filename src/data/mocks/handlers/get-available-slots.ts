@@ -8,7 +8,7 @@ import {EmployeeEntity} from "@domain/types/common/employee";
 export const generateAvailableSlotsResponse = (date: Date): DailyAvailableSlotsResponse => {
 
   const response = [];
-  const randomLength = Math.floor(Math.random() * 50);
+  const randomLength = Math.floor(Math.random() * 50) +1;
 
   for (let i = 0; i < randomLength; i++) {
     const start = `${date}T${Math.floor(Math.random() * 24)}:${Math.floor(Math.random() * 60)}:00.000Z`;

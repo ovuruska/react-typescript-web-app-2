@@ -24,7 +24,6 @@ const AddOnsDumb = ({
 
                     }: AddOnsDumbProps) => {
 
-  // productWithCategories : keys are string values are ProductEntity[]
   const productsWithCategories: {
     [key: string]: ProductEntity[];
   } = {};
@@ -34,7 +33,6 @@ const AddOnsDumb = ({
     }
     productsWithCategories[product.category].push(product);
   });
-  console.log(products);
 
   const handleProductClick = (product: ProductEntity) => (checked : boolean) => {
     if(!setProducts) return;
@@ -46,6 +44,15 @@ const AddOnsDumb = ({
     }
   }
 
+  const handleClick = () => {
+    onNextBooking && onNextBooking();
+  };
+
+  const handleClickNoThanks = () => {
+    setProducts && setProducts([]);
+    onNextBooking && onNextBooking();
+  }
+
   return <PageCard className={'add-ons-page'}>
 
     <div className={style.addOnsPage}>
@@ -54,21 +61,24 @@ const AddOnsDumb = ({
       </h2>
       <AddOnsDescription text={text} />
       <div className={style.addOns__products}>
-        {Object.keys(productsWithCategories).map((category) => (
-          <div key={category} className={style.addOns__productCategory}>
+        {Object.keys(productsWithCategories).map((category) => {
+
+          return <div key={category} className={style.addOns__productCategory}>
             <h3>{category}</h3>
               {productsWithCategories[category].map((product) => {
+                const { cost, name, id } = product;
                 const checked = !!products.find((p) => p.id === product.id);
-                return <StruckCard checked={checked} onClick={handleProductClick(product)} price={product.cost} key={product.id} content={product.name} />;
+                return <StruckCard checked={checked} onClick={handleProductClick(product)} price={cost} key={id} content={name} />;
               })}
-          </div>))}
+          </div>;
+        })}
 
         <div>
 
-          <WeakBtn content={'No thanks, I don\'t want any extra'} />
+          <WeakBtn  onClick={handleClickNoThanks} content={'No thanks, I don\'t want any extra'} />
           <div className={style.row}>
             {price && <div className={style.addOns__priceTag}>{'$' + price?.toFixed(2)}</div>}
-            <CtaPrimary content={'Book'} onClick={onNextBooking} />
+            <CtaPrimary  content={'Book'} onClick={handleClick} />
           </div>
 
         </div>

@@ -9,7 +9,7 @@ const WeakBtn : React.FC<CtaPrimaryProps> = ({
   onClick
                                                 }) => {
 
-  return <button onClick={onClick} className={styles.weakBtn}>
+  return <button data-testid={"weak-btn"} onClick={onClick} className={styles.weakBtn}>
     <label className={styles.weakBtn__label}>{content}</label>
   </button>
 
