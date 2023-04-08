@@ -1,0 +1,7 @@
+@include '@styles/layout';
+
+.loginPage {
+  @include stackedTopBorder;
+  display: flex;
+    flex-direction: column;
+}
