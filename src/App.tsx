@@ -5,6 +5,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AutoLogin from "@components/auth/auto-login";
 import SpinnerOverlay from "@components/loading/spinner-overlay";
+import PolicyPage from '@pages/policy';
 
 
 
@@ -67,6 +68,15 @@ function App() {
 
             }
           />
+          <Route
+            path="/policy"
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <PolicyPage />
+                </AutoLogin>
+              </Suspense>
+            }/>
         </Routes>
       </BrowserRouter>
     </div>

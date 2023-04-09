@@ -4,15 +4,6 @@ import PaymentPageDumb from '@pages/payment/index.dumb';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-/*
-(args) => {
-
-  return <PageCard>
-    <PaymentPageDumb {...args} />
-    </PageCard>;
-}
- */
-
 export interface PaymentPageProps {
 }
 
@@ -28,13 +19,16 @@ const PaymentPage: React.FC<PaymentPageProps> = ({}) => {
 
   const navigate = useNavigate();
 
+  const handleWarning = () => {
+    navigate('/policy');
+  }
 
   const handleCompleted = () => {
     navigate('/thank-you');
   }
 
   return <BookingJourney selectable={false}>
-    <PaymentPageDumb employee={employee} branch={branch} date={date} service={service} onCompleted={handleCompleted}/>
+    <PaymentPageDumb onWarningClick={handleWarning} employee={employee} branch={branch} date={date} service={service} onCompleted={handleCompleted}/>
   </BookingJourney>;
 };
 
