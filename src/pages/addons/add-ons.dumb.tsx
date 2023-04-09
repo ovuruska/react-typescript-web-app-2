@@ -79,7 +79,7 @@ const AddOnsDumb = ({
             {price && <div className={style.addOns__priceTag}>{'$' + price?.toFixed(2)}</div>}
             <CtaPrimary  content={'Book'} onClick={handleClick} />
           </div>
-          <a  data-testid={"no-thanks"} onClick={handleClickNoThanks} className={style.addOns__weakLink}>{'No thanks, I don\'t want any extra'}</a>
+          <a data-testid={"no-thanks"}onClick={handleClickNoThanks} className={style.addOns__weakLink}>{'No thanks, I don\'t want any extra'}</a>
 
         </div>
       </div>

@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="home-page page">
-      <img alt="scrubbers logo" className={"logo"} src={logoSrc}></img>
+      <img  alt="scrubbers logo" className={"logo"} src={logoSrc}></img>
       <ProfileCard />
       {/* <RewardsCard rewardCount={100} /> */}
       <div className="service-row">

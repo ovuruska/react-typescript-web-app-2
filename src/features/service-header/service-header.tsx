@@ -39,6 +39,7 @@ const ServiceHeader : React.FC<ServiceHeaderProps>= ({
 
   const handleChange = (index:number) => {
     const pet = pets[index];
+    dispatch(OrderActions.setPet(pet));
   }
 
   let title = "Book for"

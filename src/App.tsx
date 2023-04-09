@@ -6,8 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AutoLogin from "@components/auth/auto-login";
 import SpinnerOverlay from "@components/loading/spinner-overlay";
 
-
-
+const PolicyPage = lazy(() => import("./pages/policy"));
 const BookPage = lazy(() => import("./pages/bookpage/bookpage"));
 const HomePage = lazy(() => import("./pages/homepage/homepage"));
 const AddOnsPage = lazy(() => import("./pages/addons/add-ons"));
@@ -67,6 +66,15 @@ function App() {
 
             }
           />
+          <Route
+            path="/policy"
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <PolicyPage />
+                </AutoLogin>
+              </Suspense>
+            }/>
         </Routes>
       </BrowserRouter>
     </div>
