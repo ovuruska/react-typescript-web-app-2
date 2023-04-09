@@ -7,6 +7,7 @@
   display: flex;
   border-radius: 18px;
   background-color:$main-100;
+  width:100%;
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
@@ -34,7 +35,6 @@
       @include caption-1;
       display: block;
       color: $main-700;
-      margin-top:-12px;
 
     }
   }
@@ -44,6 +44,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    & > svg{
+      height:24px;
+      width:24px;
+    }
   }
   &__right__left{
     flex:9;
@@ -65,5 +69,7 @@
       display: block;
 
     }
+
   }
+
 }

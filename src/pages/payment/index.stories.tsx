@@ -18,7 +18,6 @@ const branchGenerator = new BranchMockGenerator();
 const Template: Story<PaymentPageDumbProps> = (args) => {
 
   return <PageCard>
-    <ApptCard employee={args.employee} date={args.date} branch={args.branch} service={args.service} />
     <PaymentPageDumb {...args} />
     </PageCard>;
 }

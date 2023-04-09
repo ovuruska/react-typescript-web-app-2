@@ -8,13 +8,14 @@ export interface OrderState {
   branch?:BranchEntity;
   groomer?:EmployeeEntity;
   pet?:PetEntity;
-  start?:string;
   products?:number[];
+  start?:string;
 }
 
 const initialState: OrderState = {
   orderType: "Grooming",
   products:[],
+
 };
 
 const orderSlice = createSlice({
@@ -32,8 +33,10 @@ const orderSlice = createSlice({
       state.branch = action.payload.branch ?? state.branch;
       state.groomer = action.payload.groomer ?? state.groomer;
       state.pet = action.payload.pet ?? state.pet;
+      state.start = action.payload.start ?? state.start;
     },
     setPet: (state, action: PayloadAction<PetEntity>) => {
+      console.log(action);
       state.pet = action.payload;
     },
     setGroomers: (state, action: PayloadAction<EmployeeEntity>) => {
@@ -43,8 +46,13 @@ const orderSlice = createSlice({
       state.orderType = initialState.orderType;
       state.branch = initialState.branch;
       state.groomer = initialState.groomer;
+      state.pet = initialState.pet;
+      state.start = initialState.start;
+      state.products = initialState.products;
+
     },
   },
+
 });
 
 export const OrderActions = orderSlice.actions;

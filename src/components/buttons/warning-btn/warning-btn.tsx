@@ -13,7 +13,9 @@ const WarningBtn: React.FC<WarningBtnDumbProps> = ({ onClick, content }: Warning
   return (
     <div data-testid={"warning-btn"} onClick={onClick} className={style.warningBtn}>
       <span>{content}</span>
-      <BiRightArrow className={style.warningBtn__icon}/>
+      <div>
+        <BiRightArrow className={style.warningBtn__icon}/>
+      </div>
     </div>
   )
 }
