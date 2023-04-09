@@ -32,7 +32,7 @@ const SelectTime: React.FC<SelectTimeProps> = ({
   const label = "Select Time";
 
 
-  return <DropdownBottomDrawer initialState={options} onSelect={handleSelect} label={label} options={options}/>
+  return <DropdownBottomDrawer clearAll={false} selectAll={false} initialState={options} onSelect={handleSelect} label={label} options={options}/>
 
 }
 

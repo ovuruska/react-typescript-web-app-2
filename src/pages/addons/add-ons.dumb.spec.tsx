@@ -78,7 +78,7 @@ describe('AddOnsDumb', () => {
     const price = 1;
     const { getByTestId } = render(<AddOnsDumb products={products} allProducts={allProducts} setProducts={setProducts}
                                                onNextBooking={onNextBooking} price={price} />);
-    const weakBtn = getByTestId('weak-btn');
+    const weakBtn = getByTestId('no-thanks');
     fireEvent.click(weakBtn);
     expect(setProducts).toBeCalledWith([]);
     expect(onNextBooking).toBeCalled();

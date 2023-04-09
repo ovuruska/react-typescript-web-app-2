@@ -52,20 +52,15 @@ const BookPage: React.FC = () => {
     <div className="book-page page">
       <ServiceHeader/>
       <div className="calender-row calendar-row-top">
-        <div className={"book-page__select-branch"}>
-          <SelectBranches onSelect={handleSelectBranches} />
-        </div>
-        <div className="calender-header-row">
-          <h2>Choose Date</h2>
-          <div className="legend-row">
 
-            <div className="legend legend--full"></div>
-            <h3>Full</h3>
-            <div className="legend legend--empty"></div>
-            <h3>Available</h3>
-          </div>
+        <div className="calender-header-row">
+          <h3>Book appointment</h3>
+
         </div>
         <SurgeCalendar initialDate={date} onChange={setDate} />
+      </div>
+      <div className={"book-page__select-branch"}>
+        <SelectBranches onSelect={handleSelectBranches} />
       </div>
       <div className={"book-page__select-row"}>
         {type == "Grooming" ? <SelectGroomers onSelect={handleSelectEmployees}/> : null}

@@ -209,5 +209,38 @@ describe('DropdownBottomDrawer', () => {
     expect(onSelect).toBeCalledWith([]);
   });
 
+  it('when selectAll is false, selectAll button should not be visible.', () => {
+    const onSelect = jest.fn();
+    const { getByTestId, queryByText } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} selectAll={false} />);
+
+    act(() => {
+      getByTestId("dropdown-bottom-drawer").click();
+    });
+
+    expect(queryByText("Select All")).toBeNull();
+  });
+  it('when clearAll is false, clearAll button should not be visible.', () => {
+    const onSelect = jest.fn();
+    const { getByTestId, queryByText } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} clearAll={false} />);
+
+    act(() => {
+      getByTestId("dropdown-bottom-drawer").click();
+    });
+
+    expect(queryByText("Clear all selections")).toBeNull();
+  });
+
+  it('when selectAll and clearAll are false, selectAll and clearAll button should not be visible.', () => {
+    const onSelect = jest.fn();
+    const { getByTestId, queryByText } = render(<DropdownBottomDrawer onSelect={onSelect} options={options} label={label} selectAll={false} clearAll={false} />);
+
+    act(() => {
+      getByTestId("dropdown-bottom-drawer").click();
+    });
+
+    expect(queryByText("Select All")).toBeNull();
+    expect(queryByText("Clear all selections")).toBeNull();
+  });
+
 
 });

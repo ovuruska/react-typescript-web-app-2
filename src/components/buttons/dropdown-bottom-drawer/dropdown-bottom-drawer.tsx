@@ -19,10 +19,13 @@ export interface DropdownBottomDrawerProps<Entity> {
   options: DropdownBottomDrawerItem<Entity>[];
   onSelect?: (options: Entity[]) => void;
   initialState?: DropdownBottomDrawerItem<Entity>[];
+  clearAll?: boolean;
+  selectAll?: boolean;
+
 }
 
 const DropdownBottomDrawer = <T extends {}>({
-                                    label, options, initialState, onSelect
+                                    label, options, initialState, onSelect, clearAll=true, selectAll=true
 }: DropdownBottomDrawerProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<DropdownBottomDrawerItem<T>[]>(initialState ?? []);
@@ -91,10 +94,12 @@ const DropdownBottomDrawer = <T extends {}>({
       <>
         {...cards}
       </>
-      <WeakBtn onClick={handleClearAll} data-testid={"dropdown-bottom-drawer-clear-all"} content={"Clear all selections"}/>
       <div style={{height: "8px"}}/>
+      <div className={styles.dropdownBtnTemplate__buttonGroup}>
+        {clearAll && <WeakBtn onClick={handleClearAll} data-testid={"dropdown-bottom-drawer-clear-all"} content={"Clear all selections"}/>}
+        {selectAll &&      <WeakBtn onClick={handleSelectAll} data-testid={"dropdown-bottom-drawer-select-all"} content={"Select All"}/>}
+      </div>
 
-      <WeakBtn onClick={handleSelectAll} data-testid={"dropdown-bottom-drawer-select-all"} content={"Select All"}/>
       <div style={{height: "8px"}}/>
       <CtaPrimary onClick={handleContinue} data-testid={"dropdown-bottom-drawer-continue"} content={"Continue"}/>
     </SelectBottomDrawer>

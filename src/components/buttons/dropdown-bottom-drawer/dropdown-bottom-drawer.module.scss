@@ -7,6 +7,14 @@
   display: flex;
   align-items: center;
   position: relative;
+
+  &__buttonGroup{
+    display: flex;
+    flex-direction: row;
+    gap:16px;
+    justify-content: space-between;
+  }
+
 }
 .dropdownBtnTemplate:hover{
   cursor: pointer;

@@ -31,7 +31,7 @@ const SelectBranches: React.FC<SelectBranchProps> = ({
     } as DropdownBottomDrawerItem<BranchEntity>
   });
 
-  return <DropdownBottomDrawer onSelect={handleSelect} label={label} options={options}/>
+  return <DropdownBottomDrawer selectAll={false} clearAll={false} onSelect={handleSelect} label={label} options={options}/>
 
 }
 
