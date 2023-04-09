@@ -40,6 +40,17 @@
     }
 
   }
+
+  &__weakLink{
+    @include caption-1;
+    color: $tertiary-600;
+    text-align: center;
+    margin: 16px 0;
+    &:hover{
+      cursor: pointer;
+      color: $tertiary-700;
+    }
+  }
 }
 
 .row {

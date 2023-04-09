@@ -2,11 +2,9 @@ import React from 'react';
 import WeakBtn from '@components/buttons/weak-btn/weak-btn';
 import style from './add-ons.module.scss';
 import AddOnsDescription from '@pages/addons/add-ons-description';
-import PageCard from '@components/cards/page-card/page-card';
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import { ProductEntity } from '@domain/types/common/product';
 import StruckCard from '@components/cards/struck-card/struck-card';
-import ServiceHeader from '@features/service-header/service-header';
 
 export interface AddOnsDumbProps {
   products: any[];
@@ -77,11 +75,11 @@ const AddOnsDumb = ({
 
         <div>
 
-          <WeakBtn  onClick={handleClickNoThanks} content={'No thanks, I don\'t want any extra'} />
           <div className={style.row}>
             {price && <div className={style.addOns__priceTag}>{'$' + price?.toFixed(2)}</div>}
             <CtaPrimary  content={'Book'} onClick={handleClick} />
           </div>
+          <a  data-testid={"no-thanks"} onClick={handleClickNoThanks} className={style.addOns__weakLink}>{'No thanks, I don\'t want any extra'}</a>
 
         </div>
       </div>
