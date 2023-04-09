@@ -3,7 +3,8 @@
 .weakBtn{
   background: white;
     border: 2px solid $gray-300;
-  height:64px;
+  height:56px;
+  min-height:56px;
   transition: all 0.2s ease-in-out;
   outline: none;
   border-radius: 12px;

@@ -1,0 +1,69 @@
+@import "@styles/variables";
+@import "@styles/typography";
+@import "@styles/layout";
+
+
+.apptCard {
+  display: flex;
+  border-radius: 18px;
+  background-color:$main-100;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+
+  & > *
+  {
+    padding:16px;
+  }
+
+  &__left {
+    border-right: 2px solid $white;
+    display: flex;
+    flex-direction: column;
+    gap:0;
+    flex:3;
+    align-items: start;
+
+    height:100%;
+    &Header {
+      @include headline;
+      display: block;
+      color: $main-600;
+    }
+    &Subheader {
+      @include caption-1;
+      display: block;
+      color: $main-700;
+      margin-top:-12px;
+
+    }
+  }
+  &__right{
+    flex:7;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__right__left{
+    flex:9;
+    display: flex;
+    flex-direction: column;
+    gap:0;
+    align-items: start;
+    justify-content: center;
+    &Header {
+      @include subhead;
+      @include textOverflow(120px);
+      display: block;
+      color: $main-700;
+    }
+    &Subheader {
+      @include caption-1;
+      @include textOverflow(120px);
+
+      display: block;
+
+    }
+  }
+}

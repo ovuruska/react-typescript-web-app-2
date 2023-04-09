@@ -2,7 +2,7 @@ import {DailyAvailableSlot} from "@domain/types/responses/daily-available-slots-
 import {injectable} from "inversify";
 import {MockGenerator} from "@domain/types/__mock__/mock-generator";
 import {faker} from "@faker-js/faker";
-import {EmployeeMockGenerator} from "@domain/types/__mock__/employee-mock-generator";
+import {EmployeeMockGenerator} from "@domain/types/__mock__/employee-generator";
 import {BranchMockGenerator} from "@domain/types/__mock__/branch-generator";
 
 

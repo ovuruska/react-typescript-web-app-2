@@ -1,12 +1,13 @@
 import React from "react";
 
 interface Props {
-  fill: string;
+  fill?: string;
 }
 
-const WeWashIcon: React.FC<Props> = ({ fill }) => {
+const WeWashIcon: React.FC<Props> = ({ fill = "#4947CA" }) => {
   return (
     <svg
+
       width="64"
       height="64"
       viewBox="0 0 64 64"
