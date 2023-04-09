@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './index.module.scss';
 import secure from '@assets/security.png';
-import { content } from './index.content';
+import { first ,second, third } from './index.content';
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 
 export interface PolicyDumpProps {
@@ -21,9 +21,16 @@ const PolicyDumb: React.FC<PolicyDumpProps> = ({
     <div className={style.policyPage__image}>
       <img src={secure} alt='secure' />
     </div>
-    <div className={style.policyPage__content}>
-      {content}
-    </div>
+      <p className={style.policyPage__content}>
+      {first}
+    </p>
+      <p className={style.policyPage__content}>
+        {second}
+
+      </p>
+      <p className={style.policyPage__content}>
+        {third}
+      </p>
     <div style={{height:"16px"}}/>
     </div>
     <div className={style.policyPage__cta}>
