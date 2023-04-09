@@ -1,12 +1,12 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import "../../App.css";
-import PromotionCard from "../../components/home/promotion-card/promotion-card";
-import CarouselSlider from "../../components/carousel-slider/carousel-slider";
-import ProfileCard from "../../components/home/profile-card/profile-card";
-import ServiceCard from "../../components/home/service-card/service-card";
+import PromotionCard from "@components/cards/promotion-card/promotion-card";
+import CarouselSlider from "@components/carousel-slider/carousel-slider";
+import ProfileCard from "@components/cards/profile-card/profile-card";
+import ServiceCard from "@components/cards/service-card/service-card";
 import svgSrc from "../../assets/grooming.svg";
 import "./homepage.scss";
-import AppointmentCard from "../../components/home/appointment-card/appointment-card";
+import AppointmentCard from "@components/cards/appointment-card/appointment-card";
 import imageSrc from "../../assets/mockPhoto.png";
 import logoSrc from "../../assets/logo.png";
 

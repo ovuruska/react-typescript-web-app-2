@@ -1,14 +1,24 @@
-
+import React, { LazyExoticComponent } from 'react';
 import "./App.css";
 import { lazy, Suspense } from "react";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AutoLogin from "@components/auth/auto-login";
 import SpinnerOverlay from "@components/loading/spinner-overlay";
-import AddOnsPage from '@pages/addons/add-ons';
+
+
 
 const BookPage = lazy(() => import("./pages/bookpage/bookpage"));
 const HomePage = lazy(() => import("./pages/homepage/homepage"));
+const AddOnsPage = lazy(() => import("./pages/addons/add-ons"));
+const PaymentPage = lazy(() => import("./pages/payment"));
+
+const appConfig : any[]= [
+  "/",HomePage,
+  "/book",BookPage,
+  "/add-ons",AddOnsPage,
+  "/payment",PaymentPage,
+]
 
 function App() {
   return (
@@ -44,6 +54,17 @@ function App() {
                 <AddOnsPage />
               </AutoLogin>
               </Suspense>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <PaymentPage />
+                </AutoLogin>
+              </Suspense>
+
             }
           />
         </Routes>

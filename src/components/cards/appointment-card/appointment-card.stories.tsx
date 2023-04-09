@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import AppointmentCard from "./appointment-card";
 
 export default {
-  title: "Appointment Card",
+  title: "Components/Cards/Appointment Card",
   component: AppointmentCard,
 } as ComponentMeta<typeof AppointmentCard>;
 

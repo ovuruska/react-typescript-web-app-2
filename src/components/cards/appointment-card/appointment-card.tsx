@@ -1,5 +1,5 @@
 import React from "react";
-import "./appointment-card.css";
+import "./appointment-card.module.scss";
 import WeWashIcon from "../../icons/wewash-icon";
 
 interface AppointmentCardProps {

@@ -1,4 +1,4 @@
-import {EmployeeMockGenerator} from "@domain/types/__mock__/employee-mock-generator";
+import {EmployeeMockGenerator} from "@domain/types/__mock__/employee-generator";
 
 describe('EmployeeGenerator', () => {
   it('should be defined', () => {

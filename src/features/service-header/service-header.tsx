@@ -6,6 +6,7 @@ import { RootState } from '@quicker/store/store';
 import './service-header.scss';
 import { OrderActions } from '@quicker/store/order-slice';
 import { PetEntity } from '@domain/types/common/pet';
+import ServiceHeaderDumb from '@features/service-header/service-header.dumb';
 
 interface ServiceHeaderProps{
   selectable? : boolean;
@@ -23,49 +24,41 @@ const ServiceHeader : React.FC<ServiceHeaderProps>= ({
       selectedPet:state.order.pet,
     }
   });
+
+
   const dispatch = useDispatch();
 
 
   useEffect(() => {
     setPetNames([]);
-    pets.map((pet:PetEntity) => {
-      setPetNames((petNames) => [...petNames,pet.name]);
-    });
+    setPetNames(pets.map((pet:PetEntity) => pet.name));
+    if(selectedPet == null && pets.length > 0){
+      dispatch(OrderActions.setPet(pets[0]));
+    }
   }, [pets]);
 
   const handleChange = (index:number) => {
     const pet = pets[index];
-    dispatch(OrderActions.setPet(pet));
   }
 
   let title = "Book for"
   if (!selectable ) {
     title = "Book for " + selectedPet?.name ?? "";
   }
-
   const goBack = () => {
     window.history.back();
   };
 
-  return <div className={`service-pet-row ${type.toLowerCase().replace(' ', '')}-row`}>
-    <div className={"clickable"}>
-      <BiLeftArrowAlt onClick={goBack} size={'35px'} />
-    </div>
-    <div className='service-title'>
-      <h3 className={`${type.toLowerCase().replace(' ', '')}-heading`}>{type}</h3>
-      <h1>{title}</h1>
-    </div>
-    {selectable &&
-    <div className='dropdown-wrapper'>
-      <Dropdown
-        width='100%'
+  return <ServiceHeaderDumb
+    goBack={goBack}
+    type={type}
+    selectable={selectable}
+    petNames={petNames}
+    handleChange={handleChange}
+    title={title}
+    selectedPet={selectedPet?.name}
 
-        onChange={handleChange}
-        dropdownTitle={petNames[0] ?? 'Select Pet'}
-        dropdownList={petNames as string[]}
-      />
-    </div>
-    }
-  </div>;
+  />
+
 };
 export default ServiceHeader;

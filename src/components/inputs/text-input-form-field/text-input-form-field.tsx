@@ -1,32 +1,32 @@
-import styles from "./text-input-form-field.module.scss";
-import { useState } from 'react';
+import React from 'react';
+import TextInputFormFieldDumb from '@components/inputs/text-input-form-field/text-input-form-field.dumb';
 
 
 export interface TextInputFormFieldProps {
   initialValue?: string;
   label?: string;
-  onChanged?: (value:string) => void;
+  onChanged?: (value: string) => void;
+  disabled?: boolean,
 }
 
-const TextInputFormField = ({
-                               label,
-                               initialValue,
-                                onChanged
-                             }:TextInputFormFieldProps) => {
+const TextInputFormField : React.FC<TextInputFormFieldProps> = ({
+                              label, initialValue, onChanged, disabled,
+                            }: TextInputFormFieldProps) => {
 
-  const [value, setValue] = useState(initialValue || "");
+  const [value, setValue] = React.useState<string>(initialValue || '');
+  const [focused, setFocused] = React.useState<boolean>(false);
 
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-    onChanged && onChanged(e.target.value);
-  }
+  const handleFocus = (isFocused: boolean) => {
+    setFocused(isFocused);
+  };
 
+  const handleChange = (value: string) => {
+    setValue(value);
+    onChanged && onChanged(value);
+  };
 
-  return <div data-testid={"text-inputs-controlled"} className={styles.textInputControlled} >
-    <label className={!value ? styles.textInputControlled__label : styles.textInputControlled__label__floating}>{label}</label>
-    <input className={styles.textInputControlled__input} value={value} onChange={handleChange} />
-    {value ? <div className={styles.textInputControlled__value}>{value}</div> : null }
-  </div>;
-}
+  return <TextInputFormFieldDumb disabled={disabled} label={label ?? 'Input'} focused={focused} onFocus={handleFocus}
+                                 value={value} onChange={handleChange} />;
+};
 
 export default TextInputFormField;
