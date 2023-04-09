@@ -1,0 +1,26 @@
+@import "@styles/variables";
+@import "@styles/typography";
+
+.warningBtn {
+  transition: all .3s;
+  background-color: $other-01;
+  color: $danger;
+  border-radius: 12px;
+  padding:8px;
+  display:flex;
+    align-items:center;
+    justify-content:space-between;
+  gap:8px;
+
+  @include caption-1;
+
+  &:hover {
+
+    background-color: $other-02;
+    cursor: pointer;
+  }
+  & > svg{
+    width: 16px;
+    height: 16px;
+  }
+}
