@@ -1,19 +1,26 @@
+@import "@styles/variables.scss";
+@import "@styles/typography.scss";
+
 .book-page {
   background: #ffffff;
 }
 
 .calender-header-row {
-  padding: 1em 2.6em;
-  display: flex;
 
+  padding: 2em 1em;
+  display: flex;
   color: #212529;
   justify-content: space-between;
+  & > h2{
+    @include title-3;
+
+  }
 }
 .book-page__select-branch {
-  margin: 2rem;
+  margin: 2rem 1rem;
 }
 .book-page__select-row {
-  margin: 2rem;
+  margin: 1rem;
   display: flex;
   gap: 2rem;
   justify-content: space-between;
@@ -47,6 +54,8 @@
 .calender-header-row h2 {
   font-size: 1em;
   color: #212529;
+  @include title-1;
+
 }
 
 .slots-row {
