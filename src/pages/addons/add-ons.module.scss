@@ -3,14 +3,7 @@
 @import "@styles/variables";
 
 .addOns {
-  &Page {
-    position: relative;
-    background-color: $white;
-    margin-top:-2em;
-    border-radius: 32px;
 
-    padding: 2em;
-  }
 
   &Description {
     @include caption-1;

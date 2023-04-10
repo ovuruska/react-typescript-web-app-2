@@ -5,6 +5,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AutoLogin from "@components/auth/auto-login";
 import SpinnerOverlay from "@components/loading/spinner-overlay";
+import ThanksPage from '@pages/thanks';
 
 const PolicyPage = lazy(() => import("./pages/policy"));
 const BookPage = lazy(() => import("./pages/bookpage/bookpage"));
@@ -72,6 +73,15 @@ function App() {
               <Suspense fallback={<SpinnerOverlay />}>
                 <AutoLogin>
                   <PolicyPage />
+                </AutoLogin>
+              </Suspense>
+            }/>
+          <Route
+            path={"/thank-you"}
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <ThanksPage />
                 </AutoLogin>
               </Suspense>
             }/>

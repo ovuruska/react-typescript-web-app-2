@@ -1,8 +1,8 @@
 import "./bookpage.scss";
 import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "@quicker/store/store";
-import { useEffect, useState } from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {  useState } from "react";
+import { useNavigate} from "react-router-dom";
 import SurgeCalendar from "@features/surge-calendar/surge-calendar";
 import SelectBranches from "@features/select-branches/select-branches";
 import AvailableSlots from "@features/available-slots/available-slots";
@@ -12,8 +12,7 @@ import {BranchEntity} from "@domain/types/common/branch";
 import {EmployeeEntity} from "@domain/types/common/employee";
 import {OrderActions} from "@quicker/store/order-slice";
 import {DailyAvailableSlot} from "@domain/types/responses/daily-available-slots-response";
-import ServiceHeader from '@features/service-header/service-header';
-import { PetEntity } from '@domain/types/common/pet';
+import BookingJourney from '@components/layouts/booking-journey';
 
 const BookPage: React.FC = () => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
@@ -48,9 +47,7 @@ const BookPage: React.FC = () => {
     }));
     navigate("/add-ons");
   }
-  return (
-    <div className="book-page page">
-      <ServiceHeader/>
+  return <BookingJourney selectable={true}>
       <div className="calender-row calendar-row-top">
 
         <div className="calender-header-row">
@@ -73,8 +70,7 @@ const BookPage: React.FC = () => {
 
         <AvailableSlots onSelect={onBook} date={date} service={type} times={times} branches={branches} employees={groomers}  />
       </div>
-    </div>
-  );
+    </BookingJourney>
 };
 
 export default BookPage;

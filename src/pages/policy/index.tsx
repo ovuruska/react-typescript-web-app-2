@@ -1,13 +1,14 @@
 import React from 'react';
 import BookingJourney from '@components/layouts/booking-journey';
 import PolicyDumb from '@pages/policy/index.dumb';
+import { useNavigate } from 'react-router-dom';
 
 
 const PolicyPage = () => {
 
+  const navigate = useNavigate();
   const handleClick = () => {
-    // Go back
-    window.history.back();
+    navigate('/payment');
   }
 
   return <BookingJourney selectable={false}>

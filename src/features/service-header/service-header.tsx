@@ -7,13 +7,15 @@ import './service-header.scss';
 import { OrderActions } from '@quicker/store/order-slice';
 import { PetEntity } from '@domain/types/common/pet';
 import ServiceHeaderDumb from '@features/service-header/service-header.dumb';
+import { useNavigate } from 'react-router-dom';
 
 interface ServiceHeaderProps{
   selectable? : boolean;
+  previous?:string;
 }
 
 const ServiceHeader : React.FC<ServiceHeaderProps>= ({
-  selectable = true,
+  selectable = true,previous
                        } : ServiceHeaderProps) => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
 
@@ -27,7 +29,7 @@ const ServiceHeader : React.FC<ServiceHeaderProps>= ({
 
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     setPetNames([]);
@@ -47,7 +49,11 @@ const ServiceHeader : React.FC<ServiceHeaderProps>= ({
     title = "Book for " + selectedPet?.name ?? "";
   }
   const goBack = () => {
-    window.history.back();
+    if(!previous) {
+      window.history.back();
+    }else{
+      navigate(previous);
+    }
   };
 
   return <ServiceHeaderDumb

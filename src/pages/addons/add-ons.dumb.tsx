@@ -5,6 +5,8 @@ import AddOnsDescription from '@pages/addons/add-ons-description';
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import { ProductEntity } from '@domain/types/common/product';
 import StruckCard from '@components/cards/struck-card/struck-card';
+import BookingJourney from '@components/layouts/booking-journey';
+import { useSelector } from 'react-redux';
 
 export interface AddOnsDumbProps {
   products: any[];
@@ -33,6 +35,10 @@ const AddOnsDumb = ({
     productsWithCategories[product.category].push(product);
   });
 
+
+
+
+
   const handleProductClick = (product: ProductEntity) => (checked : boolean) => {
     if(!setProducts) return;
     else if(checked) {
@@ -52,7 +58,7 @@ const AddOnsDumb = ({
     onNextBooking && onNextBooking();
   }
 
-  return <div className={style.addOnsPage}>
+  return <>
       <h2>
         Add-ons
       </h2>
@@ -83,7 +89,7 @@ const AddOnsDumb = ({
 
         </div>
       </div>
-    </div>;
+  </>;
 
 };
 

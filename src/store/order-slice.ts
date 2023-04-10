@@ -10,11 +10,13 @@ export interface OrderState {
   pet?:PetEntity;
   products?:number[];
   start?:string;
+  step:number;
 }
 
 const initialState: OrderState = {
   orderType: "Grooming",
   products:[],
+  step:0
 
 };
 
@@ -22,6 +24,12 @@ const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
+    incrementStep: (state) => {
+      state.step = state.step + 1;
+    },
+    decrementStep: (state) => {
+      state.step = state.step - 1;
+    },
     setOrderType: (state, action: PayloadAction<string>) => {
       state.orderType = action.payload;
     },
@@ -34,6 +42,7 @@ const orderSlice = createSlice({
       state.groomer = action.payload.groomer ?? state.groomer;
       state.pet = action.payload.pet ?? state.pet;
       state.start = action.payload.start ?? state.start;
+      state.step = action.payload.step ?? state.step;
     },
     setPet: (state, action: PayloadAction<PetEntity>) => {
       console.log(action);
@@ -49,7 +58,7 @@ const orderSlice = createSlice({
       state.pet = initialState.pet;
       state.start = initialState.start;
       state.products = initialState.products;
-
+      state.step = 0;
     },
   },
 
