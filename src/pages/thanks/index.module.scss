@@ -84,7 +84,6 @@
     flex-direction: column;
     gap:8px;
     padding: 16px;
-    padding-bottom: 120px;
     & > p{
       @include caption-2;
       color:$gray-600;

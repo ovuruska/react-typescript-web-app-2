@@ -2,11 +2,12 @@ import PageCard from '@components/cards/page-card/page-card';
 import logoSrc from "../../assets/logo.png";
 import style from "./index.module.scss";
 import ProfileBtn from '@components/buttons/profile-btn';
+
 import Dogo from "@assets/dogo.png";
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import { ProductEntity } from '@domain/types/common/product';
 import { BranchEntity } from '@domain/types/common/branch';
-import React from 'react';
+import React, { lazy } from 'react';
 import { EmployeeEntity } from '@domain/types/common/employee';
 
 export interface ThanksPageDumbProps {
