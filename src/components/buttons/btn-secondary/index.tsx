@@ -1,5 +1,5 @@
 import style from './index.module.scss';
-
+import React from "react";
 
 export interface BtnSecondaryProps {
   onClick?: () => void;
