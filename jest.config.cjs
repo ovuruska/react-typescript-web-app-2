@@ -16,6 +16,8 @@ module.exports = {
         "^@pages/(.*)$": "<rootDir>/src/pages/$1",
         '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
           '<rootDir>/src/__mocks__/assetMock.ts',
+        "^react-router-dom$": "<rootDir>/src/__mocks__/react-router-dom.ts"
+
     },
     transform:{
       ".+\\.(css|scss|png|jpg|svg)$": "jest-transform-stub"

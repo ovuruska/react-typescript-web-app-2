@@ -16,6 +16,7 @@ const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle,onChange
 
   return (
     <div
+      data-testid={"dropdown"}
       className="dropdown"
       style={{
         height: expand ? `${(dropdownList.length + 1) * 50}px` : "50px",
