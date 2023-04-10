@@ -1,18 +1,3 @@
-/*
-import PageCard from '@components/cards/page-card/page-card';
-
-
-const ThanksPageDumb = () => {
-  return <PageCard>
-
-  </PageCard>
-}
-
-export default ThanksPageDumb;
- */
-
-// Path: src/pages/thanks/index.stories.tsx
-
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
