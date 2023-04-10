@@ -4,7 +4,7 @@ module.exports = {
     collectCoverage: false,
     collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
     moduleNameMapper: {
-        '\\.(scss|sass|css|less|svg)$': 'identity-obj-proxy',
+        '\\.(scss|sass|css|less)$': 'identity-obj-proxy',
         "^@quicker/(.*)$": "<rootDir>/src/$1",
         "^@domain/(.*)$": "<rootDir>/src/domain/$1",
         "^@components/(.*)$": "<rootDir>/src/components/$1",
