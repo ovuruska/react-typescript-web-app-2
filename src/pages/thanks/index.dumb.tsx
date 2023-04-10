@@ -41,7 +41,7 @@ const ThanksPageDumb : React.FC<ThanksPageDumbProps> = ({
   return <PageCard>
     <div className={style.thanksPage}>
       <div className={style.thanksPageHeader}>
-        <img alt="scrubbers logo" className={"logo"} src={logoSrc}></img>
+        <img alt="scrubbers logo" className={style.scrubbersLogo} src={logoSrc}></img>
         <ProfileBtn/>
       </div>
       <div className={style.thanksPageColumn}>
