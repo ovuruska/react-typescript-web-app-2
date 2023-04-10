@@ -116,7 +116,7 @@ const ThanksPage = () => {
   const { products, date, service, employee, branch } = useSelector(
     (state: any) => ({
       products: state.order.products,
-      date: state.order.date,
+      date: state.order.start,
       service: state.order.orderType,
       employee: state.order.groomer,
       branch: state.order.branch
