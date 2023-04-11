@@ -7,6 +7,8 @@ import PetGenderSelect from '@components/inputs/pet-gender-select';
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import PetAgeSelect from '@pages/add-pet/pet-age-select';
 import PetWeightSelect from '@pages/add-pet/pet-weight-select';
+import { useNavigate } from 'react-router-dom';
+import PageCard from '@components/cards/page-card/page-card';
 
 export interface AddPetPageProps {
 
@@ -24,19 +26,25 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({
   const [weight, setWeight] = React.useState<number | null>(null);
 
   const [error,setError] = React.useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     if(gender && breed && name && weight && age) {
       setError(false);
+      navigate("/");
     }else{
       setError(true);
     }
   }
 
+  const handleGoBack = () => {
+    navigate("/");
+  }
 
-  return <div className={style.addPetPage}>
+
+  return <PageCard><div className={style.addPetPage}>
     <div className={style.addPetPageTop}>
-      <BiLeftArrow/>
+      <BiLeftArrow onClick={handleGoBack}/>
       <h1>Add Pet</h1>
     </div>
 
@@ -64,7 +72,7 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({
       <CtaPrimary onClick={handleSubmit} content={"Submit"}/>
     </div>
 
-  </div>
+  </div></PageCard>
 }
 
 export default AddPetPage;
