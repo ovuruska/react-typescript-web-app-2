@@ -1,6 +1,6 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
-import AddPetPage, { AddPetPageProps } from "./index";
+import AddPetPage, { AddPetPageProps } from "./index.dumb";
 import PageCard from '@components/cards/page-card/page-card';
 
 export default {
