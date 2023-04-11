@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { DailyAvailableSlot } from "@domain/types/responses/daily-available-slots-response";
+import React, { useEffect } from 'react';
+import { DailyAvailableSlot } from '@domain/types/responses/daily-available-slots-response';
 import {
   GetAvailableSlotsParams,
   GetAvailableSlotsUseCase,
-} from "@domain/usecases/available/get-available-slots";
-import { useInjection } from "inversify-react";
+} from '@domain/usecases/available/get-available-slots';
+import { useInjection } from 'inversify-react';
 
 export interface AvailableSlotsParams {
   date?: Date;
@@ -15,44 +15,42 @@ export interface AvailableSlotsParams {
   times?: string[];
 }
 
-
 const useAvailableSlots = ({
   date = new Date(),
   duration = 60,
-  service = "Full Grooming",
+  service = 'Full Grooming',
   branches,
- employees,
-  times = ["morning","afternoon","evening"],
-                           } :AvailableSlotsParams) => {
+  employees,
+  times = ['morning', 'afternoon', 'evening'],
+}: AvailableSlotsParams) => {
   const [slots, setSlots] = React.useState<DailyAvailableSlot[]>([]);
   const getAvailableSlots = useInjection(GetAvailableSlotsUseCase);
 
-  const dateStr = (date?.getDate() < 10 )? "0" + date?.getDate() : date?.getDate();
-  const monthStr = (date?.getMonth() + 1 < 10) ? "0" + (date?.getMonth() + 1) : date?.getMonth() + 1;
+  const dateStr =
+    date?.getDate() < 10 ? '0' + date?.getDate() : date?.getDate();
+  const monthStr =
+    date?.getMonth() + 1 < 10
+      ? '0' + (date?.getMonth() + 1)
+      : date?.getMonth() + 1;
   const yearStr = date?.getFullYear();
-
 
   const fullDate = `${yearStr}-${monthStr}-${dateStr}`;
   useEffect(() => {
-    if(service === "Grooming")
-      service = "Full Grooming";
-    else if(service === "WeWash")
-      service = "We Wash";
+    if (service === 'Grooming') service = 'Full Grooming';
+    else if (service === 'WeWash') service = 'We Wash';
     const params = {
       date: fullDate,
-      employees : employees ?? [],
-      branches : branches ?? [],
+      employees: employees ?? [],
+      branches: branches ?? [],
       service,
       duration,
     } as GetAvailableSlotsParams;
 
-
-
     getAvailableSlots.call(params).then((response) => {
       setSlots(response as DailyAvailableSlot[]);
     });
-  }, [dateStr,duration,employees,branches]);
+  }, [dateStr, duration, employees, branches]);
 
   return slots;
-}
+};
 export default useAvailableSlots;
