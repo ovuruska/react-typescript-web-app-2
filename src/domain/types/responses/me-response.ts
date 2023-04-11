@@ -9,10 +9,10 @@ export interface MeResponse {
   created_at: string;
   updated_at: string;
   name: string;
-  uid: string;
+  uid?: string;
   email: string;
   phone: string;
-  address: string;
-  role: number;
-  user: number;
+  address?: string;
+  role?: number;
+  user?: number;
 }

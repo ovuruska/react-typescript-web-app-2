@@ -10,8 +10,8 @@ import {AvailableRemoteDataSource} from "@data/datasources/available/remote-data
 import {AvailableRemoteDataSourceImpl} from "@data/datasources/available/remote-data-source-impl";
 import {CustomerRemoteDataSource} from "@data/datasources/customer/remote-data-source";
 import {CustomerRemoteDataSourceImpl} from "@data/datasources/customer/remote-data-source-impl";
-import {CustomerRepository} from "@domain/repositories/customer-repository";
-import {CustomerRepositoryImpl} from "@data/repositories/customer/repository-impl";
+import {CustomerRepository} from "@domain/repositories/customer";
+import {CustomerRepositoryImpl} from "@data/repositories/customer";
 import {Container} from "inversify";
 import {BranchRemoteDataSource} from "@data/datasources/branch/remote-data-source";
 import {BranchLocalDataSource} from "@data/datasources/branch/local-data-source";
@@ -38,7 +38,8 @@ import { ProductLocalDataSourceImpl } from '@data/datasources/product/local-data
 import { ProductRepository } from '@domain/repositories/product/repository';
 import { ProductRepositoryImpl } from '@data/repositories/product/repository-impl';
 import { GetAllProductsUseCase } from '@domain/usecases/product/get-all-products';
-
+import {SignupUseCase}  from '@domain/usecases/customer/signup';
+import {LoginUseCase} from '@domain/usecases/customer/login';
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -67,4 +68,6 @@ export const containerBind = (container:Container) => {
   container.bind<ProductLocalDataSource>(ProductLocalDataSource).to(ProductLocalDataSourceImpl);
   container.bind<ProductRepository>(ProductRepository).to(ProductRepositoryImpl);
   container.bind<GetAllProductsUseCase>(GetAllProductsUseCase).toSelf();
+  container.bind<SignupUseCase>(SignupUseCase).toSelf();
+  container.bind<LoginUseCase>(LoginUseCase).toSelf();
 }

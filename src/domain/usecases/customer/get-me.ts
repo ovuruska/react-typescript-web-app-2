@@ -1,6 +1,6 @@
 import {MeResponse} from "@domain/types/responses/me-response";
 import {UseCase} from "@quicker/common/use-case";
-import {CustomerRepository} from "@domain/repositories/customer-repository";
+import {CustomerRepository} from "@domain/repositories/customer";
 import {inject, injectable} from "inversify";
 
 export interface GetMeParams {

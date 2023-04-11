@@ -3,7 +3,7 @@ import mockAxios from "jest-mock-axios";
 import {getTestContainer} from "@utils/inversion-container-test";
 import {Container} from "inversify";
 import {CustomerRemoteDataSourceImpl} from "@data/datasources/customer/remote-data-source-impl";
-import {CustomerRepository} from "@domain/repositories/customer-repository";
+import {CustomerRepository} from "@domain/repositories/customer";
 
 describe('CustomerRemoteDataSourceImpl', () => {
   let customerRepository: CustomerRepository;
