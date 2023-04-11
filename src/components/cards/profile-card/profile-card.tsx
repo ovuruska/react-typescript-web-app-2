@@ -6,16 +6,24 @@ import bgSrc from "../../../assets/bgtop.png";
 import CarouselSlider from "../../carousel-slider/carousel-slider";
 import ProfileBtn from "../../buttons/profile-btn";
 import AddBtn from "../../buttons/add-btn";
+import { useNavigate } from 'react-router-dom';
 
 interface Props {}
 
 const ProfileCard: React.FC<Props> = ({}) => {
+
+  const navigate = useNavigate();
+  const handleAddClick = () => {
+    navigate("/add-pet");
+  }
+
+
   return (
     <div className="profile">
       <div className="row row1">
         <div className="icons">
           <ProfileBtn />
-          <AddBtn />
+          <AddBtn onClick={handleAddClick}/>
         </div>
       </div>
       <div className="row pets-slider">
@@ -30,7 +38,7 @@ const ProfileCard: React.FC<Props> = ({}) => {
         />
       </div>
       <div className="bg-row row">
-        <img src={bgSrc}></img>
+        <img alt={"bg"} src={bgSrc}></img>
       </div>
     </div>
   );

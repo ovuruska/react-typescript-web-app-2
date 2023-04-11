@@ -1,5 +1,4 @@
 import React from 'react';
-import PageCard from '@components/cards/page-card/page-card';
 import ThanksPageDumb from '@pages/thanks/index.dumb';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
