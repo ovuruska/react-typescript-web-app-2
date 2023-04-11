@@ -1,18 +1,14 @@
-import {injectable} from "inversify";
 import {MeResponse} from "@domain/types/responses/me-response";
-import {RemoteDataSource} from "@data/datasources/remote-data-source";
+import {injectable} from "inversify";
 import { LoginRequest } from '@domain/types/requests/login';
-import { AuthenticationResponse } from '@domain/types/responses/authentication';
 import { SignupRequest } from '@domain/types/requests/signup';
-
-
+import { AuthenticationResponse } from '@domain/types/responses/authentication';
 
 @injectable()
-export abstract class CustomerRemoteDataSource extends RemoteDataSource {
+export abstract class CustomerRepository{
   abstract getMe(): Promise<MeResponse>;
 
   abstract login(request: LoginRequest): Promise<AuthenticationResponse>;
 
   abstract signup(request: SignupRequest): Promise<AuthenticationResponse>;
-
 }
