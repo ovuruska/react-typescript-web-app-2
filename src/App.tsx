@@ -5,9 +5,10 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AutoLogin from "@components/auth/auto-login";
 import SpinnerOverlay from "@components/loading/spinner-overlay";
-import ThanksPage from '@pages/thanks';
-import AddPetPage from '@pages/add-pet';
 
+
+const AddPetPage = lazy(() => import("@pages/add-pet"));
+const ThanksPage = lazy(() => import("@pages/thanks"));
 const PolicyPage = lazy(() => import("./pages/policy"));
 const BookPage = lazy(() => import("./pages/bookpage/bookpage"));
 const HomePage = lazy(() => import("./pages/homepage/homepage"));
