@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DailyAvailableSlot } from "@domain/types/responses/daily-available-slots-response";
 import SlotCard from "@components/book/slot-card/slot-card";
-import "./available-slots.css";
+import "./available-slots.scss";
 import useAvailableSlots from "@hooks/use-available-slots";
 import AvailableSlotsDrawer from "@features/available-slots/available-slots-drawer";
 
@@ -68,9 +68,9 @@ const AvailableSlots: React.FC<AvailableSlotsProps> = ({
   };
 
   const filteredSlots = getAvailableSlots(slots);
-
   return (
     <div className="slots-wrapper">
+
       {getSlotStrings(filteredSlots).map((hour) => (
         <div data-testid={"available-slot-cards"} key={hour} onClick={() => handleClick(hour)} className="slot-wrapper">
           <SlotCard time={hour} availabilty={true} width="100%" />

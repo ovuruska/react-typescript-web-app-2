@@ -1,7 +1,7 @@
 import "./bookpage.scss";
 import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "@quicker/store/store";
-import {  useState } from "react";
+import React, {  useState } from "react";
 import { useNavigate} from "react-router-dom";
 import SurgeCalendar from "@features/surge-calendar/surge-calendar";
 import SelectBranches from "@features/select-branches/select-branches";
@@ -51,7 +51,7 @@ const BookPage: React.FC = () => {
       <div className="calender-row calendar-row-top">
 
         <div className="calender-header-row">
-          <h3>Book appointment</h3>
+          <h2>Book appointment</h2>
 
         </div>
         <SurgeCalendar initialDate={date} onChange={setDate} />
@@ -64,9 +64,14 @@ const BookPage: React.FC = () => {
         <SelectTime onSelect={setTimes}/>
       </div>
       <div className="slots-row">
-        <div className="calender-header-row">
-          <h2>Select Time</h2>
-        </div>
+        {type == "We Wash" && branches?.length == 0 && <div className={"slots-warning"}>Please select a branch</div> }
+        {type == "Grooming" && groomers?.length == 0 && branches?.length == 0 && <div className={"slots-warning"}>Please select a groomer or branch</div> }
+        {
+          (groomers?.length >0 || branches?.length > 0 )&& <div className="calender-header-row">
+            <h2>Select Time</h2>
+          </div>
+         }
+
 
         <AvailableSlots onSelect={onBook} date={date} service={type} times={times} branches={branches} employees={groomers}  />
       </div>

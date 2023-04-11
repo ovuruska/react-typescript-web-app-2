@@ -38,17 +38,21 @@ const useAvailableSlots = ({
   useEffect(() => {
     if (service === 'Grooming') service = 'Full Grooming';
     else if (service === 'WeWash') service = 'We Wash';
-    const params = {
-      date: fullDate,
-      employees: employees ?? [],
-      branches: branches ?? [],
-      service,
-      duration,
-    } as GetAvailableSlotsParams;
 
-    getAvailableSlots.call(params).then((response) => {
-      setSlots(response as DailyAvailableSlot[]);
-    });
+    if (employees?.length === 0 && branches?.length === 0) setSlots([]);
+    else {
+      const params = {
+        date: fullDate,
+        employees: employees ?? [],
+        branches: branches ?? [],
+        service,
+        duration,
+      } as GetAvailableSlotsParams;
+
+      getAvailableSlots.call(params).then((response) => {
+        setSlots(response as DailyAvailableSlot[]);
+      });
+    }
   }, [dateStr, duration, employees, branches]);
 
   return slots;
