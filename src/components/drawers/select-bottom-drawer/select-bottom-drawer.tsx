@@ -14,7 +14,6 @@ children
   const list = () => (
     <Box
       sx={{
-        width: "100%",
         height: "50%",
         padding: "16px",
         backgroundColor: "background.paper",
