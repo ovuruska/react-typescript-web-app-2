@@ -101,8 +101,6 @@ function App() {
               </Suspense>
             }
           />
-
-            }/>
           <Route
             path={"/add-pet"}
             element={
@@ -111,7 +109,8 @@ function App() {
                   <AddPetPage />
                 </AutoLogin>
               </Suspense>
-            }/>
+            }
+            />
 
         </Routes>
       </BrowserRouter>
