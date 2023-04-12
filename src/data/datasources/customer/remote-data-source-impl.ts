@@ -6,10 +6,14 @@ import { HttpClientSymbol } from '@domain/types/TYPES';
 import { SignupRequest } from '@domain/types/requests/signup';
 import { LoginRequest } from '@domain/types/requests/login';
 import { AuthenticationResponse } from '@domain/types/responses/authentication';
+import { OffsetRequest } from '@domain/types/requests/offset';
+import { AppointmentEntity } from '@domain/types/common/appointment';
+import { OffsetResponse } from '@domain/types/responses/offset';
 
 
 @injectable()
 export class CustomerRemoteDataSourceImpl implements CustomerRemoteDataSource {
+
 
   constructor(@inject<HttpClient>(HttpClientSymbol) private client: HttpClient) {
     this.client = client;
@@ -38,4 +42,19 @@ export class CustomerRemoteDataSourceImpl implements CustomerRemoteDataSource {
     });
     return response.data as AuthenticationResponse;
   }
+
+  async upcomingAppointments(request: OffsetRequest): Promise<OffsetResponse<AppointmentEntity>> {
+    const response = await this.client.get<OffsetResponse<AppointmentEntity>>('/api/customer/appointments/upcoming',{
+      params: request
+    });
+    return response.data as OffsetResponse<AppointmentEntity>;
+  }
+
+  async pastAppointments(request: OffsetRequest): Promise<OffsetResponse<AppointmentEntity>> {
+    const response = await this.client.get<OffsetResponse<AppointmentEntity>>('/api/customer/appointments/past',{
+      params: request
+    });
+    return response.data as OffsetResponse<AppointmentEntity>;
+  }
+
 }
