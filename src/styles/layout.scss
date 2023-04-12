@@ -17,15 +17,24 @@
   gap: 16px;
 }
 
-.page {
+@mixin page {
   width: 100%;
   position: relative;
+  @media only screen and (min-device-width: 650px) {
+    max-width: 450px;
+    width: 450px;
+    max-height: 85vh;
+    height: 85vh;
+    overflow-y: scroll;
+    border-radius: 30px;
+    background-color: #ffffff;
+  }
 }
 
-@mixin stackedTopBorder($color:#ffffff, $marginTop:-2em, $radius:32px) {
+@mixin stackedTopBorder($color: #ffffff, $marginTop: -2em, $radius: 32px) {
   position: relative;
   background-color: $color;
-  margin-top:$marginTop;
+  margin-top: $marginTop;
   border-radius: $radius;
 
   padding: -$marginTop;

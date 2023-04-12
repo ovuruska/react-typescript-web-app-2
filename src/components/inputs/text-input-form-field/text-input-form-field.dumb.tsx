@@ -56,8 +56,6 @@ const TextInputFormFieldDumb: React.FC<TextInputFormFieldDumbProps> = ({
     labelClass = style.textInputFormField__label__floating;
   }
 
-  console.log(hidden);
-
   return (
     <div onFocus={handleFocus} className={containerClass}>
       <input

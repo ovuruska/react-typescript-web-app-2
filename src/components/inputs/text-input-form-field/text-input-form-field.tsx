@@ -8,6 +8,8 @@ export interface TextInputFormFieldProps {
   disabled?: boolean;
   hidden?: boolean;
   type?: string;
+  value?: string;
+  setValue?: (value: string) => void;
 }
 
 const TextInputFormField: React.FC<TextInputFormFieldProps> = ({
@@ -17,8 +19,9 @@ const TextInputFormField: React.FC<TextInputFormFieldProps> = ({
   disabled,
   hidden = false,
   type,
+  value,
+  setValue,
 }: TextInputFormFieldProps) => {
-  const [value, setValue] = React.useState<string>(initialValue || '');
   const [focused, setFocused] = React.useState<boolean>(false);
   const [hiddenstate, setHiddenState] = React.useState(hidden);
 
@@ -31,7 +34,7 @@ const TextInputFormField: React.FC<TextInputFormFieldProps> = ({
   };
 
   const handleChange = (value: string) => {
-    setValue(value);
+    setValue && setValue(value);
     onChanged && onChanged(value);
   };
 

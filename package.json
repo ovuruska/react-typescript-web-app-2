@@ -9,6 +9,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "storybook": "npm run cache:clear && start-storybook -p 6006",
+    "storybook-ubuntu": "export NODE_OPTIONS=--openssl-legacy-provider && npm run cache:clear && start-storybook -p 6006",
     "build-storybook": "npm run cache:clear  && build-storybook",
     "test": "jest",
     "test:coverage": "jest --coverage",
