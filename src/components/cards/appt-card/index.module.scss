@@ -11,6 +11,20 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
+  transition: all .3s;
+  &:hover{
+    cursor:pointer;
+    background-color:$main-200;
+  }
+
+  &__completed{
+    @extend .apptCard;
+    background-color: $secondary-100;
+    &:hover{
+      cursor:pointer;
+      background-color:$secondary-200;
+    }
+  }
 
   & > *
   {
@@ -30,12 +44,38 @@
       @include headline;
       display: block;
       color: $main-600;
+      &__completed{
+        @extend .apptCard__leftHeader;
+        color: $secondary-500;
+      }
     }
     &Subheader {
       @include caption-1;
       display: block;
       color: $main-700;
+      &__completed{
+        @extend .apptCard__leftSubheader;
+        color: $secondary-400;
+      }
 
+    }
+    &Row{
+        display: flex;
+        flex-direction: row;
+        gap:8px;
+        align-items: center;
+        justify-content: start;
+
+    }
+    &Card{
+      padding:4px 10px;
+        border-radius: 18px;
+        @include caption-2;
+        color:$white;
+      &__completed{
+        @extend .apptCard__leftCard;
+        background-color: $secondary-500;
+      }
     }
   }
   &__right{
