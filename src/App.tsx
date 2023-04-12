@@ -1,3 +1,4 @@
+
 import React, { LazyExoticComponent } from 'react';
 import './App.css';
 import { lazy, Suspense } from 'react';
@@ -13,6 +14,7 @@ const AddOnsPage = lazy(() => import('./pages/addons/add-ons'));
 const PaymentPage = lazy(() => import('./pages/payment'));
 const LoginPage = lazy(() => import('./pages/login/login'));
 const ThanksPage = lazy(() => import('./pages/thanks'));
+const AddPetPage = lazy(() => import("@pages/add-pet"));
 
 const appConfig: any[] = [
   '/',
@@ -88,6 +90,7 @@ function App() {
                   <ThanksPage />
                 </AutoLogin>
               </Suspense>
+
             }
           />
           <Route
@@ -98,6 +101,18 @@ function App() {
               </Suspense>
             }
           />
+
+            }/>
+          <Route
+            path={"/add-pet"}
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <AddPetPage />
+                </AutoLogin>
+              </Suspense>
+            }/>
+
         </Routes>
       </BrowserRouter>
     </div>

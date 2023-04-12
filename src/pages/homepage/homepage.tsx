@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import "../../App.css";
 import PromotionCard from "@components/cards/promotion-card/promotion-card";
 import CarouselSlider from "@components/carousel-slider/carousel-slider";
@@ -12,6 +12,7 @@ import logoSrc from "../../assets/logo.png";
 
 const HomePage: React.FC = () => {
   useEffect(() => {}, []);
+
 
   return (
     <div className="home-page page">

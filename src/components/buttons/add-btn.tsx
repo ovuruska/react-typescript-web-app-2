@@ -1,6 +1,10 @@
-export default function AddBtn() {
+export interface AddBtnProps {
+  onClick?: () => void;
+}
+
+export default function AddBtn({onClick}: AddBtnProps) {
   return (
-    <svg
+    <svg onClick={onClick}
       width="40"
       height="40"
       viewBox="0 0 40 40"

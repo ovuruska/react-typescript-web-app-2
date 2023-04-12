@@ -7,6 +7,7 @@ import { LoginRequest } from '@domain/types/requests/login';
 import { MeMockGenerator } from '@domain/types/__mock__/me-generator';
 import { AuthenticationResponseMockGenerator } from '@domain/types/__mock__/authentication-response';
 import { SignupRequest } from '@domain/types/requests/signup';
+import { AppointmentMockGenerator } from '@domain/types/__mock__/appointment';
 
 describe('CustomerRemoteDataSourceImpl', () => {
   let customerRemoteDataSource: CustomerRemoteDataSource;
@@ -14,6 +15,7 @@ describe('CustomerRemoteDataSourceImpl', () => {
 
   const meGenerator = new MeMockGenerator();
   const authGenerator = new AuthenticationResponseMockGenerator();
+  const appointmentMockGenerator = new AppointmentMockGenerator();
 
   beforeAll(() => {
     container = getTestContainer();
@@ -64,6 +66,50 @@ describe('CustomerRemoteDataSourceImpl', () => {
     const response = await customerRemoteDataSource.signup(request);
     expect(mockAxios.post).toHaveBeenCalledWith('/api/auth/customer/register', request, undefined);
     expect(response).toEqual(me);
+  });
+
+  it('should fetch upcoming appointments successfully', async () => {
+    const data = appointmentMockGenerator.generateMany(20) ;
+    const request = {
+      offset:0,
+      limit:20,
+    };
+    mockAxios.get.mockResolvedValue({data:{
+      previous:null,
+      next:null,
+      results:data,
+      } });
+
+    const response = await customerRemoteDataSource.upcomingAppointments(request);
+
+    expect(mockAxios.get).toHaveBeenCalledWith('/api/customer/appointments/upcoming', { params:request });
+
+    expect(response.next).toEqual(null);
+    expect(response.previous).toEqual(null);
+    expect(response.results).toHaveLength(data.length);
+  });
+
+  it('should fetch past appointments successfully', async () => {
+    const data = appointmentMockGenerator.generateMany(20) ;
+    const request = {
+      offset:0,
+      limit:20,
+    };
+    mockAxios.get.mockResolvedValue({data:{
+        previous:null,
+        next:null,
+        results:data,
+      }});
+
+    const response = await customerRemoteDataSource.pastAppointments(request);
+
+    expect(mockAxios.get).toHaveBeenCalledWith('/api/customer/appointments/past', { params:request });
+
+    expect(response.next).toEqual(null);
+    expect(response.previous).toEqual(null);
+    expect(response.results).toHaveLength(data.length);
+
+
   });
 
 });

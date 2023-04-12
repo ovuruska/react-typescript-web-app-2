@@ -4,7 +4,6 @@ import WeWashIcon from '@components/icons/wewash-icon';
 import GroomingIcon from '@components/icons/grooming-icon';
 import { EmployeeEntity } from '@domain/types/common/employee';
 import { BranchEntity } from '@domain/types/common/branch';
-import Completed from '@components/cards/appt-card/completed';
 
 export interface ApptCardProps {
   date: string;
@@ -12,7 +11,6 @@ export interface ApptCardProps {
   service?: string;
   branch: BranchEntity;
   onClick?: () => void;
-  className?: string;
 }
 
 const getShortMonthName = (date: Date) => {
@@ -20,8 +18,8 @@ const getShortMonthName = (date: Date) => {
   return formatter.format(date.getMonth());
 };
 
-const ApptCard: React.FC<ApptCardProps> = ({
-                                             date, employee, service, branch, onClick,className=""
+const ApptCardCompleted: React.FC<ApptCardProps> = ({
+                                             date, employee, service, branch, onClick
 
                                            }: ApptCardProps) => {
   // Mar. 28 from date
@@ -42,24 +40,28 @@ const ApptCard: React.FC<ApptCardProps> = ({
 
   const hourStr = `${time} ${weekday}`;
 
-  return <div data-testid={"appt-card"}onClick={onClick} className={style.apptCard +" " + className}>
+  return <div data-testid={"appt-card"}onClick={onClick} className={style.apptCard__completed}>
     <div className={style.apptCard__left}>
-      <p className={style.apptCard__leftHeader}>
+      <h3 className={style.apptCard__leftHeader__completed}>
         {dateStr}
-      </p>
-      <p className={style.apptCard__leftSubheader}>
+      </h3>
+      <h4 className={style.apptCard__leftSubheader__completed}>
         {hourStr}
-      </p>
+      </h4>
     </div>
     <div className={style.apptCard__right}>
-      <div className={style.apptCard__right__left}>
-        <div className={style.apptCard__right__leftHeader}>
-          {employeeName ?? "WeWash"}
+        <div className={style.apptCard__right__left}>
+          <div className={style.apptCard__leftRow}>
+           <h3  className={style.apptCard__leftHeader__completed}>{employeeName ?? "WeWash"}</h3>
+            <div className={style.apptCard__leftCard__completed}>
+              <p>Completed</p>
+            </div>
+          </div>
+          <h4 className={style.apptCard__leftSubheader}>
+            {branch.name}
+          </h4>
         </div>
-        <div className={style.apptCard__right__leftSubheader}>
-          {branch.name}
-        </div>
-      </div>
+
       {service == 'WeWash' ? <WeWashIcon /> : <GroomingIcon />}
     </div>
 
@@ -67,5 +69,5 @@ const ApptCard: React.FC<ApptCardProps> = ({
 };
 
 
-export default ApptCard;
+export default ApptCardCompleted;
 

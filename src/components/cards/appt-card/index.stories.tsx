@@ -1,36 +1,3 @@
-/*import React from "react";
-import "./index.module.scss";
-import WeWashIcon from "@components/icons/wewash-icon";
-import GroomingIcon from '@components/icons/grooming-icon';
-import { EmployeeEntity } from '@domain/types/common/employee';
-import { BranchEntity } from '@domain/types/common/branch';
-
-interface ApptCardProps {
-  date: string;
-  employee?: EmployeeEntity;
-  service?: string;
-  branch: BranchEntity;
-  onClick?: () => void;
-}
-
-const ApptCard: React.FC<ApptCardProps> = ({
-  date,
-  employee,
-  service,
-  branch,
-  onClick,
-
-} : ApptCardProps) => {
-  return <div>
-
-  </div>;
-};
-
-export default ApptCard;
-
-
- */
-// Path: src/components/cards/appt-card-clickable/index.stories.tsx
 import React from "react";
 import { Story, Meta } from "@storybook/react";
 import { faker } from "@faker-js/faker";
@@ -38,6 +5,7 @@ import { faker } from "@faker-js/faker";
 import { EmployeeMockGenerator } from "@domain/types/__mock__/employee-generator";
 import {BranchMockGenerator} from '@domain/types/__mock__/branch-generator';
 import ApptCard, { ApptCardProps }  from './index';
+import ApptCardCompleted from '@components/cards/appt-card/completed';
 
 
 export default {
@@ -91,3 +59,16 @@ WeWash.args = {
   service: "WeWash",
 };
 
+
+const CompletedTemplate: Story<ApptCardProps> = (args) => <ApptCardCompleted {...args} />;
+
+export const GroomingCompleted = CompletedTemplate.bind({});
+GroomingCompleted.args = {
+  ...Grooming.args,
+
+}
+
+export const WeWashCompleted = CompletedTemplate.bind({});
+WeWashCompleted.args = {
+  ...WeWash.args,
+}

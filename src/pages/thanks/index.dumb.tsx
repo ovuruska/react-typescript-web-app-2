@@ -3,7 +3,7 @@ import logoSrc from "../../assets/logo.png";
 import style from "./index.module.scss";
 import ProfileBtn from '@components/buttons/profile-btn';
 
-import Dogo from "@assets/dogo.png";
+import Dogo from "@assets/dogo.svg";
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import { ProductEntity } from '@domain/types/common/product';
 import { BranchEntity } from '@domain/types/common/branch';
