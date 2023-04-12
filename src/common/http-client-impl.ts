@@ -72,6 +72,7 @@ export class HttpClientImpl implements HttpClient {
   async verify(): Promise<boolean> {
     if (!this.authToken) return false;
     try {
+      console.log(this.authToken);
       const response = await this.instance.get('/api/auth/customer/verify', {
         headers: {
           Authorization: `Token ${this.authToken}`,
