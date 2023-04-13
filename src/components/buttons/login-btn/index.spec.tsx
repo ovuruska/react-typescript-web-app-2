@@ -21,7 +21,7 @@ import LoginBtn from '@components/buttons/login-btn/index';
 
 describe('LoginBtn', () => {
   it('should render and match snapshot', () => {
-    const wrapper = render(<LoginBtn />);
+    const wrapper = render(<LoginBtn text="Login" />);
     expect(wrapper).toMatchSnapshot();
   });
 });
