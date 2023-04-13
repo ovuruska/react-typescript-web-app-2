@@ -3,12 +3,12 @@ import axios, {
   AxiosInstance,
   AxiosRequestConfig,
   AxiosResponse,
-} from "axios";
-import { inject, injectable } from "inversify";
-import { ApiUrl, ApiUrlSymbol } from "@domain/types/symbols/api-url";
-import { HttpClient } from "./http-client";
-import { Credentials } from "@domain/types/common/credentials";
-import { CredentialsSymbol } from "@domain/types/TYPES";
+} from 'axios';
+import { inject, injectable } from 'inversify';
+import { ApiUrl, ApiUrlSymbol } from '@domain/types/symbols/api-url';
+import { HttpClient } from './http-client';
+import { Credentials } from '@domain/types/common/credentials';
+import { CredentialsSymbol } from '@domain/types/TYPES';
 
 @injectable()
 export class HttpClientImpl implements HttpClient {
@@ -18,22 +18,22 @@ export class HttpClientImpl implements HttpClient {
   constructor(
     @inject<ApiUrl>(ApiUrlSymbol) protected apiUrl: ApiUrl,
     @inject<Credentials>(CredentialsSymbol)
-    private readonly credentials: Credentials
+    private readonly credentials: Credentials,
   ) {
     this.instance = axios.create({ baseURL: apiUrl.value });
     this.credentials = credentials;
-    this.authToken = localStorage.getItem("authToken");
+    this.authToken = localStorage.getItem('authToken');
 
     if (this.authToken) {
       this.instance
-        .get("/api/auth/customer/verify", {
+        .get('/api/auth/customer/verify', {
           headers: {
             Authorization: `Token ${this.authToken}`,
           },
         })
         .then(() => {
           this.instance.defaults.headers.common[
-            "Authorization"
+            'Authorization'
           ] = `Token ${this.authToken}`;
         })
         .catch((err) => {
@@ -51,14 +51,13 @@ export class HttpClientImpl implements HttpClient {
       },
       (error: AxiosError) => {
         return Promise.reject(error);
-      }
+      },
     );
   }
 
-  async login(): Promise<void> {
+  async login(username: string, password: string): Promise<void> {
     try {
-      const { username, password } = this.credentials;
-      const response = await this.instance.post("/api/auth/customer/login", {
+      const response = await this.instance.post('/api/auth/customer/login', {
         username,
         password,
       });
@@ -66,14 +65,15 @@ export class HttpClientImpl implements HttpClient {
         this.setAuthToken(response.data.token);
       }
     } catch (error) {
-      throw new Error("Authentication failed");
+      throw new Error('Authentication failed');
     }
   }
 
   async verify(): Promise<boolean> {
     if (!this.authToken) return false;
     try {
-      const response = await this.instance.get("/api/auth/customer/verify", {
+      console.log(this.authToken);
+      const response = await this.instance.get('/api/auth/customer/verify', {
         headers: {
           Authorization: `Token ${this.authToken}`,
         },
@@ -86,19 +86,19 @@ export class HttpClientImpl implements HttpClient {
 
   private setAuthToken(token: string): void {
     this.authToken = token;
-    this.instance.defaults.headers.common["Authorization"] = `Token ${token}`;
-    localStorage.setItem("authToken", token);
+    this.instance.defaults.headers.common['Authorization'] = `Token ${token}`;
+    localStorage.setItem('authToken', token);
   }
 
   public purgeAuthToken(): void {
     this.authToken = null;
-    delete this.instance.defaults.headers.common["Authorization"];
-    localStorage.removeItem("authToken");
+    delete this.instance.defaults.headers.common['Authorization'];
+    localStorage.removeItem('authToken');
   }
 
   get<Response = any>(
     url: string,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<Response>> {
     return this.instance.get<Response>(url, config);
   }
@@ -106,7 +106,7 @@ export class HttpClientImpl implements HttpClient {
   post<Request = any, Response = any>(
     url: string,
     data?: Request,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<Response>> {
     return this.instance.post<Response>(url, data, config);
   }
@@ -114,14 +114,14 @@ export class HttpClientImpl implements HttpClient {
   put<Request = any, Response = any>(
     url: string,
     data?: Request,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<Response>> {
     return this.instance.put<Response>(url, data, config);
   }
 
   delete<Response = any>(
     url: string,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<Response>> {
     return this.instance.delete<Response>(url, config);
   }
@@ -129,13 +129,13 @@ export class HttpClientImpl implements HttpClient {
   patch<Request = any, Response = any>(
     url: string,
     data?: Request,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<Response>> {
     return this.instance.patch<Response>(url, data, config);
   }
 
   checkStatus(): Promise<AxiosResponse> {
-    return this.get("/api/auth/customer/verify", {
+    return this.get('/api/auth/customer/verify', {
       withCredentials: false,
     });
   }
