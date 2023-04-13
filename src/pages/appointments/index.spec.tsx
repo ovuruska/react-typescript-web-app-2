@@ -7,7 +7,6 @@ import { AppointmentMockGenerator } from '@domain/types/__mock__/appointment';
 import { advanceTo, clear } from 'jest-date-mock';
 
 
-
 const employeeGenerator = new EmployeeMockGenerator();
 const branchGenerator = new BranchMockGenerator();
 const petGenerator = new PetMockGenerator();
@@ -141,18 +140,6 @@ describe('AppointmentsPageDumb', () => {
 
   });
 
-  it('When clicking on a card, bottom sheet should open and close when clicking on the close button.', () => {
-    const wrapper = render(<AppointmentsPageDumb appointments={appointments} pets={pets} goBack={() => {
-    }} />);
-    const apptCard = wrapper.getAllByTestId('appt-card')[0] as HTMLElement;
-    act(()=>fireEvent.click(apptCard));
-    const appointmentsDrawerHeader = wrapper.getByTestId('appointments-drawer-header');
-    expect(appointmentsDrawerHeader).toBeTruthy();
-    const appointmentsDrawerCloseButton = appointmentsDrawerHeader.children[1] as HTMLElement;
-    act(()=>fireEvent.click(appointmentsDrawerCloseButton));
-
-  });
-
   it('When clicking on a card, onApptClicked should be fired.', () => {
     const onApptClicked = jest.fn();
     const wrapper = render(<AppointmentsPageDumb appointments={appointments} pets={pets} goBack={() => {
@@ -162,16 +149,7 @@ describe('AppointmentsPageDumb', () => {
     expect(onApptClicked).toBeCalled();
   });
 
-  it('When clicking on a card. After bottom sheet is opened and clicked weak-btn onApptRemoved should be fired.', () => {
-    const onApptRemoved = jest.fn();
-    const wrapper = render(<AppointmentsPageDumb appointments={appointments} pets={pets} goBack={() => {}} onApptRemoved={onApptRemoved}/>);
-    const apptCard = wrapper.getAllByTestId('appt-card')[0] as HTMLElement;
-    act(()=>fireEvent.click(apptCard));
-    const weakBtn = wrapper.getByTestId('weak-btn');
-    act(()=>fireEvent.click(weakBtn));
-    expect(onApptRemoved).toBeCalled();
 
-  });
 
 
 

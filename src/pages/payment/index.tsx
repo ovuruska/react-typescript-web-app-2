@@ -1,5 +1,5 @@
 import React from 'react';
-import BookingJourney from '@components/layouts/booking-journey';
+import BookingJourney from '@components/journeys/booking-journey';
 import PaymentPageDumb from '@pages/payment/index.dumb';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';

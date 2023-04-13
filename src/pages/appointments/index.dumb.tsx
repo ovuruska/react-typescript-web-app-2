@@ -15,11 +15,10 @@ export interface AppointmentsPageDumbProps {
   pets?: PetEntity[];
   goBack?: () => void;
   onApptClicked?: (appt: AppointmentEntity) => void;
-  onApptRemoved?: (appt: AppointmentEntity) => void;
 }
 
 const AppointmentsPageDumb = ({
-                                appointments = [], pets = [], goBack, onApptClicked,onApptRemoved
+                                appointments = [], pets = [], goBack, onApptClicked,
                               }: AppointmentsPageDumbProps) => {
 
   const [selectedPet, setSelectedPet] = useState<string>('All Pets');
@@ -78,16 +77,11 @@ const AppointmentsPageDumb = ({
     setOpen(true);
   };
 
-  const handleRemoveAppt = (appt: AppointmentEntity) => {
-    onApptRemoved?.(appt);
-  }
-
-
 
   return <div className={style.appointmentsPage}>
     <div className={style.appointmentsPageHeader}>
-      <div data-testid={"bi-left-arrow"}>
-        <BiLeftArrow  onClick={goBack} />
+      <div data-testid={'bi-left-arrow'}>
+        <BiLeftArrow onClick={goBack} />
       </div>
       <h1>Appointments</h1>
     </div>
@@ -102,7 +96,8 @@ const AppointmentsPageDumb = ({
       <div className={style.appointmentsPageContent__body}>
         {filteredAppointments.length === 0 ?
           <p data-testid={'appointments-page-no-appts-available'} className={style.appointmentsPageContent__bodyText}>No
-            appointments available</p> : filteredAppointments.map((appt) => <ApptCardFactory key={appt.id} status={appt.status}
+            appointments available</p> : filteredAppointments.map((appt) => <ApptCardFactory key={appt.id}
+                                                                                             status={appt.status}
                                                                                              onClick={() => handleApptClicked(appt)}
                                                                                              date={appt.start}
                                                                                              branch={appt.branch}
@@ -114,29 +109,7 @@ const AppointmentsPageDumb = ({
       </div>
 
     </div>
-    <SelectBottomDrawer open={open}>
-      <div data-testid={"appointments-drawer-header"} className={style.appointmentsDrawerHeader}>
-        <h1>Appointment Details</h1>
-        <Close onClick={() => setOpen(false)} />
-      </div>
-      <div className={style.appointmentsDrawerBody}>
-        <div className={style.appointmentsDrawerBody__row}>
-          <p>Date-Time</p>
-          <p>{appointment?.start}</p>
-        </div>
-        {appointment?.employee && <div className={style.appointmentsDrawerBody__row}>
-          <p>Groomer</p>
-          <p>{appointment?.employee.name}</p>
-        </div>}
-        <div className={style.appointmentsDrawerBody__row}>
-          <p>Branch</p>
-          <p>{appointment?.branch.name}</p>
-        </div>
-      </div>
-      <div style={{height:"32px"}}/>
-      <WeakBtn onClick={()=>handleRemoveAppt(appointment as AppointmentEntity)} content={'Remove Appointment'} />
 
-    </SelectBottomDrawer>
 
   </div>;
 };

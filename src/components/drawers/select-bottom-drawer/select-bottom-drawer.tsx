@@ -33,9 +33,19 @@ children
   return (
     <div onClick={stopPropagation}>
       <Drawer
+        PaperProps={{
+          sx: {
+            borderTopLeftRadius: 32,
+            borderTopRightRadius: 32,
+            overflow: 'hidden',
+          },
+        }}
         anchor="bottom"
         open={open}
         ModalProps={{
+          BackdropProps: {
+            invisible: true,
+          },
           keepMounted: true, // Better open performance on mobile.
         }}
       >

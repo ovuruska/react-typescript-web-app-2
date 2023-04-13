@@ -7,7 +7,7 @@ import ServiceHeader from '@features/service-header/service-header';
 import PageCard from '@components/cards/page-card/page-card';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import BookingJourney from '@components/layouts/booking-journey';
+import BookingJourney from '@components/journeys/booking-journey';
 
 
 const AddOnsPage: React.FC = () => {
