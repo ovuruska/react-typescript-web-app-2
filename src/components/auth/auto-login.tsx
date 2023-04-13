@@ -16,7 +16,6 @@ const AutoLogin = ({ children }: AutoLoginProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('xdd');
 
     client
       .verify()

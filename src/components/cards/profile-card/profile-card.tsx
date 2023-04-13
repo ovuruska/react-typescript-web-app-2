@@ -16,13 +16,17 @@ const ProfileCard: React.FC<Props> = ({}) => {
   const handleAddClick = () => {
     navigate("/add-pet");
   }
+  const goToMyAccount = () => {
+    navigate("/my-account");
+  }
+
 
 
   return (
     <div className="profile">
       <div className="row row1">
         <div className="icons">
-          <ProfileBtn />
+          <ProfileBtn onClick={goToMyAccount} />
           <AddBtn onClick={handleAddClick}/>
         </div>
       </div>

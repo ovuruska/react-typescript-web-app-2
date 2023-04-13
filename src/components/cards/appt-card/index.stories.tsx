@@ -6,6 +6,7 @@ import { EmployeeMockGenerator } from "@domain/types/__mock__/employee-generator
 import {BranchMockGenerator} from '@domain/types/__mock__/branch-generator';
 import ApptCard, { ApptCardProps }  from './index';
 import ApptCardCompleted from '@components/cards/appt-card/completed';
+import ApptCardCancelled from '@components/cards/appt-card/cancelled';
 
 
 export default {
@@ -70,5 +71,17 @@ GroomingCompleted.args = {
 
 export const WeWashCompleted = CompletedTemplate.bind({});
 WeWashCompleted.args = {
+  ...WeWash.args,
+}
+
+const CancelledTemplate: Story<ApptCardProps> = (args) => <ApptCardCancelled {...args} />;
+
+export const GroomingCancelled = CancelledTemplate.bind({});
+GroomingCancelled.args = {
+  ...Grooming.args,
+}
+
+export const WeWashCancelled = CancelledTemplate.bind({});
+WeWashCancelled.args = {
   ...WeWash.args,
 }

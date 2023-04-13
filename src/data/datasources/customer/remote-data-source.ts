@@ -22,4 +22,6 @@ export abstract class CustomerRemoteDataSource extends RemoteDataSource {
 
   abstract pastAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>>;
 
+  abstract allAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>>;
+
 }

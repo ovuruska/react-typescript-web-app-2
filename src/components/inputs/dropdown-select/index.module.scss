@@ -85,4 +85,8 @@
   user-select: none;
   pointer-events: none;
   transition: all .3s ease-in-out;
+  &NoLabel{
+    @extend .dropdownBtnTemplate__value;
+    padding-top:0;
+  }
 }

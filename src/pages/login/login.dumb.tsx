@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './login.module.scss';
-import TextInputFormField from '@components/inputs/text-input-form-field/text-input-form-field';
 import LoginBtn from '@components/buttons/login-btn/index';
 import { Link } from 'react-router-dom';
 import { AiOutlineGoogle, AiFillApple } from 'react-icons/ai';
+import TextInputFormFieldControlled from '@components/inputs/text-input-form-field-controlled';
 
 export interface LoginPageDumbProps {
   onLogin: (username: string, password: string) => void;
@@ -42,12 +42,12 @@ const LoginPageDumb: React.FC<LoginPageDumbProps> = ({
       <div className={style.loginPageInner}>
         <p className={style.loginPageInnerText}>{text}</p>
         <div className={style.loginInputWrapper}>
-          <TextInputFormField
+          <TextInputFormFieldControlled
             label="Email"
             value={emailValue}
             setValue={setEmailValue}
           />
-          <TextInputFormField
+          <TextInputFormFieldControlled
             value={passwordValue}
             setValue={setPasswordValue}
             label="Password"

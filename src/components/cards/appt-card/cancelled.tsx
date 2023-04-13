@@ -18,10 +18,10 @@ const getShortMonthName = (date: Date) => {
   return formatter.format(date.getMonth());
 };
 
-const ApptCardCompleted: React.FC<ApptCardProps> = ({
-                                             date, employee, service, branch, onClick
+const ApptCardCancelled: React.FC<ApptCardProps> = ({
+                                                      date, employee, service, branch, onClick
 
-                                           }: ApptCardProps) => {
+                                                    }: ApptCardProps) => {
   // Mar. 28 from date
   const dateObj = new Date(date);
   const month = getShortMonthName(dateObj);
@@ -40,27 +40,27 @@ const ApptCardCompleted: React.FC<ApptCardProps> = ({
 
   const hourStr = `${time} ${weekday}`;
 
-  return <div data-testid={"appt-card"}onClick={onClick} className={style.apptCard__completed}>
-    <div className={style.apptCard__left__completed}>
-      <h3 className={style.apptCard__leftHeader__completed}>
+  return <div data-testid={"appt-card"}onClick={onClick} className={style.apptCard__cancelled}>
+    <div className={style.apptCard__left__cancelled}>
+      <h3 className={style.apptCard__leftHeader__cancelled}>
         {dateStr}
       </h3>
-      <h4 className={style.apptCard__leftSubheader__completed}>
+      <h4 className={style.apptCard__leftSubheader__cancelled}>
         {hourStr}
       </h4>
     </div>
     <div className={style.apptCard__right}>
-        <div className={style.apptCard__right__left}>
-          <div className={style.apptCard__leftRow}>
-           <h3  className={style.apptCard__leftHeader__completed}>{employeeName ?? "WeWash"}</h3>
-            <div className={style.apptCard__leftCard__completed}>
-              <p>Completed</p>
-            </div>
+      <div className={style.apptCard__right__left}>
+        <div className={style.apptCard__leftRow}>
+          <h3  className={style.apptCard__leftHeader}>{employeeName ?? "WeWash"}</h3>
+          <div className={style.apptCard__leftCard__cancelled}>
+            <p>Cancelled</p>
           </div>
-          <h4 className={style.apptCard__leftSubheader}>
-            {branch.name}
-          </h4>
         </div>
+        <h4 className={style.apptCard__leftSubheader}>
+          {branch.name}
+        </h4>
+      </div>
 
       {service == 'WeWash' ? <WeWashIcon /> : <GroomingIcon />}
     </div>
@@ -69,5 +69,5 @@ const ApptCardCompleted: React.FC<ApptCardProps> = ({
 };
 
 
-export default ApptCardCompleted;
+export default ApptCardCancelled;
 

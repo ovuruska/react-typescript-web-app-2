@@ -1,21 +1,3 @@
-/*
-
-
-export interface PolicyDumpProps {
-
-}
-
-const PolicyDumb: React.FC<PolicyDumpProps> = ({
-
-
-});
-
-
-export default PolicyDumb;
- */
-
-// Path: src/pages/policy/index.dumb.tsx
-
 import React from 'react'
 import style from './index.module.scss';
 import { Meta, Story } from '@storybook/react';

@@ -4,6 +4,7 @@
 
 
 .apptCard {
+  position: relative;
   display: flex;
   border-radius: 18px;
   background-color:$main-100;
@@ -25,6 +26,15 @@
       background-color:$secondary-200;
     }
   }
+  &__cancelled{
+    @extend .apptCard;
+    background-color: $danger-light;
+    transition: all .3s;
+    &:hover{
+      cursor:pointer;
+      opacity: .9;
+    }
+  }
 
   & > *
   {
@@ -32,6 +42,7 @@
   }
 
   &__left {
+
     border-right: 2px solid $white;
     display: flex;
     flex-direction: column;
@@ -40,6 +51,17 @@
     align-items: start;
 
     height:100%;
+    &__completed{
+        @extend .apptCard__left;
+      margin-top:16px;
+      padding:8px 16px
+    }
+    &__cancelled{
+        @extend .apptCard__left;
+      margin-top:16px;
+      padding:8px 16px
+    }
+
     &Header {
       @include headline;
       display: block;
@@ -47,6 +69,10 @@
       &__completed{
         @extend .apptCard__leftHeader;
         color: $secondary-500;
+      }
+      &__cancelled{
+        @extend .apptCard__leftHeader;
+        color: $danger;
       }
     }
     &Subheader {
@@ -56,6 +82,10 @@
       &__completed{
         @extend .apptCard__leftSubheader;
         color: $secondary-400;
+      }
+      &__cancelled{
+        @extend .apptCard__leftSubheader;
+        color: $danger;
       }
 
     }
@@ -69,12 +99,19 @@
     }
     &Card{
       padding:4px 10px;
-        border-radius: 18px;
         @include caption-2;
         color:$white;
+      position:absolute;
+      top:0;
+      left:0;
+      border-radius: 100px 0px;
       &__completed{
         @extend .apptCard__leftCard;
         background-color: $secondary-500;
+      }
+      &__cancelled{
+        @extend .apptCard__leftCard;
+        background-color: $danger;
       }
     }
   }
@@ -88,6 +125,7 @@
       height:24px;
       width:24px;
     }
+
   }
   &__right__left{
     flex:9;
