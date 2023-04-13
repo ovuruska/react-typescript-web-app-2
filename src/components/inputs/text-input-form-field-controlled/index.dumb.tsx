@@ -1,6 +1,6 @@
 import React from 'react';
 
-import style from './text-input-form-field.module.scss';
+import style from './index.module.scss';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 export interface TextInputFormFieldControlledDumbProps {
@@ -43,17 +43,17 @@ const TextInputFormFieldControlledDumb: React.FC<TextInputFormFieldControlledDum
   let labelClass: string;
 
   if (!disabled && focused) {
-    containerClass = style.textInputFormField__active;
-    labelClass = style.textInputFormField__label__floating;
+    containerClass = style.textInputFormFieldControlled__active;
+    labelClass = style.textInputFormFieldControlled__label__floating;
   } else if (disabled && hasValue) {
-    containerClass = style.textInputFormField__inactive;
-    labelClass = style.textInputFormField__label__floating;
+    containerClass = style.textInputFormFieldControlled__inactive;
+    labelClass = style.textInputFormFieldControlled__label__floating;
   } else if (!hasValue) {
-    labelClass = style.textInputFormField__label;
-    containerClass = style.textInputFormField__inactive;
+    labelClass = style.textInputFormFieldControlled__label;
+    containerClass = style.textInputFormFieldControlled__inactive;
   } else {
-    containerClass = style.textInputFormField__active;
-    labelClass = style.textInputFormField__label__floating;
+    containerClass = style.textInputFormFieldControlled__active;
+    labelClass = style.textInputFormFieldControlled__label__floating;
   }
 
   return (
@@ -63,19 +63,19 @@ const TextInputFormFieldControlledDumb: React.FC<TextInputFormFieldControlledDum
         onChange={handleChange}
         value={value}
         onBlur={handleBlur}
-        className={style.textInputFormField__input}
+        className={style.textInputFormFieldControlled__input}
         type={hidden ? 'password' : 'text'}
       />
       {type === 'password' &&
         (hidden ? (
           <button className={style.eyeBtn} onClick={() => setHidden()}>
-            <AiOutlineEyeInvisible className={style.textInputFormField__icon} />
+            <AiOutlineEyeInvisible className={style.textInputFormFieldControlled__icon} />
           </button>
         ) : (
           <button className={style.eyeBtn} onClick={() => setHidden()}>
             <AiOutlineEye
               onClick={() => setHidden()}
-              className={style.textInputFormField__icon}
+              className={style.textInputFormFieldControlled__icon}
             />
           </button>
         ))}

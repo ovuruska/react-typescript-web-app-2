@@ -4,7 +4,7 @@ import LoginPageDumb, { LoginPageDumbProps } from './login.dumb';
 import { BrowserRouter } from 'react-router-dom';
 
 export default {
-  title: 'LoginPageDumb',
+  title: 'Pages/Login',
   component: LoginPageDumb,
 } as Meta;
 

@@ -1,7 +1,7 @@
 @import '@styles/variables';
 @import '@styles/typography';
 
-.TextInputFormFieldControlled {
+.textInputFormFieldControlled {
   position: relative;
   height: 56px;
   border-radius: 12px;
@@ -22,13 +22,13 @@
     position: relative;
   }
   &__inactive {
-    @extend .TextInputFormFieldControlled;
+    @extend .textInputFormFieldControlled;
     border: none;
     background: $gray-100;
   }
 
   &__active {
-    @extend .TextInputFormFieldControlled;
+    @extend .textInputFormFieldControlled;
     border: 2px solid $gray-200;
     background: $white;
   }
