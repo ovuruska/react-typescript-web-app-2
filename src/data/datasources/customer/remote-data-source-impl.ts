@@ -57,4 +57,11 @@ export class CustomerRemoteDataSourceImpl implements CustomerRemoteDataSource {
     return response.data as OffsetResponse<AppointmentEntity>;
   }
 
+  async allAppointments(request: OffsetRequest): Promise<OffsetResponse<AppointmentEntity>> {
+    const response = await this.client.get<OffsetResponse<AppointmentEntity>>('/api/customer/appointments/all',{
+      params: request
+    });
+    return response.data as OffsetResponse<AppointmentEntity>;
+  }
+
 }

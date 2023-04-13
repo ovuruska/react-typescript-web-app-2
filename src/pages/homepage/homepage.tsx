@@ -9,10 +9,10 @@ import "./homepage.scss";
 import AppointmentCard from "@components/cards/appointment-card/appointment-card";
 import imageSrc from "../../assets/mockPhoto.png";
 import logoSrc from "../../assets/logo.png";
+import { useNavigate } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
   useEffect(() => {}, []);
-
 
   return (
     <div className="home-page page">

@@ -18,4 +18,7 @@ export abstract class CustomerRepository{
   abstract upcomingAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>>;
 
   abstract pastAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>>;
+
+  abstract allAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>>;
+
 }

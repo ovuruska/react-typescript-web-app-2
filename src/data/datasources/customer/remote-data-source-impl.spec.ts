@@ -78,6 +78,7 @@ describe('CustomerRemoteDataSourceImpl', () => {
       previous:null,
       next:null,
       results:data,
+        count:20
       } });
 
     const response = await customerRemoteDataSource.upcomingAppointments(request);
@@ -99,6 +100,7 @@ describe('CustomerRemoteDataSourceImpl', () => {
         previous:null,
         next:null,
         results:data,
+        count:20
       }});
 
     const response = await customerRemoteDataSource.pastAppointments(request);
@@ -109,7 +111,28 @@ describe('CustomerRemoteDataSourceImpl', () => {
     expect(response.previous).toEqual(null);
     expect(response.results).toHaveLength(data.length);
 
+  });
 
+  it('should fetch all appointments successfully', async () => {
+    const data = appointmentMockGenerator.generateMany(20) ;
+    const request = {
+      offset:0,
+      limit:20,
+    };
+    mockAxios.get.mockResolvedValue({data:{
+        previous:null,
+        next:null,
+        results:data,
+        count:20,
+      }});
+
+    const response = await customerRemoteDataSource.allAppointments(request);
+
+    expect(mockAxios.get).toHaveBeenCalledWith('/api/customer/appointments/all', { params:request });
+
+    expect(response.next).toEqual(null);
+    expect(response.previous).toEqual(null);
+    expect(response.results).toHaveLength(data.length);
   });
 
 });

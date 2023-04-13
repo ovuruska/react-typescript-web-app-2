@@ -1,6 +1,11 @@
-export default function ProfileBtn() {
+export interface ProfileBtnProps {
+  onClick?: () => void;
+}
+
+export default function ProfileBtn({ onClick }: ProfileBtnProps) {
   return (
     <svg
+      onClick={onClick}
       width="40"
       height="40"
       viewBox="0 0 40 40"

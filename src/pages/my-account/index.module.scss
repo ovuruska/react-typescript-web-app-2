@@ -31,7 +31,8 @@
     flex-direction: row;
     gap:16px;
     & > h1{
-      width:96px;
+      flex:1;
+      display: block;
       @include title-3;
       color: $gray-900;
 

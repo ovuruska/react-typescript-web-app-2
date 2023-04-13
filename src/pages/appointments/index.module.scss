@@ -1,0 +1,55 @@
+@import "@styles/variables";
+@import "@styles/typography";
+@import '@styles/layout';
+
+.appointmentsPage {
+  background-color:$main-400;
+  height:100%;
+  width:100%;
+  &Header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:8px;
+    padding:16px;
+    & > h1{
+      @include title-2;
+    }
+    & > svg{
+      transition: all .3s;
+        width: 24px;
+        height: 24px;
+      &:hover{
+        cursor:pointer;
+        color:$white;
+      }
+    }
+  }
+  &Content{
+    @include stackedTopBorder($white,-2rem);
+    height:100%;
+    &__header {
+      display:flex;
+      gap:16px;
+      flex-direction: row;
+      & > * {
+        flex:1;
+      }
+    }
+    &__body{
+      padding-top:16px;
+      display: flex;
+      flex-direction: column;
+      gap:12px;
+      align-items: center;
+
+      &Text{
+        @include caption-1;
+        margin-top:32px;
+      }
+
+    }
+
+
+  }
+}

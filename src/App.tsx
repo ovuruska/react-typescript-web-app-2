@@ -14,6 +14,8 @@ const BookPage = lazy(() => import("./pages/bookpage/bookpage"));
 const HomePage = lazy(() => import("./pages/homepage/homepage"));
 const AddOnsPage = lazy(() => import("./pages/addons/add-ons"));
 const PaymentPage = lazy(() => import("./pages/payment"));
+const MyAccountPage = lazy(() => import("./pages/my-account"));
+const AppointmentsPage = lazy(() => import("./pages/appointments"));
 
 function App() {
   return (
@@ -86,6 +88,25 @@ function App() {
               <Suspense fallback={<SpinnerOverlay />}>
                 <AutoLogin>
                   <AddPetPage />
+                </AutoLogin>
+              </Suspense>
+            }/>
+          <Route
+            path={"/my-account"}
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <MyAccountPage />
+                </AutoLogin>
+              </Suspense>
+
+            }/>
+          <Route
+            path={"/appointments"}
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <AppointmentsPage />
                 </AutoLogin>
               </Suspense>
             }/>

@@ -44,10 +44,14 @@ const DropdownSelect = <T,>({ onSelect, initialValue, options, label }: Dropdown
     setIsOpen(false)
   }
 
+  let selectedClassName = styles.dropdownBtnTemplate__value;
+  if(!label){
+    selectedClassName = styles.dropdownBtnTemplate__valueNoLabel
+  }
 
   return (<div data-testid={"dropdown-select"} className={styles.dropdownBtnTemplate} onClick={toggle}>
     {label && <label className={!selected ? styles.dropdownBtnTemplate__label : styles.dropdownBtnTemplate__label__floating}>{label}</label>}
-    {!!selected ? <div data-testid={"dropdown-select-value"} className={styles.dropdownBtnTemplate__value}>{selected.label}</div> : null }
+    {!!selected ? <div data-testid={"dropdown-select-value"} className={selectedClassName}>{selected.label}</div> : null }
     <SelectBottomDrawer open={isOpen}>
       <div className={styles.dropdownBtnTemplate__header}>
         <h1>{label}</h1>

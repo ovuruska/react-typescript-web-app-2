@@ -36,4 +36,8 @@ export class CustomerRepositoryImpl implements CustomerRepository{
     return await this.remoteDataSource.pastAppointments(request);
   }
 
+  async allAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>> {
+    return await this.remoteDataSource.allAppointments(request);
+  }
+
 }

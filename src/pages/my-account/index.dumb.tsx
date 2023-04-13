@@ -17,7 +17,7 @@ export interface MyAccountDumbProps{
   onClickAppointments?: () => void;
   onClickMyPets?: () => void;
   onClickChangePassword?: () => void;
-  onClickBack?: () => void;
+  goBack?: () => void;
   onClickLogout?: () => void;
   onClickPaymentMethods?: () => void;
   name: string;
@@ -29,7 +29,7 @@ const MyAccountDumb: React.FC<MyAccountDumbProps> = ({
   onClickAppointments,
   onClickMyPets,
   onClickChangePassword,
-  onClickBack,
+  goBack,
   onClickLogout,
   onClickPaymentMethods,
   name,
@@ -37,7 +37,7 @@ const MyAccountDumb: React.FC<MyAccountDumbProps> = ({
                                                       }) => {
 return <div className={style.myAccount}>
   <div className={style.myAccountHeader}>
-    <BiLeftArrow onClick={onClickBack}/>
+    <BiLeftArrow onClick={goBack}/>
     <h1>My Account</h1>
     <div className={style.myAccountClientCard}>
       <ClientCard name={name} email={email}/>
