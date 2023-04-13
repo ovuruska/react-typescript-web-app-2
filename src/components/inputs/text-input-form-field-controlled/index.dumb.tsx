@@ -15,73 +15,77 @@ export interface TextInputFormFieldControlledDumbProps {
   type?: string;
 }
 
-const TextInputFormFieldControlledDumb: React.FC<TextInputFormFieldControlledDumbProps> = ({
-                                                                         label,
-                                                                         value,
-                                                                         onChange,
-                                                                         onFocus,
-                                                                         focused = false,
-                                                                         disabled = false,
-                                                                         hidden,
-                                                                         setHidden,
-                                                                         type,
-                                                                       }: TextInputFormFieldControlledDumbProps) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    !disabled && onChange && onChange(e.target.value);
+const TextInputFormFieldControlledDumb: React.FC<TextInputFormFieldControlledDumbProps> =
+  ({
+    label,
+    value,
+    onChange,
+    onFocus,
+    focused = false,
+    disabled = false,
+    hidden,
+    setHidden,
+    type,
+  }: TextInputFormFieldControlledDumbProps) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      !disabled && onChange && onChange(e.target.value);
+    };
+
+    const handleFocus = () => {
+      !disabled && onFocus && onFocus(true);
+    };
+
+    const handleBlur = () => {
+      !disabled && onFocus && onFocus(false);
+    };
+
+    const hasValue = !!value;
+    let containerClass: string;
+    let labelClass: string;
+
+    if (!disabled && focused) {
+      containerClass = style.textInputFormFieldControlled__active;
+      labelClass = style.textInputFormFieldControlled__label__floating;
+    } else if (disabled && hasValue) {
+      containerClass = style.textInputFormFieldControlled__inactive;
+      labelClass = style.textInputFormFieldControlled__label__floating;
+    } else if (!hasValue) {
+      labelClass = style.textInputFormFieldControlled__label;
+      containerClass = style.textInputFormFieldControlled__inactive;
+    } else {
+      containerClass = style.textInputFormFieldControlled__active;
+      labelClass = style.textInputFormFieldControlled__label__floating;
+    }
+
+    return (
+      <div onFocus={handleFocus} className={containerClass}>
+        <input
+          readOnly={disabled}
+          onChange={handleChange}
+          value={value}
+          onBlur={handleBlur}
+          className={style.textInputFormFieldControlled__input}
+          type={hidden ? 'password' : 'text'}
+          aria-label={label}
+        />
+        {type === 'password' &&
+          (hidden ? (
+            <button className={style.eyeBtn} onClick={() => setHidden()}>
+              <AiOutlineEyeInvisible
+                className={style.textInputFormFieldControlled__icon}
+              />
+            </button>
+          ) : (
+            <button className={style.eyeBtn} onClick={() => setHidden()}>
+              <AiOutlineEye
+                onClick={() => setHidden()}
+                className={style.textInputFormFieldControlled__icon}
+              />
+            </button>
+          ))}
+        <label className={labelClass}>{label}</label>
+      </div>
+    );
   };
-
-  const handleFocus = () => {
-    !disabled && onFocus && onFocus(true);
-  };
-
-  const handleBlur = () => {
-    !disabled && onFocus && onFocus(false);
-  };
-
-  const hasValue = !!value;
-  let containerClass: string;
-  let labelClass: string;
-
-  if (!disabled && focused) {
-    containerClass = style.textInputFormFieldControlled__active;
-    labelClass = style.textInputFormFieldControlled__label__floating;
-  } else if (disabled && hasValue) {
-    containerClass = style.textInputFormFieldControlled__inactive;
-    labelClass = style.textInputFormFieldControlled__label__floating;
-  } else if (!hasValue) {
-    labelClass = style.textInputFormFieldControlled__label;
-    containerClass = style.textInputFormFieldControlled__inactive;
-  } else {
-    containerClass = style.textInputFormFieldControlled__active;
-    labelClass = style.textInputFormFieldControlled__label__floating;
-  }
-
-  return (
-    <div onFocus={handleFocus} className={containerClass}>
-      <input
-        readOnly={disabled}
-        onChange={handleChange}
-        value={value}
-        onBlur={handleBlur}
-        className={style.textInputFormFieldControlled__input}
-        type={hidden ? 'password' : 'text'}
-      />
-      {type === 'password' &&
-        (hidden ? (
-          <button className={style.eyeBtn} onClick={() => setHidden()}>
-            <AiOutlineEyeInvisible className={style.textInputFormFieldControlled__icon} />
-          </button>
-        ) : (
-          <button className={style.eyeBtn} onClick={() => setHidden()}>
-            <AiOutlineEye
-              onClick={() => setHidden()}
-              className={style.textInputFormFieldControlled__icon}
-            />
-          </button>
-        ))}
-      <label className={labelClass}>{label}</label>
-    </div>
-  );
-};
 
 export default TextInputFormFieldControlledDumb;

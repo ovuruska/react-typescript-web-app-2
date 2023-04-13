@@ -5,5 +5,9 @@ describe('TextInputFormFieldControlled', () => {
   it('should be defined.', () => {
     expect(TextInputFormFieldControlled).toBeDefined();
   });
+  it('should render and match snapshot.', () => {
+    const wrapper = render(<TextInputFormFieldControlled />);
+    expect(wrapper).toMatchSnapshot();
+  });
   // TODO: Add tests
 });

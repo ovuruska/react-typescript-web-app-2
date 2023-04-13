@@ -12,13 +12,7 @@
     "storybook-ubuntu": "export NODE_OPTIONS=--openssl-legacy-provider && npm run cache:clear && start-storybook -p 6006",
     "build-storybook": "npm run cache:clear  && build-storybook",
     "test": "jest",
-    "test:coverage": "jest --coverage",
-    "prepare": "husky install"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test -- -u"
-    }
+    "test:coverage": "jest --coverage"
   },
   "config": {
     "commitizen": {
