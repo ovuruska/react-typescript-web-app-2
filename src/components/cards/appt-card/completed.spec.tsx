@@ -26,14 +26,14 @@ describe('ApptCardCompleted', () => {
   it('should fire onClick with grooming.', () => {
     const onClick = jest.fn();
     const { getByTestId } = render(<ApptCardCompleted date={date} employee={employee} branch={branch} service={"Grooming"} onClick={onClick} />);
-    const apptCard = getByTestId('appt-card');
+    const apptCard = getByTestId('appt-card-completed');
     fireEvent.click(apptCard);
     expect(onClick).toBeCalled();
   });
   it('should fire onClick with WeWash.', () => {
     const onClick = jest.fn();
     const { getByTestId } = render(<ApptCardCompleted date={date} employee={employee} branch={branch} service={"WeWash"} onClick={onClick} />);
-    const apptCard = getByTestId('appt-card');
+    const apptCard = getByTestId('appt-card-completed');
     fireEvent.click(apptCard);
     expect(onClick).toBeCalled();
   });
