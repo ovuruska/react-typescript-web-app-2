@@ -41,6 +41,7 @@ import { GetAllProductsUseCase } from '@domain/usecases/product/get-all-products
 import {SignupUseCase}  from '@domain/usecases/customer/signup';
 import {LoginUseCase} from '@domain/usecases/customer/login';
 import { CustomerGetAllAppointmentsUseCase } from '@domain/usecases/customer/all-appointments';
+import { CustomerGetAllPetsUseCase } from '@domain/usecases/customer/get-all-pets';
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -72,5 +73,5 @@ export const containerBind = (container:Container) => {
   container.bind<SignupUseCase>(SignupUseCase).toSelf();
   container.bind<LoginUseCase>(LoginUseCase).toSelf();
   container.bind<CustomerGetAllAppointmentsUseCase>(CustomerGetAllAppointmentsUseCase).toSelf();
-
+  container.bind<CustomerGetAllPetsUseCase>(CustomerGetAllPetsUseCase).toSelf();
 }

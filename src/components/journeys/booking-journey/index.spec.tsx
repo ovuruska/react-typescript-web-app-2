@@ -1,4 +1,4 @@
-import BookingJourney from '@components/layouts/booking-journey/index';
+import BookingJourney from '@components/journeys/booking-journey/index';
 import { render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';

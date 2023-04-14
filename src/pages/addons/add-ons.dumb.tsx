@@ -5,7 +5,7 @@ import AddOnsDescription from '@pages/addons/add-ons-description';
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import { ProductEntity } from '@domain/types/common/product';
 import StruckCard from '@components/cards/struck-card/struck-card';
-import BookingJourney from '@components/layouts/booking-journey';
+import BookingJourney from '@components/journeys/booking-journey';
 import { useSelector } from 'react-redux';
 
 export interface AddOnsDumbProps {

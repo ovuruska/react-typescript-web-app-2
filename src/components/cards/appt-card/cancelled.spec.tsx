@@ -1,7 +1,8 @@
 import ApptCardCancelled from '@components/cards/appt-card/cancelled';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { EmployeeMockGenerator } from '@domain/types/__mock__/employee-generator';
 import { BranchMockGenerator } from '@domain/types/__mock__/branch-generator';
+import ApptCardCompleted from '@components/cards/appt-card/completed';
 
 const branchGenerator = new BranchMockGenerator();
 const employeeGenerator = new EmployeeMockGenerator();
@@ -18,11 +19,18 @@ describe('ApptCardCancelled', () => {
     const wrapper = render(<ApptCardCancelled date={date} branch={branch} />);
     expect(wrapper).toMatchSnapshot();
   });
-  it('should fire onClick', () => {
+  it('should fire onClick with WeWash.', () => {
     const onClick = jest.fn();
-    const wrapper = render(<ApptCardCancelled date={date} branch={branch} onClick={onClick} />);
-    const apptCard = wrapper.getByTestId('appt-card');
-    apptCard.click();
+    const { getByTestId } = render(<ApptCardCancelled date={date} employee={employee} branch={branch} service={"WeWash"} onClick={onClick} />);
+    const apptCard = getByTestId('appt-card-cancelled');
+    fireEvent.click(apptCard);
+    expect(onClick).toBeCalled();
+  });
+  it('should fire onClick with Grooming.', () => {
+    const onClick = jest.fn();
+    const { getByTestId } = render(<ApptCardCancelled date={date} employee={employee} branch={branch} service={"Grooming"} onClick={onClick} />);
+    const apptCard = getByTestId('appt-card-cancelled')
+    fireEvent.click(apptCard);
     expect(onClick).toBeCalled();
   });
   it('should render with WeWash parameter',()=>{

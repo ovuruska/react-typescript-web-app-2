@@ -7,6 +7,7 @@ import { SignupRequest } from '@domain/types/requests/signup';
 import { OffsetRequest } from '@domain/types/requests/offset';
 import { OffsetResponse } from '@domain/types/responses/offset';
 import { AppointmentEntity } from '@domain/types/common/appointment';
+import { PetDetailsEntity } from '@domain/types/common/pet-details';
 
 
 
@@ -23,5 +24,7 @@ export abstract class CustomerRemoteDataSource extends RemoteDataSource {
   abstract pastAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>>;
 
   abstract allAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>>;
+
+  abstract allPets(): Promise<PetDetailsEntity[]>;
 
 }

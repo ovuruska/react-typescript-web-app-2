@@ -6,6 +6,7 @@ import { AuthenticationResponse } from '@domain/types/responses/authentication';
 import { OffsetRequest } from '@domain/types/requests/offset';
 import { AppointmentEntity } from '@domain/types/common/appointment';
 import { OffsetResponse } from '@domain/types/responses/offset';
+import { PetDetailsEntity } from '@domain/types/common/pet-details';
 
 @injectable()
 export abstract class CustomerRepository{
@@ -20,5 +21,7 @@ export abstract class CustomerRepository{
   abstract pastAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>>;
 
   abstract allAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>>;
+
+  abstract allPets(): Promise<PetDetailsEntity[]>;
 
 }

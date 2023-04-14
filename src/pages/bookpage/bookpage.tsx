@@ -12,7 +12,7 @@ import {BranchEntity} from "@domain/types/common/branch";
 import {EmployeeEntity} from "@domain/types/common/employee";
 import {OrderActions} from "@quicker/store/order-slice";
 import {DailyAvailableSlot} from "@domain/types/responses/daily-available-slots-response";
-import BookingJourney from '@components/layouts/booking-journey';
+import BookingJourney from '@components/journeys/booking-journey';
 
 const BookPage: React.FC = () => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
