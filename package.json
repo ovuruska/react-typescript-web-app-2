@@ -11,9 +11,11 @@
     "storybook": "npm run cache:clear && start-storybook -p 6006",
     "storybook-ubuntu": "export NODE_OPTIONS=--openssl-legacy-provider && npm run cache:clear && start-storybook -p 6006",
     "build-storybook": "npm run cache:clear  && build-storybook",
-    "test": "jest",
+    "test": "jest --runInBand -u",
     "test:coverage": "jest --coverage",
-    "prepare": "husky install"
+    "test:watch": "jest --watch",
+    "test:puppeteer": "jest --config jest-puppeteer.config.cjs",
+    "createFiles": "bash create_files.sh"
   },
   "husky": {
     "hooks": {
@@ -77,6 +79,7 @@
     "@types/eslint": "^8.37.0",
     "@types/jest": "^29.5.0",
     "@types/pretty-hrtime": "^1.0.1",
+    "@types/puppeteer": "^7.0.4",
     "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.10",
     "@types/react-redux": "^7.1.25",
@@ -102,10 +105,13 @@
     "jest-environment-jsdom": "^29.5.0",
     "jest-fetch-mock": "^3.0.3",
     "jest-mock-axios": "^4.7.1",
+    "jest-puppeteer": "^8.0.6",
     "jest-svg-transformer": "^1.0.0",
     "jest-transform-stub": "^2.0.0",
     "msw": "^1.2.1",
     "pre-commit": "^1.2.2",
+    "pretender": "^3.4.7",
+    "puppeteer": "^19.9.0",
     "redux-mock-store": "^1.5.4",
     "sass": "^1.62.0",
     "storybook-css-modules": "^1.0.8",

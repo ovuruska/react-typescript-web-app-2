@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './login.module.scss';
-import LoginBtn from '@components/buttons/login-btn/index';
+import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import { Link } from 'react-router-dom';
 import { AiOutlineGoogle, AiFillApple } from 'react-icons/ai';
 import TextInputFormFieldControlled from '@components/inputs/text-input-form-field-controlled';
@@ -29,11 +29,11 @@ const LoginPageDumb: React.FC<LoginPageDumbProps> = ({
   setPasswordValue,
   onLogin,
 }) => {
-  /* const [focusedMail, setFocusedMail] = React.useState(false);
 
-  const handleFocus = (isFocused: boolean) => {
-    setFocusedMail(isFocused);
-  }; */
+  const handleLogin = () => {
+    onLogin(emailValue, passwordValue);
+  }
+
   return (
     <div className={style.loginPage}>
       <div className={style.loginTitleWrapper}>
@@ -54,10 +54,9 @@ const LoginPageDumb: React.FC<LoginPageDumbProps> = ({
             hidden={true}
             type={'password'}
           />
-          <LoginBtn
-            onClick={() => {
-              onLogin(emailValue, passwordValue);
-            }}
+          <CtaPrimary
+            content="Login"
+            onClick={handleLogin}
           />
           <Link to={'/forgotpassword'} className={style.forgotPassBtn}>
             Forgot password

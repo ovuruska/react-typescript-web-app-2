@@ -1,5 +1,5 @@
 import styles from "./cta-primary.module.scss";
-interface CtaPrimaryProps {
+export interface CtaPrimaryProps {
   content: string;
   loading?: boolean;
   onClick?: () => void;

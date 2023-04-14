@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AutoLogin from "@components/auth/auto-login";
 import SpinnerOverlay from "@components/loading/spinner-overlay";
 
-
 const AddPetPage = lazy(() => import("@pages/add-pet"));
 const ThanksPage = lazy(() => import("@pages/thanks"));
 const PolicyPage = lazy(() => import("./pages/policy"));
@@ -18,7 +17,9 @@ const MyAccountPage = lazy(() => import("./pages/my-account"));
 const AppointmentsPage = lazy(() => import("./pages/appointments"));
 const PetsPage = lazy(() => import("./pages/pets"));
 const PetDetailsPage = lazy(() => import("./pages/pet-details"));
-
+const ForgotPasswordPage = lazy(() => import('./pages/forgot-password'));
+const SignUpPage = lazy(() => import('./pages/sign-up'));
+const LoginPage = lazy(() => import('./pages/login/login'));
 
 function App() {
   return (
@@ -133,6 +134,30 @@ function App() {
             }
           >
           </Route>
+          <Route
+            path="/login"
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <LoginPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/forgotpassword"
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <ForgotPasswordPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <SignUpPage />
+              </Suspense>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

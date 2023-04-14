@@ -1,11 +1,16 @@
+const VITE_PORT = 5173;
+
 module.exports = {
-  preset: 'ts-jest',
-  testMatch: [
-    '**/__tests__/**/*.+(ts|tsx|js)',
-    '**/?(*.)+(spec|test).+(ts|tsx|js)',
-  ],
-  collectCoverage: false,
-  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
+  preset: 'jest-puppeteer',
+  browserContext: 'default',
+  launch: {
+    headless: process.env.HEADLESS !== 'false',
+  },
+  testMatch: ['**/*.e2e-spec.ts?(x)'],
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest',
+    '.+\\.(css|scss|png|jpg|svg)$': 'jest-transform-stub',
+  },
   moduleNameMapper: {
     '\\.(scss|sass|css|less)$': 'identity-obj-proxy',
     '^@quicker/(.*)$': '<rootDir>/src/$1',
@@ -21,11 +26,10 @@ module.exports = {
       '<rootDir>/src/__mocks__/assetMock.ts',
     '^react-router-dom$': '<rootDir>/src/__mocks__/react-router-dom.ts',
   },
-  transform: {
-    '.+\\.(css|scss|png|jpg|svg)$': 'jest-transform-stub',
+  server: {
+    command: 'npm run dev',
+    port: VITE_PORT,
+    launchTimeout: 10000,
+    debug: true,
   },
-  setupFiles: ['./jest.setup.cjs'],
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
-  rootDir: '',
-  testEnvironment: 'jsdom',
 };
