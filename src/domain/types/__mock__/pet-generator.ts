@@ -25,6 +25,8 @@ export class PetMockGenerator extends MockGenerator<PetEntity>{
       special_handling: faker.datatype.boolean(),
       coat_type: faker.name.jobTitle(),
       owner: faker.datatype.number(),
+      fixed: faker.datatype.boolean(),
+      gender: faker.datatype.boolean() ? "Male" : "Female"
     } as PetEntity;
   }
 
