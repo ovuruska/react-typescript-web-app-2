@@ -16,6 +16,7 @@ const AddOnsPage = lazy(() => import('./pages/addons/add-ons'));
 const PaymentPage = lazy(() => import('./pages/payment'));
 const MyAccountPage = lazy(() => import('./pages/my-account'));
 const AppointmentsPage = lazy(() => import('./pages/appointments'));
+const ForgotPasswordPage = lazy(() => import('./pages/forgot-password'));
 
 function App() {
   return (
@@ -117,6 +118,14 @@ function App() {
             element={
               <Suspense fallback={<SpinnerOverlay />}>
                 <LoginPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/forgotpassword"
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <ForgotPasswordPage />
               </Suspense>
             }
           />
