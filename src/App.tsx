@@ -17,6 +17,8 @@ const PaymentPage = lazy(() => import("./pages/payment"));
 const MyAccountPage = lazy(() => import("./pages/my-account"));
 const AppointmentsPage = lazy(() => import("./pages/appointments"));
 const PetsPage = lazy(() => import("./pages/pets"));
+const PetDetailsPage = lazy(() => import("./pages/pet-details"));
+
 
 function App() {
   return (
@@ -120,6 +122,17 @@ function App() {
                 </AutoLogin>
               </Suspense>
             }/>
+          <Route
+            path={"/pet-details"}
+            element={
+            <Suspense fallback={<SpinnerOverlay />}>
+              <AutoLogin>
+                <PetDetailsPage />
+              </AutoLogin>
+            </Suspense>
+            }
+          >
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
