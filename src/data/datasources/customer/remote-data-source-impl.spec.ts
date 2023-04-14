@@ -8,6 +8,7 @@ import { MeMockGenerator } from '@domain/types/__mock__/me-generator';
 import { AuthenticationResponseMockGenerator } from '@domain/types/__mock__/authentication-response';
 import { SignupRequest } from '@domain/types/requests/signup';
 import { AppointmentMockGenerator } from '@domain/types/__mock__/appointment';
+import { PetDetailsMockGenerator } from '@domain/types/__mock__/pet-details';
 
 describe('CustomerRemoteDataSourceImpl', () => {
   let customerRemoteDataSource: CustomerRemoteDataSource;
@@ -16,6 +17,7 @@ describe('CustomerRemoteDataSourceImpl', () => {
   const meGenerator = new MeMockGenerator();
   const authGenerator = new AuthenticationResponseMockGenerator();
   const appointmentMockGenerator = new AppointmentMockGenerator();
+  const petDetailsMockGenerator = new PetDetailsMockGenerator();
 
   beforeAll(() => {
     container = getTestContainer();
@@ -133,6 +135,15 @@ describe('CustomerRemoteDataSourceImpl', () => {
     expect(response.next).toEqual(null);
     expect(response.previous).toEqual(null);
     expect(response.results).toHaveLength(data.length);
+  });
+
+  it('should fetch all dogs successfully.', async () => {
+    const data = petDetailsMockGenerator.generateMany(20) ;
+    mockAxios.get.mockResolvedValue({data });
+    const response = await customerRemoteDataSource.allPets();
+    expect(mockAxios.get).toHaveBeenCalledWith('/api/customer/pets/all', undefined);
+    expect(response).toHaveLength(data.length);
+
   });
 
 });

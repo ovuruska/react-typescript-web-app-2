@@ -9,6 +9,7 @@ import { AuthenticationResponse } from '@domain/types/responses/authentication';
 import { OffsetRequest } from '@domain/types/requests/offset';
 import { AppointmentEntity } from '@domain/types/common/appointment';
 import { OffsetResponse } from '@domain/types/responses/offset';
+import { PetDetailsEntity } from '@domain/types/common/pet-details';
 
 
 @injectable()
@@ -62,6 +63,11 @@ export class CustomerRemoteDataSourceImpl implements CustomerRemoteDataSource {
       params: request
     });
     return response.data as OffsetResponse<AppointmentEntity>;
+  }
+
+  async allPets(): Promise<PetDetailsEntity[]> {
+    const response = await this.client.get<PetDetailsEntity[]>('/api/customer/pets/all');
+    return response.data as PetDetailsEntity[];
   }
 
 }
