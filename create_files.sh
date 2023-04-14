@@ -13,7 +13,7 @@ mkdir -p "$1"
 touch "$1/index.tsx"
 touch "$1/index.dumb.tsx"
 touch "$1/index.stories.tsx"
-touch "$1/index.module.css"
+touch "$1/index.module.scss"
 touch "$1/index.spec.tsx"
 
 echo "Files created successfully in the $1 directory."
