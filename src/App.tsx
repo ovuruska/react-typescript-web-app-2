@@ -18,6 +18,7 @@ const MyAccountPage = lazy(() => import('./pages/my-account'));
 const AppointmentsPage = lazy(() => import('./pages/appointments'));
 const ForgotPasswordPage = lazy(() => import('./pages/forgot-password'));
 const SignUpPage = lazy(() => import('./pages/sign-up'));
+const ErrorPage = lazy(() => import('./pages/error-page'));
 
 function App() {
   return (
@@ -135,6 +136,14 @@ function App() {
             element={
               <Suspense fallback={<SpinnerOverlay />}>
                 <SignUpPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <ErrorPage />
               </Suspense>
             }
           />
