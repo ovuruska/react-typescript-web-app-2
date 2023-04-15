@@ -1,5 +1,5 @@
 import SelectBottomDrawer from '@components/drawers/select-bottom-drawer/select-bottom-drawer';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { DailyAvailableSlot } from '@domain/types/responses/daily-available-slots-response';
 import styles from '@features/available-slots/available-slots-drawer.module.scss';
 import { Close } from '@mui/icons-material';
@@ -72,7 +72,7 @@ const AvailableSlotsDrawer = ({
       <div>
         {Object.keys(branchMap).map((key) => {
           const branchId = parseInt(key);
-          return (
+          return branchMap[branchId] ? (
             <div key={branchId}>
               <div className={styles.availableSlot__branchHeader}>
                 <h3>{branchMap[branchId][0].branch.name as string}</h3>
@@ -82,6 +82,8 @@ const AvailableSlotsDrawer = ({
               </div>
               <div>{getCards(branchMap[branchId])}</div>
             </div>
+          ) : (
+            <Fragment></Fragment>
           );
         })}
       </div>
