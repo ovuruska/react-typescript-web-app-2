@@ -42,6 +42,12 @@ import {CustomerSignupUseCase}  from '@domain/usecases/customer/signup';
 import {LoginUseCase} from '@domain/usecases/customer/login';
 import { CustomerGetAllAppointmentsUseCase } from '@domain/usecases/customer/all-appointments';
 import { CustomerGetAllPetsUseCase } from '@domain/usecases/customer/get-all-pets';
+import { AppointmentRemoteDataSource } from '@data/datasources/appointment/index.remote';
+import { AppointmentRemoteDataSourceImpl } from '@data/datasources/appointment/index.remote-impl';
+import { AppointmentRepositoryImpl } from '@data/repositories/appointment';
+import { AppointmentRepository } from '@domain/repositories/appointment';
+import { CreateAppointmentUseCase } from '@domain/usecases/appointment/create-appointment';
+import { CancelAppointmentUseCase } from '@domain/usecases/appointment/cancel-appointment';
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -74,4 +80,10 @@ export const containerBind = (container:Container) => {
   container.bind<LoginUseCase>(LoginUseCase).toSelf();
   container.bind<CustomerGetAllAppointmentsUseCase>(CustomerGetAllAppointmentsUseCase).toSelf();
   container.bind<CustomerGetAllPetsUseCase>(CustomerGetAllPetsUseCase).toSelf();
+
+  container.bind<AppointmentRemoteDataSource>(AppointmentRemoteDataSource).to(AppointmentRemoteDataSourceImpl).inSingletonScope();
+  container.bind<AppointmentRepository>(AppointmentRepository).to(AppointmentRepositoryImpl).inSingletonScope();
+  container.bind<CreateAppointmentUseCase>(CreateAppointmentUseCase).toSelf();
+  container.bind<CancelAppointmentUseCase>(CancelAppointmentUseCase).toSelf();
+
 }
