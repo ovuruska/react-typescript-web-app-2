@@ -31,7 +31,7 @@ children
 
 
   return (
-    <div onClick={stopPropagation}>
+    <div data-testid={"select-bottom-drawer"} onClick={stopPropagation}>
       <Drawer
         PaperProps={{
           sx: {

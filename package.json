@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "cache:clear": "rm -rf node_modules/.cache",
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "storybook": "npm run cache:clear && start-storybook -p 6006",
