@@ -2,4 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm test -- -u
+npm run test:puppeteer
 npm run build
+

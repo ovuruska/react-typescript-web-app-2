@@ -49,4 +49,37 @@
     transform: translate(12px,-12px);
     color: $main-700;
   }
+  &__error{
+    @include caption-2;
+    color: $danger-light;
+  }
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  transition: all 0.3s ease-in-out;
+
+  & > svg {
+    transition: all 0.3s ease-in-out;
+    width: 24px;
+    height: 24px;
+    fill:$gray-400;
+    &:hover {
+      fill:$gray-500;
+    }
+  }
 }

@@ -62,20 +62,6 @@ const LoginPageDumb: React.FC<LoginPageDumbProps> = ({
             Forgot password
           </Link>
         </div>
-        <div className={style.inputOptionsWrapper}>
-          <div className={style.inputOption}>
-            <AiOutlineGoogle size={'25px'} onClick={onLoginWithGoogle} />
-            <h2>Login with Google</h2>
-          </div>
-          <div className={style.inputOption} onClick={onLoginWithApple}>
-            <AiFillApple size={'25px'} />
-            <h2>Login with Apple</h2>
-          </div>
-        </div>
-        <p className={style.loginPageInnerText} style={{ textAlign: 'center' }}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-          fugit maiores magni{' '}
-        </p>
         <div className={style.signupBtnWrapper}>
           <Link to="/signup" className={style.signupBtn}>
             Sign Up

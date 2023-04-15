@@ -14,12 +14,12 @@
     "test": "jest --runInBand -u",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "test:puppeteer": "jest --config jest-puppeteer.config.cjs",
+    "test:puppeteer": "jest --runInBand --config jest-puppeteer.config.cjs",
     "createFiles": "bash create_files.sh"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test -- -u"
+      "pre-commit": "npm test -- -u && npm run test:puppeteer"
     }
   },
   "config": {

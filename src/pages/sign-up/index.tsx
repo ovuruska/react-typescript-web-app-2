@@ -13,7 +13,8 @@ const SignUpPage: React.FC<SignUpPageProps> = ({}) => {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [confirmPasswordValue, setConfirmPasswordValue] = useState('');
-  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [error, setError] = useState('');
   const signUp = useInjection<CustomerSignupUseCase>(CustomerSignupUseCase);
   const client = useInjection<HttpClient>(HttpClientSymbol);
@@ -39,8 +40,10 @@ const SignUpPage: React.FC<SignUpPageProps> = ({}) => {
         setPasswordValue={setPasswordValue}
         confirmPasswordValue={confirmPasswordValue}
         setConfirmPasswordValue={setConfirmPasswordValue}
-        userNameValue={username}
-        setUserNameValue={setUsername}
+        firstName={firstName}
+        setFirstName={setFirstName}
+        lastName={lastName}
+        setLastName={setLastName}
         onSignUp={onSignUp}
       />
     </Fragment>

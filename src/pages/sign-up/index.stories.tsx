@@ -12,7 +12,8 @@ const Template: Story<SignUpPageDumbProps> = (args) => {
   const [emailValue, setEmailValue] = React.useState('');
   const [passwordValue, setPasswordValue] = React.useState('');
   const [confirmPasswordValue, setConfirmPasswordValue] = React.useState('');
-  const [username, setUsername] = React.useState('');
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
   return (
     <BrowserRouter>
       <SignUpPageDumb
@@ -23,8 +24,10 @@ const Template: Story<SignUpPageDumbProps> = (args) => {
         setPasswordValue={setPasswordValue}
         confirmPasswordValue={confirmPasswordValue}
         setConfirmPasswordValue={setConfirmPasswordValue}
-        userNameValue={username}
-        setUserNameValue={setUsername}
+        firstName={firstName}
+        setFirstName={setFirstName}
+        lastName={lastName}
+        setLastName={setLastName}
       />
     </BrowserRouter>
   );

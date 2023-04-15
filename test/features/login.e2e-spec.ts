@@ -1,7 +1,5 @@
 import puppeteer, { ElementHandle,Page, Browser } from 'puppeteer';
 
-jest.setTimeout(10000);
-
 describe('User Login', () => {
   let browser: Browser;
   let page: Page;
@@ -21,10 +19,23 @@ describe('User Login', () => {
   it('logs in and redirects to the home page', async () => {
 
     await page.setRequestInterception(true);
-    page.on('request', (request) => {
-
-      if (request.url().endsWith('login') && request.method() === 'POST') {
+    await page.on('request', (request) => {
+      if (request.method() === 'OPTIONS') {
+        // Respond with a valid CORS response mimicking a Django server
         request.respond({
+          status: 200,
+          headers: {
+            'Access-Control-Allow-Origin': '*', // Replace '*' with your allowed origin
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'Access-Control-Max-Age': '86400', // Cache the preflight request for 1 day
+            'Content-Length': '0',
+          },
+        });
+      }
+      else if (request.url().endsWith('login') ) {
+        request.respond({
+          status: 200,
           headers:{
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -68,7 +79,9 @@ describe('User Login', () => {
 
     const button = await page.$('[data-testid="cta-primary"]') as ElementHandle
     await button.click();
-    await page.waitForNavigation();
+    await page.waitForNavigation({
+      timeout:1000
+    });
     expect(page.url()).toBe(appUrl);
   });
   it('logs in and when login fails.', async () => {

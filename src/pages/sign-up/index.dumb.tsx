@@ -16,8 +16,10 @@ export interface SignUpPageDumbProps {
   setPasswordValue: (value: string) => void;
   confirmPasswordValue: string;
   setConfirmPasswordValue: (value: string) => void;
-  userNameValue: string;
-  setUserNameValue: (value: string) => void;
+  firstName: string;
+  setFirstName: (value: string) => void;
+  lastName: string;
+  setLastName: (value: string) => void;
 }
 
 const text =
@@ -25,16 +27,16 @@ const text =
   "and we're here to provide it with our top-notch grooming and washing services.";
 
 const SignUpPageDumb: React.FC<SignUpPageDumbProps> = ({
-  onSignUpWithApple,
-  onSignUpWithGoogle,
   emailValue,
   setEmailValue,
   passwordValue,
   setPasswordValue,
   confirmPasswordValue,
   setConfirmPasswordValue,
-  userNameValue,
-  setUserNameValue,
+  firstName,
+  setFirstName,
+  lastName,
+  setLastName,
   onSignUp,
 }) => {
   return (
@@ -45,15 +47,21 @@ const SignUpPageDumb: React.FC<SignUpPageDumbProps> = ({
       <div className={style.signupPageInner}>
         <p className={style.signupPageInnerText}>{text}</p>
         <div className={style.signupInputWrapper}>
+
+          <TextInputFormFieldControlled
+            label="First name"
+            value={firstName}
+            setValue={setFirstName}
+          />
+          <TextInputFormFieldControlled
+            label={'Last name'}
+            value={lastName}
+            setValue={setLastName}
+            />
           <TextInputFormFieldControlled
             label="Email"
             value={emailValue}
             setValue={setEmailValue}
-          />
-          <TextInputFormFieldControlled
-            label="Username"
-            value={userNameValue}
-            setValue={setUserNameValue}
           />
           <TextInputFormFieldControlled
             value={passwordValue}
@@ -65,7 +73,7 @@ const SignUpPageDumb: React.FC<SignUpPageDumbProps> = ({
           <TextInputFormFieldControlled
             value={confirmPasswordValue}
             setValue={setConfirmPasswordValue}
-            label="Confirm Password"
+            label="Confirm password"
             hidden={true}
             type={'password'}
           />
@@ -76,31 +84,7 @@ const SignUpPageDumb: React.FC<SignUpPageDumbProps> = ({
             }}
           />
         </div>
-        <div className={style.inputOptionsWrapper}>
-          <div className={style.inputOption}>
-            <AiOutlineGoogle
-              size={'25px'}
-              onClick={onSignUpWithGoogle}
-              data-testid="google-icon"
-            />
-            <h2>Sign Up with Google</h2>
-          </div>
-          <div
-            className={style.inputOption}
-            onClick={onSignUpWithApple}
-            data-testid="apple-icon"
-          >
-            <AiFillApple size={'25px'} />
-            <h2>Sign Up with Apple</h2>
-          </div>
-        </div>
-        <p
-          className={style.signupPageInnerText}
-          style={{ textAlign: 'center' }}
-        >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-          fugit maiores magni{' '}
-        </p>
+
         <div className={style.signupBtnWrapper}>
           <Link to="/login" className={style.signupBtn}>
             Login

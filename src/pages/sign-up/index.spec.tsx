@@ -13,30 +13,17 @@ jest.mock('react-router-dom', () => ({
 describe('SignUpPageDumb', () => {
   const defaultProps: SignUpPageDumbProps = {
     onSignUp: jest.fn(),
-    onSignUpWithGoogle: jest.fn(),
-    onSignUpWithApple: jest.fn(),
     emailValue: '',
     setEmailValue: jest.fn(),
     passwordValue: '',
     setPasswordValue: jest.fn(),
     confirmPasswordValue: '',
     setConfirmPasswordValue: jest.fn(),
-    userNameValue: '',
-    setUserNameValue: jest.fn(),
+    firstName: '',
+    setFirstName: jest.fn(),
+    lastName: '',
+    setLastName: jest.fn(),
   };
-
-  test('calls onSignUpWithGoogle when Google icon is clicked', () => {
-    render(<SignUpPageDumb {...defaultProps} />);
-    fireEvent.click(screen.getByTestId('google-icon'));
-    expect(defaultProps.onSignUpWithGoogle).toHaveBeenCalled();
-  });
-
-  test('calls onSignUpWithApple when Apple icon is clicked', () => {
-    render(<SignUpPageDumb {...defaultProps} />);
-    fireEvent.click(screen.getByTestId('apple-icon'));
-    expect(defaultProps.onSignUpWithApple).toHaveBeenCalled();
-  });
-
   test('updates email input value', () => {
     render(<SignUpPageDumb {...defaultProps} />);
     fireEvent.change(screen.getByLabelText('Email'), {
@@ -45,12 +32,20 @@ describe('SignUpPageDumb', () => {
     expect(defaultProps.setEmailValue).toHaveBeenCalledWith('test@example.com');
   });
 
-  test('updates username input value', () => {
+  test('updates first name input value', () => {
     render(<SignUpPageDumb {...defaultProps} />);
-    fireEvent.change(screen.getByLabelText('Username'), {
+    fireEvent.change(screen.getByLabelText('First name'), {
       target: { value: 'testuser' },
     });
-    expect(defaultProps.setUserNameValue).toHaveBeenCalledWith('testuser');
+    expect(defaultProps.setFirstName).toHaveBeenCalledWith('testuser');
+  });
+
+  test('updates last name input value', () => {
+    render(<SignUpPageDumb {...defaultProps} />);
+    fireEvent.change(screen.getByLabelText('Last name'), {
+      target: { value: 'testuser' },
+    });
+    expect(defaultProps.setLastName).toHaveBeenCalledWith('testuser');
   });
 
   test('updates password input value', () => {
@@ -63,7 +58,7 @@ describe('SignUpPageDumb', () => {
 
   test('updates confirm password input value', () => {
     render(<SignUpPageDumb {...defaultProps} />);
-    fireEvent.change(screen.getByLabelText('Confirm Password'), {
+    fireEvent.change(screen.getByLabelText('Confirm password'), {
       target: { value: 'testpassword' },
     });
     expect(defaultProps.setConfirmPasswordValue).toHaveBeenCalledWith(

@@ -21,143 +21,45 @@ const ForgotPasswordPage = lazy(() => import('./pages/forgot-password'));
 const SignUpPage = lazy(() => import('./pages/sign-up'));
 const LoginPage = lazy(() => import('./pages/login/login'));
 
+const routes = [
+  { path: "/", component: HomePage },
+  { path: "/book", component: BookPage },
+  { path: "/add-ons", component: AddOnsPage },
+  { path: "/payment", component: PaymentPage },
+  { path: "/policy", component: PolicyPage },
+  { path: "/thank-you", component: ThanksPage },
+  { path: "/add-pet", component: AddPetPage },
+  { path: "/my-account", component: MyAccountPage },
+  { path: "/appointments", component: AppointmentsPage },
+  { path: "/pets", component: PetsPage },
+  { path: "/pet-details", component: PetDetailsPage },
+  { path: "/login", component: LoginPage, noAutoLogin: true },
+  { path: "/forgotpassword", component: ForgotPasswordPage, noAutoLogin: true },
+  { path: "/signup", component: SignUpPage, noAutoLogin: true },
+];
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <AutoLogin>
-                  <HomePage />
-                </AutoLogin>
-              </Suspense>
-            }
-          />
-          <Route
-            path="/book"
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <AutoLogin>
-                  <BookPage />
-                </AutoLogin>
-              </Suspense>
-            }
-          />
-          <Route
-            path="/add-ons"
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-
-              <AutoLogin>
-                <AddOnsPage />
-              </AutoLogin>
-              </Suspense>
-            }
-          />
-          <Route
-            path="/payment"
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <AutoLogin>
-                  <PaymentPage />
-                </AutoLogin>
-              </Suspense>
-
-            }
-          />
-          <Route
-            path="/policy"
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <AutoLogin>
-                  <PolicyPage />
-                </AutoLogin>
-              </Suspense>
-            }/>
-          <Route
-            path={"/thank-you"}
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <AutoLogin>
-                  <ThanksPage />
-                </AutoLogin>
-              </Suspense>
-            }/>
-          <Route
-            path={"/add-pet"}
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <AutoLogin>
-                  <AddPetPage />
-                </AutoLogin>
-              </Suspense>
-            }/>
-          <Route
-            path={"/my-account"}
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <AutoLogin>
-                  <MyAccountPage />
-                </AutoLogin>
-              </Suspense>
-
-            }/>
-          <Route
-            path={"/appointments"}
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <AutoLogin>
-                  <AppointmentsPage />
-                </AutoLogin>
-              </Suspense>
-            }/>
-          <Route
-            path={"/pets"}
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <AutoLogin>
-                  <PetsPage />
-                </AutoLogin>
-              </Suspense>
-            }/>
-          <Route
-            path={"/pet-details"}
-            element={
-            <Suspense fallback={<SpinnerOverlay />}>
-              <AutoLogin>
-                <PetDetailsPage />
-              </AutoLogin>
-            </Suspense>
-            }
-          >
-          </Route>
-          <Route
-            path="/login"
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <LoginPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/forgotpassword"
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <ForgotPasswordPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <Suspense fallback={<SpinnerOverlay />}>
-                <SignUpPage />
-              </Suspense>
-            }
-          />
+          {routes.map(({ path, component: Component, noAutoLogin }) => (
+            <Route
+              key={path}
+              path={path}
+              element={
+                <Suspense fallback={<SpinnerOverlay />}>
+                  {noAutoLogin ? (
+                    <Component />
+                  ) : (
+                    <AutoLogin>
+                      <Component />
+                    </AutoLogin>
+                  )}
+                </Suspense>
+              }
+            />
+          ))}
         </Routes>
       </BrowserRouter>
     </div>
