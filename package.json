@@ -11,9 +11,9 @@
     "storybook": "npm run cache:clear && start-storybook -p 6006",
     "storybook-ubuntu": "export NODE_OPTIONS=--openssl-legacy-provider && npm run cache:clear && start-storybook -p 6006",
     "build-storybook": "npm run cache:clear  && build-storybook",
-    "test": "jest",
+    "test": "jest --runInBand -u",
     "test:coverage": "jest --coverage",
-    "prepare": "husky install"
+    "createFiles": "bash create_files.sh"
   },
   "husky": {
     "hooks": {

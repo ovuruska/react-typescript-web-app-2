@@ -2,12 +2,13 @@ import style from './index.module.scss';
 
 export interface LoginBtnProps {
   onClick?: () => void;
+  text: string;
 }
 
-const LoginBtn: React.FC<LoginBtnProps> = ({ onClick }) => {
+const LoginBtn: React.FC<LoginBtnProps> = ({ onClick, text }) => {
   return (
     <a className={style.loginBtn} onClick={onClick}>
-      Login
+      {text}
     </a>
   );
 };

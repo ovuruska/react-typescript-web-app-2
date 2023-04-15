@@ -16,11 +16,10 @@ const AutoLogin = ({ children }: AutoLoginProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-
     client
       .verify()
       .then((res) => {
-        //if (!res) navigate('/login');
+        if (!res) navigate('/login');
         setIsLoggedIn(true);
         setIsLoading(false);
       })

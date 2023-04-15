@@ -55,6 +55,7 @@ const LoginPageDumb: React.FC<LoginPageDumbProps> = ({
             type={'password'}
           />
           <LoginBtn
+            text="Login"
             onClick={() => {
               onLogin(emailValue, passwordValue);
             }}
