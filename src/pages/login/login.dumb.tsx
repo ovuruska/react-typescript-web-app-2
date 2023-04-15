@@ -4,34 +4,42 @@ import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import { Link } from 'react-router-dom';
 import { AiOutlineGoogle, AiFillApple } from 'react-icons/ai';
 import TextInputFormFieldControlled from '@components/inputs/text-input-form-field-controlled';
+import TextInputFormField from '@components/inputs/text-input-form-field';
+import { emailValidator } from '@domain/types/validators/email';
+import { passwordValidator } from '@domain/types/validators/password';
 
 export interface LoginPageDumbProps {
   onLogin: (username: string, password: string) => void;
   onForgotPassword?: () => void;
   onLoginWithGoogle?: () => void;
   onLoginWithApple?: () => void;
-  emailValue: string;
-  setEmailValue: (value: string) => void;
-  passwordValue: string;
-  setPasswordValue: (value: string) => void;
 }
 
 const text =
   'We understand that your furry friends deserve the best care, ' +
   "and we're here to provide it with our top-notch grooming and washing services.";
 
+
+
 const LoginPageDumb: React.FC<LoginPageDumbProps> = ({
   onLoginWithApple,
   onLoginWithGoogle,
-  emailValue,
-  setEmailValue,
-  passwordValue,
-  setPasswordValue,
   onLogin,
 }) => {
+  const [emailValue, setEmailValue] = React.useState('');
+  const [passwordValue, setPasswordValue] = React.useState('');
+  const [emailError, setEmailError] = React.useState<string|undefined>(undefined);
+  const [passwordError, setPasswordError] = React.useState<string|undefined>(undefined);
 
   const handleLogin = () => {
-    onLogin(emailValue, passwordValue);
+    const emailValid = emailValidator(emailValue);
+    const passwordValid = passwordValidator(passwordValue);
+    if(emailValid.valid && passwordValid.valid){
+      onLogin(emailValue, passwordValue);
+    }else{
+      setEmailError(emailValid.errorMessage);
+      setPasswordError(passwordValid.errorMessage);
+    }
   }
 
   return (
@@ -42,17 +50,16 @@ const LoginPageDumb: React.FC<LoginPageDumbProps> = ({
       <div className={style.loginPageInner}>
         <p className={style.loginPageInnerText}>{text}</p>
         <div className={style.loginInputWrapper}>
-          <TextInputFormFieldControlled
+          <TextInputFormField
             label="Email"
-            value={emailValue}
-            setValue={setEmailValue}
+            onChanged={setEmailValue}
+            errorMessage={emailError}
           />
-          <TextInputFormFieldControlled
-            value={passwordValue}
-            setValue={setPasswordValue}
+          <TextInputFormField
+            onChanged={setPasswordValue}
             label="Password"
-            hidden={true}
             type={'password'}
+            errorMessage={passwordError}
           />
           <CtaPrimary
             content="Login"

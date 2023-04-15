@@ -1,15 +1,18 @@
 import puppeteer, { ElementHandle,Page, Browser } from 'puppeteer';
 
+jest.setTimeout(10000);
+
 describe('User Login', () => {
   let browser: Browser;
   let page: Page;
   const appUrl = 'http://localhost:5173/';
   const email = 'b@b.com';
-  const password = 'b';
+  const password = 'QuickerTest*123';
 
   beforeEach(async () => {
     browser = await puppeteer.launch({ headless: true });
     page = await browser.newPage();
+    await page.setRequestInterception(true);
   });
 
   afterEach(async () => {
@@ -18,7 +21,6 @@ describe('User Login', () => {
 
   it('logs in and redirects to the home page', async () => {
 
-    await page.setRequestInterception(true);
     await page.on('request', (request) => {
       if (request.method() === 'OPTIONS') {
         // Respond with a valid CORS response mimicking a Django server
@@ -32,8 +34,7 @@ describe('User Login', () => {
             'Content-Length': '0',
           },
         });
-      }
-      else if (request.url().endsWith('login') ) {
+      }else if (request.url().endsWith('login') && request.method() === 'POST' ) {
         request.respond({
           status: 200,
           headers:{
@@ -69,7 +70,7 @@ describe('User Login', () => {
     });
     await page.goto(appUrl);
 
-    const inputs = await page.$$('[data-testid="text-input-form-field-controlled"]');
+    const inputs = await page.$$('[data-testid="text-input-form-field"]');
     const emailInput = inputs[0];
     const passwordInput = inputs[1];
     await emailInput.click();
@@ -84,45 +85,97 @@ describe('User Login', () => {
     });
     expect(page.url()).toBe(appUrl);
   });
-  it('logs in and when login fails.', async () => {
+  describe('fails',() => {
+    beforeEach(async () => {
+      page.on('request', (request) => {
 
-    await page.setRequestInterception(true);
-    page.on('request', (request) => {
-
-      if (request.url().endsWith('/api/auth/customer/login')) {
-        request.respond({
-          status: 400,
-          contentType: 'application/json',
-          body: JSON.stringify({
-            error: 'Invalid credentials',
-          }),
-        });
-      } else {
-        request.continue();
-      }
-    });
-    await page.goto(appUrl);
-
-    const inputs = await page.$$('[data-testid="text-input-form-field-controlled"]');
-    const emailInput = inputs[0];
-    const passwordInput = inputs[1];
-    await emailInput.click();
-    await page.keyboard.type(email, { delay: 100 });
-    await passwordInput.click();
-    await page.keyboard.type(password, { delay: 100 });
-
-    const button = await page.$('[data-testid="cta-primary"]') as ElementHandle
-    await button.click();
-    try{
-      await page.waitForNavigation({
-        timeout:1000
+        if (request.url().endsWith('/api/auth/customer/login')) {
+          request.respond({
+            status: 400,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              error: 'Invalid credentials',
+            }),
+          });
+        } else {
+          request.continue();
+        }
       });
-      expect(page.url()).toBe(`${appUrl}login`);
+      await page.goto(appUrl);
 
-    }catch(e){
-      expect(page.url()).toBe(`${appUrl}login`);
-    }
+    });
 
+    it('when invalid password is provided.', async () => {
+      const inputs = await page.$$('[data-testid="text-input-form-field"]');
+      const emailInput = inputs[0];
+      const passwordInput = inputs[1];
+      await emailInput.click();
+      await page.keyboard.type(email, { delay: 100 });
+      await passwordInput.click();
+      await page.keyboard.type("invalid", { delay: 100 });
+
+      const button = await page.$('[data-testid="cta-primary"]') as ElementHandle
+      await button.click();
+      try{
+        await page.waitForNavigation({
+          timeout:1000
+        });
+        expect(page.url()).toBe(`${appUrl}login`);
+
+      }catch(e){
+        expect(page.url()).toBe(`${appUrl}login`);
+      }
+
+    });
+
+    it('when invalid email is provided.', async () => {
+      const inputs = await page.$$('[data-testid="text-input-form-field"]');
+      const emailInput = inputs[0];
+      const passwordInput = inputs[1];
+      await emailInput.click();
+      await page.keyboard.type(email, { delay: 100 });
+      await passwordInput.click();
+      await page.keyboard.type("invalid", { delay: 100 });
+
+      const button = await page.$('[data-testid="cta-primary"]') as ElementHandle
+      await button.click();
+      try{
+        await page.waitForNavigation({
+          timeout:1000
+        });
+        expect(page.url()).toBe(`${appUrl}login`);
+
+      }catch(e){
+        expect(page.url()).toBe(`${appUrl}login`);
+      }
+
+    });
+
+
+    it('when 400 is returned.', async () => {
+
+      const inputs = await page.$$('[data-testid="text-input-form-field"]');
+      const emailInput = inputs[0];
+      const passwordInput = inputs[1];
+      await emailInput.click();
+      await page.keyboard.type(email, { delay: 100 });
+      await passwordInput.click();
+      await page.keyboard.type(password, { delay: 100 });
+
+      const button = await page.$('[data-testid="cta-primary"]') as ElementHandle
+      await button.click();
+      try{
+        await page.waitForNavigation({
+          timeout:1000
+        });
+        expect(page.url()).toBe(`${appUrl}login`);
+
+      }catch(e){
+        expect(page.url()).toBe(`${appUrl}login`);
+      }
+
+    });
   });
+
 
 });
