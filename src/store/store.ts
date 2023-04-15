@@ -5,10 +5,12 @@ import storage from "redux-persist/lib/storage"; // Default: localStorage if web
 
 import petsSlice from "./pet-slice";
 import orderSlice from "./order-slice";
+import selectedPetSlice from '@quicker/store/selected-pet-slice';
 
 const rootReducer = combineReducers({
   pets: petsSlice.reducer,
   order: orderSlice.reducer,
+  selectedPet: selectedPetSlice.reducer,
 });
 
 const persistConfig = {

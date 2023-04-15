@@ -6,6 +6,7 @@ import { MeMockGenerator } from '@domain/types/__mock__/me-generator';
 import { AuthenticationResponseMockGenerator } from '@domain/types/__mock__/authentication-response';
 import mockAxios from 'jest-mock-axios';
 import { AppointmentMockGenerator } from '@domain/types/__mock__/appointment';
+import { PetDetailsMockGenerator } from '@domain/types/__mock__/pet-details';
 
 const appointmentGenerator = new AppointmentMockGenerator();
 
@@ -16,6 +17,7 @@ describe('CustomerRepositoryImpl', () => {
 
   const meGenerator = new MeMockGenerator();
   const authGenerator = new AuthenticationResponseMockGenerator();
+  const petDetailsMockGenerator = new PetDetailsMockGenerator();
 
   beforeAll(() => {
     container = getTestContainer();
@@ -89,6 +91,13 @@ describe('CustomerRepositoryImpl', () => {
       offset: 0, limit: 10,
     });
     expect(result.results).toEqual(appointments);
+  });
+
+  it('should get all pets successfully', async () => {
+   const data = petDetailsMockGenerator.generateMany(10);
+    mockAxios.get.mockResolvedValue({data});
+    const result = await customerRepository.allPets();
+    expect(result).toEqual(data);
   });
 
 

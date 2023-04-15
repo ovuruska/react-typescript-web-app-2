@@ -11,6 +11,11 @@ const MyAccountPage = () => {
   const gotoAppointments = () => {
     navigate('/appointments');
   }
+
+  const gotoPets = () => {
+    navigate('/pets');
+  }
+
   const goBack = () => {
     window.history.back();
   }
@@ -18,6 +23,7 @@ const MyAccountPage = () => {
   return <PageCard><MyAccountDumb
     goBack={goBack}
     onClickAppointments={gotoAppointments}
+    onClickMyPets={gotoPets}
     name={me?.name ?? ""}
     email={me?.email ?? ""}
   /></PageCard>

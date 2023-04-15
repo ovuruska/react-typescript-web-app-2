@@ -19,6 +19,8 @@ const AppointmentsPage = lazy(() => import('./pages/appointments'));
 const ForgotPasswordPage = lazy(() => import('./pages/forgot-password'));
 const SignUpPage = lazy(() => import('./pages/sign-up'));
 const ErrorPage = lazy(() => import('./pages/error-page'));
+const PetsPage = lazy(() => import('./pages/pets'));
+const PetDetailsPage = lazy(() => import('./pages/pet-details'));
 
 function App() {
   return (
@@ -147,6 +149,27 @@ function App() {
               </Suspense>
             }
           />
+
+          <Route
+            path={'/pets'}
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <PetsPage />
+                </AutoLogin>
+              </Suspense>
+            }
+          />
+          <Route
+            path={'/pet-details'}
+            element={
+              <Suspense fallback={<SpinnerOverlay />}>
+                <AutoLogin>
+                  <PetDetailsPage />
+                </AutoLogin>
+              </Suspense>
+            }
+          ></Route>
         </Routes>
       </BrowserRouter>
     </div>

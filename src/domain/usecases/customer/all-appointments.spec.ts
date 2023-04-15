@@ -1,27 +1,3 @@
-/*
-import { UseCase } from '@quicker/common/use-case';
-import { inject, injectable } from 'inversify';
-import { CustomerRepository } from '@domain/repositories/customer';
-import { OffsetRequest } from '@domain/types/requests/offset';
-import { AppointmentEntity } from '@domain/types/common/appointment';
-import { OffsetResponse } from '@domain/types/responses/offset';
-
-
-@injectable()
-export class CustomerGetAllAppointmentsUseCase implements UseCase<any, any>{
-  constructor(@inject<CustomerRepository>(CustomerRepository) private readonly repository: CustomerRepository) {
-    this.repository = repository;
-  }
-
-  call(params: OffsetRequest): Promise<OffsetResponse<AppointmentEntity>> {
-    return this.repository.allAppointments(params);
-  }
-}
-
- */
-
-// Path: src/domain/usecases/customer/all-appointments.spec.ts
-
 import { CustomerGetAllAppointmentsUseCase } from '@domain/usecases/customer/all-appointments';
 import { getTestContainer } from '@utils/inversion-container-test';
 import { Container } from 'inversify';

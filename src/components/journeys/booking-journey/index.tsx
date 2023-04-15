@@ -1,7 +1,7 @@
 import ServiceHeader from '@features/service-header/service-header';
-import style from '@components/layouts/booking-journey/index.module.scss';
+import style from '@components/journeys/booking-journey/index.module.scss';
 import PageCard from '@components/cards/page-card/page-card';
-import {journey} from '@components/layouts/booking-journey/index.journey';
+import {journey} from '@components/journeys/booking-journey/index.journey';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

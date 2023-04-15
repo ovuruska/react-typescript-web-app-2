@@ -38,7 +38,7 @@ const MyAccountDumb: React.FC<MyAccountDumbProps> = ({
 return <div className={style.myAccount}>
   <div className={style.myAccountHeader}>
     <BiLeftArrow onClick={goBack}/>
-    <h1>My Account</h1>
+    <h1>Me</h1>
     <div className={style.myAccountClientCard}>
       <ClientCard name={name} email={email}/>
 

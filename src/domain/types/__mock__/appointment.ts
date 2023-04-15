@@ -41,10 +41,15 @@ export class AppointmentMockGenerator extends MockGenerator<AppointmentEntity> {
 
 
   generateOne(id?: number,values? : GenerateAppointmentOptions ): AppointmentEntity {
+
+    const func = (faker.datatype.boolean()) ? faker.date.past : faker.date.future;
+    const start = func();
+    const end = func();
+
     return {
       id: id ?? faker.datatype.number(),
-      start: faker.date.past().toString(),
-      end: faker.date.past().toString(),
+      start: start.toString(),
+      end: end.toString(),
       customer_notes: faker.lorem.paragraph(),
       tip: faker.datatype.number(),
       cost: faker.datatype.number(),

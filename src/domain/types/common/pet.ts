@@ -13,4 +13,6 @@ export interface PetEntity {
   special_handling: boolean;
   coat_type: string;
   owner: number;
+  gender: string;
+  fixed: boolean;
 }

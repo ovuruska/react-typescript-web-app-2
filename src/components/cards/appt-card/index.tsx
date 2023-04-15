@@ -4,7 +4,6 @@ import WeWashIcon from '@components/icons/wewash-icon';
 import GroomingIcon from '@components/icons/grooming-icon';
 import { EmployeeEntity } from '@domain/types/common/employee';
 import { BranchEntity } from '@domain/types/common/branch';
-import Completed from '@components/cards/appt-card/completed';
 
 export interface ApptCardProps {
   date: string;
@@ -15,9 +14,33 @@ export interface ApptCardProps {
   className?: string;
 }
 
-const getShortMonthName = (date: Date) => {
-  const formatter = new Intl.DateTimeFormat('en', { month: 'short' });
-  return formatter.format(date.getMonth());
+export const getShortMonthName = (date: Date) => {
+  switch(date.getMonth()){
+    case 0:
+      return "Jan.";
+    case 1:
+      return "Feb.";
+    case 2:
+      return "Mar.";
+    case 3:
+      return "Apr.";
+    case 4:
+      return "May";
+    case 5:
+      return "Jun.";
+    case 6:
+      return "Jul.";
+    case 7:
+      return "Aug.";
+    case 8:
+      return "Sep.";
+    case 9:
+      return "Oct.";
+    case 10:
+      return "Nov.";
+    case 11:
+      return "Dec.";
+  }
 };
 
 const ApptCard: React.FC<ApptCardProps> = ({
@@ -28,13 +51,10 @@ const ApptCard: React.FC<ApptCardProps> = ({
   const dateObj = new Date(date);
   const month = getShortMonthName(dateObj);
   const day = dateObj.getDate();
-
-  const dateStr = `${month}${month == 'May' ? '' : '.'} ${day < 10 ? '0' : ''}${day}`;
+  const dateStr = `${month} ${day < 10 ? '0' : ''}${day}`;
   const weekday = dateObj.toLocaleString('en-us', { weekday: 'short' });
-  // 05.00 PM from date
-  // Other than 'numeric'
-  const time = dateObj.toLocaleString('en-us', { hour: 'numeric', minute: 'numeric' });
 
+  const time = dateObj.toLocaleString('en-us', { hour: 'numeric', minute: 'numeric' });
   let employeeName = null;
   if (employee) {
     employeeName = employee.name.split(" ")[0];
