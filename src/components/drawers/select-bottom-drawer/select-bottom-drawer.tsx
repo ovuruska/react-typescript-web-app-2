@@ -37,7 +37,6 @@ children
           sx: {
             borderTopLeftRadius: 32,
             borderTopRightRadius: 32,
-            overflow: 'hidden',
           },
         }}
         anchor="bottom"
