@@ -20,6 +20,7 @@ const PetDetailsPage = lazy(() => import("./pages/pet-details"));
 const ForgotPasswordPage = lazy(() => import('./pages/forgot-password'));
 const SignUpPage = lazy(() => import('./pages/sign-up'));
 const LoginPage = lazy(() => import('@pages/login'));
+const NotFoundPage = lazy(() => import('@pages/error-page'));
 
 const routes = [
   { path: "/", component: HomePage },
@@ -36,6 +37,7 @@ const routes = [
   { path: "/login", component: LoginPage, noAutoLogin: true },
   { path: "/forgotpassword", component: ForgotPasswordPage, noAutoLogin: true },
   { path: "/signup", component: SignUpPage, noAutoLogin: true },
+  { path: "*", component: NotFoundPage,noAutoLogin: true },
 ];
 
 function App() {

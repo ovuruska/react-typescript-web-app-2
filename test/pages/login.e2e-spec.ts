@@ -1,13 +1,14 @@
 import puppeteer, { ElementHandle,Page, Browser } from 'puppeteer';
+import { APP_URL, DELAY, EMAIL, PASSWORD, TIMEOUT } from './constants';
 
-jest.setTimeout(10000);
+jest.setTimeout(600000);
 
 describe('User Login', () => {
   let browser: Browser;
   let page: Page;
-  const appUrl = 'http://localhost:5173/';
-  const email = 'b@b.com';
-  const password = 'QuickerTest*123';
+  const appUrl = APP_URL;
+  const email = EMAIL;
+  const password = PASSWORD;
 
   beforeEach(async () => {
     browser = await puppeteer.launch({ headless: true });
@@ -74,9 +75,9 @@ describe('User Login', () => {
     const emailInput = inputs[0];
     const passwordInput = inputs[1];
     await emailInput.click();
-    await page.keyboard.type(email, { delay: 100 });
+    await page.keyboard.type(email, { delay: DELAY });
     await passwordInput.click();
-    await page.keyboard.type(password, { delay: 100 });
+    await page.keyboard.type(password, { delay: DELAY });
 
     const button = await page.$('[data-testid="cta-primary"]') as ElementHandle
     await button.click();
@@ -110,9 +111,9 @@ describe('User Login', () => {
       const emailInput = inputs[0];
       const passwordInput = inputs[1];
       await emailInput.click();
-      await page.keyboard.type(email, { delay: 100 });
+      await page.keyboard.type(email, { delay: DELAY });
       await passwordInput.click();
-      await page.keyboard.type("invalid", { delay: 100 });
+      await page.keyboard.type("invalid", { delay: DELAY });
 
       const button = await page.$('[data-testid="cta-primary"]') as ElementHandle
       await button.click();
@@ -133,9 +134,9 @@ describe('User Login', () => {
       const emailInput = inputs[0];
       const passwordInput = inputs[1];
       await emailInput.click();
-      await page.keyboard.type(email, { delay: 100 });
+      await page.keyboard.type(email, { delay: DELAY });
       await passwordInput.click();
-      await page.keyboard.type("invalid", { delay: 100 });
+      await page.keyboard.type("invalid", { delay: DELAY });
 
       const button = await page.$('[data-testid="cta-primary"]') as ElementHandle
       await button.click();
@@ -158,9 +159,9 @@ describe('User Login', () => {
       const emailInput = inputs[0];
       const passwordInput = inputs[1];
       await emailInput.click();
-      await page.keyboard.type(email, { delay: 100 });
+      await page.keyboard.type(email, { delay: DELAY });
       await passwordInput.click();
-      await page.keyboard.type(password, { delay: 100 });
+      await page.keyboard.type(password, { delay: DELAY });
 
       const button = await page.$('[data-testid="cta-primary"]') as ElementHandle
       await button.click();

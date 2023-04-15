@@ -5,6 +5,7 @@ import { HttpClient } from '@quicker/common/http-client';
 import { HttpClientSymbol } from '@domain/types/TYPES';
 import { useNavigate } from 'react-router';
 import ErrorPopup from '@components/popups/error-popup';
+import { Helmet } from 'react-helmet';
 
 export interface LoginPageProps {}
 
@@ -29,6 +30,9 @@ const LoginPage: React.FC<LoginPageProps> = (props) => {
 
   return (
     <Fragment>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <ErrorPopup message={error} setMessage={setError} />
       <LoginPageDumb
         {...props}
