@@ -4,11 +4,13 @@
 
 .errorPage {
   height: 100vh;
+  background-color: $main-400 !important;
+  position: relative;
+
   @include page;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: $main-400;
 
   &Nav {
     width: 100%;

@@ -58,7 +58,7 @@ const TextInputFormFieldControlledDumb: React.FC<TextInputFormFieldControlledDum
     }
 
     return (
-      <div onFocus={handleFocus} className={containerClass}>
+      <div data-testid={"text-input-form-field-controlled"} onFocus={handleFocus} className={containerClass}>
         <input
           readOnly={disabled}
           onChange={handleChange}

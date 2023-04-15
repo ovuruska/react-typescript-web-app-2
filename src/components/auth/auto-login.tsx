@@ -24,7 +24,7 @@ const AutoLogin = ({ children }: AutoLoginProps) => {
         setIsLoading(false);
       })
       .catch((err) => {
-        navigate('/');
+        navigate('/login');
       });
   }, [isLoggedIn]);
 

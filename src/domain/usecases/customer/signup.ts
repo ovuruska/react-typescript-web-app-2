@@ -5,7 +5,7 @@ import { AuthenticationResponse } from '@domain/types/responses/authentication';
 import { SignupRequest } from '@domain/types/requests/signup';
 
 @injectable()
-export class SignupUseCase implements UseCase<SignupRequest, Promise<AuthenticationResponse>> {
+export class CustomerSignupUseCase implements UseCase<SignupRequest, Promise<AuthenticationResponse>> {
   constructor(@inject<CustomerRepository>(CustomerRepository) private readonly repository: CustomerRepository) {
     this.repository = repository;
   }

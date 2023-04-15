@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './index.module.scss';
 import { BiLeftArrow } from 'react-icons/bi';
-import TextInputFormField from '@components/inputs/text-input-form-field/text-input-form-field';
+import TextInputFormField from '@components/inputs/text-input-form-field';
 import PetBreedSelect from '@pages/add-pet/pet-breed-select';
 import PetGenderSelect from '@components/inputs/pet-gender-select';
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';

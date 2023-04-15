@@ -1,28 +1,27 @@
 import { useInjection } from 'inversify-react';
-import LoginPageDumb, { LoginPageDumbProps } from './login.dumb';
+import LoginPageDumb, { LoginPageDumbProps } from './index.dumb';
 import React, { Fragment } from 'react';
 import { HttpClient } from '@quicker/common/http-client';
 import { HttpClientSymbol } from '@domain/types/TYPES';
 import { useNavigate } from 'react-router';
 import ErrorPopup from '@components/popups/error-popup';
+import { Helmet } from 'react-helmet';
 
 export interface LoginPageProps {}
 
 const LoginPage: React.FC<LoginPageProps> = (props) => {
-  const [emailValue, setEmailValue] = React.useState('');
-  const [passwordValue, setPasswordValue] = React.useState('');
+
   const [error, setError] = React.useState('');
   const client = useInjection<HttpClient>(HttpClientSymbol);
   const navigate = useNavigate();
 
-  const onLogin = async (username: string, password: string) => {
+  const onLogin = async (email: string, password: string) => {
     client
-      .login(username, password)
+      .login(email, password)
       .then(() => {
-        console.log('in then');
         navigate('/');
       })
-      .catch(() => {
+      .catch((err) => {
         setError('Login failed');
       });
   };
@@ -31,13 +30,12 @@ const LoginPage: React.FC<LoginPageProps> = (props) => {
 
   return (
     <Fragment>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <ErrorPopup message={error} setMessage={setError} />
       <LoginPageDumb
         {...props}
-        emailValue={emailValue}
-        setEmailValue={setEmailValue}
-        passwordValue={passwordValue}
-        setPasswordValue={setPasswordValue}
         onLogin={onLogin}
         onLoginWithApple={onLoginWithApple}
         onLoginWithGoogle={onLoginWithGoogle}

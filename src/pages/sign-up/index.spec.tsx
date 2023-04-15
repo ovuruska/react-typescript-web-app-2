@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { render, fireEvent, screen, getByTestId } from '@testing-library/react';
+import { render, fireEvent, screen, getByTestId, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import SignUpPageDumb, { SignUpPageDumbProps } from './index.dumb';
 
@@ -11,63 +11,89 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('SignUpPageDumb', () => {
-  const defaultProps: SignUpPageDumbProps = {
-    onSignUp: jest.fn(),
-    onSignUpWithGoogle: jest.fn(),
-    onSignUpWithApple: jest.fn(),
-    emailValue: '',
-    setEmailValue: jest.fn(),
-    passwordValue: '',
-    setPasswordValue: jest.fn(),
-    confirmPasswordValue: '',
-    setConfirmPasswordValue: jest.fn(),
-    userNameValue: '',
-    setUserNameValue: jest.fn(),
-  };
 
-  test('calls onSignUpWithGoogle when Google icon is clicked', () => {
-    render(<SignUpPageDumb {...defaultProps} />);
-    fireEvent.click(screen.getByTestId('google-icon'));
-    expect(defaultProps.onSignUpWithGoogle).toHaveBeenCalled();
+  let defaultProps: SignUpPageDumbProps;
+  beforeEach(() => {
+    defaultProps = {
+      onSignUp: jest.fn(),
+    };
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  test('calls onSignUpWithApple when Apple icon is clicked', () => {
-    render(<SignUpPageDumb {...defaultProps} />);
-    fireEvent.click(screen.getByTestId('apple-icon'));
-    expect(defaultProps.onSignUpWithApple).toHaveBeenCalled();
+  it('should be defined.', () => {
+    expect(SignUpPageDumb).toBeDefined();
   });
 
-  test('updates email input value', () => {
-    render(<SignUpPageDumb {...defaultProps} />);
-    fireEvent.change(screen.getByLabelText('Email'), {
-      target: { value: 'test@example.com' },
+  it('should render correctly.', () => {
+    const { container } = render(<SignUpPageDumb {...defaultProps} />);
+    expect(container).toBeInTheDocument();
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should not call onSignUp when sign up button is clicked but first_name, last_name, email, password and password confirmed are not valid.', () => {
+    const { container, getByTestId } = render(<SignUpPageDumb {...defaultProps} />);
+    const signUpButton = getByTestId('cta-primary');
+    fireEvent.click(signUpButton);
+    expect(defaultProps.onSignUp).not.toHaveBeenCalled();
+    const inputItems = container.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
+    const firstNameInput = inputItems[0];
+    const lastNameInput = inputItems[1];
+    const emailInput = inputItems[2];
+    const passwordInput = inputItems[3];
+    const passwordConfirmInput = inputItems[4];
+    act(() => {
+      emailInput.focus();
+      fireEvent.change(emailInput, { target: { value: 'b@b.com' } });
     });
-    expect(defaultProps.setEmailValue).toHaveBeenCalledWith('test@example.com');
-  });
 
-  test('updates username input value', () => {
-    render(<SignUpPageDumb {...defaultProps} />);
-    fireEvent.change(screen.getByLabelText('Username'), {
-      target: { value: 'testuser' },
+    act(() => {
+      passwordInput.focus();
+      fireEvent.change(passwordInput, { target: { value: 'TestPassword*!1' } });
     });
-    expect(defaultProps.setUserNameValue).toHaveBeenCalledWith('testuser');
+    fireEvent.click(signUpButton);
+    expect(defaultProps.onSignUp).not.toHaveBeenCalled();
   });
+  it('should call onSignUp when first_name, last_name, email, password and password confirmed are valid.', () => {
+    const { container, getByTestId, getAllByTestId } = render(<SignUpPageDumb {...defaultProps} />);
+    const signUpButton = getByTestId('cta-primary');
+    const inputItems = container.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
+    const firstNameInput = inputItems[0];
+    const lastNameInput = inputItems[1];
+    const emailInput = inputItems[2];
+    const passwordInput = inputItems[3];
+    const passwordConfirmInput = inputItems[4];
 
-  test('updates password input value', () => {
-    render(<SignUpPageDumb {...defaultProps} />);
-    fireEvent.change(screen.getByLabelText('Password'), {
-      target: { value: 'testpassword' },
-    });
-    expect(defaultProps.setPasswordValue).toHaveBeenCalledWith('testpassword');
-  });
+    const firstName = 'Test';
+    const lastName = 'Test';
+    const email = 'b@b.com';
+    const password = 'TestPassword*!1';
 
-  test('updates confirm password input value', () => {
-    render(<SignUpPageDumb {...defaultProps} />);
-    fireEvent.change(screen.getByLabelText('Confirm Password'), {
-      target: { value: 'testpassword' },
+
+    act(() => {
+      firstNameInput.focus();
+      fireEvent.change(firstNameInput, { target: { value: 'Test' } });
     });
-    expect(defaultProps.setConfirmPasswordValue).toHaveBeenCalledWith(
-      'testpassword',
-    );
+    act(() => {
+      lastNameInput.focus();
+      fireEvent.change(lastNameInput, { target: { value: 'Test' } });
+    });
+    act(() => {
+      emailInput.focus();
+      fireEvent.change(emailInput, { target: { value: email}});
+    });
+    act(() => {
+      passwordInput.focus();
+      fireEvent.change(passwordInput, { target: { value: password } });
+    });
+    act(() => {
+      passwordConfirmInput.focus();
+      fireEvent.change(passwordConfirmInput, { target: { value: password } });
+    });
+    fireEvent.click(signUpButton);
+    expect(defaultProps.onSignUp).toHaveBeenCalledWith(email,password,firstName,lastName);
+    expect(defaultProps.onSignUp).toHaveBeenCalledTimes(1);
+
   });
 });

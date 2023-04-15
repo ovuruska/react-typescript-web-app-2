@@ -3,8 +3,7 @@ import TextInputFormFieldControlled, {
   TextInputFormFieldControlledProps,
 } from '@components/inputs/text-input-form-field-controlled';
 
-import LoginBtn from '@components/buttons/login-btn';
-
+import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import style from './index.module.scss';
 import { Link } from 'react-router-dom';
 
@@ -35,8 +34,8 @@ const ForgotPasswordPageDumb: React.FC<ForgotPasswordPageDumbProps> = ({
             value={emailValue}
             setValue={setEmailValue}
           />
-          <LoginBtn
-            text="Forgot Password"
+          <CtaPrimary
+            content="Forgot Password"
             onClick={() => {
               onForgotPassword && onForgotPassword();
             }}

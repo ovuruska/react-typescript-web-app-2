@@ -4,10 +4,14 @@ import logo from '@assets/scrubbers-logo.png';
 import bg from '@assets/bgtop.png';
 import '../../App.css';
 import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 const ErrorPage: React.FC = () => {
   return (
     <div className={style.errorPage}>
+      <Helmet>
+        <title>Not Found</title>
+        </Helmet>
       <div className={style.errorPageNav}>
         <img src={logo} alt="scrubbers logo"></img>
       </div>
@@ -26,6 +30,7 @@ const ErrorPage: React.FC = () => {
         <img src={bg} alt="scrubbers logo"></img>
       </div>
     </div>
+
   );
 };
 

@@ -36,5 +36,7 @@ export abstract class HttpClient {
   abstract login(username?: string, password?: string): Promise<any>;
 
   abstract verify(): Promise<boolean>;
+
+  abstract logout(): Promise<void>;
 }
 

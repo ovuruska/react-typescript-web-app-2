@@ -9,22 +9,12 @@ export default {
 } as Meta;
 
 const Template: Story<SignUpPageDumbProps> = (args) => {
-  const [emailValue, setEmailValue] = React.useState('');
-  const [passwordValue, setPasswordValue] = React.useState('');
-  const [confirmPasswordValue, setConfirmPasswordValue] = React.useState('');
-  const [username, setUsername] = React.useState('');
+
   return (
     <BrowserRouter>
       <SignUpPageDumb
         {...args}
-        emailValue={emailValue}
-        setEmailValue={setEmailValue}
-        passwordValue={passwordValue}
-        setPasswordValue={setPasswordValue}
-        confirmPasswordValue={confirmPasswordValue}
-        setConfirmPasswordValue={setConfirmPasswordValue}
-        userNameValue={username}
-        setUserNameValue={setUsername}
+
       />
     </BrowserRouter>
   );

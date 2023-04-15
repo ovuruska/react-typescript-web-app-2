@@ -55,16 +55,17 @@ export class HttpClientImpl implements HttpClient {
     );
   }
 
-  async login(username: string, password: string): Promise<void> {
+  async login(email: string, password: string): Promise<void> {
     try {
       const response = await this.instance.post('/api/auth/customer/login', {
-        username,
+        email,
         password,
       });
       if (response.status === 200) {
         this.setAuthToken(response.data.token);
       }
     } catch (error) {
+      console.log(error);
       throw new Error('Authentication failed');
     }
   }
@@ -72,7 +73,6 @@ export class HttpClientImpl implements HttpClient {
   async verify(): Promise<boolean> {
     if (!this.authToken) return false;
     try {
-      console.log(this.authToken);
       const response = await this.instance.get('/api/auth/customer/verify', {
         headers: {
           Authorization: `Token ${this.authToken}`,
@@ -134,9 +134,8 @@ export class HttpClientImpl implements HttpClient {
     return this.instance.patch<Response>(url, data, config);
   }
 
-  checkStatus(): Promise<AxiosResponse> {
-    return this.get('/api/auth/customer/verify', {
-      withCredentials: false,
-    });
+  logout(): Promise<void> {
+    this.purgeAuthToken();
+    return Promise.resolve();
   }
 }

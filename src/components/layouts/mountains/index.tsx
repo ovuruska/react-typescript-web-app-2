@@ -7,6 +7,8 @@ export interface MountainsProps{
   left?:number;
   right?:number;
   bottom?:number;
+  height?:number;
+  width?:number;
 
 }
 
@@ -14,7 +16,9 @@ const Mountains = ({
   top,
   left,
   right,
-  bottom
+  bottom,
+  height,
+  width,
                    }: MountainsProps) => {
 
   let style = {
@@ -31,6 +35,12 @@ const Mountains = ({
   }
   if(bottom){
     style['bottom'] = bottom.toString()+"px";
+  }
+  if(height){
+    style['height'] = height.toString()+"px";
+  }
+  if(width){
+    style['width'] = width.toString()+"px";
   }
 
   return <div className={styles.mountains} style={style}></div>

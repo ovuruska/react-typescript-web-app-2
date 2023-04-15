@@ -90,8 +90,8 @@ const AppointmentsPageDumb = ({
     }}></div>
     <div className={style.appointmentsPageContent}>
       <div className={style.appointmentsPageContent__header}>
-        <DropdownSelect onSelect={setSelectedPet} options={petOptions} initialValue={initialValue} />
-        <DropdownSelect onSelect={setTime} options={options} initialValue={initialValue2} />
+        <DropdownSelect label={"Filter pets"} onSelect={setSelectedPet} options={petOptions} initialValue={initialValue} />
+        <DropdownSelect label={"Filter appointments"} onSelect={setTime} options={options} initialValue={initialValue2} />
       </div>
       <div className={style.appointmentsPageContent__body}>
         {filteredAppointments.length === 0 ?
