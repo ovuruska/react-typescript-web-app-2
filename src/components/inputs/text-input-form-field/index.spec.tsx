@@ -325,5 +325,85 @@ describe('TextInputFormField', () => {
     expect(inputItem.value).toEqual('');
   });
 
+  it('when capitalized is true, every first letter of text should be capitalized.', () => {
+    const { container } = render(<TextInputFormField label='Test' capitalized={true} />);
+    const inputItem = container.querySelector('input') as HTMLInputElement;
+    const text = 'updated test value';
+    act(() => {
+      inputItem.focus();
+      fireEvent.change(inputItem, { target: { value: text } });
+    });
+    expect(inputItem.value).toEqual('Updated Test Value');
+
+  });
+  it('when capitalized is false, every first letter of text should not be capitalized.', () => {
+    const { container } = render(<TextInputFormField label='Test' capitalized={false} />);
+    const inputItem = container.querySelector('input') as HTMLInputElement;
+    const text = 'updated test value';
+    act(() => {
+      inputItem.focus();
+      fireEvent.change(inputItem, { target: { value: text } });
+
+    });
+    expect(inputItem.value).toEqual(text);
+  });
+  it('throws exception, if two of lower, upper or capitalized are true.', () => {
+    expect(() => {
+      render(<TextInputFormField label='Test' capitalized={true} lower={true} />);
+    }).toThrow();
+    expect(() => {
+      render(<TextInputFormField label='Test' capitalized={true} upper={true} />);
+    });
+    expect(() => {
+      render(<TextInputFormField label='Test' lower={true} upper={true} />);
+    });
+    expect(() => {
+      render(<TextInputFormField label='Test' capitalized={true} lower={true} upper={true} />);
+    }).toThrow();
+  });
+  it('when lower is true, every letter of text should be lower case.', () => {
+    const { container } = render(<TextInputFormField label='Test' lower={true} />);
+    const inputItem = container.querySelector('input') as HTMLInputElement;
+    const text = 'UPDATED TEST VALUE';
+    act(() => {
+      inputItem.focus();
+      fireEvent.change(inputItem, { target: { value: text } });
+    });
+    expect(inputItem.value).toEqual('updated test value');
+  });
+
+  it('when lower is false, every letter of text should not be lower case.', () => {
+    const { container } = render(<TextInputFormField label='Test' lower={false} />);
+    const inputItem = container.querySelector('input') as HTMLInputElement;
+    const text = 'UPDATED TEST VALUE';
+    act(() => {
+      inputItem.focus();
+      fireEvent.change(inputItem, { target: { value: text } });
+    });
+    expect(inputItem.value).toEqual(text);
+
+  });
+  it('when upper is true, every letter of text should be upper case.', () => {
+    const { container } = render(<TextInputFormField label='Test' upper={true} />);
+    const inputItem = container.querySelector('input') as HTMLInputElement;
+    const text = 'updated test value';
+    act(() => {
+      inputItem.focus();
+      fireEvent.change(inputItem, { target: { value: text } });
+
+    });
+    expect(inputItem.value).toEqual('UPDATED TEST VALUE');
+  });
+  it('when upper is false, every letter of text should not be upper case.', () => {
+    const { container } = render(<TextInputFormField label='Test' upper={false} />);
+    const inputItem = container.querySelector('input') as HTMLInputElement;
+    const text = 'updated test value';
+    act(() => {
+      inputItem.focus();
+      fireEvent.change(inputItem, { target: { value: text } });
+    });
+    expect(inputItem.value).toEqual(text);
+  });
+
 });
 

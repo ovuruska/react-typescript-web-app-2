@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import LoginPageDumb, { LoginPageDumbProps } from './login.dumb';
+import LoginPageDumb, { LoginPageDumbProps } from './index.dumb';
 import { BrowserRouter } from 'react-router-dom';
 
 export default {

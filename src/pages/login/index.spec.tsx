@@ -1,4 +1,4 @@
-import LoginPageDumb, { LoginPageDumbProps } from '@pages/login/login.dumb';
+import LoginPageDumb, { LoginPageDumbProps } from '@pages/login/index.dumb';
 import { render, fireEvent, act } from '@testing-library/react';
 import { ReactNode } from 'react';
 

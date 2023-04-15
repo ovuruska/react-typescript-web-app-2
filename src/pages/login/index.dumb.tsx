@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './login.module.scss';
+import style from './index.module.scss';
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import { Link } from 'react-router-dom';
 import { AiOutlineGoogle, AiFillApple } from 'react-icons/ai';
@@ -31,6 +31,15 @@ const LoginPageDumb: React.FC<LoginPageDumbProps> = ({
   const [emailError, setEmailError] = React.useState<string|undefined>(undefined);
   const [passwordError, setPasswordError] = React.useState<string|undefined>(undefined);
 
+  const handleEmailChange = (value:string) => {
+    setEmailValue(value);
+    setEmailError(undefined);
+  }
+  const handlePasswordChange = (value:string) => {
+    setPasswordValue(value);
+    setPasswordError(undefined);
+  }
+
   const handleLogin = () => {
     const emailValid = emailValidator(emailValue);
     const passwordValid = passwordValidator(passwordValue);
@@ -52,11 +61,12 @@ const LoginPageDumb: React.FC<LoginPageDumbProps> = ({
         <div className={style.loginInputWrapper}>
           <TextInputFormField
             label="Email"
-            onChanged={setEmailValue}
+            onChanged={handleEmailChange}
+            lower={true}
             errorMessage={emailError}
           />
           <TextInputFormField
-            onChanged={setPasswordValue}
+            onChanged={handlePasswordChange}
             label="Password"
             type={'password'}
             errorMessage={passwordError}

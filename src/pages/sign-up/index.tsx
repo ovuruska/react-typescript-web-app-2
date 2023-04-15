@@ -6,27 +6,32 @@ import { CustomerSignupUseCase } from '@domain/usecases/customer/signup';
 import { SignupRequest } from '@domain/types/requests/signup';
 import { HttpClient } from '@quicker/common/http-client';
 import { HttpClientSymbol } from '@domain/types/TYPES';
+import { useNavigate } from 'react-router-dom';
 
 export interface SignUpPageProps {}
 
 const SignUpPage: React.FC<SignUpPageProps> = ({}) => {
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-  const [confirmPasswordValue, setConfirmPasswordValue] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [error, setError] = useState('');
   const signUp = useInjection<CustomerSignupUseCase>(CustomerSignupUseCase);
   const client = useInjection<HttpClient>(HttpClientSymbol);
-
-  const onSignUp = () => {
+  const navigate = useNavigate();
+  const onSignUp = (email:string,password:string,first_name:string,last_name:string) => {
     const params = {
-      email: emailValue,
-      password: passwordValue,
+      email,
+      password,
+      first_name,
+      last_name,
     } as SignupRequest;
 
     signUp.call(params).then((res) => {
-      client.login(params.email, params.password);
+      client.login(params.email, params.password).then(() => {
+        navigate('/');
+      });
+    }).catch((err) => {
+      if(err.response.status === 400){
+        setError("Email already exists");
+      }
+      setError("There is an issue happened 🤗");
     });
   };
 
@@ -34,16 +39,6 @@ const SignUpPage: React.FC<SignUpPageProps> = ({}) => {
     <Fragment>
       <ErrorPopup message={error} setMessage={setError} />
       <SignUpPageDumb
-        emailValue={emailValue}
-        setEmailValue={setEmailValue}
-        passwordValue={passwordValue}
-        setPasswordValue={setPasswordValue}
-        confirmPasswordValue={confirmPasswordValue}
-        setConfirmPasswordValue={setConfirmPasswordValue}
-        firstName={firstName}
-        setFirstName={setFirstName}
-        lastName={lastName}
-        setLastName={setLastName}
         onSignUp={onSignUp}
       />
     </Fragment>

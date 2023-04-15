@@ -10,6 +10,9 @@ export interface TextInputFormFieldProps {
   type?: string;
   errorMessage?: string;
   validator?: (value: string) => boolean;
+  capitalized?: boolean;
+  lower?: boolean;
+  upper?: boolean;
 }
 
 const TextInputFormField: React.FC<TextInputFormFieldProps> = ({
@@ -19,8 +22,15 @@ const TextInputFormField: React.FC<TextInputFormFieldProps> = ({
                                                                  initialValue,
                                                                  onChanged,
                                                                  disabled,
+  lower= false,
+  upper= false,
+  capitalized = false,
                                                                  type = 'text',
                                                                }: TextInputFormFieldProps) => {
+
+  if((lower && upper) || (lower && capitalized) || (upper && capitalized)){
+    throw new Error('Only one of the lower, upper, capitalized can be true');
+  }
 
   if(validator && initialValue && !validator(initialValue)){
     initialValue = '';
@@ -39,6 +49,16 @@ const TextInputFormField: React.FC<TextInputFormFieldProps> = ({
   };
 
   const handleChange = (value: string) => {
+    if(capitalized){
+      value = value.toLowerCase();
+      value = value.replace(/(^|\s)[\p{Ll}]/gu, (match) => match.toUpperCase());
+    }
+    if(lower){
+      value = value.toLowerCase();
+    }
+    if(upper){
+      value = value.toUpperCase();
+    }
     setValue(value);
     onChanged && onChanged(value);
   };
