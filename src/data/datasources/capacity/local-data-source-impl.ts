@@ -1,19 +1,3 @@
-/*
-import {injectable} from "inversify";
-import {BranchEntity} from "@domain/types/common/branch";
-import {LocalDataSource} from "@data/datasources/local-data-source";
-import { CapacityDetails } from '@domain/types/common/capacity-details';
-
-@injectable()
-export abstract class CapacityLocalDataSource extends LocalDataSource {
-  // monthKey is YYYY-MM
-  abstract getMonthlyCapacity(monthKey : string): BranchEntity[] | null;
-
-  abstract setMonthlyCapacity(monthKey: string, monthlyCapacity: CapacityDetails[]): void;
-}
-
-
-*/
 import { injectable } from 'inversify';
 import { CapacityLocalDataSource } from '@data/datasources/capacity/local-data-source';
 import { CapacityDetails } from '@domain/types/common/capacity-details';

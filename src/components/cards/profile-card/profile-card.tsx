@@ -7,10 +7,14 @@ import CarouselSlider from "../../carousel-slider/carousel-slider";
 import ProfileBtn from "../../buttons/profile-btn";
 import AddBtn from "../../buttons/add-btn";
 import { useNavigate } from 'react-router-dom';
+import { AppointmentEntity } from '@domain/types/common/appointment';
+import { PetEntity } from '@domain/types/common/pet';
 
-interface Props {}
+interface ProfileCardProps {
+  pets?: PetEntity[];
+}
 
-const ProfileCard: React.FC<Props> = ({}) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({}) => {
 
   const navigate = useNavigate();
   const handleAddClick = () => {

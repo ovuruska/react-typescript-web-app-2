@@ -48,6 +48,8 @@ import { AppointmentRepositoryImpl } from '@data/repositories/appointment';
 import { AppointmentRepository } from '@domain/repositories/appointment';
 import { CreateAppointmentUseCase } from '@domain/usecases/appointment/create-appointment';
 import { CancelAppointmentUseCase } from '@domain/usecases/appointment/cancel-appointment';
+import { CustomerGetUpcomingAppointmentsUseCase } from '@domain/usecases/customer/upcoming-appointments';
+import { CustomerGetPastAppointmentsUseCase } from '@domain/usecases/customer/past-appointments';
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -85,5 +87,6 @@ export const containerBind = (container:Container) => {
   container.bind<AppointmentRepository>(AppointmentRepository).to(AppointmentRepositoryImpl).inSingletonScope();
   container.bind<CreateAppointmentUseCase>(CreateAppointmentUseCase).toSelf();
   container.bind<CancelAppointmentUseCase>(CancelAppointmentUseCase).toSelf();
-
+  container.bind<CustomerGetUpcomingAppointmentsUseCase>(CustomerGetUpcomingAppointmentsUseCase).toSelf();
+  container.bind<CustomerGetPastAppointmentsUseCase>(CustomerGetPastAppointmentsUseCase).toSelf();
 }

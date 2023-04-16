@@ -44,14 +44,10 @@ export const login = async (page: Page, responsePool:ResponsePool) => {
   });
 
   await page.goto(APP_URL + RouteNames.LOGIN);
-  /*await page.waitForSelector('[data-testid="text-input-form-field"]',{
+  await page.waitForSelector('[data-testid="text-input-form-field"]',{
     timeout:500
   });
 
-   */
-  await page.waitForSelector('[data-testid="text-input-form-field"]',{
-    timeout:50000
-  });
   const inputs = await page.$$('[data-testid="text-input-form-field"]');
   const emailInput = inputs[0];
   const passwordInput = inputs[1];
@@ -63,7 +59,7 @@ export const login = async (page: Page, responsePool:ResponsePool) => {
   const button = await page.$('[data-testid="cta-primary"]') as ElementHandle
   await button.click();
   await page.waitForNavigation({
-    timeout:100000
+    timeout:1000
   });
 
 }

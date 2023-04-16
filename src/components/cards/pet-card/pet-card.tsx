@@ -7,12 +7,13 @@ interface Props {
   svgSrc: string;
   name: string;
   age: string;
+  onClick?: () => void;
 }
 
 const PetCard: React.FC<Props> = (props: Props) => {
-  const { svgSrc, name, age } = props;
+  const { svgSrc, name, age,onClick } = props;
   return (
-    <div className="pet-card">
+    <div onClick={onClick } className="pet-card">
       <div className="center-wrapper" style={{ width: "45%" }}>
         <Avatar name={name} round={true} size={"50px"} color="#DA8100" />
       </div>
