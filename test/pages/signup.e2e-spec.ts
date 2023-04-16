@@ -1,5 +1,5 @@
 import puppeteer, { ElementHandle,Page, Browser } from 'puppeteer';
-import { APP_URL, DELAY, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, TIMEOUT } from './constants';
+import { APP_URL, DELAY, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, TIMEOUT } from '../utils/constants';
 
 jest.setTimeout(TIMEOUT);
 
@@ -73,7 +73,7 @@ describe('User Signup', () => {
       }
     });
 
-    await page.goto(`${appUrl}signup`);
+    await page.goto(`${appUrl}/signup`);
     const inputs = await page.$$('[data-testid="text-input-form-field"]');
     const firstNameInput = inputs[0];
     const lastNameInput = inputs[1];
@@ -97,7 +97,7 @@ describe('User Signup', () => {
     await page.waitForNavigation({
       timeout:15000
     });
-    expect(page.url()).toBe(appUrl);
+    expect(page.url()).toBe(appUrl + "/");
 
   });
 
@@ -117,7 +117,7 @@ describe('User Signup', () => {
           request.continue();
         }
       });
-      await page.goto(`${appUrl}signup`);
+      await page.goto(`${appUrl}/signup`);
 
     });
 
@@ -136,10 +136,10 @@ describe('User Signup', () => {
         await page.waitForNavigation({
           timeout:1000
         });
-        expect(page.url()).toBe(`${appUrl}signup`);
+        expect(page.url()).toBe(`${appUrl}/signup`);
 
       }catch(e){
-        expect(page.url()).toBe(`${appUrl}signup`);
+        expect(page.url()).toBe(`${appUrl}/signup`);
       }
 
     });
@@ -159,10 +159,10 @@ describe('User Signup', () => {
         await page.waitForNavigation({
           timeout:1000
         });
-        expect(page.url()).toBe(`${appUrl}signup`);
+        expect(page.url()).toBe(`${appUrl}/signup`);
 
       }catch(e){
-        expect(page.url()).toBe(`${appUrl}signup`);
+        expect(page.url()).toBe(`${appUrl}/signup`);
       }
 
     });
@@ -184,10 +184,10 @@ describe('User Signup', () => {
         await page.waitForNavigation({
           timeout:1000
         });
-        expect(page.url()).toBe(`${appUrl}signup`);
+        expect(page.url()).toBe(`${appUrl}/signup`);
 
       }catch(e){
-        expect(page.url()).toBe(`${appUrl}signup`);
+        expect(page.url()).toBe(`${appUrl}/signup`);
       }
 
     });

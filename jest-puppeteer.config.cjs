@@ -26,6 +26,7 @@ module.exports = {
       '<rootDir>/src/__mocks__/assetMock.ts',
     '^react-router-dom$': '<rootDir>/src/__mocks__/react-router-dom.ts',
   },
+  setupFiles: ['./jest-puppeteer.setup.cjs'],
   server: {
     command: 'npm run dev',
     port: VITE_PORT,

@@ -1,7 +1,11 @@
 import puppeteer, { ElementHandle,Page, Browser } from 'puppeteer';
-import { APP_URL, DELAY, EMAIL, PASSWORD, TIMEOUT } from './constants';
+import { APP_URL, DELAY, EMAIL, PASSWORD, TIMEOUT } from '../utils/constants';
+import { AuthenticationResponseMockGenerator } from '../../src/domain/types/__mock__/authentication-response';
 
 jest.setTimeout(600000);
+
+const authGenerator = new AuthenticationResponseMockGenerator();
+const authResponse = authGenerator.generateOne();
 
 describe('User Login', () => {
   let browser: Browser;
@@ -43,25 +47,7 @@ describe('User Login', () => {
             "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
           },
           contentType: 'application/json',
-          body: JSON.stringify({
-            user: {
-              id: 153,
-              username: 'b@b.com',
-            },
-            token:
-              'f4a727bdc2216d3acb8a4e88e5ed5d1f87bba6a2f57262a2a27a0675fbb25acb',
-            profile: {
-              id: 102,
-              name: 'a b',
-              uid: '',
-              email: '',
-              phone: '',
-              address: '',
-              user: 153,
-              role: 1,
-              validated: true,
-            },
-          }),
+          body: JSON.stringify(authResponse),
         });
         request.responseForRequest();
 
@@ -84,7 +70,7 @@ describe('User Login', () => {
     await page.waitForNavigation({
       timeout:1000
     });
-    expect(page.url()).toBe(appUrl);
+    expect(page.url()).toBe(appUrl + "/");
   });
   describe('fails',() => {
     beforeEach(async () => {
@@ -121,10 +107,10 @@ describe('User Login', () => {
         await page.waitForNavigation({
           timeout:1000
         });
-        expect(page.url()).toBe(`${appUrl}login`);
+        expect(page.url()).toBe(`${appUrl}/login`);
 
       }catch(e){
-        expect(page.url()).toBe(`${appUrl}login`);
+        expect(page.url()).toBe(`${appUrl}/login`);
       }
 
     });
@@ -144,10 +130,10 @@ describe('User Login', () => {
         await page.waitForNavigation({
           timeout:1000
         });
-        expect(page.url()).toBe(`${appUrl}login`);
+        expect(page.url()).toBe(`${appUrl}/login`);
 
       }catch(e){
-        expect(page.url()).toBe(`${appUrl}login`);
+        expect(page.url()).toBe(`${appUrl}/login`);
       }
 
     });
@@ -169,10 +155,10 @@ describe('User Login', () => {
         await page.waitForNavigation({
           timeout:1000
         });
-        expect(page.url()).toBe(`${appUrl}login`);
+        expect(page.url()).toBe(`${appUrl}/login`);
 
       }catch(e){
-        expect(page.url()).toBe(`${appUrl}login`);
+        expect(page.url()).toBe(`${appUrl}/login`);
       }
 
     });
