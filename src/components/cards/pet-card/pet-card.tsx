@@ -4,14 +4,13 @@ import "./pet-card.css";
 import Avatar from "react-avatar";
 
 interface Props {
-  svgSrc: string;
   name: string;
   age: string;
   onClick?: () => void;
 }
 
 const PetCard: React.FC<Props> = (props: Props) => {
-  const { svgSrc, name, age,onClick } = props;
+  const {  name, age,onClick } = props;
   return (
     <div onClick={onClick } className="pet-card">
       <div className="center-wrapper" style={{ width: "45%" }}>

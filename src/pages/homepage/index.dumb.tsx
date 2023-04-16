@@ -5,17 +5,18 @@ import CarouselSlider from "@components/carousel-slider/carousel-slider";
 import ProfileCard from "@components/cards/profile-card/profile-card";
 import ServiceCard from "@components/cards/service-card/service-card";
 import svgSrc from "../../assets/grooming.svg";
-import "./homepage.scss";
+import "./index.scss";
 import AppointmentCard from "@components/cards/appointment-card/appointment-card";
 import imageSrc from "../../assets/mockPhoto.png";
 import logoSrc from "../../assets/logo.png";
 import { PetEntity } from '@domain/types/common/pet';
 import { AppointmentEntity } from '@domain/types/common/appointment';
 import UpcomingApptsDumb from '@features/upcoming-appts/index.dumb';
+import { PetDetailsEntity } from '@domain/types/common/pet-details';
 
 export interface HomePageDumbProps {
   appointments: AppointmentEntity[];
-  pets: PetEntity[];
+  pets: PetDetailsEntity[];
 }
 
 const HomePageDumb = ({appointments,pets} : HomePageDumbProps) => {
@@ -32,32 +33,18 @@ const HomePageDumb = ({appointments,pets} : HomePageDumbProps) => {
         <div className="service-row-flex">
           <ServiceCard
             title="Grooming"
-            subtitle="Tincidunt ornare massa"
-            svgSrc={svgSrc}
+            subtitle="clean, well-brushed, and clipped"
           />
           <ServiceCard
             title="We Wash"
-            subtitle="Tincidunt ornare massa"
-            svgSrc={svgSrc}
+            subtitle="bath to clean up your pet"
           />
         </div>
       </div>
       <div className="appointments-row">
         <UpcomingApptsDumb appointments={appointments} />
       </div>
-      <div className="promotions-row">
-        <div className="header-row" style={{ paddingLeft: "0" }}>
-          <h2>Promotions</h2>
-        </div>
-        <CarouselSlider
-          Element={PromotionCard}
-          args={[
-            { title: "Maecenas lacus vel facilisis", imageSrc: imageSrc },
-            { title: "Maecenas lacus vel facilisis", imageSrc: imageSrc },
-            { title: "Maecenas lacus vel facilisis", imageSrc: imageSrc },
-          ]}
-        />
-      </div>
+
     </div>
   );
 }

@@ -1,3 +1,6 @@
+@import "@styles/variables";
+@import "@styles/typography";
+
 .profile {
   background-color: #faca86;
   width: 100%;
@@ -52,4 +55,19 @@
 
 .bg-row img {
   width: 100%;
+}
+
+.text-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 1em;
+  width: 60%;
+
+  & > p {
+    text-align: center;
+    @include headline;
+    color:$main-800;
+  }
 }

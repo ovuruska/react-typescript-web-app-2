@@ -8,12 +8,11 @@ import WeWashIcon from "../../icons/wewash-icon";
 import "./service-card.css";
 
 interface Props {
-  svgSrc: string;
   title: string;
   subtitle: string;
 }
 
-const ServiceCard: React.FC<Props> = ({ svgSrc, title, subtitle }) => {
+const ServiceCard: React.FC<Props> = ({  title, subtitle }) => {
   const [colorScheme, setcolorScheme] = useState<number>(0);
   const dispatch = useDispatch();
   useEffect(() => {

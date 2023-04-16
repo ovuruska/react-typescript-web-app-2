@@ -1,5 +1,4 @@
-import "./profile-card.css";
-import "../../../App.css";
+import "./profile-card.scss";
 import React from "react";
 import PetCard from "../../cards/pet-card/pet-card";
 import bgSrc from "../../../assets/bgtop.png";
@@ -7,16 +6,18 @@ import CarouselSlider from "../../carousel-slider/carousel-slider";
 import ProfileBtn from "../../buttons/profile-btn";
 import AddBtn from "../../buttons/add-btn";
 import { useNavigate } from 'react-router-dom';
-import { AppointmentEntity } from '@domain/types/common/appointment';
-import { PetEntity } from '@domain/types/common/pet';
+import { PetDetailsEntity } from '@domain/types/common/pet-details';
+import { useDispatch } from 'react-redux';
+import  { SelectedPetActions } from '@quicker/store/selected-pet-slice';
 
 interface ProfileCardProps {
-  pets?: PetEntity[];
+  pets?: PetDetailsEntity[];
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({}) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({pets = []}) => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleAddClick = () => {
     navigate("/add-pet");
   }
@@ -24,6 +25,20 @@ const ProfileCard: React.FC<ProfileCardProps> = ({}) => {
     navigate("/my-account");
   }
 
+  const handlePetClick = (pet:PetDetailsEntity) => () => {
+    dispatch(SelectedPetActions.setPet(pet));
+    navigate("/pet-details");
+  };
+
+  const args = pets.map((pet) => {
+    return {
+      name: pet.name,
+      age: pet.age,
+      onClick:handlePetClick(pet)
+
+
+    };
+  });
 
 
   return (
@@ -34,14 +49,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({}) => {
           <AddBtn onClick={handleAddClick}/>
         </div>
       </div>
+      {pets.length === 0 && <div className={"text-column"}><p> You can add your dog by clicking + button.</p></div>}
       <div className="row pets-slider">
         <CarouselSlider
-          args={[
-            { name: "John Foo", age: "5 years old", svgSrc: "foo" },
-            { name: "John Foo", age: "5 years old", svgSrc: "foo" },
-            { name: "John Foo", age: "5 years old", svgSrc: "foo" },
-            { name: "John Foo", age: "5 years old", svgSrc: "foo" },
-          ]}
+          args={args}
           Element={PetCard}
         />
       </div>

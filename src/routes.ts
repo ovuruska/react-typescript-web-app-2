@@ -4,7 +4,7 @@ const AddPetPage = lazy(() => import("@pages/add-pet"));
 const ThanksPage = lazy(() => import("@pages/thanks"));
 const PolicyPage = lazy(() => import("./pages/policy"));
 const BookPage = lazy(() => import("./pages/bookpage/bookpage"));
-const HomePage = lazy(() => import("./pages/homepage/homepage"));
+const HomePage = lazy(() => import("@pages/homepage"));
 const AddOnsPage = lazy(() => import("./pages/addons/add-ons"));
 const PaymentPage = lazy(() => import("./pages/payment"));
 const MyAccountPage = lazy(() => import("./pages/my-account"));

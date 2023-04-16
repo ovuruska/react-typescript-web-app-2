@@ -11,7 +11,7 @@ export default {
 
 //👇 We create a “template” of how args map to rendering
 const Template: ComponentStory<typeof PetCard> = (args) => (
-  <PetCard name="John Foo" age="5 years old" svgSrc="foo" />
+  <PetCard name="John Foo" age="5 years old" />
 );
 
 export const FirstStory = Template.bind({});
