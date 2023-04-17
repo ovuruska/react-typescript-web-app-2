@@ -10,6 +10,7 @@ import { OffsetRequest } from '@domain/types/requests/offset';
 import { OffsetResponse } from '@domain/types/responses/offset';
 import { AppointmentEntity } from '@domain/types/common/appointment';
 import { PetDetailsEntity } from '@domain/types/common/pet-details';
+import { CreatePetRequest } from '@domain/types/requests/create-pet';
 
 @injectable()
 export class CustomerRepositoryImpl implements CustomerRepository{
@@ -43,6 +44,10 @@ export class CustomerRepositoryImpl implements CustomerRepository{
 
   async allPets(): Promise<PetDetailsEntity[]> {
     return await this.remoteDataSource.allPets();
+  }
+
+  async createPet(request:CreatePetRequest): Promise<PetDetailsEntity> {
+    return await this.remoteDataSource.createPet(request);
   }
 
 }

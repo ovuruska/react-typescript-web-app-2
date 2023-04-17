@@ -10,6 +10,7 @@ import { OffsetRequest } from '@domain/types/requests/offset';
 import { AppointmentEntity } from '@domain/types/common/appointment';
 import { OffsetResponse } from '@domain/types/responses/offset';
 import { PetDetailsEntity } from '@domain/types/common/pet-details';
+import { CreatePetRequest } from '@domain/types/requests/create-pet';
 
 
 @injectable()
@@ -68,6 +69,11 @@ export class CustomerRemoteDataSourceImpl implements CustomerRemoteDataSource {
   async allPets(): Promise<PetDetailsEntity[]> {
     const response = await this.client.get<PetDetailsEntity[]>('/api/customer/pets/all');
     return response.data as PetDetailsEntity[];
+  }
+
+  async createPet(request: CreatePetRequest): Promise<PetDetailsEntity> {
+    const response = await this.client.post<CreatePetRequest, PetDetailsEntity>('/api/customer/pet/create', request);
+    return response.data as PetDetailsEntity;
   }
 
 }

@@ -9,6 +9,7 @@ import { AuthenticationResponseMockGenerator } from '@domain/types/__mock__/auth
 import { SignupRequest } from '@domain/types/requests/signup';
 import { AppointmentMockGenerator } from '@domain/types/__mock__/appointment';
 import { PetDetailsMockGenerator } from '@domain/types/__mock__/pet-details';
+import { CreatePetRequest } from '@domain/types/requests/create-pet';
 
 describe('CustomerRemoteDataSourceImpl', () => {
   let customerRemoteDataSource: CustomerRemoteDataSource;
@@ -144,6 +145,21 @@ describe('CustomerRemoteDataSourceImpl', () => {
     expect(mockAxios.get).toHaveBeenCalledWith('/api/customer/pets/all', undefined);
     expect(response).toHaveLength(data.length);
 
+  });
+
+  it('should create dog successfully.', async () => {
+    const data = petDetailsMockGenerator.generateOne();
+    const request = {
+      name:"a",
+      breed:"a",
+      gender:"Male",
+      age:1,
+      weight:1,
+    } as CreatePetRequest;
+    mockAxios.post.mockResolvedValue({data });
+    const response = await customerRemoteDataSource.createPet(request);
+    expect(mockAxios.post).toHaveBeenCalledWith('/api/customer/pet/create', request, undefined);
+    expect(response).toEqual(data);
   });
 
 });

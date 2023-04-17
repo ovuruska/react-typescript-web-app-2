@@ -7,6 +7,7 @@ import { AuthenticationResponseMockGenerator } from '@domain/types/__mock__/auth
 import mockAxios from 'jest-mock-axios';
 import { AppointmentMockGenerator } from '@domain/types/__mock__/appointment';
 import { PetDetailsMockGenerator } from '@domain/types/__mock__/pet-details';
+import { CreatePetRequest } from '@domain/types/requests/create-pet';
 
 const appointmentGenerator = new AppointmentMockGenerator();
 
@@ -100,5 +101,19 @@ describe('CustomerRepositoryImpl', () => {
     expect(result).toEqual(data);
   });
 
+  it('should create pet successfully', async () => {
+    const data = petDetailsMockGenerator.generateOne();
+    mockAxios.post.mockResolvedValue({data});
+    const request = {
+      name: 'a',
+      breed: 'a',
+      gender:"Male",
+      age: 1,
+      weight: 1,
+    } as CreatePetRequest;
+    const result = await customerRepository.createPet(request);
+    expect(result).toEqual(data);
+    expect(mockAxios.post).toHaveBeenCalledWith('/api/customer/pet/create', request, undefined);
+  });
 
 });

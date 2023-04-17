@@ -50,6 +50,7 @@ import { CreateAppointmentUseCase } from '@domain/usecases/appointment/create-ap
 import { CancelAppointmentUseCase } from '@domain/usecases/appointment/cancel-appointment';
 import { CustomerGetUpcomingAppointmentsUseCase } from '@domain/usecases/customer/upcoming-appointments';
 import { CustomerGetPastAppointmentsUseCase } from '@domain/usecases/customer/past-appointments';
+import { CustomerCreatePetUseCase } from '@domain/usecases/customer/create-pet';
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -89,4 +90,5 @@ export const containerBind = (container:Container) => {
   container.bind<CancelAppointmentUseCase>(CancelAppointmentUseCase).toSelf();
   container.bind<CustomerGetUpcomingAppointmentsUseCase>(CustomerGetUpcomingAppointmentsUseCase).toSelf();
   container.bind<CustomerGetPastAppointmentsUseCase>(CustomerGetPastAppointmentsUseCase).toSelf();
+  container.bind<CustomerCreatePetUseCase>(CustomerCreatePetUseCase).toSelf();
 }

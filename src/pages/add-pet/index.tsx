@@ -1,15 +1,12 @@
 import React from 'react';
-import style from './index.module.scss';
-import { BiLeftArrow } from 'react-icons/bi';
-import TextInputFormField from '@components/inputs/text-input-form-field';
-import PetBreedSelect from '@pages/add-pet/pet-breed-select';
-import PetGenderSelect from '@components/inputs/pet-gender-select';
-import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
-import PetAgeSelect from '@pages/add-pet/pet-age-select';
-import PetWeightSelect from '@pages/add-pet/pet-weight-select';
 import { useNavigate } from 'react-router-dom';
 import PageCard from '@components/cards/page-card/page-card';
 import AddPetDumb from '@pages/add-pet/index.dumb';
+import { useInjection } from 'inversify-react';
+import { CustomerCreatePetUseCase } from '@domain/usecases/customer/create-pet';
+import { CreatePetRequest } from '@domain/types/requests/create-pet';
+import { useDispatch } from 'react-redux';
+import { PetsActions } from '@quicker/store/pet-slice';
 
 export interface AddPetPageProps {
 
@@ -20,13 +17,22 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({}: AddPetPageProps) => {
 
 
   const navigate = useNavigate();
-
+  const createPet = useInjection<CustomerCreatePetUseCase>(CustomerCreatePetUseCase);
+  const dispatch = useDispatch();
 
   const goBack = () => {
     navigate('/');
   };
 
-  return <PageCard><AddPetDumb goBack={goBack} /></PageCard>;
+  const handleSubmit = (request:CreatePetRequest) =>{
+    goBack();
+    createPet.call(request).then((response) => {
+      dispatch(PetsActions.addPet(response));
+    });
+
+  }
+
+  return <PageCard><AddPetDumb submit={handleSubmit} goBack={goBack} /></PageCard>;
 };
 
 export default AddPetPage;

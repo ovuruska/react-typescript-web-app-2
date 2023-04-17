@@ -7,14 +7,16 @@ import PetGenderSelect from '@components/inputs/pet-gender-select';
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import PetAgeSelect from '@pages/add-pet/pet-age-select';
 import PetWeightSelect from '@pages/add-pet/pet-weight-select';
+import { CreatePetRequest } from '@domain/types/requests/create-pet';
 
 export interface AddPetPageProps {
   goBack?: () => void;
+  submit?: (request:CreatePetRequest) => void;
 }
 
 
 export const AddPetDumb: React.FC<AddPetPageProps> = ({
-  goBack,
+  goBack,submit
                                                       }: AddPetPageProps) => {
 
   const [breed, setBreed] = React.useState<string | null>(null);
@@ -29,7 +31,14 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
   const handleSubmit = () => {
     if(gender && breed && name && weight && age) {
       setError(false);
-      goBack && goBack()
+      const request = {
+        name,
+        breed,
+        gender,
+        age,
+        weight
+      }
+      submit && submit(request)
     }else{
       setError(true);
     }

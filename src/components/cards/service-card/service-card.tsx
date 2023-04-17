@@ -27,7 +27,6 @@ const ServiceCard: React.FC<Props> = ({  title, onClick, subtitle }) => {
 
   const handleBookingStart = () => {
 
-    // TODO: This is a hacky way to do this. We should be able to do this in a better way.
     onClick && onClick() &&     dispatch(OrderActions.setOrderType(title)) && navigate("/book");
   }
 
