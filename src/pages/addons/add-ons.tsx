@@ -35,7 +35,7 @@ const AddOnsPage: React.FC = () => {
 
 
   return <BookingJourney selectable={false}>
-   <AddOnsDumb onNextBooking={handleNextBooking} products={products} allProducts={allProducts} price={price} setProducts={setProducts} />;
+   <AddOnsDumb onNextBooking={handleNextBooking} products={products} allProducts={allProducts} price={price} setProducts={setProducts} />
   </BookingJourney>
 };
 

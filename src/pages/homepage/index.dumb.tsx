@@ -33,7 +33,7 @@ const HomePageDumb = ({appointments,pets} : HomePageDumbProps) => {
         <div className="service-row-flex">
           <ServiceCard
             title="Grooming"
-            subtitle="clean, well-brushed, and clipped"
+            subtitle="well-brushed, and clipped"
           />
           <ServiceCard
             title="We Wash"

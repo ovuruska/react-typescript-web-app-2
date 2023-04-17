@@ -89,7 +89,7 @@ const AddOnsDumb = ({
 
         </div>
       </div>
-  </>;
+  </>
 
 };
 
