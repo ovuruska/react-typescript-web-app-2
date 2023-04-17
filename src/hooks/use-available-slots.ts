@@ -18,7 +18,7 @@ export interface AvailableSlotsParams {
 const useAvailableSlots = ({
   date = new Date(),
   duration = 60,
-  service = 'Full Grooming',
+  service = 'Grooming',
   branches,
   employees,
   times = ['morning', 'afternoon', 'evening'],
@@ -36,7 +36,7 @@ const useAvailableSlots = ({
 
   const fullDate = `${yearStr}-${monthStr}-${dateStr}`;
   useEffect(() => {
-    if (service === 'Grooming') service = 'Full Grooming';
+    if (service === 'Grooming') service = 'Grooming';
     else if (service === 'WeWash') service = 'We Wash';
 
     if (employees?.length === 0 && branches?.length === 0) setSlots([]);

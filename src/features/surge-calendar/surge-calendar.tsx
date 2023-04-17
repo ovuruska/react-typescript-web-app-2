@@ -17,7 +17,7 @@ const SurgeCalendar: React.FC<SurgeCalendarProps> = ({
   employees,
   branches,
   onChange,
-  service = "Full Grooming",
+  service = "Grooming",
 }) => {
 
   const [date, setDate] = useState<Date>(initialDate);

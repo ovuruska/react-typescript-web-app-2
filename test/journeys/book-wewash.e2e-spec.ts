@@ -161,6 +161,10 @@ describe('Book we wash', () => {
     expect(requestBody.pet).toBe(expectedObj.pet);
     expect(requestBody.service).toBe(expectedObj.service);
     expect(requestBody.products.length).toEqual(expectedObj.products.length);
+    requestBody.products.forEach((product, index) => {
+      expect(typeof product).toBe(typeof 1);
+
+    });
     // Check if body includes start inside the expected time
     expect(requestBody.start).toContain(expectedObj.start);
 

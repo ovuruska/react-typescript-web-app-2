@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useInjection } from 'inversify-react';
 import { CreateAppointmentUseCase } from '@domain/usecases/appointment/create-appointment';
 import { CreateAppointmentRequest } from '@domain/types/requests/create-appointment';
+import { ProductEntity } from '@domain/types/common/product';
 
 export interface PaymentPageProps {
 }
@@ -32,9 +33,9 @@ const PaymentPage: React.FC<PaymentPageProps> = ({}) => {
       employee: employee.id,
       branch: branch.id,
       pet:pet.id,
-      service: (service === 'Grooming') ? 'Full Grooming' : 'We Wash',
+      service: service,
       start,
-      products: products ?? [],
+      products: products.map((product:ProductEntity) => product.id),
     } as CreateAppointmentRequest;
     createAppointment.call(createAppointmentParams);
 

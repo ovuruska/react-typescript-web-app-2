@@ -66,14 +66,14 @@ describe('Book', () => {
 
     const expectedObj : Partial<CreateAppointmentRequest> = {
       pet:pets[0].id,
-      service: "Full Grooming"
+      service: "Grooming"
 
     }
     await login(page, responsePool);
 
 
     await page.goto(APP_URL + '/');
-    // .card-green corresponds to Full Grooming button.
+    // .card-green corresponds to Grooming button.
     await page.waitForSelector('.card-green');
     const groomingButton = await page.$('.card-green') as ElementHandle<Element>;
     await groomingButton.click();
@@ -193,6 +193,10 @@ describe('Book', () => {
     expect(requestBody.pet).toBe(expectedObj.pet);
     expect(requestBody.service).toBe(expectedObj.service);
     expect(requestBody.products.length).toEqual(expectedObj.products.length);
+    requestBody.products.forEach((product, index) => {
+      expect(typeof product).toBe(typeof 1);
+
+    });
     // Check if body includes start inside the expected time
     expect(requestBody.start).toContain(expectedObj.start);
 

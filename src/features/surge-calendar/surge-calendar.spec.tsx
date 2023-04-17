@@ -60,7 +60,7 @@ describe('SurgeCalendar', () => {
 
   it('should render with service', () => {
     const wrapper = render(<InversionProvider container={testContainer}><SurgeCalendar
-      service='Full Grooming' /></InversionProvider>);
+      service='Grooming' /></InversionProvider>);
     expect(wrapper).toBeTruthy();
   });
 
