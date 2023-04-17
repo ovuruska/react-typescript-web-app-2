@@ -14,8 +14,13 @@ import {OrderActions} from "@quicker/store/order-slice";
 import {DailyAvailableSlot} from "@domain/types/responses/daily-available-slots-response";
 import BookingJourney from '@components/journeys/booking-journey';
 
+
+const getTomorrow = () => {
+  return new Date(new Date().getTime() + 24*  60 * 60 * 1000);
+}
+
 const BookPage: React.FC = () => {
-  const [date,setDate] = useState<Date>(new Date());
+  const [date,setDate] = useState<Date>(getTomorrow());
   const [branches,setBranches] = useState<Array<number>>([]);
   const [groomers,setGroomers] = useState<Array<number>>([]);
   const [times,setTimes] = useState<Array<string>>(["morning","afternoon","evening"]);

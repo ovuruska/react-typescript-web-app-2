@@ -5,12 +5,16 @@ import PageCard from '@components/cards/page-card/page-card';
 import { HttpClient } from '@quicker/common/http-client';
 import { useInjection } from 'inversify-react';
 import { HttpClientSymbol } from '@domain/types/TYPES';
+import { persistor } from '@quicker/store/store';
+import { OrderActions } from '@quicker/store/order-slice';
+import { useDispatch } from 'react-redux';
 
 const MyAccountPage = () => {
 
   const navigate = useNavigate();
   const me = useMe();
   const client = useInjection<HttpClient>(HttpClientSymbol);
+  const dispatch = useDispatch();
 
   const gotoAppointments = () => {
     navigate('/appointments');
@@ -26,6 +30,10 @@ const MyAccountPage = () => {
 
   const handleLogout = () => {
     client.logout();
+    localStorage.clear();
+    sessionStorage.clear();
+    persistor.purge();
+    dispatch(OrderActions.resetOrder());
     navigate('/login');
   }
 

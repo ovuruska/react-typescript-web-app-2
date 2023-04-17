@@ -2,13 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BranchEntity } from '@domain/types/common/branch';
 import { EmployeeEntity } from '@domain/types/common/employee';
 import { PetEntity } from '@domain/types/common/pet';
+import { ProductEntity } from '@domain/types/common/product';
 
 export interface OrderState {
   orderType: string;
   branch?:BranchEntity;
   groomer?:EmployeeEntity;
   pet?:PetEntity;
-  products:number[];
+  products:ProductEntity[];
   start?:string;
   step:number;
 }
@@ -43,7 +44,7 @@ const orderSlice = createSlice({
       state.pet = action.payload.pet ?? state.pet;
       state.start = action.payload.start ?? state.start;
       state.step = action.payload.step ?? state.step;
-      state.products = action.payload.products ?? state.products.filter((p) => p != 0) ?? [];
+      state.products = action.payload.products ?? state.products  ;
     },
     setPet: (state, action: PayloadAction<PetEntity>) => {
       console.log("setPet", action.payload);

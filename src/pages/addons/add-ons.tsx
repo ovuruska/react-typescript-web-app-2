@@ -14,6 +14,8 @@ import { OrderActions } from '@quicker/store/order-slice';
 const AddOnsPage: React.FC = () => {
   const allProducts = useAllProducts();
   const [products, setProducts] = React.useState<ProductEntity[]>([]);
+
+
   const price = 250 + products.reduce((acc, product) => acc + product.cost, 0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const AddOnsPage: React.FC = () => {
   }
   const handleSelectProduct = (products: ProductEntity[]) => {
     setProducts(products);
-    dispatch(OrderActions.setOrder({products:products.map((product)=>{return product.id})}));
+    dispatch(OrderActions.setOrder({products}));
 
   }
 

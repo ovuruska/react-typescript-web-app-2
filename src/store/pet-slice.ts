@@ -1,15 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PetEntity } from '@domain/types/common/pet';
-import { PetMockGenerator } from '@domain/types/__mock__/pet-generator';
 
 export interface PetState {
   pets: Array<PetEntity>;
 }
 
-const petGenerator = new PetMockGenerator();
-
 const initialState: PetState = {
-  pets: petGenerator.generateMany(2)
+  pets: []
 };
 
 const petsSlice = createSlice({

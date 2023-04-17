@@ -1,5 +1,6 @@
 import CustomCalendar from "@components/book/calender/custom-calender";
 import { useCallback,  useState } from "react";
+import style from "./surge-calendar.module.scss";
 
 export type SurgeCalendarProps = {
   initialDate?: Date;
@@ -9,6 +10,8 @@ export type SurgeCalendarProps = {
   service?: string;
 };
 
+
+
 const SurgeCalendar: React.FC<SurgeCalendarProps> = ({
   initialDate = new Date(),
   employees,
@@ -16,6 +19,7 @@ const SurgeCalendar: React.FC<SurgeCalendarProps> = ({
   onChange,
   service = "Full Grooming",
 }) => {
+
   const [date, setDate] = useState<Date>(initialDate);
 
   const handleChange = useCallback(
@@ -27,12 +31,21 @@ const SurgeCalendar: React.FC<SurgeCalendarProps> = ({
     },
     [onChange]
   );
+  const strikethroughPastDates = (date: Date) => {
+    if(date < new Date()) {
+      return style.surgeCalendar__past;
+    }else{
+      return "";
+    }
 
+  }
   return (
     <div>
       <CustomCalendar
         date={date}
         onChange={handleChange}
+  mapDateToClassName={strikethroughPastDates}
+
       />
     </div>
   );

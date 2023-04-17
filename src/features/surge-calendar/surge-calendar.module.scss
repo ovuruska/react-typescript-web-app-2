@@ -21,4 +21,15 @@
     color: #FACA86;
   }
 
+  // strike through
+  &__past{
+    pointer-events: none;
+    cursor: default;
+    text-decoration: line-through;
+    &:hover{
+      pointer-events: none;
+        cursor: default;
+    }
+  }
+
 }
