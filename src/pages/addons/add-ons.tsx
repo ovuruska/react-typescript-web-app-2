@@ -6,8 +6,9 @@ import { ProductEntity } from '@domain/types/common/product';
 import ServiceHeader from '@features/service-header/service-header';
 import PageCard from '@components/cards/page-card/page-card';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import BookingJourney from '@components/journeys/booking-journey';
+import { OrderActions } from '@quicker/store/order-slice';
 
 
 const AddOnsPage: React.FC = () => {
@@ -15,9 +16,15 @@ const AddOnsPage: React.FC = () => {
   const [products, setProducts] = React.useState<ProductEntity[]>([]);
   const price = 250 + products.reduce((acc, product) => acc + product.cost, 0);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleNextBooking = () => {
     navigate('/payment');
+
+  }
+  const handleSelectProduct = (products: ProductEntity[]) => {
+    setProducts(products);
+    dispatch(OrderActions.setOrder({products:products.map((product)=>{return product.id})}));
 
   }
 
@@ -35,7 +42,7 @@ const AddOnsPage: React.FC = () => {
 
 
   return <BookingJourney selectable={false}>
-   <AddOnsDumb onNextBooking={handleNextBooking} products={products} allProducts={allProducts} price={price} setProducts={setProducts} />
+   <AddOnsDumb onNextBooking={handleNextBooking} products={products} allProducts={allProducts} price={price} setProducts={handleSelectProduct} />
   </BookingJourney>
 };
 

@@ -9,7 +9,6 @@ const PetDetailsPage = () => {
     selectedPet: state.selectedPet.pet
   }));
   const navigate = useNavigate();
-  console.log(selectedPet);
   const handleGoBack = () => {
     // If window history is empty, go to /
     if (window.history.length === 0) {

@@ -26,7 +26,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({pets = []}) => {
   }
 
   const handlePetClick = (pet:PetDetailsEntity) => () => {
-    dispatch(SelectedPetActions.setPet(pet));
+    dispatch(SelectedPetActions.setSelectedPet(pet));
     navigate("/pet-details");
   };
 

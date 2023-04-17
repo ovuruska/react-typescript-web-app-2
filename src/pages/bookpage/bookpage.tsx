@@ -15,7 +15,6 @@ import {DailyAvailableSlot} from "@domain/types/responses/daily-available-slots-
 import BookingJourney from '@components/journeys/booking-journey';
 
 const BookPage: React.FC = () => {
-  const [petNames, setPetNames] = useState<Array<string>>([]);
   const [date,setDate] = useState<Date>(new Date());
   const [branches,setBranches] = useState<Array<number>>([]);
   const [groomers,setGroomers] = useState<Array<number>>([]);

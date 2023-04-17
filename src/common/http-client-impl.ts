@@ -65,7 +65,6 @@ export class HttpClientImpl implements HttpClient {
         this.setAuthToken(response.data.token);
       }
     } catch (error) {
-      console.log(error);
       throw new Error('Authentication failed');
     }
   }

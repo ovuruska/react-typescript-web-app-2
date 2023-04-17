@@ -22,7 +22,7 @@ describe('AppointmentRepositoryImpl', () => {
   it('should be defined', () => {
     expect(appointmentRepositoryImpl).toBeDefined();
   });
-  it('should post to /api/appointment/create when createAppointment is called.', async () => {
+  it('should post to /api/customer/appointment/create when createAppointment is called.', async () => {
     const params = {
       pet: 1,
       start: '2021-01-01T00:00:00.000Z',
@@ -36,16 +36,16 @@ describe('AppointmentRepositoryImpl', () => {
     const response = await appointmentRepositoryImpl.createAppointment(params);
 
     expect(response).toEqual(appointmentData);
-    expect(mockAxios.post).toHaveBeenCalledWith('/api/appointment/create', params,undefined);
+    expect(mockAxios.post).toHaveBeenCalledWith('/api/customer/appointment/create', params,undefined);
 
   });
-  it('should post to /api/appointment/cancel/:id when cancelAppointment is called.', async () => {
+  it('should post to /api/customer/appointment/cancel/:id when cancelAppointment is called.', async () => {
     const id = 1;
     mockAxios.post.mockResolvedValue({ status: 200 });
     const response = await appointmentRepositoryImpl.cancelAppointment(id);
 
     expect(response).toEqual(true);
-    expect(mockAxios.post).toHaveBeenCalledWith(`/api/appointment/cancel/${id}`,undefined,undefined);
+    expect(mockAxios.post).toHaveBeenCalledWith(`/api/customer/appointment/cancel/${id}`,undefined,undefined);
   });
 
 });

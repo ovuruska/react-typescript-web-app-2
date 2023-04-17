@@ -13,7 +13,7 @@ const PetsPage = () => {
   const dispatch = useDispatch();
 
   const handleClickPet = (selectedPet: PetDetailsEntity) => {
-    dispatch(SelectedPetActions.setPet(selectedPet));
+    dispatch(SelectedPetActions.setSelectedPet(selectedPet));
     navigate('/pet-details');
 
   };

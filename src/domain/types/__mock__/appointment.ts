@@ -25,7 +25,7 @@ export interface GenerateAppointmentOptions {
 }
 
 
-const selectRandom = <T>(array: T[]): T => {
+export const selectRandom = <T>(array: T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
 }
 

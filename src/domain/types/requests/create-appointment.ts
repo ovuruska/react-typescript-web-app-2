@@ -4,5 +4,6 @@ export interface CreateAppointmentRequest {
   branch: number;
   employee?: number;
   customer_notes?: string;
-
+  products: number[];
+  service: string;
 }

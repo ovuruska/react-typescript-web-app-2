@@ -24,11 +24,11 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
 
 // Export the persisted store and a persistor to use in your application
-export const persistor = persistStore(store);
+//export const persistor = persistStore(store);
 export default store;

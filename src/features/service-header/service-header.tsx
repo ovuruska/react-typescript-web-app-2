@@ -34,10 +34,9 @@ const ServiceHeader : React.FC<ServiceHeaderProps>= ({
   useEffect(() => {
     setPetNames([]);
     setPetNames(pets.map((pet:PetEntity) => pet.name));
-    if(selectedPet == null && pets.length > 0){
-      dispatch(OrderActions.setPet(pets[0]));
-    }
+
   }, [pets]);
+
 
   const handleChange = (index:number) => {
     const pet = pets[index];

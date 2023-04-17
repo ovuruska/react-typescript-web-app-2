@@ -17,9 +17,11 @@ import { PetDetailsEntity } from '@domain/types/common/pet-details';
 export interface HomePageDumbProps {
   appointments: AppointmentEntity[];
   pets: PetDetailsEntity[];
+  onServiceCardClick?: () => boolean;
 }
 
-const HomePageDumb = ({appointments,pets} : HomePageDumbProps) => {
+const HomePageDumb = ({appointments,pets,onServiceCardClick} : HomePageDumbProps) => {
+
 
   return (
     <div className="home-page page">
@@ -32,10 +34,12 @@ const HomePageDumb = ({appointments,pets} : HomePageDumbProps) => {
         </div>
         <div className="service-row-flex">
           <ServiceCard
+            onClick={onServiceCardClick}
             title="Grooming"
             subtitle="well-brushed, and clipped"
           />
           <ServiceCard
+            onClick={onServiceCardClick}
             title="We Wash"
             subtitle="bath to clean up your pet"
           />

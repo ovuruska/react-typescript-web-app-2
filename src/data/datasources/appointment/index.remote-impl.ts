@@ -13,12 +13,12 @@ export class AppointmentRemoteDataSourceImpl implements AppointmentRemoteDataSou
   }
 
   async createAppointment(params: CreateAppointmentRequest): Promise<AppointmentEntity> {
-    const response = await this.httpClient.post<CreateAppointmentRequest, AppointmentEntity>('/api/appointment/create', params);
+    const response = await this.httpClient.post<CreateAppointmentRequest, AppointmentEntity>('/api/customer/appointment/create', params);
     return response.data as AppointmentEntity;
   }
 
   async cancelAppointment(id: number): Promise<boolean> {
-    const response = await this.httpClient.post(`/api/appointment/cancel/${id}`);
+    const response = await this.httpClient.post(`/api/customer/appointment/cancel/${id}`);
     return response.status === 200;
   }
 }

@@ -13,9 +13,9 @@ export interface PaymentPageProps {
 const PaymentPage: React.FC<PaymentPageProps> = ({}) => {
 
 
-  const { employee, branch,pet, date, service } = useSelector((state: any) => {
+  const { employee, branch,pet, start, service ,products} = useSelector((state: any) => {
     return{
-      employee: state.order.groomer, branch: state.order.branch, date: state.order.start, service: state.order.orderType,pet:state.selectedPet.pet,
+      products:state.order.products,employee: state.order.groomer, branch: state.order.branch, start: state.order.start, service: state.order.orderType,pet:state.order.pet,
 
     };
   });
@@ -29,12 +29,12 @@ const PaymentPage: React.FC<PaymentPageProps> = ({}) => {
   const handleCompleted = () => {
 
     const createAppointmentParams = {
-      employee: employee,
-      branch: branch,
-      date: date,
-      pet:pet,
+      employee: employee.id,
+      branch: branch.id,
+      pet:pet.id,
       service: (service === 'Grooming') ? 'Full Grooming' : 'We Wash',
-      start: date.start,
+      start,
+      products: products ?? [],
     } as CreateAppointmentRequest;
     createAppointment.call(createAppointmentParams);
 
@@ -42,7 +42,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({}) => {
   }
 
   return <BookingJourney selectable={false}>
-    <PaymentPageDumb onWarningClick={handleWarning} employee={employee} branch={branch} date={date} service={service} onCompleted={handleCompleted}/>
+    <PaymentPageDumb onWarningClick={handleWarning} employee={employee} branch={branch} date={start} service={service} onCompleted={handleCompleted}/>
   </BookingJourney>;
 };
 
