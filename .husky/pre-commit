@@ -4,6 +4,5 @@
 npm run cache:clear
 npm run build
 npm test -- -u
-npm run cache:clear
 npm run test:puppeteer
 

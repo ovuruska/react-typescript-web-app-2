@@ -14,7 +14,7 @@ const selectedPetSlice = createSlice({
   name: "selectedPet",
   initialState,
   reducers: {
-    setSelectedPet: (state, action: PayloadAction<PetDetailsEntity>) => {
+    setSelectedPet: (state, action: PayloadAction<PetDetailsEntity | null>) => {
       state.pet = action.payload;
     }
   }

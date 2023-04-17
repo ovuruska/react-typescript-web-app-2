@@ -9,9 +9,12 @@ import { useNavigate } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
   const upcomingAppts = useUpcomingAppts();
+
+
   const { pets } = useAllPets();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   const onServiceCardClick = () => {
     if(pets.length > 0) {
