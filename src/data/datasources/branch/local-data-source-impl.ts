@@ -6,7 +6,7 @@ import { injectable } from "inversify";
 export class BranchLocalDataSourceImpl extends BranchLocalDataSource {
   getAllBranches(): BranchEntity[] | null {
     // Get from session storage
-    const branches = sessionStorage.getItem("branches");
+    const branches = localStorage.getItem("branches");
 
     if (branches && branches.length > 0) {
       return JSON.parse(branches) as BranchEntity[];
@@ -16,6 +16,6 @@ export class BranchLocalDataSourceImpl extends BranchLocalDataSource {
   }
 
   setAllBranches(branches: BranchEntity[]): void {
-    sessionStorage.setItem("branches", JSON.stringify(branches));
+    localStorage.setItem("branches", JSON.stringify(branches));
   }
 }

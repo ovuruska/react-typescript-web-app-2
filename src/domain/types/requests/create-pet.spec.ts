@@ -1,12 +1,3 @@
-/*
-export interface CreatePetRequest {
-  name: string;
-  breed: string;
-  weight: number;
-  age: number;
-  gender: string;
-}
- */
 import { CreatePetRequest } from '@domain/types/requests/create-pet';
 
 describe('CreatePetRequest', () => {

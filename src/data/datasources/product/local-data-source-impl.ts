@@ -5,7 +5,7 @@ import { ProductLocalDataSource } from '@data/datasources/product/local-data-sou
 @injectable()
 export class ProductLocalDataSourceImpl implements ProductLocalDataSource {
   getAllProducts(): ProductEntity[] | null {
-    const result = sessionStorage.getItem('products');
+    const result = localStorage.getItem('products');
     if(result) {
       return JSON.parse(result) as ProductEntity[];
     }else{
@@ -14,6 +14,6 @@ export class ProductLocalDataSourceImpl implements ProductLocalDataSource {
   }
 
   setAllProducts(products: ProductEntity[]): void {
-    sessionStorage.setItem('products', JSON.stringify(products));
+    localStorage.setItem('products', JSON.stringify(products));
   }
 }

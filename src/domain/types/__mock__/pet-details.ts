@@ -6,14 +6,13 @@ import { faker } from '@faker-js/faker';
 class PetDetailsMockGenerator extends PetMockGenerator {
   generateOne(): PetDetailsEntity {
     const pet = super.generateOne();
-    const petDetailsEntity: PetDetailsEntity = {
+    return {
       ...pet,
-      number_of_groomings: faker.datatype.number({min:0,max:100}),
-      number_of_wewashes: faker.datatype.number({min:0,max:100}),
-      total_grooming_cost: faker.datatype.number({min:0,max:5000}),
-      total_wewash_cost: faker.datatype.number({min:0,max:5000}),
+      number_of_groomings: faker.datatype.number({ min: 0, max: 100 }),
+      number_of_wewashes: faker.datatype.number({ min: 0, max: 100 }),
+      total_grooming_cost: faker.datatype.number({ min: 0, max: 5000 }),
+      total_wewash_cost: faker.datatype.number({ min: 0, max: 5000 }),
     };
-    return petDetailsEntity;
   }
 
   generateMany(count: number): PetDetailsEntity[] {

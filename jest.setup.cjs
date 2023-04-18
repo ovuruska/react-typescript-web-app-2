@@ -6,4 +6,5 @@ require('dotenv').config({
 // Required for inversify!
 require('reflect-metadata');
 
-require('@quicker/__mocks__/sessionStorage');
+require('@quicker/__mocks__/storage');
+require('fake-indexeddb/auto');

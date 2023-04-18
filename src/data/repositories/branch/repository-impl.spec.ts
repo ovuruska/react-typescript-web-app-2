@@ -1,4 +1,4 @@
-import '@quicker/__mocks__/sessionStorage';
+import '@quicker/__mocks__/storage';
 import {BranchRepositoryImpl} from "@data/repositories/branch/repository-impl";
 import {getTestContainer} from "@utils/inversion-container-test";
 import {BranchRepository} from "@domain/repositories/branch/repository";
@@ -66,7 +66,7 @@ describe('BranchRepositoryImpl', () => {
     expect(result2).toEqual(allBranches);
 
     // Check if local storage.getItem is called.
-    expect(sessionStorage.getItem).toHaveBeenCalled();
+    expect(localStorage.getItem).toHaveBeenCalled();
 
   });
 

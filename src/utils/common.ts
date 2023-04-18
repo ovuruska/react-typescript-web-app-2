@@ -28,7 +28,7 @@ import {EmployeeRemoteDataSourceImpl} from "@data/datasources/employee/remote-da
 import {EmployeeRepository} from "@domain/repositories/employee/repository";
 import {EmployeeRepositoryImpl} from "@data/repositories/employee/repository-impl";
 import {GetAllGroomersUseCase} from "@domain/usecases/employee/get-all-groomers-use-case";
-import {HttpClientSymbol} from "@domain/types/TYPES";
+import { AppointmentCacheProvider, HttpClientSymbol, PetDetailsCacheProvider } from '@domain/types/TYPES';
 import { CapacityLocalDataSource } from '@data/datasources/capacity/local-data-source';
 import { CapacityLocalDataSourceImpl } from '@data/datasources/capacity/local-data-source-impl';
 import { ProductRemoteDataSource } from '@data/datasources/product/remote-data-source';
@@ -51,6 +51,14 @@ import { CancelAppointmentUseCase } from '@domain/usecases/appointment/cancel-ap
 import { CustomerGetUpcomingAppointmentsUseCase } from '@domain/usecases/customer/upcoming-appointments';
 import { CustomerGetPastAppointmentsUseCase } from '@domain/usecases/customer/past-appointments';
 import { CustomerCreatePetUseCase } from '@domain/usecases/customer/create-pet';
+import { AppointmentEntity } from '@domain/types/common/appointment';
+import { CacheProvider } from '@quicker/common/cache-provider';
+import { IndexedDbCache } from '@quicker/common/indexed-db';
+import { PetDetailsEntity } from '@domain/types/common/pet-details';
+import { AppointmentLocalDataSourceImpl } from '@data/datasources/appointment/index.local-impl';
+import { AppointmentLocalDataSource } from '@data/datasources/appointment/index.local';
+import { CustomerLocalDataSource } from '@data/datasources/customer/local-data-source';
+import { CustomerLocalDataSourceImpl } from '@data/datasources/customer/local-data-source-impl';
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -60,7 +68,7 @@ export const containerBind = (container:Container) => {
   container.bind<AvailableRepository>(AvailableRepository).to(AvailableRepositoryImpl);
   container.bind<AvailableRemoteDataSource>(AvailableRemoteDataSource).to(AvailableRemoteDataSourceImpl);
   container.bind<GetAvailableSlotsUseCase>(GetAvailableSlotsUseCase).toSelf();
-  container.bind<CustomerRemoteDataSource>(CustomerRemoteDataSource).to(CustomerRemoteDataSourceImpl);
+  container.bind<CustomerRemoteDataSource>(CustomerRemoteDataSource).to(CustomerRemoteDataSourceImpl).inSingletonScope();
   container.bind<CustomerRepository>(CustomerRepository).to(CustomerRepositoryImpl);
   container.bind<GetMeUseCase>(GetMeUseCase).toSelf();
 
@@ -91,4 +99,25 @@ export const containerBind = (container:Container) => {
   container.bind<CustomerGetUpcomingAppointmentsUseCase>(CustomerGetUpcomingAppointmentsUseCase).toSelf();
   container.bind<CustomerGetPastAppointmentsUseCase>(CustomerGetPastAppointmentsUseCase).toSelf();
   container.bind<CustomerCreatePetUseCase>(CustomerCreatePetUseCase).toSelf();
+
+
+  container.bind<AppointmentLocalDataSource>(AppointmentLocalDataSource).to(AppointmentLocalDataSourceImpl).inSingletonScope();
+  container.bind<CustomerLocalDataSource>(CustomerLocalDataSource).to(CustomerLocalDataSourceImpl).inSingletonScope();
+  container.bind<CacheProvider<AppointmentEntity>>(AppointmentCacheProvider).toDynamicValue(
+    () =>
+      new IndexedDbCache<AppointmentEntity>({
+        dbName: 'appointment',
+        storeName: 'appointments',
+      }),
+  )
+    .inSingletonScope();
+
+  container.bind<CacheProvider<PetDetailsEntity>>(PetDetailsCacheProvider).toDynamicValue(
+    () =>
+      new IndexedDbCache<PetDetailsEntity>({
+        dbName: 'pet-details',
+        storeName: 'pet-details',
+      }),
+  ).inSingletonScope();
+
 }

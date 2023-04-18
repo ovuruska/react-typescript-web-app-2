@@ -4,48 +4,67 @@ import { getTestContainer } from '@utils/inversion-container-test';
 import { AppointmentRepository } from '@domain/repositories/appointment';
 import { CreateAppointmentRequest } from '@domain/types/requests/create-appointment';
 import { AppointmentMockGenerator } from '@domain/types/__mock__/appointment';
-import mockAxios from 'jest-mock-axios';
+import { AppointmentRemoteDataSourceImpl } from '@data/datasources/appointment/index.remote-impl';
+import { AppointmentLocalDataSourceImpl } from '@data/datasources/appointment/index.local-impl';
+import { AppointmentLocalDataSource } from '@data/datasources/appointment/index.local';
+import { AppointmentRemoteDataSource } from '@data/datasources/appointment/index.remote';
 
 
 const appointmentGenerator = new AppointmentMockGenerator();
-const appointmentData = appointmentGenerator.generateOne();
 
 describe('AppointmentRepositoryImpl', () => {
   let appointmentRepositoryImpl: AppointmentRepositoryImpl;
+  let appointmentRemoteDataSource: AppointmentRemoteDataSourceImpl;
+  let appointmentLocalDataSource: AppointmentLocalDataSourceImpl;
   let container: Container;
 
   beforeAll(() => {
     container = getTestContainer();
     appointmentRepositoryImpl = container.get(AppointmentRepository) as AppointmentRepositoryImpl;
+    appointmentRemoteDataSource = container.get(AppointmentRemoteDataSource) as AppointmentRemoteDataSourceImpl;
+    appointmentLocalDataSource = container.get(AppointmentLocalDataSource) as AppointmentLocalDataSourceImpl;
   });
+
 
   it('should be defined', () => {
     expect(appointmentRepositoryImpl).toBeDefined();
   });
-  it('should post to /api/customer/appointment/create when createAppointment is called.', async () => {
-    const params = {
+  it('should call createAppointment for data sources.', async () => {
+    const appointment = appointmentGenerator.generateOne();
+    jest.spyOn(appointmentRemoteDataSource, 'createAppointment').mockResolvedValue(appointment);
+    jest.spyOn(appointmentLocalDataSource, 'createAppointment');
+
+    const request = {
       pet: 1,
-      start: '2021-01-01T00:00:00.000Z',
+      start: "2021-01-01T00:00:00.000Z",
       branch: 1,
       employee: 1,
-      customer_notes: 'test'
-
+      customer_notes: "test",
+      products: [1],
+      service: "test"
     } as CreateAppointmentRequest;
 
-    mockAxios.post.mockResolvedValue({ data: appointmentData })
-    const response = await appointmentRepositoryImpl.createAppointment(params);
+    const result = await appointmentRepositoryImpl.createAppointment( request );
+    expect(result).toEqual(appointment);
 
-    expect(response).toEqual(appointmentData);
-    expect(mockAxios.post).toHaveBeenCalledWith('/api/customer/appointment/create', params,undefined);
-
+    expect(appointmentRemoteDataSource.createAppointment).toBeCalled();
+    expect(appointmentRemoteDataSource.createAppointment).toHaveBeenCalledWith(request);
+    expect(appointmentLocalDataSource.createAppointment).toBeCalled();
+    expect(appointmentLocalDataSource.createAppointment).toHaveBeenCalledWith(appointment);
   });
-  it('should post to /api/customer/appointment/cancel/:id when cancelAppointment is called.', async () => {
-    const id = 1;
-    mockAxios.patch.mockResolvedValue({ status: 200 });
-    const response = await appointmentRepositoryImpl.cancelAppointment(id);
 
-    expect(response).toEqual(true);
-    expect(mockAxios.patch).toHaveBeenCalledWith(`/api/customer/appointment/cancel/${id}`,undefined,undefined,);
+  it('should call cancelAppointment for data sources.', async () => {
+    jest.spyOn(appointmentRemoteDataSource, 'cancelAppointment').mockResolvedValue(true);
+    jest.spyOn(appointmentLocalDataSource, 'cancelAppointment');
+
+    const result = await appointmentRepositoryImpl.cancelAppointment(1);
+    expect(result).toEqual(true);
+
+    expect(appointmentRemoteDataSource.cancelAppointment).toBeCalled();
+    expect(appointmentRemoteDataSource.cancelAppointment).toHaveBeenCalledWith(1);
+    expect(appointmentLocalDataSource.cancelAppointment).toBeCalled();
+    expect(appointmentLocalDataSource.cancelAppointment).toHaveBeenCalledWith(1);
   });
+
 
 });

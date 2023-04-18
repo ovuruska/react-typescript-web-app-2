@@ -20,4 +20,8 @@ Object.defineProperty(window, 'sessionStorage', {
   value: sessionStorageMock,
 });
 
+Object.defineProperty(window, 'localStorage', {
+  value: sessionStorageMock,
+});
+
 export {}

@@ -42,12 +42,12 @@ describe('ProductRepositoryImpl', () => {
     await productRepositoryImpl.getAllProducts();
     expect(spy).toHaveBeenCalled();
     expect(mockAxios.get).toHaveBeenCalledWith('/api/products/all', undefined);
-    expect(sessionStorage.getItem).toHaveBeenCalled();
-    expect(sessionStorage.setItem).toHaveBeenCalled();
+    expect(localStorage.getItem).toHaveBeenCalled();
+    expect(localStorage.setItem).toHaveBeenCalled();
 
     await productRepositoryImpl.getAllProducts();
     expect(spy).toHaveBeenCalled();
-    expect(sessionStorage.getItem).toHaveBeenCalled();
-    expect(sessionStorage.setItem).toHaveBeenCalled();
+    expect(localStorage.getItem).toHaveBeenCalled();
+    expect(localStorage.setItem).toHaveBeenCalled();
   });
 });

@@ -11,15 +11,23 @@ import { OffsetResponse } from '@domain/types/responses/offset';
 import { AppointmentEntity } from '@domain/types/common/appointment';
 import { PetDetailsEntity } from '@domain/types/common/pet-details';
 import { CreatePetRequest } from '@domain/types/requests/create-pet';
+import { CustomerLocalDataSource } from '@data/datasources/customer/local-data-source';
 
 @injectable()
 export class CustomerRepositoryImpl implements CustomerRepository{
 
-  constructor(@inject<CustomerRemoteDataSource>(CustomerRemoteDataSource) private remoteDataSource: CustomerRemoteDataSource) {
-  }
+  constructor( @inject<CustomerRemoteDataSource>(CustomerRemoteDataSource) private remoteDataSource: CustomerRemoteDataSource,
+    @inject<CustomerLocalDataSource>(CustomerLocalDataSource) private localDataSource: CustomerLocalDataSource){}
 
   async getMe(): Promise<MeResponse> {
-    return await this.remoteDataSource.getMe();
+    const localResponse = await this.localDataSource.me();
+    if(localResponse){
+      return localResponse;
+    }else {
+      const response = await this.remoteDataSource.getMe();
+      this.localDataSource.me(response);
+      return response;
+    }
   }
 
   async login(request: LoginRequest): Promise<AuthenticationResponse> {
@@ -31,23 +39,72 @@ export class CustomerRepositoryImpl implements CustomerRepository{
   }
 
   async upcomingAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>> {
-    return await this.remoteDataSource.upcomingAppointments(request);
+    const localResponse = await this.localDataSource.upcomingAppointments(request);
+    const response = this.remoteDataSource.upcomingAppointments(request).then((remoteResponse) => {
+      const {count, results} = remoteResponse;
+      if(count > 0){
+        this.localDataSource.addAppointments(results);
+      }
+      return remoteResponse;
+
+    });
+    if(localResponse.count > 0){
+      return localResponse;
+
+    }
+    return await response;
   }
 
   async pastAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>> {
-    return await this.remoteDataSource.pastAppointments(request);
+    const localResponse = await this.localDataSource.pastAppointments(request);
+    const response = this.remoteDataSource.pastAppointments(request).then((remoteResponse) => {
+      const {count, results} = remoteResponse;
+      if(count > 0){
+        this.localDataSource.addAppointments(results);
+      }
+      return remoteResponse;
+
+    });
+    if(localResponse.count > 0){
+      return localResponse;
+    }
+    return await response;
   }
 
   async allAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>> {
-    return await this.remoteDataSource.allAppointments(request);
+    const localResponse = await this.localDataSource.allAppointments(request);
+    const response = this.remoteDataSource.allAppointments(request).then((remoteResponse) => {
+      const {count, results} = remoteResponse;
+      if(count > 0){
+        this.localDataSource.addAppointments(results);
+      }
+      return remoteResponse;
+    });
+    if(localResponse.count > 0){
+      return localResponse;
+    }
+    return await response;
   }
 
   async allPets(): Promise<PetDetailsEntity[]> {
-    return await this.remoteDataSource.allPets();
+    const localResponse = await this.localDataSource.allPets();
+    const response = this.remoteDataSource.allPets().then((remoteResponse) => {
+      if(remoteResponse.length > 0){
+        this.localDataSource.addPets(remoteResponse);
+      }
+      return remoteResponse;
+
+    });
+    if(localResponse.length > 0){
+      return localResponse;
+    }
+    return await response;
   }
 
   async createPet(request:CreatePetRequest): Promise<PetDetailsEntity> {
-    return await this.remoteDataSource.createPet(request);
+    const response =await this.remoteDataSource.createPet(request);
+    this.localDataSource.createPet(response);
+    return response;
   }
 
 }

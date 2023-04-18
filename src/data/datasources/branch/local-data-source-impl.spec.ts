@@ -1,4 +1,3 @@
-import '@quicker/__mocks__/sessionStorage';
 import {BranchLocalDataSourceImpl} from "@data/datasources/branch/local-data-source-impl";
 import {BranchEntity} from "@domain/types/common/branch";
 import {Container} from "inversify";
