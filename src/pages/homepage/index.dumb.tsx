@@ -18,9 +18,10 @@ export interface HomePageDumbProps {
   appointments: AppointmentEntity[];
   pets: PetDetailsEntity[];
   onServiceCardClick?: () => boolean;
+  onAppointmentClick?: (appt: AppointmentEntity) => void;
 }
 
-const HomePageDumb = ({appointments,pets,onServiceCardClick} : HomePageDumbProps) => {
+const HomePageDumb = ({appointments,onAppointmentClick,pets,onServiceCardClick} : HomePageDumbProps) => {
 
 
   return (
@@ -46,7 +47,7 @@ const HomePageDumb = ({appointments,pets,onServiceCardClick} : HomePageDumbProps
         </div>
       </div>
       <div className="appointments-row">
-        <UpcomingApptsDumb appointments={appointments} />
+        <UpcomingApptsDumb onClick={onAppointmentClick} appointments={appointments} />
       </div>
 
     </div>

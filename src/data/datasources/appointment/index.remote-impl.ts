@@ -18,7 +18,7 @@ export class AppointmentRemoteDataSourceImpl implements AppointmentRemoteDataSou
   }
 
   async cancelAppointment(id: number): Promise<boolean> {
-    const response = await this.httpClient.post(`/api/customer/appointment/cancel/${id}`);
+    const response = await this.httpClient.patch(`/api/customer/appointment/cancel/${id}`);
     return response.status === 200;
   }
 }

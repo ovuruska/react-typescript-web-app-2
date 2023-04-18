@@ -41,11 +41,11 @@ describe('AppointmentRepositoryImpl', () => {
   });
   it('should post to /api/customer/appointment/cancel/:id when cancelAppointment is called.', async () => {
     const id = 1;
-    mockAxios.post.mockResolvedValue({ status: 200 });
+    mockAxios.patch.mockResolvedValue({ status: 200 });
     const response = await appointmentRepositoryImpl.cancelAppointment(id);
 
     expect(response).toEqual(true);
-    expect(mockAxios.post).toHaveBeenCalledWith(`/api/customer/appointment/cancel/${id}`,undefined,undefined);
+    expect(mockAxios.patch).toHaveBeenCalledWith(`/api/customer/appointment/cancel/${id}`,undefined,undefined,);
   });
 
 });

@@ -26,24 +26,24 @@ describe('AppointmentRemoteDataSourceImpl', () => {
   });
 
   it('cancelAppointment returns correct response when status is 200.', async () => {
-    mockAxios.post.mockResolvedValue({ status: 200,data:{} });
+    mockAxios.patch.mockResolvedValue({ status: 200,data:{} });
     const response = await appointmentRemoteDataSourceImpl.cancelAppointment(1);
     expect(response).toBe(true);
-    expect(mockAxios.post).toHaveBeenCalledWith('/api/customer/appointment/cancel/1', undefined, undefined);
+    expect(mockAxios.patch).toHaveBeenCalledWith('/api/customer/appointment/cancel/1', undefined, undefined);
 
   });
 
   it('cancelAppointment returns correct response when status is 400.', async () => {
-    mockAxios.post.mockResolvedValue({ status: 400,data:{} });
+    mockAxios.patch.mockResolvedValue({ status: 400,data:{} });
     const response = await appointmentRemoteDataSourceImpl.cancelAppointment(1);
     expect(response).toBe(false);
-    expect(mockAxios.post).toHaveBeenCalledWith('/api/customer/appointment/cancel/1', undefined, undefined);
+    expect(mockAxios.patch).toHaveBeenCalledWith('/api/customer/appointment/cancel/1', undefined,undefined,);
   });
   it('cancelAppointment returns correct response when status is 404.', async () => {
-    mockAxios.post.mockResolvedValue({ status: 404,data:{} });
+    mockAxios.patch.mockResolvedValue({ status: 404,data:{} });
     const response = await appointmentRemoteDataSourceImpl.cancelAppointment(1);
     expect(response).toBe(false);
-    expect(mockAxios.post).toHaveBeenCalledWith('/api/customer/appointment/cancel/1', undefined, undefined);
+    expect(mockAxios.patch).toHaveBeenCalledWith('/api/customer/appointment/cancel/1', undefined,undefined,);
   });
 
   it('createAppointment returns correct response when given valid params.', async () => {

@@ -6,6 +6,8 @@ import PageCard from '@components/cards/page-card/page-card';
 import ShakingModal from '@components/layouts/shaking-modal';
 import { AppointmentEntity } from '@domain/types/common/appointment';
 import ApptCancelJourney from '@components/journeys/appt-cancel';
+import { useInjection } from 'inversify-react';
+import { CancelAppointmentUseCase } from '@domain/usecases/appointment/cancel-appointment';
 
 
 const AppointmentsPage = () => {
@@ -13,6 +15,7 @@ const AppointmentsPage = () => {
   const me = useMe();
   const [appointment, setAppointment] = React.useState<any>(null);
   const [open, setOpen] = React.useState(false);
+  const cancelAppt = useInjection<CancelAppointmentUseCase>(CancelAppointmentUseCase);
 
   const pets = me?.dogs ?? [];
 
@@ -29,9 +32,13 @@ const AppointmentsPage = () => {
     setOpen(false);
   }
 
+  const handleCancel = (appointment: AppointmentEntity) => {
+    cancelAppt.call(appointment.id);
+  }
+
   return <PageCard>
     <AppointmentsPageDumb onApptClicked={handleApptClicked} appointments={appointments} pets={pets} goBack={goBack}/>
-    <ApptCancelJourney open={open} close={handleClose } appointment={appointment} />
+    <ApptCancelJourney cancel={handleCancel} open={open} close={handleClose } appointment={appointment} />
   </PageCard>
 
 }
