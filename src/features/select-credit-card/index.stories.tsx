@@ -1,36 +1,3 @@
-/*import { CreditCardDetails } from '@domain/types/common/credit-card-details';
-import style from './index.module.scss';
-
-export interface SelectCreditCardDumbProps  {
-  options?: CreditCardDetails[];
-  onSelect?:(creditCard: CreditCardDetails)=>void;
-  selected?: CreditCardDetails;
-  open?: boolean;
-  setOpen?: (open: boolean)=>void;
-}
-
-const SelectCreditCardDumb: React.FC<SelectCreditCardDumbProps> = ({
-  options,
-  onSelect,
-  selected,
-  open,
-  setOpen
-}:SelectCreditCardDumbProps) => {
-
-  const handleOpen = () => {
-    setOpen && setOpen(true);
-  }
-
-  return <div className={style.selectCreditCard} onClick={handleOpen}>
-
-  </div>
-};
-
-export default SelectCreditCardDumb;
-
- */
-
-// Path: src/features/select-credit-card/index.stories.tsx
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import SelectCreditCardDumb, { SelectCreditCardDumbProps } from './index.dumb';

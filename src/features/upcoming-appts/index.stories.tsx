@@ -1,22 +1,3 @@
-/*
-import { AppointmentEntity } from '@domain/types/common/appointment';
-
-export interface UpcomingApptsDumbProps {
-  appointments: AppointmentEntity[];
-}
-
-const UpcomingApptsDumb = ({
-  appointments,
-                           }:UpcomingApptsDumbProps) => {
-  return <div data-testid={"upcoming-appts"}></div>
-}
-
-export default UpcomingApptsDumb
-
- */
-
-// Path: src/features/upcoming-appts/index.stories.tsx
-
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 

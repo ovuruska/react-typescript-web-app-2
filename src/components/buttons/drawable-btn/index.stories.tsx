@@ -1,23 +1,3 @@
-/*
-import React from "react";
-
-export interface DrawableBtnProps {
-  onClick?: () => void;
-  text: string;
-}
-
-const DrawableBtn: React.FC<DrawableBtnProps> = ({ onClick, text }) => {
-
-  return <div onClick={onClick}>
-    <label>{text}</label>
-  </div>
-};
-
-export default DrawableBtn;
-
- */
-// Path: src/components/buttons/drawable-btn/index.stories.tsx
-
 import React from "react";
 import DrawableBtn, { DrawableBtnProps } from "./index";
 import { Story, Meta } from "@storybook/react";

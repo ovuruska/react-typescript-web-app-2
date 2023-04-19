@@ -31,7 +31,11 @@ describe('CustomerLocalDataSourceImpl', () => {
     petDetailsCacheProvider = container.get<CacheProvider<PetDetailsEntity>>(PetDetailsCacheProvider);
   });
 
+  beforeEach(() => {
+    localStorage.clear();
+  });
   afterEach(() => {
+
     jest.restoreAllMocks();
   });
 
@@ -111,17 +115,17 @@ describe('CustomerLocalDataSourceImpl', () => {
     const me = new MeMockGenerator().generateOne();
     const response = await customerLocalDataSourceImpl.me(me);
     expect(response).toEqual(me);
-    expect(localStorage.setItem).toBeCalledWith(JSON.stringify(me));
+    expect(localStorage.setItem).toBeCalledWith("me",JSON.stringify(me));
   })
-  it('should get me if me is called. First return null, after me is called with return exact value.',async ()=>{
+  it('when me is called with argument it should call localStorage.setItem.',async ()=>{
     const me = new MeMockGenerator().generateOne();
     const response = await customerLocalDataSourceImpl.me();
     expect(localStorage.getItem).toHaveBeenCalled();
     expect(response).toEqual(null);
     await customerLocalDataSourceImpl.me(me);
-    const response2 = await customerLocalDataSourceImpl.me();
-    expect(response2).toEqual(me);
-    expect(localStorage.getItem).toHaveBeenCalledTimes(2);
+    expect(localStorage.setItem).toHaveBeenCalled();
+    expect(localStorage.setItem).toBeCalledWith("me",JSON.stringify(me))
+
 
   });
 

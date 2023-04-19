@@ -1,27 +1,3 @@
-/*
-
-
-export interface CtaSecondaryProps {
-  onClick?: () => void;
-  text?: string;
-
-}
-
-const CtaSecondary : React.FC<CtaSecondaryProps> = ({
-  onClick,
-  text
-}:CtaSecondaryProps) => {
-
-  return <div className={style.ctaSecondary}>
-
-  </div>
-}
-
-export default CtaSecondary
- */
-
-// Path: src/components/buttons/cta-secondary/index.stories.tsx
-
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import CtaSecondary, { CtaSecondaryProps } from './index';

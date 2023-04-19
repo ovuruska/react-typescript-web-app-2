@@ -38,6 +38,12 @@ const MyAccountPage = () => {
     dispatch(OrderActions.resetOrder());
     dispatch(PetsActions.emptyPets());
     dispatch(SelectedPetActions.setSelectedPet(null));
+    indexedDB.databases().then(function(databases) {
+      databases.forEach(function(database) {
+        if(!database.name ) return;
+        indexedDB.deleteDatabase(database.name );
+      });
+    });
     navigate('/login');
   }
 

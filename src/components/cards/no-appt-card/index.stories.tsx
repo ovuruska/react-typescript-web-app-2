@@ -1,20 +1,3 @@
-/*
-import React from 'react';
-import './index.module.scss';
-
-
-
-const NoApptCard = () => {
-  return <div>
-
-  </div>
-}
-
-export default NoApptCard
- */
-
-// Path: src/components/cards/no-appt-card/index.stories.tsx
-
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import NoApptCard,{NoApptCardProps} from './index';

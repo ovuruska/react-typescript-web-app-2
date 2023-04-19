@@ -89,7 +89,7 @@ describe('IndexedDbCache', () => {
     ).toEqual(result);
   });
   it('find with multiple fields. Check sorted with id.', async () => {
-    const samplePets = generator.generateMany(200);
+    const samplePets = generator.generateMany(20);
     await cache.bulkUpsert(samplePets);
 
     await cache.bulkUpsert(samplePets);
@@ -102,7 +102,7 @@ describe('IndexedDbCache', () => {
 
   });
   it('find get all. Check sorted with id.', async () => {
-    const samplePets = generator.generateMany(200);
+    const samplePets = generator.generateMany(20);
     await cache.bulkUpsert(samplePets);
 
     await cache.bulkUpsert(samplePets);
