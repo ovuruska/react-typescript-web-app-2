@@ -9,24 +9,24 @@ describe('MonthPickerDumb', () => {
   });
   it('when clicked on month picker, should open drawer', () => {
     const { getByTestId } = render(<MonthPickerDumb />);
-    getByTestId('month-picker').click();
+    act(()=>getByTestId('month-picker').click());
     expect(getByTestId('month-picker-header')).toBeInTheDocument();
   });
   it('when drawer is open, should have 12 month cards', () => {
     const { getByTestId } = render(<MonthPickerDumb />);
-    getByTestId('month-picker').click();
+    act(()=>getByTestId('month-picker').click());
     expect(getByTestId('month-picker-grid').children.length).toBe(12);
   });
   it('when drawer is open, should have 1 cta-primary button and 1 weak-btn button.', () => {
     const { getByTestId } = render(<MonthPickerDumb />);
-    getByTestId('month-picker').click();
+    act(()=>getByTestId('month-picker').click());
     expect(getByTestId('month-picker-header').children.length).toBe(2);
     expect(getByTestId('cta-primary')).toBeInTheDocument();
     expect(getByTestId('weak-btn')).toBeInTheDocument();
   });
   it('when drawer is open, and month card is clicked, __selected element will change.', () => {
     const { getByTestId } = render(<MonthPickerDumb month={6}/>);
-    getByTestId('month-picker').click();
+    act(()=>getByTestId('month-picker').click());
     const grid = getByTestId('month-picker-grid') as HTMLDivElement;
     const monthCard = grid.children[0] as HTMLDivElement;
     act(() => monthCard.click());
@@ -37,7 +37,7 @@ describe('MonthPickerDumb', () => {
   it('when drawer is open and month card is clicked, and submit button is clicked, drawer should close and onSubmit should fire with month number.', () => {
     const onSubmit = jest.fn();
     const { getByTestId } = render(<MonthPickerDumb month={6} onSubmit={onSubmit}/>);
-    getByTestId('month-picker').click();
+    act(()=>getByTestId('month-picker').click());
     const grid = getByTestId('month-picker-grid') as HTMLDivElement;
     const monthCard = grid.children[0] as HTMLDivElement;
     act(() => monthCard.click());
@@ -48,7 +48,7 @@ describe('MonthPickerDumb', () => {
   it('when drawer is open and month card is clicked, and cancel button is clicked, drawer should close and onCancel should fire.', () => {
     const onCancel = jest.fn();
     const { getByTestId } = render(<MonthPickerDumb month={6} onCancel={onCancel}/>);
-    getByTestId('month-picker').click();
+    act(()=>getByTestId('month-picker').click());
     const grid = getByTestId('month-picker-grid') as HTMLDivElement;
     const monthCard = grid.children[0] as HTMLDivElement;
     act(() => monthCard.click());
@@ -65,7 +65,7 @@ describe('MonthPicker', () => {
   });
   it('when selected a non-selected month and onCancel is fired, month should not be changed.', () => {
     const { getByTestId } = render(<MonthPicker initialMonth={6}/>);
-    getByTestId('month-picker').click();
+    act(()=>getByTestId('month-picker').click());
     const grid = getByTestId('month-picker-grid') as HTMLDivElement;
     const monthCard = grid.children[0] as HTMLDivElement;
     act(() => monthCard.click());
@@ -75,7 +75,7 @@ describe('MonthPicker', () => {
   });
   it('when selected a non-selected month and onSubmit is fired, month should be changed.', () => {
     const { getByTestId } = render(<MonthPicker initialMonth={6}/>);
-    getByTestId('month-picker').click();
+    act(()=>getByTestId('month-picker').click());
     const grid = getByTestId('month-picker-grid') as HTMLDivElement;
     const monthCard = grid.children[0] as HTMLDivElement;
     act(() => monthCard.click());
