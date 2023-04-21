@@ -6,6 +6,7 @@ import WarningBtn from '@components/buttons/warning-btn/warning-btn';
 import SelectCreditCard from '@features/select-credit-card';
 import ApptCard from '@components/cards/appt-card';
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
+import TextInputFormField from '@components/inputs/text-input-form-field';
 
 
 export interface PaymentPageDumbProps {
@@ -14,7 +15,7 @@ export interface PaymentPageDumbProps {
   date: string;
   service: string;
   onCreditCardSelect?: () => void;
-  onCompleted?: () => void;
+  onCompleted?: (specialHandling:string) => void;
   onWarningClick?: () => void;
 }
 
@@ -28,6 +29,13 @@ const PaymentPageDumb: React.FC<PaymentPageDumbProps> = ({
                                                            onCompleted,
                                                            onWarningClick,
                                                          }: PaymentPageDumbProps) => {
+
+  const [specialHandling, setSpecialHandling] = React.useState('');
+
+  const handleSubmit = () => {
+    onCompleted && onCompleted(specialHandling);
+  }
+
   return <div className={style.paymentPage} >
     <div className={style.paymentPageContainer}>
       <WarningBtn onClick={onWarningClick} content='Some policies we would like to make you aware of.' />
@@ -36,8 +44,15 @@ const PaymentPageDumb: React.FC<PaymentPageDumbProps> = ({
       <h3 className={style.paymentPage__header3}>Credit Card</h3>
       <SelectCreditCard onSelect={onCreditCardSelect} />
     </div>
+    <div style={{
+      width:"100%"
+    }}>
+      <TextInputFormField multiline={true} onChanged={setSpecialHandling} label={"Special Handling"}/>
+
+    </div>
+
     <div className={style.paymentPageComplete}>
-      <CtaPrimary content={'Complete Booking'} onClick={onCompleted} />
+      <CtaPrimary content={'Complete Booking'} onClick={handleSubmit} />
 
     </div>
 

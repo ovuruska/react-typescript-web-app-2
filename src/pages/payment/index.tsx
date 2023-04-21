@@ -27,7 +27,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({}) => {
     navigate('/policy');
   }
 
-  const handleCompleted = () => {
+  const handleCompleted = (specialHandling:string) => {
 
     const createAppointmentParams = {
       employee: employee.id,
@@ -36,6 +36,7 @@ const PaymentPage: React.FC<PaymentPageProps> = ({}) => {
       service: service,
       start,
       products: products.map((product:ProductEntity) => product.id),
+      customer_notes: specialHandling,
     } as CreateAppointmentRequest;
     createAppointment.call(createAppointmentParams);
 

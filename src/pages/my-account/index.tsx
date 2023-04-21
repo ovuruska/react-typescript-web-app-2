@@ -37,11 +37,10 @@ const MyAccountPage = () => {
     persistor.purge();
     dispatch(OrderActions.resetOrder());
     dispatch(PetsActions.emptyPets());
-    dispatch(SelectedPetActions.setSelectedPet(null));
     indexedDB.databases().then(function(databases) {
       databases.forEach(function(database) {
         if(!database.name ) return;
-        indexedDB.deleteDatabase(database.name );
+        if(window.indexedDB.deleteDatabase(database.name)) return;
       });
     });
     navigate('/login');

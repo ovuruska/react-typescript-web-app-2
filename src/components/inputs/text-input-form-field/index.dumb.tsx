@@ -37,7 +37,7 @@ const TextInputFormFieldDumb: React.FC<TextInputFormFieldDumbProps> = ({
   const inputRef = useRef<any>(null);
   const autoResize = (textarea: HTMLTextAreaElement | HTMLInputElement) => {
     textarea.style.height = 'auto'; // Reset the height to "auto" before adjusting
-    textarea.style.height = textarea.scrollHeight - 32 + 'px'; // Set the height to match the scrollHeight
+    textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to match the scrollHeight
   };
   useEffect(() => {
     if (multiline && inputRef.current instanceof HTMLTextAreaElement) {
