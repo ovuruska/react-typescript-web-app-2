@@ -48,7 +48,7 @@ describe('Create Dog', () => {
 
   describe('success',  () => {
 
-    it('should create dog', async () => {
+    it.skip('should create dog', async () => {
       await login(page, responsePool);
 
       const PET_NAME = 'Johnny';

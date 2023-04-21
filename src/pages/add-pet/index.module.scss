@@ -34,6 +34,17 @@
     }
   }
 
+  &__dateRow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:16px;
+    width: 100%;
+    & > * {
+        flex:1;
+    }
+  }
+
   &__form{
     position:relative;
     margin-top:-32px;
@@ -51,6 +62,9 @@
     & > *:first-child{
       padding-bottom:16px;
 
+    }
+    & h4{
+      color:$main-500;
     }
 
     &Header{

@@ -5,9 +5,9 @@ import TextInputFormField from '@components/inputs/text-input-form-field';
 import PetBreedSelect from '@pages/add-pet/pet-breed-select';
 import PetGenderSelect from '@components/inputs/pet-gender-select';
 import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
-import PetAgeSelect from '@pages/add-pet/pet-age-select';
 import PetWeightSelect from '@pages/add-pet/pet-weight-select';
 import { CreatePetRequest } from '@domain/types/requests/create-pet';
+import PetBirthDateSelect from '@pages/add-pet/birth-date';
 
 export interface AddPetPageProps {
   goBack?: () => void;
@@ -22,21 +22,22 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
   const [breed, setBreed] = React.useState<string | null>(null);
   const [name, setName] = React.useState<string | null>(null);
   const [gender, setGender] = React.useState<string | null>(null);
-  const [age, setAge] = React.useState<number | null>(null);
+  const [birthDate, setBirthDate] = React.useState<Date | null>(null);
   const [weight, setWeight] = React.useState<number | null>(null);
 
   const [error,setError] = React.useState<boolean>(false);
-
+  const [birthDateError,setBirthDateError] = React.useState<string>("");
 
   const handleSubmit = () => {
-    if(gender && breed && name && weight && age) {
+    if(gender && breed && name && weight && birthDate) {
       setError(false);
+      setBirthDateError("Birth date cannot be empty.")
       const request = {
         name,
         breed,
         gender,
-        age,
-        weight
+        birthDate:birthDate.toISOString(),
+        weight,
       }
       submit && submit(request)
     }else{
@@ -48,6 +49,20 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
     goBack && goBack()
   }
 
+  const handleBirthDateChange = (date:Date) => {
+    setBirthDate(date);
+    // Birth date cannot be in the future or more than 32 years ago
+    //
+    const now = new Date();
+
+    if(date.getTime() > now.getTime()){
+      setBirthDateError("Birth date cannot be in the future.");
+    }else if(date.getTime() < now.setFullYear(now.getFullYear() - 32)){
+      setBirthDateError("Birth date cannot be more than 32 years ago.");
+    }else{
+      setBirthDateError("");
+    }
+  }
 
   return <div className={style.addPetPage}>
     <div className={style.addPetPageTop}>
@@ -65,10 +80,12 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
       {(error && !breed )? <div className={style.addPetPageError}>Breed cannot be empty.</div> : <div style={{height:"16px"}}/>}
       <PetGenderSelect onSelect={setGender}/>
       {error && !gender?<div className={style.addPetPageError}>Gender cannot be empty.</div> : <div style={{height:"16px"}}/>}
-      <PetAgeSelect onSelect={setAge}/>
-      {error && !age?<div className={style.addPetPageError}>Age cannot be empty.</div> : <div style={{height:"16px"}}/>}
+
       <PetWeightSelect onSelect={setWeight}/>
       {error && !weight?<div className={style.addPetPageError}>Weight cannot be empty.</div> : <div style={{height:"16px"}}/>}
+      <h4>Birth Date</h4>
+      <PetBirthDateSelect onChange={handleBirthDateChange}/>
+      {(birthDateError!=="") ? <div className={style.addPetPageError}>{birthDateError}</div> : <div style={{height:"16px"}}/>}
       <div style={{
         height:"8px"
       }}/>
