@@ -13,26 +13,28 @@ export interface TextInputFormFieldProps {
   capitalized?: boolean;
   lower?: boolean;
   upper?: boolean;
+  multiline?: boolean;
 }
 
 const TextInputFormField: React.FC<TextInputFormFieldProps> = ({
-                                                                 errorMessage,
-                                                                 validator,
-                                                                 label,
-                                                                 initialValue,
-                                                                 onChanged,
-                                                                 disabled,
-  lower= false,
-  upper= false,
-  capitalized = false,
-                                                                 type = 'text',
-                                                               }: TextInputFormFieldProps) => {
+   errorMessage,
+   validator,
+   label,
+   initialValue,
+   onChanged,
+   disabled,
+   multiline = false,
+   lower = false,
+   upper = false,
+   capitalized = false,
+   type = 'text',
+ }: TextInputFormFieldProps) => {
 
-  if((lower && upper) || (lower && capitalized) || (upper && capitalized)){
+  if ((lower && upper) || (lower && capitalized) || (upper && capitalized)) {
     throw new Error('Only one of the lower, upper, capitalized can be true');
   }
 
-  if(validator && initialValue && !validator(initialValue)){
+  if (validator && initialValue && !validator(initialValue)) {
     initialValue = '';
   }
 
@@ -49,14 +51,14 @@ const TextInputFormField: React.FC<TextInputFormFieldProps> = ({
   };
 
   const handleChange = (value: string) => {
-    if(capitalized){
+    if (capitalized) {
       value = value.toLowerCase();
       value = value.replace(/(^|\s)[\p{Ll}]/gu, (match) => match.toUpperCase());
     }
-    if(lower){
+    if (lower) {
       value = value.toLowerCase();
     }
-    if(upper){
+    if (upper) {
       value = value.toUpperCase();
     }
     setValue(value);
@@ -67,6 +69,7 @@ const TextInputFormField: React.FC<TextInputFormFieldProps> = ({
                                  type={type} hidden={hiddenState}
                                  setHidden={handleHidden}
                                  errorMessage={errorMessage}
+                                 multiline={multiline}
                                  validator={validator}
                                  value={value} onChange={handleChange} />;
 };

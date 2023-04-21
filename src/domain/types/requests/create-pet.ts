@@ -4,6 +4,6 @@ export interface CreatePetRequest {
   weight: number;
   age?: number;
   gender: string;
-  birthDate: string;
-  specialHandling?: string;
+  birth_date: string;
+  special_handling?: string;
 }

@@ -6,12 +6,12 @@ import { injectable } from 'inversify';
 @injectable()
 export class PetMockGenerator extends MockGenerator<PetEntity>{
   generateMany(count: number): PetEntity[] {
-    return new Array(count).fill(null).map(() => this.generateOne());
+    return new Array(count).fill(null).map((_,index) => this.generateOne(index));
   }
 
-  generateOne(): PetEntity {
+  generateOne(id?:number): PetEntity {
     return {
-      id: faker.datatype.number(),
+      id: id ?? faker.datatype.number(),
       created_at: faker.date.past().toString(),
       updated_at: faker.date.past().toString(),
       name: faker.name.firstName(),

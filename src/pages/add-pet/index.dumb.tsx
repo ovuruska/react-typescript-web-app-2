@@ -24,6 +24,7 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
   const [gender, setGender] = React.useState<string | null>(null);
   const [birthDate, setBirthDate] = React.useState<Date | null>(null);
   const [weight, setWeight] = React.useState<number | null>(null);
+  const [specialHandling, setSpecialHandling] = React.useState<string | null>(null);
 
   const [error,setError] = React.useState<boolean>(false);
   const [birthDateError,setBirthDateError] = React.useState<string>("");
@@ -36,7 +37,8 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
         name,
         breed,
         gender,
-        birthDate:birthDate.toISOString(),
+        birth_date:birthDate.toISOString(),
+        special_handling:specialHandling ?? "",
         weight,
       }
       submit && submit(request)
@@ -86,10 +88,10 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
       <h4>Birth Date</h4>
       <PetBirthDateSelect onChange={handleBirthDateChange}/>
       {(birthDateError!=="") ? <div className={style.addPetPageError}>{birthDateError}</div> : <div style={{height:"16px"}}/>}
+      <TextInputFormField label={"Special Handling"} multiline={true} onChanged={setSpecialHandling}/>
       <div style={{
         height:"8px"
       }}/>
-
       <div style={{
         height:"16px"
       }}/>

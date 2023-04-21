@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import style from './index.module.scss';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
@@ -15,6 +15,7 @@ export interface TextInputFormFieldDumbProps {
   hidden?: boolean;
   setHidden: () => void;
   type?: string;
+  multiline?: boolean;
 }
 
 const TextInputFormFieldDumb: React.FC<TextInputFormFieldDumbProps> = ({
@@ -29,14 +30,36 @@ const TextInputFormFieldDumb: React.FC<TextInputFormFieldDumbProps> = ({
                                                                          hidden,
                                                                          setHidden,
                                                                          errorMessage,
+                                                                         multiline = false,
                                                                        }: TextInputFormFieldDumbProps) => {
 
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputRef = useRef<any>(null);
+  const autoResize = (textarea: HTMLTextAreaElement | HTMLInputElement) => {
+    textarea.style.height = 'auto'; // Reset the height to "auto" before adjusting
+    textarea.style.height = textarea.scrollHeight - 32 + 'px'; // Set the height to match the scrollHeight
+  };
+  useEffect(() => {
+    if (multiline && inputRef.current instanceof HTMLTextAreaElement) {
+      autoResize(inputRef.current);
+    }
+  }, [multiline]);
+
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (!disabled && onChange) {
       if (!validator || validator(e.target.value)) onChange(e.target.value);
+      if (multiline) autoResize(e.target as HTMLTextAreaElement);
+
     }
   };
+
+  useEffect(() => {
+    if (multiline) {
+      const textArea = document.querySelector('textarea');
+      if (textArea) autoResize(textArea as HTMLTextAreaElement);
+    }
+  }, []);
 
   const handleFocus = () => {
     !disabled && onFocus && onFocus(true);
@@ -65,12 +88,14 @@ const TextInputFormFieldDumb: React.FC<TextInputFormFieldDumbProps> = ({
   }
 
   const inputType = (type === 'password' && hidden) ? 'password' : 'text';
+  const InputElement = multiline ? 'textarea' : 'input';
 
-
+  // @ts-ignore
   return <>
     <div data-testid={'text-input-form-field'} onFocus={handleFocus} className={containerClass}>
-      <input readOnly={disabled} onChange={handleChange} value={value} onBlur={handleBlur}
-             className={style.textInputFormField__input} type={inputType} />
+      <InputElement ref={inputRef}
+                    readOnly={disabled} onChange={handleChange} value={value} onBlur={handleBlur}
+                    className={style.textInputFormField__input} type={inputType} />
       {type === 'password' && (hidden ? (
         <button data-testid={'text-input-form-field-show-button'} className={style.eyeBtn} onClick={() => setHidden()}>
           <AiOutlineEye

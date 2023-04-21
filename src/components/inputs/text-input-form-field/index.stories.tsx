@@ -3,11 +3,12 @@ import { Story, Meta } from "@storybook/react";
 import TextInputFormField, {
   TextInputFormFieldProps,
 } from "./index";
+import { faker } from '@faker-js/faker';
 
 export default {
   title: "Components/Inputs/TextInputFormField",
   component: TextInputFormField,
-}
+} as Meta;
 
 const Template: Story<TextInputFormFieldProps> = (args) => (
   <TextInputFormField {...args} />
@@ -57,6 +58,13 @@ NumericValidator.args = {
   label: "Input",
   initialValue: "Initial value",
   onChanged: (value) => console.log(value),
-  validator: (value) => /^[0-9]+$/.test(value),
+  validator: (value) => /^\d+$/.test(value),
 };
 
+export const Multiline = Template.bind({});
+Multiline.args = {
+  label: "Input",
+  initialValue: faker.lorem.paragraph(35),
+  onChanged: (value) => console.log(value),
+  multiline: true,
+}
