@@ -43,17 +43,17 @@ const PaymentPageDumb: React.FC<PaymentPageDumbProps> = ({
 
       <h3 className={style.paymentPage__header3}>Credit Card</h3>
       <SelectCreditCard onSelect={onCreditCardSelect} />
-    </div>
-    <div style={{
-      width:"100%"
-    }}>
-      <TextInputFormField multiline={true} onChanged={setSpecialHandling} label={"Special Handling"}/>
+      <div style={{
+        width:"100%"
+      }}>
+        <TextInputFormField multiline={true} onChanged={setSpecialHandling} label={"Special Handling"}/>
 
+      </div>
     </div>
+
 
     <div className={style.paymentPageComplete}>
       <CtaPrimary content={'Complete Booking'} onClick={handleSubmit} />
-
     </div>
 
   </div>;

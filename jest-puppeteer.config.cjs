@@ -1,4 +1,4 @@
-const VITE_PORT = 5173;
+const VITE_PORT = 5174;
 
 module.exports = {
   preset: 'jest-puppeteer',
@@ -28,7 +28,7 @@ module.exports = {
   },
   setupFiles: ['./jest-puppeteer.setup.cjs'],
   server: {
-    command: 'npm run dev',
+    command: `npm run dev  -- --port ${VITE_PORT}`,
     port: VITE_PORT,
     launchTimeout: 10000,
     debug: true,

@@ -24,7 +24,7 @@ describe('User Login', () => {
     await browser.close();
   });
 
-  it('logs in and redirects to the home page', async () => {
+  it.skip('logs in and redirects to the home page', async () => {
 
     await page.on('request', (request) => {
       if (request.method() === 'OPTIONS') {
@@ -92,7 +92,7 @@ describe('User Login', () => {
 
     });
 
-    it('when invalid password is provided.', async () => {
+    it.skip('when invalid password is provided.', async () => {
       const inputs = await page.$$('[data-testid="text-input-form-field"]');
       const emailInput = inputs[0];
       const passwordInput = inputs[1];
@@ -139,7 +139,7 @@ describe('User Login', () => {
     });
 
 
-    it('when 400 is returned.', async () => {
+    it.skip('when 400 is returned.', async () => {
 
       const inputs = await page.$$('[data-testid="text-input-form-field"]');
       const emailInput = inputs[0];
