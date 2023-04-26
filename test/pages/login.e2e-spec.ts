@@ -15,7 +15,7 @@ describe('User Login', () => {
   const password = PASSWORD;
 
   beforeEach(async () => {
-    browser = await puppeteer.launch({ headless: true });
+    browser = await puppeteer.launch({ headless: "new" });
     page = await browser.newPage();
     await page.setRequestInterception(true);
   });

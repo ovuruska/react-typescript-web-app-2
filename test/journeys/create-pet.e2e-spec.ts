@@ -24,7 +24,7 @@ describe('Create Dog', () => {
 
   beforeEach(async () => {
     browser = await puppeteer.launch({
-      headless: true,
+      headless: "new",
     });
     page = await browser.newPage();
     responsePool = new ResponsePool();

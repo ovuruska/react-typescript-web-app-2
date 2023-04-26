@@ -14,7 +14,7 @@ describe('User Signup', () => {
 
   beforeEach(async () => {
     browser = await puppeteer.launch({
-      headless: true,
+      headless: "new",
       });
     page = await browser.newPage();
     await page.setRequestInterception(true);

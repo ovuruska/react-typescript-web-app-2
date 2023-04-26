@@ -4,7 +4,7 @@ module.exports = {
   preset: 'jest-puppeteer',
   browserContext: 'default',
   launch: {
-    headless: process.env.HEADLESS !== 'false',
+    headless: "new",
   },
   testMatch: ['**/*.e2e-spec.ts?(x)'],
   transform: {
