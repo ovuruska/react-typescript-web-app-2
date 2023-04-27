@@ -39,6 +39,10 @@ const BookPage: React.FC = () => {
     setGroomers(employees.map((employee) => employee.id));
   }
 
+  const handleSetDate = (date:Date) => {
+    setDate(date);
+  }
+
   const onBook = (slot:DailyAvailableSlot) => {
     const branch = slot.branch
     const employee = slot.employee;
@@ -58,7 +62,7 @@ const BookPage: React.FC = () => {
           <h2>Book appointment</h2>
 
         </div>
-        <SurgeCalendar initialDate={date} onChange={setDate} />
+        <SurgeCalendar initialDate={date} onChange={handleSetDate} />
       </div>
       <div className={"book-page__select-branch"}>
         <SelectBranches onSelect={handleSelectBranches} />

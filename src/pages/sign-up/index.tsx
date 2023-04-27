@@ -7,6 +7,8 @@ import { SignupRequest } from '@domain/types/requests/signup';
 import { HttpClient } from '@quicker/common/http-client';
 import { HttpClientSymbol } from '@domain/types/TYPES';
 import { useNavigate } from 'react-router-dom';
+import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
+import { RouteNames } from '@quicker/routes';
 
 export interface SignUpPageProps {}
 
@@ -15,6 +17,8 @@ const SignUpPage: React.FC<SignUpPageProps> = ({}) => {
   const signUp = useInjection<CustomerSignupUseCase>(CustomerSignupUseCase);
   const client = useInjection<HttpClient>(HttpClientSymbol);
   const navigate = useNavigate();
+  const [_ ,setLoading] = useLoadingOverlay();
+
   const onSignUp = (email:string,password:string,first_name:string,last_name:string) => {
     const params = {
       email,
@@ -22,16 +26,19 @@ const SignUpPage: React.FC<SignUpPageProps> = ({}) => {
       first_name,
       last_name,
     } as SignupRequest;
+    setLoading(true);
 
     signUp.call(params).then((res) => {
       client.login(params.email, params.password).then(() => {
-        navigate('/');
+        navigate(RouteNames.HOME);
       });
     }).catch((err) => {
       if(err.response.status === 400){
-        setError("Email already exists");
+        setError("User with same email exists");
       }
       setError("There is an issue happened 🤗");
+    }).finally(() => {
+      setLoading(false);
     });
   };
 

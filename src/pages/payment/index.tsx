@@ -7,6 +7,8 @@ import { useInjection } from 'inversify-react';
 import { CreateAppointmentUseCase } from '@domain/usecases/appointment/create-appointment';
 import { CreateAppointmentRequest } from '@domain/types/requests/create-appointment';
 import { ProductEntity } from '@domain/types/common/product';
+import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
+import { RouteNames } from '@quicker/routes';
 
 export interface PaymentPageProps {
 }
@@ -22,13 +24,14 @@ const PaymentPage: React.FC<PaymentPageProps> = ({}) => {
   });
   const createAppointment = useInjection(CreateAppointmentUseCase);
   const navigate = useNavigate();
+  const [_, setLoading] = useLoadingOverlay();
 
   const handleWarning = () => {
     navigate('/policy');
   }
 
   const handleCompleted = (specialHandling:string) => {
-
+    setLoading(true);
     const createAppointmentParams = {
       employee: employee.id,
       branch: branch.id,
@@ -38,9 +41,16 @@ const PaymentPage: React.FC<PaymentPageProps> = ({}) => {
       products: products.map((product:ProductEntity) => product.id),
       customer_notes: specialHandling,
     } as CreateAppointmentRequest;
-    createAppointment.call(createAppointmentParams);
 
-    navigate('/thank-you');
+    createAppointment.call(createAppointmentParams).then((response) => {
+      setLoading(false);
+      navigate(RouteNames.THANKS);
+
+    }).catch((err) => {
+      setLoading(false);
+      navigate(RouteNames.HOME)
+    });
+
   }
 
   return <BookingJourney selectable={false}>

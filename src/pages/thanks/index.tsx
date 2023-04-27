@@ -3,6 +3,7 @@ import ThanksPageDumb from '@pages/thanks/index.dumb';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { OrderActions } from '@quicker/store/order-slice';
+import { RouteNames } from '@quicker/routes';
 
 const ThanksPage = () => {
   const { products, date, service, employee, branch } = useSelector(
@@ -20,7 +21,7 @@ const ThanksPage = () => {
   const navigate = useNavigate();
   const handleClick = () => {
     dispatch(OrderActions.resetOrder());
-    navigate("/");
+    navigate(RouteNames.HOME);
 
   }
 

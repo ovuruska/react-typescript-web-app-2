@@ -6,6 +6,9 @@ import { HttpClientSymbol } from '@domain/types/TYPES';
 import { useNavigate } from 'react-router';
 import ErrorPopup from '@components/popups/error-popup';
 import { Helmet } from 'react-helmet';
+import { useLoadingOverlayContext } from '@components/loading/loading-overlay/context';
+import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
+import { RouteNames } from '@quicker/routes';
 
 export interface LoginPageProps {}
 
@@ -14,14 +17,18 @@ const LoginPage: React.FC<LoginPageProps> = (props) => {
   const [error, setError] = React.useState('');
   const client = useInjection<HttpClient>(HttpClientSymbol);
   const navigate = useNavigate();
+  const [_,setLoading] = useLoadingOverlay();
 
   const onLogin = async (email: string, password: string) => {
+    setLoading(true);
     client
       .login(email, password)
       .then(() => {
-        navigate('/');
+        setLoading(false);
+        navigate(RouteNames.HOME);
       })
       .catch((err) => {
+        setLoading(false);
         setError('Login failed');
       });
   };

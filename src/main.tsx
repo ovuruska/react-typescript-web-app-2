@@ -8,14 +8,16 @@ import store from './store/store';
 import { Provider as InversionProvider } from 'inversify-react';
 import { getContainer } from '@utils/inversion-container';
 import { FirebaseProvider } from '@hooks/firebase-context';
+import { LoadingOverlayProvider } from '@components/loading/loading-overlay/context';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<InversionProvider
   container={getContainer()}>
-  <FirebaseProvider>
+  <LoadingOverlayProvider>
+    <FirebaseProvider>
 
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </FirebaseProvider>
-
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </FirebaseProvider>
+  </LoadingOverlayProvider>
 </InversionProvider>);
