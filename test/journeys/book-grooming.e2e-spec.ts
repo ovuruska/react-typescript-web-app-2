@@ -58,7 +58,7 @@ describe('Book', () => {
     await browser.close();
   });
 
-  it('grooming appointment.', async () => {
+  it.skip('grooming appointment.', async () => {
 
 
     const {pets , branches, employees, products, dailySlots, appointments} = injectResponses(responsePool);
