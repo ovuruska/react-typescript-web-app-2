@@ -8,6 +8,7 @@ import CtaPrimary from '@components/buttons/cta-primary/cta-primary';
 import PetWeightSelect from '@pages/add-pet/pet-weight-select';
 import { CreatePetRequest } from '@domain/types/requests/create-pet';
 import PetBirthDateSelect from '@pages/add-pet/birth-date';
+import { HealthInformation } from '@pages/add-pet/health-information';
 
 export interface AddPetPageProps {
   goBack?: () => void;
@@ -74,7 +75,7 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
 
     <div className={style.addPetPage__form}>
       <h3 className={style.addPetPage__formHeader}>
-        Dog information
+        Pet information
       </h3>
       <TextInputFormField label={"Name"} onChanged={setName}/>
       {(error && !name) ? <div className={style.addPetPageError}>Name cannot be empty.</div> : <div style={{height:"16px"}}/>}
@@ -85,16 +86,25 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
 
       <PetWeightSelect onSelect={setWeight}/>
       {error && !weight?<div className={style.addPetPageError}>Weight cannot be empty.</div> : <div style={{height:"16px"}}/>}
-      <h4>Birth Date</h4>
-      <PetBirthDateSelect onChange={handleBirthDateChange}/>
-      {(birthDateError!=="") ? <div className={style.addPetPageError}>{birthDateError}</div> : <div style={{height:"16px"}}/>}
       <TextInputFormField label={"Special Handling"} multiline={true} onChanged={setSpecialHandling}/>
+      <div style={{height:"32px"}}/>
+      <h3 className={style.addPetPage__formHeader}>Birth Date</h3>
       <div style={{
         height:"8px"
       }}/>
+      <PetBirthDateSelect onChange={handleBirthDateChange}/>
+      {(birthDateError!=="") ? <div className={style.addPetPageError}>{birthDateError}</div> : <div style={{height:"16px"}}/>}
       <div style={{
         height:"16px"
       }}/>
+      <h3 className={style.addPetPage__formHeader}>Health information</h3>
+
+      <HealthInformation/>
+
+      <div style={{
+        height:"24px"
+      }}/>
+
       <CtaPrimary onClick={handleSubmit} content={"Submit"}/>
     </div>
 

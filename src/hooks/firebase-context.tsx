@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useInjection } from 'inversify-react';
 import { FirebaseConfig, firebaseConfigSymbol } from '@domain/types/common/firebase-config';
-import { getAnalytics } from "firebase/analytics";
-import { initializeApp } from "firebase/app";
+import { getAnalytics } from 'firebase/analytics';
+import { initializeApp } from 'firebase/app';
 import { Analytics } from '@firebase/analytics';
-
+import { getStorage, ref as storageRef, FirebaseStorage } from '@firebase/storage';
 
 
 export interface FirebaseProviderProps {
@@ -13,19 +13,21 @@ export interface FirebaseProviderProps {
 
 export interface FirebaseContextValue {
   analytics: Analytics | null;
+  storage: FirebaseStorage | null;
 }
-const FirebaseContext = createContext({analytics: null} as FirebaseContextValue);
+
+const FirebaseContext = createContext({ analytics: null, storage: null } as FirebaseContextValue);
 
 export const useFirebase = () => {
   return useContext(FirebaseContext);
 };
 
-export const FirebaseProvider = ({ children  } : FirebaseProviderProps) => {
+export const FirebaseProvider = ({ children }: FirebaseProviderProps) => {
   const firebaseConfig = useInjection(firebaseConfigSymbol) as FirebaseConfig;
 
   const [auth, setAuth] = useState(null);
   const [firestore, setFirestore] = useState(null);
-  const [storage, setStorage] = useState(null);
+  const [storage, setStorage] = useState<FirebaseStorage | null>(null);
   const [analytics, setAnalytics] = useState<Analytics | null>(null);
 
 
@@ -33,16 +35,16 @@ export const FirebaseProvider = ({ children  } : FirebaseProviderProps) => {
     const app = initializeApp(firebaseConfig);
 
     const analytics = getAnalytics(app);
-
+    const storage = getStorage(app);
     setAnalytics(analytics);
+    setStorage(storage);
 
   }, []);
 
   const value = {
-    analytics
+    analytics,
+    storage
   } as FirebaseContextValue;
 
-  return (
-    <FirebaseContext.Provider value={value}>{children}</FirebaseContext.Provider>
-  );
+  return (<FirebaseContext.Provider value={value}>{children}</FirebaseContext.Provider>);
 };

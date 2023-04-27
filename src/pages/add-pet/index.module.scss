@@ -33,6 +33,17 @@
       }
     }
   }
+  &__subForm{
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    padding:16px 0;
+    width: 100%;
+    height: 100%;
+    & > * {
+        flex:1;
+    }
+  }
 
   &__dateRow{
     display: flex;
