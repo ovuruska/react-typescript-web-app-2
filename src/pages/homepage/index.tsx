@@ -5,6 +5,7 @@ import { OrderActions } from '@quicker/store/order-slice';
 import { useDispatch } from 'react-redux';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { RouteNames } from '@quicker/routes';
 
 const HomePage: React.FC = () => {
   const upcomingAppts = useUpcomingAppts();
@@ -14,19 +15,20 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate();
 
 
-  const onServiceCardClick = () => {
+  const onServiceCardClick = (serviceName: string) => {
     if(pets.length > 0) {
       dispatch(OrderActions.setPet(pets[0]));
       return true;
     }
     else {
-      navigate("/add-pet");
+      dispatch(OrderActions.setOrderType(serviceName));
+      navigate(RouteNames.ADD_PET);
       return false;
     }
   }
 
   const onAppointmentClick = () => {
-    navigate('/appointments')
+    navigate(RouteNames.APPOINTMENTS);
   }
 
   return <HomePageDumb onAppointmentClick={onAppointmentClick} onServiceCardClick={onServiceCardClick} appointments={upcomingAppts} pets={pets}/>;

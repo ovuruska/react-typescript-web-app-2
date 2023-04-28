@@ -17,7 +17,7 @@ import { PetDetailsEntity } from '@domain/types/common/pet-details';
 export interface HomePageDumbProps {
   appointments: AppointmentEntity[];
   pets: PetDetailsEntity[];
-  onServiceCardClick?: () => boolean;
+  onServiceCardClick?: (serviceName:string) => boolean;
   onAppointmentClick?: (appt: AppointmentEntity) => void;
 }
 

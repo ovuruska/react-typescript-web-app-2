@@ -10,7 +10,7 @@ import "./service-card.css";
 interface Props {
   title: string;
   subtitle: string;
-  onClick?: () => boolean;
+  onClick?: (serviceName:string) => boolean;
 }
 
 const ServiceCard: React.FC<Props> = ({  title, onClick, subtitle }) => {
@@ -27,7 +27,7 @@ const ServiceCard: React.FC<Props> = ({  title, onClick, subtitle }) => {
 
   const handleBookingStart = () => {
 
-    onClick && onClick() &&     dispatch(OrderActions.setOrderType(title)) && navigate("/book");
+    onClick && onClick(title) &&     dispatch(OrderActions.setOrderType(title)) && navigate("/book");
   }
 
   return (

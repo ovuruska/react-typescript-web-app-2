@@ -11,20 +11,23 @@ import PetBirthDateSelect from '@pages/add-pet/birth-date';
 import { HealthInformation } from '@pages/add-pet/health-information';
 import { useFirebase } from '@hooks/firebase-context';
 import { UploadProofRequest } from '@domain/types/requests/firebase/upload-proof';
+import { PetDetailsEntity } from '@domain/types/common/pet-details';
 
 export interface AddPetPageProps {
   goBack?: () => void;
   submit?: (request: CreatePetRequest) => void;
   handleProof?: (request:UploadProofRequest) => void;
+  pets?: PetDetailsEntity[];
 }
 
 
 export const AddPetDumb: React.FC<AddPetPageProps> = ({
-                                                        goBack, submit,handleProof
+                                                        goBack, submit,handleProof,pets = []
                                                       }: AddPetPageProps) => {
   const initialDate = new Date();
   const [breed, setBreed] = React.useState<string | null>(null);
   const [name, setName] = React.useState<string | null>(null);
+  const [nameError, setNameError] = React.useState<string | null>(null);
   const [gender, setGender] = React.useState<string | null>(null);
   const [birthDate, setBirthDate] = React.useState<Date | null>(initialDate);
   const [weight, setWeight] = React.useState<number | null>(null);
@@ -32,12 +35,16 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
   const [rabiesExp, setRabiesExp] = React.useState<Date | null>(initialDate);
   const [rabiesProof, setRabiesProof] = React.useState<File | null>(null);
   const [healthInformationError, setHealthInformationError] = React.useState<string | null>(null);
-
   const [error, setError] = React.useState<boolean>(false);
   const [birthDateError, setBirthDateError] = React.useState<string | null>(null);
 
   const handleSubmit = () => {
-    if (gender && breed && name && weight && birthDate && rabiesProof && rabiesProof) {
+    let flag = false;
+    const petNameExists = pets.find((pet) => pet.name === name);
+    if(petNameExists) {
+      flag = true;
+    }
+    if (!flag && gender && breed && name && weight && birthDate && rabiesProof && rabiesProof) {
       setError(false);
       setBirthDateError(null);
       setHealthInformationError(null);
@@ -65,6 +72,13 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
       if (rabiesProof === null) {
         setHealthInformationError('Proof should be available.');
       }
+      if(petNameExists){
+        setNameError('Pet with same name already exists.');
+      }
+      else if(!name) {
+        setNameError('Name cannot be empty.');
+      }
+      console.log(nameError);
 
       setError(true);
     }
@@ -99,7 +113,7 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
         Pet information
       </h3>
       <TextInputFormField label={'Name'} onChanged={setName} />
-      {(error && !name) ? <div className={style.addPetPageError}>Name cannot be empty.</div> :
+      {(error && nameError) ? <div className={style.addPetPageError}>{nameError}</div> :
         <div style={{ height: '16px' }} />}
       <PetBreedSelect onSelect={setBreed} />
       {(error && !breed) ? <div className={style.addPetPageError}>Breed cannot be empty.</div> :
