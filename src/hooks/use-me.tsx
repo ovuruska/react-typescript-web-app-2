@@ -8,7 +8,7 @@ const useMe = () => {
 
   const [me, setMe] = React.useState<MeResponse | null>(null);
   useEffect(() => {
-    getMe.call({}).then((meResponse) => {
+    getMe.call().then((meResponse) => {
       setMe(meResponse);
     });
   }, []);

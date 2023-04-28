@@ -29,11 +29,11 @@ const SignUpPage: React.FC<SignUpPageProps> = ({}) => {
     setLoading(true);
 
     signUp.call(params).then((res) => {
-      client.login(params.email, params.password).then(() => {
-        navigate(RouteNames.HOME);
-        setLoading(false);
+      const {token} = res;
+      client.setAuthToken(token);
+      setLoading(false);
+      navigate(RouteNames.HOME);
 
-      });
     }).catch((err) => {
       if(err.response.status === 400){
         setError("User with same email exists");

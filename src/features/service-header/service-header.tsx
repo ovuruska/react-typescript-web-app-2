@@ -8,6 +8,7 @@ import { OrderActions } from '@quicker/store/order-slice';
 import { PetEntity } from '@domain/types/common/pet';
 import ServiceHeaderDumb from '@features/service-header/service-header.dumb';
 import { useNavigate } from 'react-router-dom';
+import useAllPets from '@hooks/use-all-pets';
 
 interface ServiceHeaderProps{
   selectable? : boolean;
@@ -19,13 +20,13 @@ const ServiceHeader : React.FC<ServiceHeaderProps>= ({
                        } : ServiceHeaderProps) => {
   const [petNames, setPetNames] = useState<Array<string>>([]);
 
-  const {type,pets,selectedPet} = useSelector((state: RootState) => {
+  const {type,selectedPet} = useSelector((state: RootState) => {
     return {
       type:state.order.orderType,
-      pets:state.pets.pets,
       selectedPet:state.order.pet,
     }
   });
+  const { pets } = useAllPets();
 
 
   const dispatch = useDispatch();

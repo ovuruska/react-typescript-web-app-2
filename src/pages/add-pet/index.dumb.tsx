@@ -63,11 +63,7 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
         setBirthDateError('Birth date cannot be empty.');
       }
       if (rabiesProof === null) {
-        setHealthInformationError('Proof should be uploaded.');
-      }
-
-      if (rabiesExp) {
-        setHealthInformationError('Rabies vaccination expiration date cannot be empty.');
+        setHealthInformationError('Proof should be available.');
       }
 
       setError(true);

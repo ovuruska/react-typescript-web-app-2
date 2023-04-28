@@ -6,7 +6,6 @@ import { useInjection } from 'inversify-react';
 import { CustomerCreatePetUseCase } from '@domain/usecases/customer/create-pet';
 import { CreatePetRequest } from '@domain/types/requests/create-pet';
 import { useDispatch } from 'react-redux';
-import { PetsActions } from '@quicker/store/pet-slice';
 import { RouteNames } from '@quicker/routes';
 import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
 import { QuickerFirebaseStorage } from '@data/datasources/firebase/storage';
@@ -23,7 +22,6 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({}: AddPetPageProps) => {
   const navigate = useNavigate();
   const createPet = useInjection<CustomerCreatePetUseCase>(CustomerCreatePetUseCase);
   const firebaseStorage = useInjection<QuickerFirebaseStorage>(QuickerFirebaseStorage);
-  const dispatch = useDispatch();
   const [_, setLoading] = useLoadingOverlay();
 
   const goBack = () => {
@@ -33,7 +31,6 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({}: AddPetPageProps) => {
   const handleSubmit = (request:CreatePetRequest) =>{
     setLoading(true);
     createPet.call(request).then((response) => {
-      dispatch(PetsActions.addPet(response));
     }).finally(() => {
       setLoading(false);
       goBack();
@@ -42,7 +39,6 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({}: AddPetPageProps) => {
 
   const handleProof = (request: UploadProofRequest) => {
     firebaseStorage.uploadProof(request).then((response) => {
-      console.log(response);
     });
   }
 

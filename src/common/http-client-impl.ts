@@ -83,7 +83,7 @@ export class HttpClientImpl implements HttpClient {
     }
   }
 
-  private setAuthToken(token: string): void {
+  public setAuthToken(token: string): void {
     this.authToken = token;
     this.instance.defaults.headers.common['Authorization'] = `Token ${token}`;
     localStorage.setItem('authToken', token);

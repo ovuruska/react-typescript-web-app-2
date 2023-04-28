@@ -8,8 +8,6 @@ import { HttpClientSymbol } from '@domain/types/TYPES';
 import { persistor } from '@quicker/store/store';
 import { OrderActions } from '@quicker/store/order-slice';
 import { useDispatch } from 'react-redux';
-import { PetsActions } from '@quicker/store/pet-slice';
-import { SelectedPetActions } from '@quicker/store/selected-pet-slice';
 
 const MyAccountPage = () => {
 
@@ -36,7 +34,6 @@ const MyAccountPage = () => {
     sessionStorage.clear();
     persistor.purge();
     dispatch(OrderActions.resetOrder());
-    dispatch(PetsActions.emptyPets());
     indexedDB.databases().then(function(databases) {
       databases.forEach(function(database) {
         if(!database.name ) return;

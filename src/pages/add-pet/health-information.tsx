@@ -41,7 +41,12 @@ export const HealthInformation = ({
       <MonthPicker onChange={handleMonthChange} initialMonth={month} label={"Vaccination Exp. Month"}/>
     </div>
     <div className={style.addPetPage__dateRow}>
-      <FilePicker label={"Rabies Vaccine Proof"} onChange={handleProofChange}/>
+      <FilePicker label={"Rabies Vaccine Proof"} onChange={handleProofChange} extensions={[
+        ".pdf",
+        ".jpg",
+        ".jpeg",
+        ".png",
+      ]}/>
     </div>
   </div>;
 };

@@ -55,3 +55,15 @@ export const Default = Template.bind({});
 Default.args = {
   label: 'File Picker',
 };
+
+export const WithPngExtension = Template.bind({});
+WithPngExtension.args = {
+  label: 'File Picker',
+  extensions: ['.png'],
+};
+
+export const WithMultipleFiles = Template.bind({});
+WithMultipleFiles.args = {
+  label: 'File Picker',
+  multiple: true,
+}

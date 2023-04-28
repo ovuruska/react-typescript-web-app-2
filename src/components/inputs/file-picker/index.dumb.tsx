@@ -6,12 +6,16 @@ export interface FilePickerDumbProps {
   label?: string;
   value?: File;
   onChange?: (value: File) => void;
+  multiple?: boolean;
+  extensions?: string[];
 }
 
 export const FilePickerDumb = ({
   label,
   value,
   onChange,
+  multiple = false,
+  extensions = [],
 } : FilePickerDumbProps) => {
   const hasValue = !!value;
   let containerClass: string;
@@ -35,8 +39,10 @@ export const FilePickerDumb = ({
   }
 
 
+  const accept = extensions.join(',') || undefined;
+
   return <div data-testid={'file-picker'} className={containerClass}>
-    <input data-testid={'file-picker-input'} className={styles.filePicker} type="file" id="file" name="file" onChange={handleChange} />
+    <input data-testid={'file-picker-input'} className={styles.filePicker} type="file" id="file" name="file" onChange={handleChange} accept={accept} multiple={multiple} />
     {(name!== undefined) ? <div data-testid={'file-picker-value'}
                                  className={styles.dropdownBtnTemplate__value}>{name ?? ''}</div> : null}
     <label className={labelClass}>{label}</label>
