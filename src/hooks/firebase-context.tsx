@@ -5,6 +5,8 @@ import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
 import { Analytics } from '@firebase/analytics';
 import { getStorage, ref as storageRef, FirebaseStorage } from '@firebase/storage';
+import { FirebaseAppSymbol } from '@domain/types/TYPES';
+import { FirebaseApp } from '@firebase/app';
 
 
 export interface FirebaseProviderProps {
@@ -23,7 +25,7 @@ export const useFirebase = () => {
 };
 
 export const FirebaseProvider = ({ children }: FirebaseProviderProps) => {
-  const firebaseConfig = useInjection(firebaseConfigSymbol) as FirebaseConfig;
+  const app = useInjection(FirebaseAppSymbol) as FirebaseApp;
 
   const [auth, setAuth] = useState(null);
   const [firestore, setFirestore] = useState(null);
@@ -32,7 +34,6 @@ export const FirebaseProvider = ({ children }: FirebaseProviderProps) => {
 
 
   useEffect(() => {
-    const app = initializeApp(firebaseConfig);
 
     const analytics = getAnalytics(app);
     const storage = getStorage(app);

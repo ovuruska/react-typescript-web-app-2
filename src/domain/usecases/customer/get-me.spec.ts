@@ -36,7 +36,7 @@ describe('GetMeUseCase', () => {
     } as MeResponse;
     mockAxios.get.mockResolvedValue({data });
 
-    const response = await useCase.call({});
+    const response = await useCase.call();
     expect(mockAxios.get).toHaveBeenCalledWith('/api/me', undefined);
 
     expect(response).toEqual(data);

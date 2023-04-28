@@ -31,15 +31,18 @@ const SignUpPage: React.FC<SignUpPageProps> = ({}) => {
     signUp.call(params).then((res) => {
       client.login(params.email, params.password).then(() => {
         navigate(RouteNames.HOME);
+        setLoading(false);
+
       });
     }).catch((err) => {
       if(err.response.status === 400){
         setError("User with same email exists");
+      }else{
+        setError("There is an issue happened 🤗");
+
       }
-      setError("There is an issue happened 🤗");
-    }).finally(() => {
       setLoading(false);
-    });
+    })
   };
 
   return (

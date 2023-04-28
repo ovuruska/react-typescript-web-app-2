@@ -13,7 +13,7 @@ export class GetMeUseCase implements UseCase<GetMeParams, Promise<MeResponse>> {
     this.repository = repository;
   }
 
-  call(params: GetMeParams): Promise<MeResponse> {
+  call(): Promise<MeResponse> {
     return this.repository.getMe();
   }
 }

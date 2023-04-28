@@ -6,4 +6,5 @@ export interface CreatePetRequest {
   gender: string;
   birth_date: string;
   special_handling?: string;
+  rabies_vaccination?: string;
 }

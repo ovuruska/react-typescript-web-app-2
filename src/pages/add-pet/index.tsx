@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import { PetsActions } from '@quicker/store/pet-slice';
 import { RouteNames } from '@quicker/routes';
 import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
+import { QuickerFirebaseStorage } from '@data/datasources/firebase/storage';
+import { UploadProofRequest } from '@domain/types/requests/firebase/upload-proof';
 
 export interface AddPetPageProps {
 
@@ -20,6 +22,7 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({}: AddPetPageProps) => {
 
   const navigate = useNavigate();
   const createPet = useInjection<CustomerCreatePetUseCase>(CustomerCreatePetUseCase);
+  const firebaseStorage = useInjection<QuickerFirebaseStorage>(QuickerFirebaseStorage);
   const dispatch = useDispatch();
   const [_, setLoading] = useLoadingOverlay();
 
@@ -35,10 +38,15 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({}: AddPetPageProps) => {
       setLoading(false);
       goBack();
     });
-
   }
 
-  return <PageCard><AddPetDumb submit={handleSubmit} goBack={goBack} /></PageCard>;
+  const handleProof = (request: UploadProofRequest) => {
+    firebaseStorage.uploadProof(request).then((response) => {
+      console.log(response);
+    });
+  }
+
+  return <PageCard><AddPetDumb handleProof={handleProof} submit={handleSubmit} goBack={goBack} /></PageCard>;
 };
 
 export default AddPetPage;

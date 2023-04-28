@@ -28,7 +28,12 @@ import {EmployeeRemoteDataSourceImpl} from "@data/datasources/employee/remote-da
 import {EmployeeRepository} from "@domain/repositories/employee/repository";
 import {EmployeeRepositoryImpl} from "@data/repositories/employee/repository-impl";
 import {GetAllGroomersUseCase} from "@domain/usecases/employee/get-all-groomers-use-case";
-import { AppointmentCacheProvider, HttpClientSymbol, PetDetailsCacheProvider } from '@domain/types/TYPES';
+import {
+  AppointmentCacheProvider,
+  FirebaseAppSymbol, FirebaseStorageSymbol,
+  HttpClientSymbol,
+  PetDetailsCacheProvider,
+} from '@domain/types/TYPES';
 import { CapacityLocalDataSource } from '@data/datasources/capacity/local-data-source';
 import { CapacityLocalDataSourceImpl } from '@data/datasources/capacity/local-data-source-impl';
 import { ProductRemoteDataSource } from '@data/datasources/product/remote-data-source';
@@ -59,6 +64,11 @@ import { AppointmentLocalDataSourceImpl } from '@data/datasources/appointment/in
 import { AppointmentLocalDataSource } from '@data/datasources/appointment/index.local';
 import { CustomerLocalDataSource } from '@data/datasources/customer/local-data-source';
 import { CustomerLocalDataSourceImpl } from '@data/datasources/customer/local-data-source-impl';
+import { initializeApp,FirebaseApp } from '@firebase/app';
+import { FirebaseConfig, firebaseConfigSymbol } from '@domain/types/common/firebase-config';
+import { FirebaseStorage, getStorage } from '@firebase/storage';
+import { QuickerFirebaseStorage } from '@data/datasources/firebase/storage';
+import { QuickerFirebaseStorageImpl } from '@data/datasources/firebase/storage-impl';
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -70,7 +80,7 @@ export const containerBind = (container:Container) => {
   container.bind<GetAvailableSlotsUseCase>(GetAvailableSlotsUseCase).toSelf();
   container.bind<CustomerRemoteDataSource>(CustomerRemoteDataSource).to(CustomerRemoteDataSourceImpl).inSingletonScope();
   container.bind<CustomerRepository>(CustomerRepository).to(CustomerRepositoryImpl);
-  container.bind<GetMeUseCase>(GetMeUseCase).toSelf();
+  container.bind<GetMeUseCase>(GetMeUseCase).toSelf().inSingletonScope();
 
   container.bind<BranchRepository>(BranchRepository).to(BranchRepositoryImpl).inSingletonScope();
   container.bind<BranchRemoteDataSource>(BranchRemoteDataSource).to(BranchRemoteDataSourceImpl).inSingletonScope();
@@ -119,5 +129,12 @@ export const containerBind = (container:Container) => {
         storeName: 'pet-details',
       }),
   ).inSingletonScope();
+  const firebaseConfig = container.get<FirebaseConfig>(firebaseConfigSymbol);
+  const firebaseApp = initializeApp(firebaseConfig)
+  container.bind<FirebaseApp>(FirebaseAppSymbol).toConstantValue(firebaseApp);
+  const storage = getStorage(firebaseApp);
+  container.bind<FirebaseStorage>(FirebaseStorageSymbol).toConstantValue(storage);
+
+  container.bind<QuickerFirebaseStorage>(QuickerFirebaseStorage).to(QuickerFirebaseStorageImpl).inSingletonScope();
 
 }

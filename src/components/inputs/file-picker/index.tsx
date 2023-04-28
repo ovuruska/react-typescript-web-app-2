@@ -15,6 +15,5 @@ export const FilePicker : React.FC<FilePickerProps> = ({
     setFile(value);
     onChange && onChange(value);
   }
-
   return <FilePickerDumb label={label} onChange={handleChange} value={file} />;
 }
