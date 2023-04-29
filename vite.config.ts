@@ -6,8 +6,28 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   plugins: [react(), VitePWA({
     registerType: 'autoUpdate', injectRegister: 'auto',
+    includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'masked-icon.svg'],
+    manifest:{
+      name: "Scrubbers Scheduling App",
+      short_name: "Scrubbers",
+      description: "Designed to schedule for your furry companions",
+      theme_color: "#fa9700",
+      icons: [
+        {
+          "src": "public/pwa-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        },
+        {
+          "src": "public/pwa-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+      ]
+    },
     workbox: {
-      globPatterns: ['**/*.{js,css,html,ico,png,svg,json,ts,tsx}']
+      globPatterns: ['**/*.{js,css,html,ico,png,svg,json,ts,tsx}'],
+      maximumFileSizeToCacheInBytes: 5*1024*1024,
     },devOptions: {
       enabled: true,
     },

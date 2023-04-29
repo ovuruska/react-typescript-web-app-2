@@ -7,7 +7,7 @@
     "cache:clear": "rm -rf node_modules/.cache && rm -rf .vite && rm -rf node_modules/.vite",
     "dev": "vite --host",
     "build": "tsc && vite build",
-    "preview": "npm run build && vite preview",
+    "preview": "npm run build && vite preview --host",
     "storybook": "npm run cache:clear && start-storybook -p 6006",
     "storybook-ubuntu": "export NODE_OPTIONS=--openssl-legacy-provider && npm run cache:clear && start-storybook -p 6006",
     "build-storybook": "npm run cache:clear  && build-storybook",
