@@ -9,10 +9,11 @@ import SelectBottomDrawer from '@components/drawers/select-bottom-drawer/select-
 import { Close } from '@mui/icons-material';
 import WarningBtn from '@components/buttons/warning-btn/warning-btn';
 import WeakBtn from '@components/buttons/weak-btn/weak-btn';
+import { PetDetailsEntity } from '@domain/types/common/pet-details';
 
 export interface AppointmentsPageDumbProps {
   appointments?: AppointmentEntity[];
-  pets?: PetEntity[];
+  pets?: PetDetailsEntity[];
   goBack?: () => void;
   onApptClicked?: (appt: AppointmentEntity) => void;
 }

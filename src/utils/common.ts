@@ -30,7 +30,7 @@ import {EmployeeRepositoryImpl} from "@data/repositories/employee/repository-imp
 import {GetAllGroomersUseCase} from "@domain/usecases/employee/get-all-groomers-use-case";
 import {
   AppointmentCacheProvider,
-  FirebaseAppSymbol, FirebaseStorageSymbol,
+  FirebaseAppSymbol, FirebaseStorageSymbol, HttpClientCachedSymbol,
   HttpClientSymbol,
   PetDetailsCacheProvider,
 } from '@domain/types/TYPES';
@@ -44,7 +44,7 @@ import { ProductRepository } from '@domain/repositories/product/repository';
 import { ProductRepositoryImpl } from '@data/repositories/product/repository-impl';
 import { GetAllProductsUseCase } from '@domain/usecases/product/get-all-products';
 import {CustomerSignupUseCase}  from '@domain/usecases/customer/signup';
-import {LoginUseCase} from '@domain/usecases/customer/login';
+import {CustomerLoginUseCase} from '@domain/usecases/customer/login';
 import { CustomerGetAllAppointmentsUseCase } from '@domain/usecases/customer/all-appointments';
 import { CustomerGetAllPetsUseCase } from '@domain/usecases/customer/get-all-pets';
 import { AppointmentRemoteDataSource } from '@data/datasources/appointment/index.remote';
@@ -98,7 +98,7 @@ export const containerBind = (container:Container) => {
   container.bind<ProductRepository>(ProductRepository).to(ProductRepositoryImpl);
   container.bind<GetAllProductsUseCase>(GetAllProductsUseCase).toSelf();
   container.bind<CustomerSignupUseCase>(CustomerSignupUseCase).toSelf();
-  container.bind<LoginUseCase>(LoginUseCase).toSelf();
+  container.bind<CustomerLoginUseCase>(CustomerLoginUseCase).toSelf();
   container.bind<CustomerGetAllAppointmentsUseCase>(CustomerGetAllAppointmentsUseCase).toSelf();
   container.bind<CustomerGetAllPetsUseCase>(CustomerGetAllPetsUseCase).toSelf();
 

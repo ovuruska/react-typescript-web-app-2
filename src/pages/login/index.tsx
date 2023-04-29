@@ -1,36 +1,36 @@
 import { useInjection } from 'inversify-react';
-import LoginPageDumb, { LoginPageDumbProps } from './index.dumb';
+import LoginPageDumb from './index.dumb';
 import React, { Fragment } from 'react';
-import { HttpClient } from '@quicker/common/http-client';
-import { HttpClientSymbol } from '@domain/types/TYPES';
 import { useNavigate } from 'react-router';
 import ErrorPopup from '@components/popups/error-popup';
 import { Helmet } from 'react-helmet';
-import { useLoadingOverlayContext } from '@components/loading/loading-overlay/context';
 import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
 import { RouteNames } from '@quicker/routes';
+import { CustomerLoginUseCase } from '@domain/usecases/customer/login';
 
 export interface LoginPageProps {}
 
 const LoginPage: React.FC<LoginPageProps> = (props) => {
 
   const [error, setError] = React.useState('');
-  const client = useInjection<HttpClient>(HttpClientSymbol);
+  const login = useInjection<CustomerLoginUseCase>(CustomerLoginUseCase);
   const navigate = useNavigate();
   const [_,setLoading] = useLoadingOverlay();
 
   const onLogin = async (email: string, password: string) => {
     setLoading(true);
-    client
-      .login(email, password)
-      .then(() => {
-        setLoading(false);
-        navigate(RouteNames.HOME);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setError('Login failed');
-      });
+    const loginParams ={
+      email,
+      password
+    };
+    login.call(loginParams).then(() => {
+      navigate(RouteNames.HOME);
+    }).catch((err) => {
+      setError('Login failed');
+    }).finally(()=>{
+      setLoading(false);
+    });
+
   };
   const onLoginWithApple = () => {};
   const onLoginWithGoogle = () => {};

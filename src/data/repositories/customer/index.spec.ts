@@ -68,10 +68,13 @@ describe('CustomerRepositoryImpl', () => {
       email: 'a@a.com', password: 'test',
     } as LoginRequest;
     jest.spyOn(customerRemoteDataSource, 'login').mockResolvedValue(authResponse);
+    jest.spyOn(customerLocalDataSource, 'me').mockResolvedValue(null);
     const response = await customerRepository.login(request);
     expect(response).toEqual(authResponse);
     expect(customerRemoteDataSource.login).toBeCalledTimes(1);
     expect(customerRemoteDataSource.login).toBeCalledWith(request);
+    expect(customerLocalDataSource.me).toBeCalledTimes(1);
+    expect(customerLocalDataSource.me).toBeCalledWith(authResponse.profile);
   });
   it('when signup is called, it should call remote data source and return response', async () => {
     const authResponse = authenticationResponseGenerator.generateOne();
@@ -83,6 +86,8 @@ describe('CustomerRepositoryImpl', () => {
     expect(response).toEqual(authResponse);
     expect(customerRemoteDataSource.signup).toBeCalledTimes(1);
     expect(customerRemoteDataSource.signup).toBeCalledWith(request);
+    expect(customerLocalDataSource.me).toBeCalledTimes(1);
+    expect(customerLocalDataSource.me).toBeCalledWith(authResponse.profile);
   });
   it('when upcomingAppointments is called, it should call local data source and remote data source. If local data is not empty array, it should return local data.Then call localDataRepository with remote data', async () => {
     const request = {

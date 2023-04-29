@@ -1,4 +1,4 @@
-import { LoginUseCase } from '@domain/usecases/customer/login';
+import { CustomerLoginUseCase } from '@domain/usecases/customer/login';
 import { Container } from 'inversify';
 import { getTestContainer } from '@utils/inversion-container-test';
 import mockAxios from 'jest-mock-axios';
@@ -6,11 +6,11 @@ import { AuthenticationResponseMockGenerator } from '@domain/types/__mock__/auth
 import { LoginRequest } from '@domain/types/requests/login';
 
 describe('LoginUseCase', () => {
-  let useCase: LoginUseCase;
+  let useCase: CustomerLoginUseCase;
   let container: Container;
   beforeAll(() => {
     container = getTestContainer();
-    useCase = container.get(LoginUseCase);
+    useCase = container.get(CustomerLoginUseCase);
   });
 
   const authResponseGenerator = new AuthenticationResponseMockGenerator();

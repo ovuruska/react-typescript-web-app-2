@@ -1,12 +1,12 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import AppointmentsPageDumb, { AppointmentsPageDumbProps } from './index.dumb';
-import { PetMockGenerator } from '@domain/types/__mock__/pet-generator';
 import { AppointmentMockGenerator } from '@domain/types/__mock__/appointment';
 import ProductMockGenerator from '@domain/types/__mock__/product-generator';
 import { BranchMockGenerator } from '@domain/types/__mock__/branch-generator';
 import { EmployeeMockGenerator } from '@domain/types/__mock__/employee-generator';
 import PageCard from '@components/cards/page-card/page-card';
+import { PetDetailsMockGenerator } from '@domain/types/__mock__/pet-details';
 
 export default {
   title: 'Pages/Appointments',
@@ -16,7 +16,7 @@ export default {
 const employeeGenerator = new EmployeeMockGenerator();
 const branchGenerator = new BranchMockGenerator();
 const productGenerator = new ProductMockGenerator();
-const petGenerator = new PetMockGenerator();
+const petGenerator = new PetDetailsMockGenerator();
 const appointmentGenerator = new AppointmentMockGenerator();
 const pets = petGenerator.generateMany(3);
 const employees = employeeGenerator.generateMany(3);

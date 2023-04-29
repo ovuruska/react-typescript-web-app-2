@@ -30,11 +30,7 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({}: AddPetPageProps) => {
 
   const { pets } = useAllPets();
   const goBack = () => {
-    if(orderType && pets.length === 0) {
-      navigate(RouteNames.BOOK);
-    }else{
-      navigate(RouteNames.HOME);
-    }
+    navigate(RouteNames.HOME);
   };
 
   const handleSubmit = (request:CreatePetRequest) =>{
@@ -42,7 +38,11 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({}: AddPetPageProps) => {
     createPet.call(request).then((response) => {
     }).finally(() => {
       setLoading(false);
-      goBack();
+      if(orderType && pets.length === 0) {
+        navigate(RouteNames.BOOK);
+      }else{
+        navigate(RouteNames.HOME);
+      }
     });
   }
 
@@ -51,7 +51,7 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({}: AddPetPageProps) => {
     });
   }
 
-  return <PageCard><AddPetDumb handleProof={handleProof} pets={pets} submit={handleSubmit} goBack={goBack} /></PageCard>;
+  return <PageCard><AddPetDumb handleProof={handleProof} pets={pets} submit={handleSubmit}  goBack={goBack} /></PageCard>;
 };
 
 export default AddPetPage;

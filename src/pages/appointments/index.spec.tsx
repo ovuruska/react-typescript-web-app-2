@@ -2,14 +2,14 @@ import AppointmentsPageDumb from '@pages/appointments/index.dumb';
 import { act, fireEvent, render } from '@testing-library/react';
 import { EmployeeMockGenerator } from '@domain/types/__mock__/employee-generator';
 import { BranchMockGenerator } from '@domain/types/__mock__/branch-generator';
-import { PetMockGenerator } from '@domain/types/__mock__/pet-generator';
 import { AppointmentMockGenerator } from '@domain/types/__mock__/appointment';
 import { advanceTo, clear } from 'jest-date-mock';
+import { PetDetailsMockGenerator } from '@domain/types/__mock__/pet-details';
 
 
 const employeeGenerator = new EmployeeMockGenerator();
 const branchGenerator = new BranchMockGenerator();
-const petGenerator = new PetMockGenerator();
+const petGenerator = new PetDetailsMockGenerator();
 const appointmentGenerator = new AppointmentMockGenerator();
 
 

@@ -7,39 +7,21 @@ import axios, {
 import { inject, injectable } from 'inversify';
 import { ApiUrl, ApiUrlSymbol } from '@domain/types/symbols/api-url';
 import { HttpClient } from './http-client';
-import { Credentials } from '@domain/types/common/credentials';
-import { CredentialsSymbol } from '@domain/types/TYPES';
 
 @injectable()
 export class HttpClientImpl implements HttpClient {
-  public instance: AxiosInstance;
-  private authToken: string | null;
+  protected instance: AxiosInstance;
+  protected authToken: string | null;
 
   constructor(
     @inject<ApiUrl>(ApiUrlSymbol) protected apiUrl: ApiUrl,
-    @inject<Credentials>(CredentialsSymbol)
-    private readonly credentials: Credentials,
   ) {
     this.instance = axios.create({ baseURL: apiUrl.value });
-    this.credentials = credentials;
     this.authToken = localStorage.getItem('authToken');
-
-    if (this.authToken) {
-      this.instance
-        .get('/api/auth/customer/verify', {
-          headers: {
-            Authorization: `Token ${this.authToken}`,
-          },
-        })
-        .then(() => {
-          this.instance.defaults.headers.common[
-            'Authorization'
-          ] = `Token ${this.authToken}`;
-        })
-        .catch((err) => {
-          this.authToken = null;
-        });
+    if(this.authToken) {
+      this.setAuthToken(this.authToken);
     }
+    this.verify().then();
 
     this.instance.interceptors.response.use(
       (response: any) => {

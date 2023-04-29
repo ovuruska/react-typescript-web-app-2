@@ -31,11 +31,21 @@ export class CustomerRepositoryImpl implements CustomerRepository{
   }
 
   async login(request: LoginRequest): Promise<AuthenticationResponse> {
-    return await this.remoteDataSource.login(request);
+    const response = await this.remoteDataSource.login(request);
+    const {profile,token} = response;
+    if(profile){
+      this.localDataSource.me(profile);
+    }
+    return response;
   }
 
   async signup(request: SignupRequest): Promise<AuthenticationResponse> {
-    return await this.remoteDataSource.signup(request);
+    const response = await this.remoteDataSource.signup(request);
+    const {profile} = response;
+    if(profile){
+      this.localDataSource.me(profile);
+    }
+    return response;
   }
 
   async upcomingAppointments(request:OffsetRequest): Promise<OffsetResponse<AppointmentEntity>> {

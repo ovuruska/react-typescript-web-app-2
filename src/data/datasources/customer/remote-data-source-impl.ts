@@ -16,7 +16,6 @@ import { CreatePetRequest } from '@domain/types/requests/create-pet';
 @injectable()
 export class CustomerRemoteDataSourceImpl implements CustomerRemoteDataSource {
 
-
   constructor(@inject<HttpClient>(HttpClientSymbol) private client: HttpClient) {
     this.client = client;
   }
@@ -31,6 +30,10 @@ export class CustomerRemoteDataSourceImpl implements CustomerRemoteDataSource {
     const response = await this.client.post<LoginRequest, AuthenticationResponse>('/api/auth/customer/login', {
       email, password,
     });
+    if(response.status === 200){
+      const {token} = response.data;
+      this.client.setAuthToken(token);
+    }
     return response.data as AuthenticationResponse;
   }
 
@@ -40,8 +43,11 @@ export class CustomerRemoteDataSourceImpl implements CustomerRemoteDataSource {
     } = request;
     const response = await this.client.post<SignupRequest, AuthenticationResponse>('/api/auth/customer/register', {
       first_name, last_name, email, password,
-
     });
+    if(response.status === 200){
+      const {token} = response.data;
+      this.client.setAuthToken(token);
+    }
     return response.data as AuthenticationResponse;
   }
 

@@ -8,16 +8,16 @@ import { AppointmentEntity } from '@domain/types/common/appointment';
 import ApptCancelJourney from '@components/journeys/appt-cancel';
 import { useInjection } from 'inversify-react';
 import { CancelAppointmentUseCase } from '@domain/usecases/appointment/cancel-appointment';
+import useAllPets from '@hooks/use-all-pets';
 
 
 const AppointmentsPage = () => {
   const appointments = useAllAppointments();
-  const me = useMe();
   const [appointment, setAppointment] = React.useState<any>(null);
   const [open, setOpen] = React.useState(false);
   const cancelAppt = useInjection<CancelAppointmentUseCase>(CancelAppointmentUseCase);
 
-  const pets = me?.dogs ?? [];
+  const { pets } = useAllPets();
 
   const goBack = () => {
     window.history.back();

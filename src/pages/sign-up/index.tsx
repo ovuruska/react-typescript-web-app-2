@@ -4,8 +4,6 @@ import ErrorPopup from '@components/popups/error-popup';
 import { useInjection } from 'inversify-react';
 import { CustomerSignupUseCase } from '@domain/usecases/customer/signup';
 import { SignupRequest } from '@domain/types/requests/signup';
-import { HttpClient } from '@quicker/common/http-client';
-import { HttpClientSymbol } from '@domain/types/TYPES';
 import { useNavigate } from 'react-router-dom';
 import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
 import { RouteNames } from '@quicker/routes';
@@ -15,7 +13,6 @@ export interface SignUpPageProps {}
 const SignUpPage: React.FC<SignUpPageProps> = ({}) => {
   const [error, setError] = useState('');
   const signUp = useInjection<CustomerSignupUseCase>(CustomerSignupUseCase);
-  const client = useInjection<HttpClient>(HttpClientSymbol);
   const navigate = useNavigate();
   const [_ ,setLoading] = useLoadingOverlay();
 
@@ -28,9 +25,7 @@ const SignUpPage: React.FC<SignUpPageProps> = ({}) => {
     } as SignupRequest;
     setLoading(true);
 
-    signUp.call(params).then((res) => {
-      const {token} = res;
-      client.setAuthToken(token);
+    signUp.call(params).then(() => {
       setLoading(false);
       navigate(RouteNames.HOME);
 
