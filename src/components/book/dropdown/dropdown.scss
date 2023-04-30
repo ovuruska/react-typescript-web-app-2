@@ -17,6 +17,14 @@
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+.dropdown-value{
+  max-width: 100px;
+  min-width:100px;
+  text-align: left;
+  text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .animation-rotation {
   transform: rotate(0deg);
   transition: all 0.3s ease-in-out;

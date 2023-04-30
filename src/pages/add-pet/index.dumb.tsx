@@ -43,11 +43,10 @@ export const AddPetDumb: React.FC<AddPetPageProps> = ({
     if(petNameExists) {
       flag = true;
     }
-    if (!flag && gender && breed && name && weight && birthDate && rabiesProof && rabiesProof) {
+    if (!flag && gender && breed && name && weight && birthDate && rabiesProof) {
       setError(false);
       setBirthDateError(null);
       setHealthInformationError(null);
-
       const request = {
         name,
         breed,

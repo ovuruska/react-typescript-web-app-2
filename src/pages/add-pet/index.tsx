@@ -36,13 +36,14 @@ export const AddPetPage: React.FC<AddPetPageProps> = ({}: AddPetPageProps) => {
   const handleSubmit = (request:CreatePetRequest) =>{
     setLoading(true);
     createPet.call(request).then((response) => {
-    }).finally(() => {
-      setLoading(false);
       if(orderType && pets.length === 0) {
         navigate(RouteNames.BOOK);
       }else{
         navigate(RouteNames.HOME);
       }
+    }).catch().finally(() => {
+      setLoading(false);
+
     });
   }
 

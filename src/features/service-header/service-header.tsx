@@ -54,7 +54,7 @@ const ServiceHeader : React.FC<ServiceHeaderProps>= ({
       navigate(previous);
     }
   };
-  const color = type === "Grooming" ? "#27946d" : "#4947ca";
+  const color = type === "Grooming" ? "#b4ffe4" : "#e1e0ff";
   return <>
     <Helmet>
       <meta name="theme-color" content={color} />

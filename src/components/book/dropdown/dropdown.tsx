@@ -29,7 +29,7 @@ const Dropdown: React.FC<Props> = ({ dropdownList, width, dropdownTitle,onChange
           setExpand((old) => !old);
         }}
       >
-        <li>
+        <li className={"dropdown-value"}>
           {activeIndex === -1 ? dropdownTitle : dropdownList[activeIndex]}
         </li>
         <div className={`animation-rotation ${expand && "rotate"}`}>
