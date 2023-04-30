@@ -9,7 +9,6 @@ import PetWeightSelect from '@pages/add-pet/pet-weight-select';
 import { CreatePetRequest } from '@domain/types/requests/create-pet';
 import PetBirthDateSelect from '@pages/add-pet/birth-date';
 import { HealthInformation } from '@pages/add-pet/health-information';
-import { useFirebase } from '@hooks/firebase-context';
 import { UploadProofRequest } from '@domain/types/requests/firebase/upload-proof';
 import { PetDetailsEntity } from '@domain/types/common/pet-details';
 

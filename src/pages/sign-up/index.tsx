@@ -7,6 +7,7 @@ import { SignupRequest } from '@domain/types/requests/signup';
 import { useNavigate } from 'react-router-dom';
 import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
 import { RouteNames } from '@quicker/route-names';
+import { Helmet } from 'react-helmet';
 
 export interface SignUpPageProps {}
 
@@ -39,10 +40,14 @@ const SignUpPage: React.FC<SignUpPageProps> = ({}) => {
       setLoading(false);
     })
   };
+  const color = '#faca86';
 
   return (
     <Fragment>
-      <ErrorPopup message={error} setMessage={setError} />
+      <Helmet>
+        <meta name="theme-color" content={color}/>
+        <title>Signup</title>
+      </Helmet>
       <SignUpPageDumb
         onSignUp={onSignUp}
       />

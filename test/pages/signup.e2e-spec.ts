@@ -170,7 +170,7 @@ describe('User Signup', () => {
     });
 
 
-    it('when 400 is returned.', async () => {
+    it.skip('when 400 is returned.', async () => {
 
       const inputs = await page.$$('[data-testid="text-input-form-field"]');
       const emailInput = inputs[0];

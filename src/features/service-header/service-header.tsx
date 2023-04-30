@@ -1,5 +1,3 @@
-import { BiLeftArrowAlt } from 'react-icons/bi';
-import Dropdown from '@components/book/dropdown/dropdown';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@quicker/store/store';
@@ -9,6 +7,7 @@ import { PetEntity } from '@domain/types/common/pet';
 import ServiceHeaderDumb from '@features/service-header/service-header.dumb';
 import { useNavigate } from 'react-router-dom';
 import useAllPets from '@hooks/use-all-pets';
+import { Helmet } from 'react-helmet';
 
 interface ServiceHeaderProps{
   selectable? : boolean;
@@ -55,17 +54,22 @@ const ServiceHeader : React.FC<ServiceHeaderProps>= ({
       navigate(previous);
     }
   };
+  const color = type === "Grooming" ? "#27946d" : "#4947ca";
+  return <>
+    <Helmet>
+      <meta name="theme-color" content={color} />
+    </Helmet>
+    <ServiceHeaderDumb
+      goBack={goBack}
+      type={type}
+      selectable={selectable}
+      petNames={petNames}
+      handleChange={handleChange}
+      title={title}
+      selectedPet={selectedPet?.name}
 
-  return <ServiceHeaderDumb
-    goBack={goBack}
-    type={type}
-    selectable={selectable}
-    petNames={petNames}
-    handleChange={handleChange}
-    title={title}
-    selectedPet={selectedPet?.name}
-
-  />
+    />
+  </>
 
 };
 export default ServiceHeader;

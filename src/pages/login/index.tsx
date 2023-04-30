@@ -1,6 +1,6 @@
 import { useInjection } from 'inversify-react';
 import LoginPageDumb from './index.dumb';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import ErrorPopup from '@components/popups/error-popup';
 import { Helmet } from 'react-helmet';
@@ -34,10 +34,12 @@ const LoginPage: React.FC<LoginPageProps> = (props) => {
   };
   const onLoginWithApple = () => {};
   const onLoginWithGoogle = () => {};
+  const color = '#faca86';
 
   return (
     <Fragment>
       <Helmet>
+        <meta name="theme-color" content={color}/>
         <title>Login</title>
       </Helmet>
       <ErrorPopup message={error} setMessage={setError} />

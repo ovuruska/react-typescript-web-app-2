@@ -11,7 +11,7 @@ export default defineConfig({
       name: "Scrubbers Scheduling App",
       short_name: "Scrubbers",
       description: "Designed to schedule for your furry companions",
-      theme_color: "#fa9700",
+      theme_color: "#faca86",
       icons: [
         {
           "src": "pwa-192x192.png",
