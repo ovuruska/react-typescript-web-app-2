@@ -40,5 +40,9 @@ export abstract class HttpClient {
   abstract logout(): Promise<void>;
 
   abstract setAuthToken(token: string): void;
+
+  abstract purgeAuthToken(): void;
+
+  abstract isTokenExpired(): boolean;
 }
 

@@ -10,6 +10,7 @@ import { HttpClient } from './http-client';
 
 @injectable()
 export class HttpClientImpl implements HttpClient {
+
   protected instance: AxiosInstance;
   protected authToken: string | null;
 
@@ -69,12 +70,17 @@ export class HttpClientImpl implements HttpClient {
     this.authToken = token;
     this.instance.defaults.headers.common['Authorization'] = `Token ${token}`;
     localStorage.setItem('authToken', token);
+    // Set the token's expiration time
+    const expiresIn = 4 * 24 * 60 * 60 * 1000; // 4 days in milliseconds
+    const expirationTime = new Date().getTime() + expiresIn;
+    localStorage.setItem('authTokenExpiration', expirationTime.toString());
   }
 
   public purgeAuthToken(): void {
     this.authToken = null;
     delete this.instance.defaults.headers.common['Authorization'];
     localStorage.removeItem('authToken');
+    localStorage.removeItem('authTokenExpiration');
   }
 
   get<Response = any>(
@@ -118,5 +124,12 @@ export class HttpClientImpl implements HttpClient {
   logout(): Promise<void> {
     this.purgeAuthToken();
     return Promise.resolve();
+  }
+
+  isTokenExpired(): boolean {
+    const expirationTime = localStorage.getItem('authTokenExpiration');
+    if (!expirationTime) return true;
+
+    return new Date().getTime() > parseInt(expirationTime, 10);
   }
 }

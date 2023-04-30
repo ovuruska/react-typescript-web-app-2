@@ -6,7 +6,7 @@ import { CustomerSignupUseCase } from '@domain/usecases/customer/signup';
 import { SignupRequest } from '@domain/types/requests/signup';
 import { useNavigate } from 'react-router-dom';
 import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
-import { RouteNames } from '@quicker/routes';
+import { RouteNames } from '@quicker/route-names';
 
 export interface SignUpPageProps {}
 

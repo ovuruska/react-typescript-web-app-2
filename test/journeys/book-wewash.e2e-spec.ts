@@ -7,6 +7,7 @@ import Container = interfaces.Container;
 import { getTestContainer } from '../../src/utils/inversion-container-test';
 import { CreateAppointmentRequest } from '../../src/domain/types/requests/create-appointment';
 import { injectResponses } from './responses';
+import { RouteNames } from '../../src/route-names';
 
 
 // Grooming should work without selecting pet.
@@ -47,9 +48,9 @@ describe('Book we wash', () => {
   });
 
   afterEach(async () => {
+    await page.goto(APP_URL + RouteNames.LOGOUT);
     await browser.close();
   });
-
   it('we wash appointment.', async () => {
 
 

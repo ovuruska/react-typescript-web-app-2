@@ -1,5 +1,6 @@
 import puppeteer, { ElementHandle,Page, Browser } from 'puppeteer';
 import { APP_URL, DELAY, EMAIL, FIRST_NAME, LAST_NAME, PASSWORD, TIMEOUT } from '../utils/constants';
+import { RouteNames } from '../../src/route-names';
 
 jest.setTimeout(TIMEOUT);
 
@@ -21,6 +22,7 @@ describe('User Signup', () => {
   });
 
   afterEach(async () => {
+    await page.goto(appUrl + RouteNames.LOGOUT);
     await browser.close();
   });
 

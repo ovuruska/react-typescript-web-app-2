@@ -1,30 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./App.css";
 import { lazy, Suspense } from "react";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AutoLogin from "@components/auth/auto-login";
 import SpinnerOverlay from "@components/loading/spinner-overlay";
 
 import { routes } from "./routes";
+import { PublicRoute } from '@components/auth/public-route';
+import { PrivateRoute } from '@components/auth/private-route';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          {routes.map(({ path, component: Component, noAutoLogin }) => (
+          {routes.map(({ path, component: Component,publicRoute }) => (
             <Route
               key={path}
               path={path}
               element={
                 <Suspense fallback={<SpinnerOverlay />}>
-                  {noAutoLogin ? (
-                    <Component />
-                  ) : (
-                    <AutoLogin>
+                  {publicRoute ? (
+                    <PublicRoute>
                       <Component />
-                    </AutoLogin>
+                    </PublicRoute>
+                  ) : (
+                    <PrivateRoute>
+                      <Component />
+                    </PrivateRoute>
                   )}
                 </Suspense>
               }

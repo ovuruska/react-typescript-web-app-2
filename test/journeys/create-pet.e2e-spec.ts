@@ -6,9 +6,9 @@ import puppeteer, { Browser, ElementHandle, HTTPRequest, Page } from 'puppeteer'
 import { ResponsePool } from '../utils/response-pool';
 import { getTestContainer } from '../../src/utils/inversion-container-test';
 import { Container } from 'inversify';
-import { RouteNames } from '../../src/routes';
 import { CreatePetRequest } from '../../src/domain/types/requests/create-pet';
 import { breeds } from '../../src/pages/add-pet/index.constants';
+import { RouteNames } from '../../src/route-names';
 
 jest.setTimeout(10000000);
 describe('Create Dog', () => {
@@ -43,6 +43,7 @@ describe('Create Dog', () => {
 
 
   afterEach(async () => {
+    await page.goto(APP_URL + RouteNames.LOGOUT);
     await browser.close();
   });
 

@@ -2,19 +2,12 @@ import { APP_URL, TIMEOUT } from '../utils/constants';
 import puppeteer, { Browser, ElementHandle, HTTPRequest, Page } from 'puppeteer';
 import { ResponsePool } from '../utils/response-pool';
 import { login } from '../actions/login';
-import { PetDetailsMockGenerator } from '../../src/domain/types/__mock__/pet-details';
-import { AppointmentMockGenerator } from '../../src/domain/types/__mock__/appointment';
-import { AppointmentEntity } from '../../src/domain/types/common/appointment';
-import { OffsetResponse } from '../../src/domain/types/responses/offset';
-import { EmployeeMockGenerator } from '../../src/domain/types/__mock__/employee-generator';
-import { BranchMockGenerator } from '../../src/domain/types/__mock__/branch-generator';
-import { DailyAvailableSlotMockGenerator } from '../../src/domain/types/__mock__/daily-available-slot-generator';
-import ProductMockGenerator from '../../src/domain/types/__mock__/product-generator';
 import { interfaces } from 'inversify';
 import Container = interfaces.Container;
 import { getTestContainer } from '../../src/utils/inversion-container-test';
 import { CreateAppointmentRequest } from '../../src/domain/types/requests/create-appointment';
 import { injectResponses } from './responses';
+import { RouteNames } from '../../src/route-names';
 
 
 // Grooming should work without selecting pet.
@@ -55,6 +48,7 @@ describe('Book', () => {
   });
 
   afterEach(async () => {
+    await page.goto(APP_URL + RouteNames.LOGOUT);
     await browser.close();
   });
 

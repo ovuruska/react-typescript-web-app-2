@@ -1,8 +1,8 @@
 import { ElementHandle, Page } from 'puppeteer';
 import { APP_URL, DELAY, EMAIL,PASSWORD } from '../utils/constants';
-import { RouteNames } from "@quicker/routes";
 import { ResponsePool } from '../utils/response-pool';
 import { AuthenticationResponseMockGenerator } from '../../src/domain/types/__mock__/authentication-response';
+import { RouteNames } from '../../src/route-names';
 
 
 const authGenerator = new AuthenticationResponseMockGenerator();

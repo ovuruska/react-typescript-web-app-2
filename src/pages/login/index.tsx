@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router';
 import ErrorPopup from '@components/popups/error-popup';
 import { Helmet } from 'react-helmet';
 import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
-import { RouteNames } from '@quicker/routes';
 import { CustomerLoginUseCase } from '@domain/usecases/customer/login';
+import { RouteNames } from '@quicker/route-names';
 
 export interface LoginPageProps {}
 

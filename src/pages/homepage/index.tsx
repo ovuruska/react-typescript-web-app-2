@@ -5,7 +5,7 @@ import { OrderActions } from '@quicker/store/order-slice';
 import { useDispatch } from 'react-redux';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { RouteNames } from '@quicker/routes';
+import { RouteNames } from '@quicker/route-names';
 
 const HomePage: React.FC = () => {
   const upcomingAppts = useUpcomingAppts();

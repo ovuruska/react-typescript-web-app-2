@@ -8,7 +8,7 @@ import { CreateAppointmentUseCase } from '@domain/usecases/appointment/create-ap
 import { CreateAppointmentRequest } from '@domain/types/requests/create-appointment';
 import { ProductEntity } from '@domain/types/common/product';
 import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
-import { RouteNames } from '@quicker/routes';
+import { RouteNames } from '@quicker/route-names';
 
 export interface PaymentPageProps {
 }

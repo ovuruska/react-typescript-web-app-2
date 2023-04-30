@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import { LogoutPage } from '@pages/logout';
 
 const AddPetPage = lazy(() => import("@pages/add-pet"));
 const ThanksPage = lazy(() => import("@pages/thanks"));
@@ -28,26 +29,10 @@ export const routes = [
   { path: "/appointments", component: AppointmentsPage },
   { path: "/pets", component: PetsPage },
   { path: "/pet-details", component: PetDetailsPage },
-  { path: "/login", component: LoginPage, noAutoLogin: true },
-  { path: "/forgotpassword", component: ForgotPasswordPage, noAutoLogin: true },
-  { path: "/signup", component: SignUpPage, noAutoLogin: true },
-  { path: "*", component: NotFoundPage,noAutoLogin: true },
+  { path: "/logout", component: LogoutPage},
+  { path: "/login", component: LoginPage, publicRoute: true },
+  { path: "/forgotpassword", component: ForgotPasswordPage, publicRoute: true },
+  { path: "/signup", component: SignUpPage, publicRoute: true },
+  { path: "*", component: NotFoundPage,publicRoute: true },
 ];
 
-export const enum RouteNames {
-  HOME = "/",
-  BOOK = "/book",
-  ADDONS = "/add-ons",
-  PAYMENT = "/payment",
-  POLICY = "/policy",
-  THANKS = "/thank-you",
-  ADD_PET = "/add-pet",
-  MY_ACCOUNT = "/my-account",
-  APPOINTMENTS = "/appointments",
-  PETS = "/pets",
-  PET_DETAILS = "/pet-details",
-  LOGIN = "/login",
-  FORGOT_PASSWORD = "/forgotpassword",
-  SIGNUP = "/signup",
-  NOTFOUND = "/404",
-}

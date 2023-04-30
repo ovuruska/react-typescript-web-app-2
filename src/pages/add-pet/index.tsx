@@ -6,11 +6,11 @@ import { useInjection } from 'inversify-react';
 import { CustomerCreatePetUseCase } from '@domain/usecases/customer/create-pet';
 import { CreatePetRequest } from '@domain/types/requests/create-pet';
 import { useSelector } from 'react-redux';
-import { RouteNames } from '@quicker/routes';
 import { useLoadingOverlay } from '@components/loading/loading-overlay/use-loading-overlay';
 import { QuickerFirebaseStorage } from '@data/datasources/firebase/storage';
 import { UploadProofRequest } from '@domain/types/requests/firebase/upload-proof';
 import useAllPets from '@hooks/use-all-pets';
+import { RouteNames } from '@quicker/route-names';
 
 export interface AddPetPageProps {
 
