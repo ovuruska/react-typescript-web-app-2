@@ -113,7 +113,6 @@ export class CustomerRepositoryImpl implements CustomerRepository{
 
   async createPet(request:CreatePetRequest): Promise<PetDetailsEntity> {
     const response =await this.remoteDataSource.createPet(request);
-    console.log(response);
     this.localDataSource.createPet(response);
     return response;
   }
