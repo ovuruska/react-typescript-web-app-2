@@ -3,7 +3,7 @@ import "../../App.css";
 import "./carousel-slider.css";
 import Avatar from "react-avatar";
 import { motion } from "framer-motion";
-import PetCard from "../cards/pet-card/pet-card";
+import PetCard from "../cards/pet-card";
 
 interface Props {
   Element: React.ElementType;
