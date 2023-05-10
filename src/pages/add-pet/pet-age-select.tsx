@@ -10,7 +10,8 @@ export interface DogAgeSelectProps {
 
 const PetAgeSelect = ({ onSelect }: DogAgeSelectProps) => {
   const options = ages.map((age) => ({ value: age, label: age.toString() }));
-  return <DropdownSelect options={options} label={'Age'} onSelect={onSelect} />;
+  return <DropdownSelect       toggleWhenSelected={true}
+                               options={options} label={'Age'} onSelect={onSelect} />;
 };
 
 export default PetAgeSelect;

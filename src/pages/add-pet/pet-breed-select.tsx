@@ -8,7 +8,8 @@ export interface DogBreedSelectProps {
 
 const PetBreedSelect = ({ onSelect, initialValue }: DogBreedSelectProps) => {
   const options = breeds.map((breed) => ({ value: breed, label: breed }));
-  return <DropdownSelect options={options} initialValue={options.filter(val => val.value === initialValue)[0] ?? null}
+  return <DropdownSelect       toggleWhenSelected={true}
+                               options={options} initialValue={options.filter(val => val.value === initialValue)[0] ?? null}
                          label={'Breed'} onSelect={onSelect} />;
 };
 

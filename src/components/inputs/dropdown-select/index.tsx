@@ -16,15 +16,17 @@ export interface DropdownSelectProps<T> {
   initialValue?: DropdownSelectItem<T>;
   options: DropdownSelectItem<T>[];
   label?: string;
+  toggleWhenSelected?: boolean;
 }
 
-const DropdownSelect = <T,>({ onSelect, initialValue, options, label }: DropdownSelectProps<T>): JSX.Element => {
+const DropdownSelect = <T,>({ onSelect, initialValue, options, label,toggleWhenSelected=false }: DropdownSelectProps<T>): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<DropdownSelectItem<T> | null>(initialValue ?? null);
 
   const handleCheck = (option: DropdownSelectItem<T>) => {
    setSelected(option);
    onSelect && onSelect(option.value);
+   toggleWhenSelected && toggle();
   };
 
   const toggle = () => setIsOpen(!isOpen);
@@ -54,7 +56,7 @@ const DropdownSelect = <T,>({ onSelect, initialValue, options, label }: Dropdown
     {!!selected ? <div data-testid={"dropdown-select-value"} className={selectedClassName}>{selected.label}</div> : null }
     <SelectBottomDrawer open={isOpen}>
       <div className={styles.dropdownBtnTemplate__header}>
-        <h1>{label}</h1>
+        <h1 data-testid={"dropdown-select-header"}>{label}</h1>
         <Close onClick={toggle}/>
       </div>
       <div style={{height: "16px"}}/>

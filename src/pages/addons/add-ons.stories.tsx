@@ -5,7 +5,7 @@ import AddOnsDumb from '@pages/addons/add-ons.dumb';
 import ProductMockGenerator from '@domain/types/__mock__/product-generator';
 
 export default {
-  title: "Add-ons Page",
+  title: "Pages/Add-ons Page",
   component: AddOnsDumb,
 } as ComponentMeta<typeof AddOnsDumb>;
 

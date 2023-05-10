@@ -26,6 +26,7 @@ const PetWeightSelect = ({ onSelect }: DogWeightSelectProps) => {
 
   return (
     <DropdownSelect
+      toggleWhenSelected={true}
       options={options}
       label={'Weight'}
       onSelect={handleSelect}
