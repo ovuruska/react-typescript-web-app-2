@@ -33,18 +33,18 @@ describe('AddCreditCardDumb', () => {
     await waitFor(() => expect(onSubmit).toHaveBeenCalled());
     expect(onSubmit).toHaveBeenCalledWith({
       address: {
-        addressLine1: '123 Main St',
-        addressLine2: 'Apt 1',
+        address_line_1: '123 Main St',
+        address_line_2: 'Apt 1',
         city: 'New York',
         country: 'USA',
-        postalCode: '12345',
+        postal_code: '12345',
         state: 'NY',
       },
       brand: 'Visa',
-      cardNumber: '1234567890123456',
-      cardholderName: 'John Doe',
-      CVV: '123',
-      expDate: '12/24',
+      card_number: '1234567890123456',
+      cardholder_name: 'John Doe',
+      cvv: '123',
+      exp_date: '12/24',
 
     },expect.anything());
   });
