@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageLayout } from '@components/layouts/page-layout';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { CreditCard, CreditCardBrand } from '@domain/types/common/credit-card';
+import { CreditCardInformation, CreditCardBrand } from '@domain/types/common/credit-card';
 import * as Yup from 'yup';
 import CtaSecondary from '@components/buttons/cta-secondary';
 import { FormikHelpers } from 'formik/dist/types';
@@ -12,28 +12,28 @@ import DropdownSelect, { DropdownSelectProps } from '@components/inputs/dropdown
 
 export interface AddCreditCardDumbProps {
   onClick?: () => void;
-  onSubmit: (values: CreditCard, formikHelpers: FormikHelpers<CreditCard>) => void | Promise<any>;
+  onSubmit: (values: CreditCardInformation, formikHelpers: FormikHelpers<CreditCardInformation>) => void | Promise<any>;
 
 }
 
-const initialValues: CreditCard = {
-  CVV: '', cardNumber: '', expDate: '', brand: CreditCardBrand.Visa, cardholderName: '', address: {
-    city: '', country: '', addressLine1: '', addressLine2: '', postalCode: '', state: '',
+const initialValues: CreditCardInformation = {
+  cvv: '', card_number: '', exp_date: '', brand: CreditCardBrand.Visa, cardholder_name: '', address: {
+    city: '', country: '', address_line_1: '', address_line_2: '', postal_code: '', state: '',
   },
 };
 
 const validationSchema = Yup.object({
-  CVV: Yup.string().required('CVV is required'),
-  cardNumber: Yup.string().required('Card Number is required'),
-  expDate: Yup.string().required('Expiry Date is required'),
+  cvv: Yup.string().required('cvv is required'),
+  card_number: Yup.string().required('Card Number is required'),
+  exp_date: Yup.string().required('Expiry Date is required'),
   brand: Yup.string().required('Brand is required'),
-  cardholderName: Yup.string().required('Cardholder Name is required'),
+  cardholder_name: Yup.string().required('Cardholder Name is required'),
   address: Yup.object({
     city: Yup.string().required('City is required'),
     country: Yup.string().required('Country is required'),
-    addressLine1: Yup.string().required('Address Line 1 is required'),
-    addressLine2: Yup.string(),
-    postalCode: Yup.string().required('Postal Code is required'),
+    address_line_1: Yup.string().required('Address Line 1 is required'),
+    address_line_2: Yup.string(),
+    postal_code: Yup.string().required('Postal Code is required'),
     state: Yup.string().required('State is required'),
   }),
 });
@@ -48,16 +48,16 @@ export const AddCreditCardDumb = ({
         <div style={{ height: '16px' }} />
         <div>
           <TextInputFormField label={'Cardholder Name'}
-                              onChanged={(value) => setFieldValue('cardholderName', value)}
+                              onChanged={(value) => setFieldValue('cardholder_name', value)}
           />
-          <ErrorMessage name='cardholderName' />
+          <ErrorMessage name='cardholder_name' />
         </div>
         <div style={{ height: '8px' }} />
         <div>
           <TextInputFormField label={'Card Number'}
-                              onChanged={(value) => setFieldValue('cardNumber', value)}
+                              onChanged={(value) => setFieldValue('card_number', value)}
           />
-          <ErrorMessage name='cardNumber' />
+          <ErrorMessage name='card_number' />
         </div>
         <div style={{ height: '8px' }} />
         <div>
@@ -70,13 +70,13 @@ export const AddCreditCardDumb = ({
         </div>
         <div className={style.addCreditCard__row}>
           <div>
-            <ExpiryDate onChange={(value) => setFieldValue('expDate', value)} />
-            <ErrorMessage name='expDate' />
+            <ExpiryDate onChange={(value) => setFieldValue('exp_date', value)} />
+            <ErrorMessage name='exp_date' />
           </div>
           <div>
-            <TextInputFormField onChanged={(value) => setFieldValue('CVV', value)} label={'CVV'}
+            <TextInputFormField onChanged={(value) => setFieldValue('cvv', value)} label={'cvv'}
                                 type={'password'} />
-            <ErrorMessage name='CVV' />
+            <ErrorMessage name='cvv' />
           </div>
         </div>
         <div style={{ height: '16px' }} />
@@ -84,14 +84,14 @@ export const AddCreditCardDumb = ({
         <div style={{ height: '16px' }} />
         <div>
           <TextInputFormField label={'Address Line 1'}
-                              onChanged={(value) => setFieldValue('address.addressLine1', value)} />
-          <ErrorMessage name={'address.addressLine1'} />
+                              onChanged={(value) => setFieldValue('address.address_line_1', value)} />
+          <ErrorMessage name={'address.address_line_1'} />
         </div>
         <div style={{ height: '8px' }} />
         <div>
           <TextInputFormField label={'Address Line 2'}
-                              onChanged={(value) => setFieldValue('address.addressLine2', value)} />
-          <ErrorMessage name={'address.addressLine2'} />
+                              onChanged={(value) => setFieldValue('address.address_line_2', value)} />
+          <ErrorMessage name={'address.address_line_2'} />
         </div>
         <div className={style.addCreditCard__row}>
           <div>
@@ -115,8 +115,8 @@ export const AddCreditCardDumb = ({
           </div>
           <div>
             <TextInputFormField label={'Postal Code'}
-                                onChanged={(value) => setFieldValue('address.postalCode', value)} />
-            <ErrorMessage name={'address.postalCode'} />
+                                onChanged={(value) => setFieldValue('address.postal_code', value)} />
+            <ErrorMessage name={'address.postal_code'} />
           </div>
 
         </div>

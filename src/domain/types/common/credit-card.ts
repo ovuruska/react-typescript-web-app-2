@@ -1,18 +1,18 @@
-export interface CreditCard {
-  cardNumber: string;
-  CVV: string;
-  expDate: string;
+export interface CreditCardInformation {
+  card_number: string;
+  cvv: string;
+  exp_date: string;
   brand: string;
   address: Address;
-  cardholderName: string;
+  cardholder_name: string;
 }
 
 export interface Address {
   city: string;
   country: string;
-  addressLine1: string;
-  addressLine2?: string;
-  postalCode: string;
+  address_line_1: string;
+  address_line_2?: string;
+  postal_code: string;
   state: string;
 }
 
@@ -26,4 +26,12 @@ export enum CreditCardBrand {
   DinersClub = "Diners Club",
   JCB = "JCB",
   VisaDebit = "Visa (debit)"
+}
+
+export interface CreditCardRecord {
+  exp_month:string;
+  exp_year:string;
+  first6:string;
+  last4:string;
+  brand:string;
 }

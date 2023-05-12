@@ -1,5 +1,6 @@
 .inner-carousel {
   display: flex;
+  gap:16px;
 }
 
 .carousel {

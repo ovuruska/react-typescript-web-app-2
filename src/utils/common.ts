@@ -69,6 +69,8 @@ import { FirebaseConfig, firebaseConfigSymbol } from '@domain/types/common/fireb
 import { FirebaseStorage, getStorage } from '@firebase/storage';
 import { QuickerFirebaseStorage } from '@data/datasources/firebase/storage';
 import { QuickerFirebaseStorageImpl } from '@data/datasources/firebase/storage-impl';
+import { PaymentRemoteDataSource } from '@data/datasources/payment/index.remote';
+import { PaymentRemoteDataSourceImpl } from '@data/datasources/payment/index.remote.impl';
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -136,5 +138,7 @@ export const containerBind = (container:Container) => {
   container.bind<FirebaseStorage>(FirebaseStorageSymbol).toConstantValue(storage);
 
   container.bind<QuickerFirebaseStorage>(QuickerFirebaseStorage).to(QuickerFirebaseStorageImpl).inSingletonScope();
+
+  container.bind<PaymentRemoteDataSource>(PaymentRemoteDataSource).to(PaymentRemoteDataSourceImpl).inSingletonScope();
 
 }
