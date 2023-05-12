@@ -5,7 +5,7 @@ import { CreditCardInformation, CreditCardRecord } from '@domain/types/common/cr
 
 @injectable()
 export abstract class PaymentRemoteDataSource extends RemoteDataSource{
-  abstract listCreditCards() : Promise<CreditCardRecord>
+  abstract listCreditCards() : Promise<CreditCardRecord[]>
   abstract addCreditCard(creditCard:CreditCardInformation) : Promise<CreditCardRecord>
   abstract deleteCreditCard(id:number) : Promise<void>
 }

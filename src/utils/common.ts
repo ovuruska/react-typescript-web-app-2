@@ -71,6 +71,11 @@ import { QuickerFirebaseStorage } from '@data/datasources/firebase/storage';
 import { QuickerFirebaseStorageImpl } from '@data/datasources/firebase/storage-impl';
 import { PaymentRemoteDataSource } from '@data/datasources/payment/index.remote';
 import { PaymentRemoteDataSourceImpl } from '@data/datasources/payment/index.remote.impl';
+import { PaymentRepository } from '@domain/repositories/payment';
+import { PaymentRepositoryImpl } from '@data/repositories/payment';
+import { PaymentCreateCreditCardUseCase } from '@domain/usecases/payment/create-credit-card';
+import { PaymentListCreditCardsUseCase } from '@domain/usecases/payment/list-credit-cards';
+import { PaymentDeleteCreditCardUseCase } from '@domain/usecases/payment/delete-credit-card';
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -140,5 +145,9 @@ export const containerBind = (container:Container) => {
   container.bind<QuickerFirebaseStorage>(QuickerFirebaseStorage).to(QuickerFirebaseStorageImpl).inSingletonScope();
 
   container.bind<PaymentRemoteDataSource>(PaymentRemoteDataSource).to(PaymentRemoteDataSourceImpl).inSingletonScope();
+  container.bind<PaymentRepository>(PaymentRepository).to(PaymentRepositoryImpl).inSingletonScope();
+  container.bind<PaymentCreateCreditCardUseCase>(PaymentCreateCreditCardUseCase).toSelf().inSingletonScope();
+  container.bind<PaymentListCreditCardsUseCase>(PaymentListCreditCardsUseCase).toSelf().inSingletonScope();
+  container.bind<PaymentDeleteCreditCardUseCase>(PaymentDeleteCreditCardUseCase).toSelf().inSingletonScope();
 
 }

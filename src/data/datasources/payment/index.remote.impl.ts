@@ -18,7 +18,7 @@ export class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource{
     await this.httpClient.delete(`/payment/card/${id}`);
   }
 
-  async listCreditCards(): Promise<CreditCardRecord> {
+  async listCreditCards(): Promise<CreditCardRecord[]> {
     const response = await this.httpClient.get('/payment/cards');
     return response.data;
   }
