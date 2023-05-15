@@ -29,6 +29,7 @@ export enum CreditCardBrand {
 }
 
 export interface CreditCardRecord {
+  id:number;
   exp_month:string;
   exp_year:string;
   first6:string;

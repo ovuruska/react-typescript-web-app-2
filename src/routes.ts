@@ -1,5 +1,8 @@
 import { lazy } from 'react';
 import { LogoutPage } from '@pages/logout';
+import { RouteNames } from '@quicker/route-names';
+import { PaymentMethodsPage } from '@pages/payment-methods';
+import { AddCreditCardPage } from '@pages/add-credit-card';
 
 const AddPetPage = lazy(() => import("@pages/add-pet"));
 const ThanksPage = lazy(() => import("@pages/thanks"));
@@ -30,6 +33,8 @@ export const routes = [
   { path: "/pets", component: PetsPage },
   { path: "/pet-details", component: PetDetailsPage },
   { path: "/logout", component: LogoutPage},
+  { path: RouteNames.PAYMENT_METHODS, component: PaymentMethodsPage},
+  { path: RouteNames.ADD_CARD, component: AddCreditCardPage},
   { path: "/login", component: LoginPage, publicRoute: true },
   { path: "/forgotpassword", component: ForgotPasswordPage, publicRoute: true },
   { path: "/signup", component: SignUpPage, publicRoute: true },

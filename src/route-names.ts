@@ -15,4 +15,6 @@ export const enum RouteNames {
   SIGNUP = '/signup',
   NOTFOUND = '/404',
   LOGOUT = '/logout',
+  ADD_CARD = '/add-card',
+  PAYMENT_METHODS = '/payment-methods'
 }
