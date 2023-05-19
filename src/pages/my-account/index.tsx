@@ -8,6 +8,7 @@ import { HttpClientSymbol } from '@domain/types/TYPES';
 import { persistor } from '@quicker/store/store';
 import { OrderActions } from '@quicker/store/order-slice';
 import { useDispatch } from 'react-redux';
+import { RouteNames } from '@quicker/route-names';
 
 const MyAccountPage = () => {
 
@@ -17,15 +18,15 @@ const MyAccountPage = () => {
   const dispatch = useDispatch();
 
   const gotoAppointments = () => {
-    navigate('/appointments');
+    navigate(RouteNames.APPOINTMENTS);
   }
 
   const gotoPets = () => {
-    navigate('/pets');
+    navigate(RouteNames.PETS);
   }
 
   const goBack = () => {
-    window.history.back();
+    navigate(RouteNames.HOME);
   }
 
   const handleLogout = () => {
@@ -40,13 +41,17 @@ const MyAccountPage = () => {
         if(window.indexedDB.deleteDatabase(database.name)) return;
       });
     });
-    navigate('/login');
+    navigate(RouteNames.LOGIN);
+  }
+  const gotoPaymentMethods = () => {
+    navigate(RouteNames.PAYMENT_METHODS);
   }
 
   return <PageCard><MyAccountDumb
     goBack={goBack}
     onClickAppointments={gotoAppointments}
     onClickMyPets={gotoPets}
+    onClickPaymentMethods={gotoPaymentMethods}
     onClickLogout={handleLogout}
     name={me?.name ?? ""}
     email={me?.email ?? ""}

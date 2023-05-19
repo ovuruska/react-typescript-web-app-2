@@ -2,6 +2,8 @@ import style from '@components/layouts/page-layout/index.module.scss';
 import { BiLeftArrow } from 'react-icons/bi';
 import React from 'react';
 import PageCard from '@components/cards/page-card/page-card';
+import "@quicker/App.css"
+import "@quicker/index.css"
 
 export interface PageLayoutProps {
   children?: React.ReactNode;

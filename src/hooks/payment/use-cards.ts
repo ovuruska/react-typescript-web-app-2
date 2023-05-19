@@ -9,8 +9,8 @@ export interface UseCardsReturnParams {
   cards: CreditCardRecord[];
   loading: boolean;
   error: string | null;
-  addCard: (card: CreditCardInformation) => void;
-  deleteCard: (cardId: number) => void;
+  addCard: (card: CreditCardInformation) => Promise<CreditCardRecord | null>;
+  deleteCard: (cardId: number) => Promise<void>;
 }
 
 export const useCards = (): UseCardsReturnParams => {
@@ -23,6 +23,7 @@ export const useCards = (): UseCardsReturnParams => {
 
 
   useEffect(() => {
+    setLoading(true);
     listCreditCards.call().then((response) => {
       setCards(response);
       setError(null);
@@ -34,11 +35,16 @@ export const useCards = (): UseCardsReturnParams => {
   }, []);
 
   const addCard = async (card: CreditCardInformation) => {
-    addCardUseCase.call(card).then((response) => {
+    setLoading(true);
+    return addCardUseCase.call(card).then((response) => {
       setCards([...cards, response]);
       setError(null);
+      return response;
     }).catch((error) => {
       setError(error.toString());
+      return null;
+    }).finally(() => {
+      setLoading(false);
     });
   };
 
