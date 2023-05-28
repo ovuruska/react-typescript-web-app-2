@@ -2,14 +2,15 @@ import React from 'react';
 import { CreditCardDetails } from '@domain/types/common/credit-card-details';
 import SelectCreditCardDumb from '@features/select-credit-card/index.dumb';
 import { CreditCardDetailsMockGenerator } from '@domain/types/__mock__/credit-card-details-generator';
+import { useCards } from '@hooks/payment/use-cards';
+import { CreditCardRecord } from '@domain/types/common/credit-card';
 
 export interface SelectCreditCardProps {
-  onSelect?: (creditCard: CreditCardDetails) => void;
+  onSelect?: (creditCard: CreditCardRecord) => void;
 
 }
 
-const creditCardGenerator = new CreditCardDetailsMockGenerator();
-const creditCards = creditCardGenerator.generateMany(5);
+
 
 
 const SelectCreditCard: React.FC<SelectCreditCardProps> = ({
@@ -19,15 +20,16 @@ const SelectCreditCard: React.FC<SelectCreditCardProps> = ({
 
 
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState<CreditCardDetails | null>(creditCards[0]);
+  const { cards } = useCards()
+  const [selected, setSelected] = React.useState<CreditCardRecord | null>(cards[0]);
 
 
-  const handleSelect = (creditCard: CreditCardDetails) => {
+  const handleSelect = (creditCard: CreditCardRecord) => {
     setSelected(creditCard);
     onSelect && onSelect(creditCard);
   };
 
-  return <SelectCreditCardDumb onSelect={handleSelect} options={creditCards} selected={selected} open={open}
+  return <SelectCreditCardDumb onSelect={handleSelect} options={cards} selected={selected} open={open}
                                setOpen={setOpen} />;
 };
 

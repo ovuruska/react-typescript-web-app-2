@@ -5,7 +5,6 @@ import { faker } from '@faker-js/faker';
 import { EmployeeMockGenerator } from '@domain/types/__mock__/employee-generator';
 import { BranchMockGenerator } from '@domain/types/__mock__/branch-generator';
 import PageCard from '@components/cards/page-card/page-card';
-import ApptCard from '@components/cards/appt-card';
 
 export default {
   title: 'Pages/Payment Page',

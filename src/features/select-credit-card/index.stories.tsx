@@ -3,6 +3,8 @@ import { Meta, Story } from '@storybook/react';
 import SelectCreditCardDumb, { SelectCreditCardDumbProps } from './index.dumb';
 import { CreditCardDetailsMockGenerator } from '@domain/types/__mock__/credit-card-details-generator';
 import { CreditCardDetails } from '@domain/types/common/credit-card-details';
+import { CreditCardRecordMockGenerator } from '@domain/types/__mock__/credit-card-record.generator';
+import { CreditCardRecord } from '@domain/types/common/credit-card';
 
 export default {
   title: 'Features/SelectCreditCardDumb',
@@ -10,13 +12,13 @@ export default {
 
 } as Meta;
 
-const creditCardGenerator = new CreditCardDetailsMockGenerator();
+const creditCardGenerator = new CreditCardRecordMockGenerator();
 
 const creditCards = creditCardGenerator.generateMany(5);
 
 const Template: Story<SelectCreditCardDumbProps> = (args) =>{
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState<CreditCardDetails | null>(args.selected ?? null);
+  const [selected, setSelected] = React.useState<CreditCardRecord | null>(args.selected ?? null);
 
   return <SelectCreditCardDumb onSelect={setSelected} options={args.options} selected={selected} open={open} setOpen={setOpen}/>
 } ;

@@ -1,4 +1,3 @@
-import { CreditCardDetails } from '@domain/types/common/credit-card-details';
 import style from './index.module.scss';
 import { Box, Drawer } from '@mui/material';
 import CtaSecondary from '@components/buttons/cta-secondary';
@@ -7,11 +6,12 @@ import React from 'react';
 import { Close } from '@mui/icons-material';
 import SelectBottomDrawer from '@components/drawers/select-bottom-drawer/select-bottom-drawer';
 import WeakBtn from '@components/buttons/weak-btn/weak-btn';
+import { CreditCardRecord } from '@domain/types/common/credit-card';
 
 export interface SelectCreditCardDumbProps {
-  options?: CreditCardDetails[];
-  onSelect?: (creditCard: CreditCardDetails) => void;
-  selected?: CreditCardDetails | null;
+  options?: CreditCardRecord[];
+  onSelect?: (creditCard: CreditCardRecord) => void;
+  selected?: CreditCardRecord | null;
   open?: boolean;
   setOpen?: (open: boolean) => void;
 }
@@ -27,12 +27,7 @@ const SelectCreditCardDumb: React.FC<SelectCreditCardDumbProps> = ({
     setOpen && setOpen(true);
   };
 
-  let creditCardNumber = '';
-  if (selected) {
-    creditCardNumber = selected.cardNumber;
-    creditCardNumber = creditCardNumber.slice(0, 4) + '**** **** **' + creditCardNumber.slice(14);
-  }
-
+  const creditCardNumber = selected?.first6 + "******" + selected?.last4;
 
   return <div className={style.selectCreditCardContainer}>
     <div className={style.selectCreditCard} >
@@ -53,10 +48,10 @@ const SelectCreditCardDumb: React.FC<SelectCreditCardDumbProps> = ({
         </div>
 
         {options?.map((option, index) => {
-          const { expiredDate, cardNumber, issuer } = option;
-          const content = '****' + cardNumber?.slice(12) + ' expiring at ' + expiredDate;
-          return <CheckableCard key={index} title={issuer} content={content}
-                                checked={selected?.cardNumber === option.cardNumber}
+          const { exp_year,exp_month,first6,last4,brand,id} = option;
+          const content = first6 + "******" + last4 + ' expiring at ' + exp_month + '/' + exp_year
+          return <CheckableCard key={index} title={brand} content={content}
+                                checked={selected?.id === id}
                                 onClicked={() => onSelect && onSelect(option)} />;
         })}
         <CtaSecondary onClick={handleClose} text={'Select card'} />

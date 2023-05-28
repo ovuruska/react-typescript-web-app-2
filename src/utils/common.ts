@@ -29,7 +29,7 @@ import {EmployeeRepository} from "@domain/repositories/employee/repository";
 import {EmployeeRepositoryImpl} from "@data/repositories/employee/repository-impl";
 import {GetAllGroomersUseCase} from "@domain/usecases/employee/get-all-groomers-use-case";
 import {
-  AppointmentCacheProvider,
+  AppointmentCacheProvider, CreditCardCacheProvider,
   FirebaseAppSymbol, FirebaseStorageSymbol, HttpClientCachedSymbol,
   HttpClientSymbol,
   PetDetailsCacheProvider,
@@ -76,6 +76,9 @@ import { PaymentRepositoryImpl } from '@data/repositories/payment';
 import { PaymentCreateCreditCardUseCase } from '@domain/usecases/payment/create-credit-card';
 import { PaymentListCreditCardsUseCase } from '@domain/usecases/payment/list-credit-cards';
 import { PaymentDeleteCreditCardUseCase } from '@domain/usecases/payment/delete-credit-card';
+import { PaymentLocalDataSource } from '@data/datasources/payment/index.local';
+import { PaymentLocalDataSourceImpl } from '@data/datasources/payment/index.local.impl';
+import { CreditCardRecord } from '@domain/types/common/credit-card';
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
@@ -144,6 +147,13 @@ export const containerBind = (container:Container) => {
 
   container.bind<QuickerFirebaseStorage>(QuickerFirebaseStorage).to(QuickerFirebaseStorageImpl).inSingletonScope();
 
+  container.bind<PaymentLocalDataSource>(PaymentLocalDataSource).to(PaymentLocalDataSourceImpl).inSingletonScope();
+  container.bind<CacheProvider<CreditCardRecord>>(CreditCardCacheProvider).toDynamicValue(
+    () =>
+      new IndexedDbCache<CreditCardRecord>({
+        dbName: 'credit-card',
+        storeName: 'credit-card',
+      })).inSingletonScope();
   container.bind<PaymentRemoteDataSource>(PaymentRemoteDataSource).to(PaymentRemoteDataSourceImpl).inSingletonScope();
   container.bind<PaymentRepository>(PaymentRepository).to(PaymentRepositoryImpl).inSingletonScope();
   container.bind<PaymentCreateCreditCardUseCase>(PaymentCreateCreditCardUseCase).toSelf().inSingletonScope();
