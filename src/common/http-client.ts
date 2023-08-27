@@ -1,6 +1,5 @@
-import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
+import {AxiosRequestConfig, AxiosResponse} from "axios";
 import {injectable} from "inversify";
-import {ApiUrl} from "@domain/types/symbols/api-url";
 
 @injectable()
 export abstract class HttpClient {

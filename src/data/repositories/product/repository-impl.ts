@@ -12,14 +12,7 @@ export class ProductRepositoryImpl implements ProductRepository {
     @inject(ProductLocalDataSource) private readonly productLocalDataSource: ProductLocalDataSource) {}
 
   async getAllProducts(): Promise<ProductEntity[]> {
-    const localResponse = this.productLocalDataSource.getAllProducts();
-    if (localResponse) {
-      return localResponse;
-    } else {
-      const remoteResponse = await this.productRemoteDataSource.getAllProducts();
-      this.productLocalDataSource.setAllProducts(remoteResponse);
-      return remoteResponse;
-    }
+    return this.productRemoteDataSource.getAllProducts();
   }
 
 }

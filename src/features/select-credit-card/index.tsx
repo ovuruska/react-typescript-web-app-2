@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CreditCardDetails } from '@domain/types/common/credit-card-details';
 import SelectCreditCardDumb from '@features/select-credit-card/index.dumb';
 import { CreditCardDetailsMockGenerator } from '@domain/types/__mock__/credit-card-details-generator';
@@ -23,6 +23,11 @@ const SelectCreditCard: React.FC<SelectCreditCardProps> = ({
   const { cards } = useCards()
   const [selected, setSelected] = React.useState<CreditCardRecord | null>(cards[0]);
 
+  useEffect(() => {
+    if ( !selected && cards.length > 0 ) {
+      setSelected(cards[0])
+    }
+  }, [cards, selected])
 
   const handleSelect = (creditCard: CreditCardRecord) => {
     setSelected(creditCard);

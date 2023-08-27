@@ -17,26 +17,15 @@ const logger = createLogger({
 
 });
 
-const persistConfig = {
-  key: "root",
-  storage,
-  // Optionally, add a list of reducers to blacklist or whitelist
-  // blacklist: [], // List of reducers NOT to be persisted
-  // whitelist: [], // List of reducers to be persisted
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const middleware = import.meta.env.PROD ? [] :  [logger];
 
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware,
 
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-// Export the persisted store and a persistor to use in your application
-export const persistor = persistStore(store);
 export default store;

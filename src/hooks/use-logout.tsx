@@ -1,8 +1,3 @@
-/*
-
- */
-
-import { persistor } from '@quicker/store/store';
 import { OrderActions } from '@quicker/store/order-slice';
 import { HttpClientSymbol } from '@domain/types/TYPES';
 import { HttpClient } from '@common/http-client';
@@ -16,7 +11,6 @@ export const useLogout = () => {
     client.purgeAuthToken();
     localStorage.clear();
     sessionStorage.clear();
-    persistor.purge();
     dispatch(OrderActions.resetOrder());
     indexedDB.databases().then(function(databases) {
       databases.forEach(function(database) {

@@ -1,16 +1,12 @@
-/*
-const client = HttpClientMockImpl();
-client.configure('GET', '/api/customer/appointment/cancel/1');
-client.get('/api/customer/appointment/cancel/1').wait(500).then((response) => {
-  console.log(response);
-});
-client.get('/api/customer/appointment/cancel/1');
- */
+
 
 import { HttpClient } from '@common/http-client';
 import { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import { injectable } from 'inversify';
 
+@injectable()
 export class HttpClientMockImpl implements HttpClient {
+  private authToken: string | null = null;
   private timeout: number = 250;
   private responses: Map<string, AxiosResponse> = new Map<string, AxiosResponse>();
   constructor(timeout: number = 250) {
@@ -18,18 +14,21 @@ export class HttpClientMockImpl implements HttpClient {
   }
 
   public purgeAuthToken(): void {
+    this.authToken = null;
   }
   public setAuthToken(token: string): void {
+    this.authToken = token;
   }
   async logout(): Promise<void> {
+    this.purgeAuthToken();
   }
   public isTokenExpired(): boolean {
-    return false;
+    return !!this.authToken;
   }
   async login(username?: string, password?: string): Promise<any> {
   }
   public verify(): Promise<boolean> {
-    return Promise.resolve(true);
+    return Promise.resolve(!!this.authToken);
   }
 
   static getNotFoundResponse(): AxiosResponse {
@@ -88,7 +87,8 @@ export class HttpClientMockImpl implements HttpClient {
     });
   }
 
-  configure(method:string,url: string, response?: AxiosResponse): void {
-    this.responses.set(`${method}:${url}`, response ?? {data: null, status: 200, statusText: 'OK', headers: {}, config: {}, request: {}} as AxiosResponse);
+  configure(method:string,url: string, responseData?: object): void {
+    const response = responseData ? {data: responseData, status: 200, statusText: 'OK', headers: {}, config: {}, request: {}} as AxiosResponse : null;
+    this.responses.set(`${method}:${url}`, response as AxiosResponse);
   }
 }

@@ -79,12 +79,17 @@ import { PaymentDeleteCreditCardUseCase } from '@domain/usecases/payment/delete-
 import { PaymentLocalDataSource } from '@data/datasources/payment/index.local';
 import { PaymentLocalDataSourceImpl } from '@data/datasources/payment/index.local.impl';
 import { CreditCardRecord } from '@domain/types/common/credit-card';
+import { HttpClientMockImpl } from '@common/http-client-mock.impl';
+import { configurePayloads } from '@common/configure-payloads';
 
 export const containerBind = (container:Container) => {
   container.bind<CapacityRemoteDataSource>(CapacityRemoteDataSource).to(CapacityRemoteDataSourceImpl);
   container.bind<CapacityRepository>(CapacityRepository).to(CapacityRepositoryImpl);
   container.bind<GetMonthlyCapacityUseCase>(GetMonthlyCapacityUseCase).toSelf();
-  container.bind<HttpClient>(HttpClientSymbol).to(HttpClientImpl).inSingletonScope();
+  //container.bind<HttpClient>(HttpClientSymbol).to(HttpClientImpl).inSingletonScope();
+  const httpClient = new HttpClientMockImpl();
+  configurePayloads(httpClient);
+  container.bind<HttpClient>(HttpClientSymbol).toConstantValue(httpClient);
   container.bind<AvailableRepository>(AvailableRepository).to(AvailableRepositoryImpl);
   container.bind<AvailableRemoteDataSource>(AvailableRemoteDataSource).to(AvailableRemoteDataSourceImpl);
   container.bind<GetAvailableSlotsUseCase>(GetAvailableSlotsUseCase).toSelf();

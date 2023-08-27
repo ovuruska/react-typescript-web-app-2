@@ -15,7 +15,7 @@ export class PetMockGenerator extends MockGenerator<PetEntity>{
       created_at: faker.date.past().toString(),
       updated_at: faker.date.past().toString(),
       name: faker.name.firstName(),
-      breed: faker.name.jobTitle(),
+      breed: faker.animal.dog(),
       age: faker.datatype.number({min:0,max:32}),
       weight: faker.datatype.number(),
       description: faker.lorem.paragraph(),

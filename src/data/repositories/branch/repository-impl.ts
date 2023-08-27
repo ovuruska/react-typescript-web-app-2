@@ -14,13 +14,6 @@ export class BranchRepositoryImpl implements BranchRepository {
   ) {}
 
   async getAllBranches(): Promise<BranchEntity[]> {
-    const localBranches = this.localDataSource.getAllBranches();
-    if (localBranches !== null) {
-      return Promise.resolve(localBranches);
-    } else {
-      const remoteBranches = await this.remoteDataSource.getAllBranches();
-      this.localDataSource.setAllBranches(remoteBranches);
-      return Promise.resolve(remoteBranches);
-    }
+    return this.remoteDataSource.getAllBranches();
   }
 }

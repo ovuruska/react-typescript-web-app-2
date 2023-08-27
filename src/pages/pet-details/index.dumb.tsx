@@ -11,7 +11,7 @@ export interface PetDetailsPageDumbProps {
 }
 
 const PetDetailsPageDumb = ({pet,goBack}:PetDetailsPageDumbProps) => {
-
+  console.log("pet",pet)
   return <div className={style.petDetails}>
     <div className={style.petDetailsHeader}>
       <BiLeftArrow onClick={goBack}/>

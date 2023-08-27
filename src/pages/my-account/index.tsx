@@ -5,7 +5,6 @@ import PageCard from '@components/cards/page-card/page-card';
 import { HttpClient } from '@quicker/common/http-client';
 import { useInjection } from 'inversify-react';
 import { HttpClientSymbol } from '@domain/types/TYPES';
-import { persistor } from '@quicker/store/store';
 import { OrderActions } from '@quicker/store/order-slice';
 import { useDispatch } from 'react-redux';
 import { RouteNames } from '@quicker/route-names';
@@ -33,7 +32,6 @@ const MyAccountPage = () => {
     client.logout();
     localStorage.clear();
     sessionStorage.clear();
-    persistor.purge();
     dispatch(OrderActions.resetOrder());
     indexedDB.databases().then(function(databases) {
       databases.forEach(function(database) {
