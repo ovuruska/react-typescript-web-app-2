@@ -60,8 +60,4 @@ describe('AppointmentRemoteDataSourceImpl', () => {
     expect(mockAxios.post).toHaveBeenCalledWith('/api/customer/appointment/create', params, undefined);
 
   });
-
-
-
-
 });
