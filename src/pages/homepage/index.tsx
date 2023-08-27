@@ -27,11 +27,15 @@ const HomePage: React.FC = () => {
     }
   }
 
+  const handleGoTo = () => {
+    navigate(RouteNames.APPOINTMENTS);
+  }
+
   const onAppointmentClick = () => {
     navigate(RouteNames.APPOINTMENTS);
   }
 
-  return <HomePageDumb onAppointmentClick={onAppointmentClick} onServiceCardClick={onServiceCardClick} appointments={upcomingAppts} pets={pets}/>;
+  return <HomePageDumb onAppointmentClick={onAppointmentClick} onServiceCardClick={onServiceCardClick} appointments={upcomingAppts} pets={pets} goTo={handleGoTo}/>;
 };
 
 export default HomePage;
